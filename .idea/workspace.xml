@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="lOdable">
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/11aad32784f1a585762f34fc47ff322f.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/12858d72b1299fa6aca8e9500d5b4ea3.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/171548f98c6f11d0573875daca9c2cd9.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/21d5197e5d7c4a1289ba533d68b8e7a1.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/4d9174055b61ca8ef0aa66da86af7414.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/641ee80b93189ef53ef76afdbd6b9d08.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/6b2a49174efca891f65835d3e24d4c9c.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/7b09fc22b26e3e22456116dea152c2cc.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/81bb3543f36654388d958c0c2e9dc848.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/890801ca9092ae9cfb5325965a9bb531.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/8b60860af744ecaed47a1299b04cb04c.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/9f6336885af7f4718fb19fd81ff97e32.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/c704598f136e1dc1273e8634ef44409a.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/c738411caf4a8361bb013dc1a375d15b.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/cbe25b1ee54981db95b4d82a88abe050.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/e6e36b79ef25201c62c33fc0a2608537.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/ed6807c6149b8548f739d1d19392590f.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/f19585fa662850577ecd2131e9b3cb8b.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/f298ca8711f103242af8ef56e9540a5b.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/fac69ec29660522f788e615b55f4189c.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/fc559a9788f6ad10f0c93213fc56cae7.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/ff7c710ef91fc2422527e555596b3812.json.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/.cache/ffe1545d537ce526a27dc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/dist/about.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/dist/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/c7c0813435442289bce1f.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/cd7327c311ee844b4688a.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/cf57281b99b6230d41609.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/e19e7456ab7f79f25d733.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/m5335cd8ebd92c2028258.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/m55cd3eedc10796e4360f.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/m895fdf45461c5008a308.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/map/about.map.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/map/index.map.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/r7b1771680651ef3b12a4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FireJSX.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/FireJSX.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/architects/StaticArchitect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/architects/StaticArchitect.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LazyLoad.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LazyLoad.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/plugins/PagePlugin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugins/PagePlugin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1e553kS3TAgy2zbNhQYpknfREtG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="10.19.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="settings.typescriptcompiler" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/test" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.dev">
+    <configuration name="autopublish" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="autopublish" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="publishDev" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="publishDev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="publishNitely" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="publishNitely" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="sync" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="sync" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/test/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="test" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="watch" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="watch" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.test" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.test" />
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="" />
+      <created>1593598415999</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1593598415999</updated>
+      <workItem from="1593598422042" duration="3486000" />
+      <workItem from="1593623975601" duration="1397000" />
+      <workItem from="1593672874444" duration="59000" />
+      <workItem from="1593672974922" duration="299000" />
+      <workItem from="1593673942050" duration="551000" />
+      <workItem from="1593756512965" duration="21703000" />
+    </task>
+    <task id="LOCAL-00001" summary=".gitignore">
+      <created>1593598608476</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1593598608476</updated>
+    </task>
+    <task id="LOCAL-00002" summary="rm dist">
+      <created>1593598667601</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1593598667601</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Fire JSX to FireJSX">
+      <created>1593599719588</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1593599719588</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix">
+      <created>1593760685663</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1593760685663</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix">
+      <created>1593760691031</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1593760691031</updated>
+    </task>
+    <task id="LOCAL-00006" summary="rm .js">
+      <created>1593760816942</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1593760816942</updated>
+    </task>
+    <task id="LOCAL-00007" summary="rm .js">
+      <created>1593760820753</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1593760820753</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Changed map and lib root">
+      <created>1593764102677</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1593764102677</updated>
+    </task>
+    <task id="LOCAL-00009" summary="webpack architect conditional">
+      <created>1593768870134</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1593768870134</updated>
+    </task>
+    <task id="LOCAL-00010" summary="webpack architect conditional">
+      <created>1593772845645</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1593772845645</updated>
+    </task>
+    <task id="LOCAL-00011" summary="lOdable">
+      <created>1593776155050</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1593776155050</updated>
+    </task>
+    <task id="LOCAL-00012" summary="lOdable">
+      <created>1593776247605</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1593776247606</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value=".gitignore" />
+    <MESSAGE value="rm dist" />
+    <MESSAGE value="Fire JSX to FireJSX" />
+    <MESSAGE value="fix" />
+    <MESSAGE value="rm .js" />
+    <MESSAGE value="Changed map and lib root" />
+    <MESSAGE value="webpack architect conditional" />
+    <MESSAGE value="lOdable" />
+    <option name="LAST_COMMIT_MESSAGE" value="lOdable" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="502" y="23" key="#autopublish" timestamp="1593598756287">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="502" y="23" key="#autopublish/0.0.1920.1035@0.0.1920.1035" timestamp="1593598756287" />
+    <state x="502" y="23" key="#publishDev" timestamp="1593598765779">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="502" y="23" key="#publishDev/0.0.1920.1035@0.0.1920.1035" timestamp="1593598765779" />
+    <state x="502" y="23" key="#publishNitely" timestamp="1593598760132">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="502" y="23" key="#publishNitely/0.0.1920.1035@0.0.1920.1035" timestamp="1593598760132" />
+    <state x="502" y="23" key="#sync" timestamp="1593598723242">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="502" y="23" key="#sync/0.0.1920.1035@0.0.1920.1035" timestamp="1593598723242" />
+    <state x="502" y="23" key="#watch" timestamp="1593598741322">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="502" y="23" key="#watch/0.0.1920.1035@0.0.1920.1035" timestamp="1593598741322" />
+    <state x="100" y="99" width="1720" height="840" key="DiffContextDialog" timestamp="1593764063917">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="100" y="99" width="1720" height="840" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593764063917" />
+    <state x="638" y="154" width="636" height="712" key="FileChooserDialogImpl" timestamp="1593674487480">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="638" y="153" key="FileChooserDialogImpl/0.0.1920.1035@0.0.1920.1035" timestamp="1593599916306" />
+    <state x="638" y="154" width="636" height="712" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593674487480" />
+    <state width="1889" height="165" key="GridCell.Tab.0.bottom" timestamp="1593782787719">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1885" height="235" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372243" />
+    <state width="1889" height="165" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593782787719" />
+    <state width="1889" height="165" key="GridCell.Tab.0.center" timestamp="1593782787717">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1885" height="235" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372240" />
+    <state width="1889" height="165" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593782787717" />
+    <state width="1889" height="165" key="GridCell.Tab.0.left" timestamp="1593782787716">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1885" height="235" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372239" />
+    <state width="1889" height="165" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593782787716" />
+    <state width="1889" height="165" key="GridCell.Tab.0.right" timestamp="1593782787718">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1885" height="235" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372242" />
+    <state width="1889" height="165" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593782787718" />
+    <state x="207" y="0" key="SettingsEditor" timestamp="1593778840341">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="207" y="0" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1593598521864" />
+    <state x="207" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593778840341" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1593776250182">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="356" y="114" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1593599721937" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593776250182" />
+    <state x="610" y="299" key="cloudConfig.PluginsDialog" timestamp="1593672925959">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="610" y="299" key="cloudConfig.PluginsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593672925959" />
+    <state x="784" y="299" key="cloudConfig.SelfSettingsDialog" timestamp="1593672919509">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="784" y="299" key="cloudConfig.SelfSettingsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593672919509" />
+    <state x="675" y="8" width="915" height="1022" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1593776167755">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="675" y="8" width="915" height="1022" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593776167755" />
+    <state x="663" y="399" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1593758446197">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="663" y="399" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593758446197" />
+    <state x="536" y="118" width="848" height="802" key="find.popup" timestamp="1593769672586">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="536" y="118" width="848" height="802" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593769672586" />
+    <state x="559" y="361" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1593606020199">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="559" y="361" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1920.1035@0.0.1920.1035" timestamp="1593606020199" />
+    <state x="653" y="182" width="604" height="674" key="refactoring.ChangeSignatureDialog" timestamp="1593769683906">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="653" y="182" width="604" height="674" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593769683906" />
+    <state x="455" y="228" key="run.anything.popup" timestamp="1593779508981">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="455" y="228" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593779508981" />
+  </component>
+</project>
