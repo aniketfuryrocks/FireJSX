@@ -128,6 +128,12 @@ export default class {
                 }
             }
             global.FireJSX.finishRender = () => {
+                console.log("resolving")
+                if (this.config.ssr) {
+                    const helmet = Helmet.renderStatic();
+                    for (let helmetKey in helmet)
+                        document.head.innerHTML += helmet[helmetKey].toString()
+                }
                 page.plugin.onRender(dom);//call plugin
                 resolve(dom.serialize());//serialize i.e get html
             }
@@ -138,10 +144,7 @@ export default class {
                         global.FireJSX.app,
                         {content: global.FireJSX.map.content}
                     )
-                );
-                const helmet = Helmet.renderStatic();
-                for (let helmetKey in helmet)
-                    document.head.innerHTML += helmet[helmetKey].toString()
+                )
                 if (global.FireJSX.lazyCount === 0)
                     global.FireJSX.finishRender();
             } else

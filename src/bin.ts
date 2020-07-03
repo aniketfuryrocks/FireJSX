@@ -76,7 +76,7 @@ function init(): { app: FireJS, args: Args, customConfig: boolean } {
     }
 }
 
-(async function () {
+async function main() {
     const {app, args, customConfig} = init();
     const $ = app.getContext();
     if (customConfig)
@@ -106,4 +106,12 @@ function init(): { app: FireJS, args: Args, customConfig: boolean } {
     } catch (err) {
         $.cli.error(err)
     }
-})().catch(err => console.error(err));
+}
+
+let doneOnce = false;
+const mainInterval = setInterval(() => {
+    if (!doneOnce) {
+        doneOnce = true;
+        main().then(() => clearInterval(mainInterval))
+    }
+}, 1000)

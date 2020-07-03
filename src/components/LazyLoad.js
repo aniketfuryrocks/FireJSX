@@ -28,7 +28,7 @@ export default (chunk, {
                 setChild(React.createElement(chunk.default, props, props.children))
         }
         if (FireJSX.lazyDone === FireJSX.lazyCount && FireJSX.isSSR)
-            FireJSX.finishRender();
+            console.log("render 2")
     }
 
     if (!(FireJSX.isSSR && script))
@@ -40,7 +40,7 @@ export default (chunk, {
             }
         ).catch(onError)
     else if ((++FireJSX.lazyDone) === FireJSX.lazyCount && FireJSX.isSSR)
-        FireJSX.finishRender();
+            console.log("render")
 
     if (!script)
         return function (_props) {

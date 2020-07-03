@@ -11,7 +11,8 @@ export default abstract class extends FireJSXPlugin {
         this.page = page;
     }
 
-    onBuild(renderPage: (path: string, content?: any, render?: boolean) => void, ...extra: any) {
+    async onBuild(renderPage: (path: string, content?: any, render?: boolean) => void, ...extra: any) {
+        // @ts-ignore
         renderPage("/" + this.page.toString().substring(0, this.page.toString().lastIndexOf(".")))
     }
 
