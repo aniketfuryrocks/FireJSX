@@ -4,7 +4,7 @@ import GlobalPlugin from "./plugins/GlobalPlugin";
 import ConfigMapper, {Config} from "./mappers/ConfigMapper";
 import Cli from "./utils/Cli";
 import Page from "./classes/Page";
-import {Compiler, Configuration, Stats} from "webpack";
+import {Configuration, Stats} from "webpack";
 import {join, relative} from "path";
 import {mapPlugin} from "./mappers/PluginMapper";
 import PageArchitect from "./architects/PageArchitect";
@@ -165,9 +165,8 @@ export default class {
             }
             const promises = [];
             for (const page of this.$.pageMap.values()) {
-                promises.push(new Promise(resolve => {
-                    }
-                    /*this.buildPage(page, () => {
+                promises.push(new Promise(resolve =>
+                    this.$.pageArchitect.buildPage(page, () => {
                         map.pageMap[page.toString()] = page.chunks;
                         page.chunks.forEach(chunk => {
                             if (chunk.endsWith(".js")) {
@@ -182,7 +181,7 @@ export default class {
                     }, (e) => {
                         this.$.cli.error(`Error while building page ${page}\n`, e);
                         throw "";
-                    })*/
+                    })
                 ))
             }
             const fullExternalName = map.staticConfig.externals[0].substr(map.staticConfig.externals[0].lastIndexOf("/") + 1);

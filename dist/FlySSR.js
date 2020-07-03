@@ -38,6 +38,8 @@ class default_1 {
     render(page, path, content = {}) {
         return __awaiter(this, void 0, void 0, function* () {
             const _page = this.pageMap.get(page);
+            if (!page)
+                throw new Error(`Page ${page} does not exist`);
             return {
                 html: yield this.renderer.render(_page, path, content),
                 map: `FireJSX.map=${JSON.stringify({
