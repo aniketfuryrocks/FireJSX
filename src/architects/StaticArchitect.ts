@@ -81,8 +81,7 @@ export default class {
             //isSSR
             global.FireJSX.isSSR = this.config.ssr
             //reset lazy count
-            global.FireJSX.lazyCount = 0;
-            global.FireJSX.lazyDone = 0;
+            global.FireJSX.lazyPromises = [];
             //chunks
             {
                 let index;
@@ -127,16 +126,6 @@ export default class {
                         requireUncached(join(this.config.pathToLib, page.chunks[index]));
                 }
             }
-            global.FireJSX.finishRender = () => {
-                console.log("resolving")
-                if (this.config.ssr) {
-                    const helmet = Helmet.renderStatic();
-                    for (let helmetKey in helmet)
-                        document.head.innerHTML += helmet[helmetKey].toString()
-                }
-                page.plugin.onRender(dom);//call plugin
-                resolve(dom.serialize());//serialize i.e get html
-            }
             //static render
             if (this.config.ssr) {
                 document.getElementById("root").innerHTML = global.window.ReactDOMServer.renderToString(
@@ -145,10 +134,16 @@ export default class {
                         {content: global.FireJSX.map.content}
                     )
                 )
-                if (global.FireJSX.lazyCount === 0)
-                    global.FireJSX.finishRender();
-            } else
-                global.FireJSX.finishRender();
+                Promise.all(global.FireJSX.lazyPromises).then(() => {
+                    if (this.config.ssr) {
+                        const helmet = Helmet.renderStatic();
+                        for (let helmetKey in helmet)
+                            document.head.innerHTML += helmet[helmetKey].toString()
+                    }
+                    page.plugin.onRender(dom);//call plugin
+                    resolve(dom.serialize());//serialize i.e get html
+                })
+            }
         });
     }
 }

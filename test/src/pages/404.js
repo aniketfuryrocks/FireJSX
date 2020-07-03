@@ -7,6 +7,8 @@ import Loader from "../../../src/components/Loader.js";
 
 export default () => {
     const Markdown = LazyLoad(() => import("markdown-to-jsx"));
+    const Markdown2 = LazyLoad(() => import("markdown-to-jsx"));
+
     return (
         <div>
             <Head>
@@ -20,6 +22,9 @@ export default () => {
             <Markdown>
                 By the way, I am a lazy loaded component 😺
             </Markdown>
+            <Markdown2>
+                Markdown2
+            </Markdown2>
             <br/>
             <br/>
             <Link to={"/"}> 👻 Click Here To Go Home</Link>

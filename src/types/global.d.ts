@@ -20,12 +20,10 @@ declare module NodeJS {
                 preloadChunks: (chunks: string[]) => void,
                 loadChunks: (chunks: string[]) => void
             },
-            finishRender?: () => void,
-            lazyCount?: number,
-            lazyDone?: number,
             pages?: {
                 404: string
             },
+            lazyPromises?: [],
             showLoader?: () => void
         },
         React?: any,

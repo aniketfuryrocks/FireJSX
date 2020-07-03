@@ -1,52 +1,43 @@
-FireJSX.lazyCount = 0;
-FireJSX.lazyDone = 0;
-export default (chunk, {
-    ssr = true, script, delay = 0, placeHolder = <></>, onError = (e) => {
+let count = 0;
+
+export default (chunkFunc, {
+    ssr = true, script, placeHolder = <></>, onError = (e) => {
         console.error("Error while lazy loading ");
         throw new Error(e);
     }
 } = {}) => {
-    FireJSX.lazyCount++;
-
     if (script && ssr)
         throw new Error("Scripts can't be rendered. Set either script or ssr to false");
-    let id;
-    if (FireJSX.isSSR) {
-        delay = 0;
-        placeHolder = (<div id={id = `FireJSX_LAZY_${FireJSX.lazyCount}`}/>)
-    }
-    let props = {};
+    //id
+    let id = `FireJSX_LAZY_${count++}`;
+    let props;
     let setChild;
 
-    function load(chunk) {
-        if (!script)
-            if (FireJSX.isSSR && ssr)
-                document.getElementById(id).outerHTML = window.ReactDOMServer.renderToString(
-                    React.createElement(chunk.default, props, props.children)
-                );
-            else
-                setChild(React.createElement(chunk.default, props, props.children))
-        if ((++FireJSX.lazyDone) === FireJSX.lazyCount && FireJSX.isSSR)
-            FireJSX.finishRender();
+    async function starter() {
+        try {
+            const chunk = await chunkFunc();
+            if (!script)
+                if (FireJSX.isSSR && ssr)
+                    document.getElementById(id).outerHTML = window.ReactDOMServer.renderToString(
+                        React.createElement(chunk.default, props, props.children)
+                    );
+                else
+                    setChild(React.createElement(chunk.default, props, props.children))
+        } catch (e) {
+            onError(e)
+        }
     }
 
-    if (FireJSX.isSSR && ssr || !FireJSX.isSSR)
-        chunk()
-            .then(chunk => {
-                if (!delay)
-                    load(chunk);
-                else
-                    setTimeout(() => load(chunk), delay);
-            })
-            .catch(onError)
-    else if ((++FireJSX.lazyDone) === FireJSX.lazyCount && FireJSX.isSSR)
-        FireJSX.finishRender();
+    if (FireJSX.isSSR && ssr)
+        FireJSX.lazyPromises.push(starter)
+    else
+        starter()
 
     if (!script)
         return function (_props) {
-            props = _props;
-            const [child, _setChild] = React.useState(placeHolder);
+            const [child, _setChild] = React.useState(FireJSX.isSSR ? <div id={id}/> : placeHolder);
             setChild = _setChild;
+            props = _props;
             return (
                 <div suppressHydrationWarning={true}>
                     {child}

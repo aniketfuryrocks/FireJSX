@@ -61,8 +61,7 @@ class default_1 {
             //isSSR
             global.FireJSX.isSSR = this.config.ssr;
             //reset lazy count
-            global.FireJSX.lazyCount = 0;
-            global.FireJSX.lazyDone = 0;
+            global.FireJSX.lazyPromises = [];
             //chunks
             {
                 let index;
@@ -108,24 +107,19 @@ class default_1 {
                         Require_1.requireUncached(path_1.join(this.config.pathToLib, page.chunks[index]));
                 }
             }
-            global.FireJSX.finishRender = () => {
-                console.log("resolving");
-                if (this.config.ssr) {
-                    const helmet = react_helmet_1.Helmet.renderStatic();
-                    for (let helmetKey in helmet)
-                        document.head.innerHTML += helmet[helmetKey].toString();
-                }
-                page.plugin.onRender(dom); //call plugin
-                resolve(dom.serialize()); //serialize i.e get html
-            };
             //static render
             if (this.config.ssr) {
                 document.getElementById("root").innerHTML = global.window.ReactDOMServer.renderToString(global.React.createElement(global.FireJSX.app, { content: global.FireJSX.map.content }));
-                if (global.FireJSX.lazyCount === 0)
-                    global.FireJSX.finishRender();
+                Promise.all(global.FireJSX.lazyPromises).then(() => {
+                    if (this.config.ssr) {
+                        const helmet = react_helmet_1.Helmet.renderStatic();
+                        for (let helmetKey in helmet)
+                            document.head.innerHTML += helmet[helmetKey].toString();
+                    }
+                    page.plugin.onRender(dom); //call plugin
+                    resolve(dom.serialize()); //serialize i.e get html
+                });
             }
-            else
-                global.FireJSX.finishRender();
         });
     }
 }
