@@ -41,7 +41,7 @@ class default_1 {
                                                 browsers: [`last 2 versions`, `not ie <= 11`, `not android 4.4.3`],
                                             },
                                         }], "@babel/preset-react"],
-                                plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime", "react-hot-loader/babel"]
+                                plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime", ...(this.$.config.pro ? ["react-hot-loader/babel"] : [])]
                             }
                         },
                     }, {

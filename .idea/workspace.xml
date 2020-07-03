@@ -10,48 +10,54 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="lOdable">
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/11aad32784f1a585762f34fc47ff322f.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/12858d72b1299fa6aca8e9500d5b4ea3.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/171548f98c6f11d0573875daca9c2cd9.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/21d5197e5d7c4a1289ba533d68b8e7a1.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/4d9174055b61ca8ef0aa66da86af7414.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/641ee80b93189ef53ef76afdbd6b9d08.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/6b2a49174efca891f65835d3e24d4c9c.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/7b09fc22b26e3e22456116dea152c2cc.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/81bb3543f36654388d958c0c2e9dc848.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/890801ca9092ae9cfb5325965a9bb531.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/8b60860af744ecaed47a1299b04cb04c.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/9f6336885af7f4718fb19fd81ff97e32.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/c704598f136e1dc1273e8634ef44409a.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/c738411caf4a8361bb013dc1a375d15b.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/cbe25b1ee54981db95b4d82a88abe050.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/e6e36b79ef25201c62c33fc0a2608537.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/ed6807c6149b8548f739d1d19392590f.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/f19585fa662850577ecd2131e9b3cb8b.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/f298ca8711f103242af8ef56e9540a5b.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/fac69ec29660522f788e615b55f4189c.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/fc559a9788f6ad10f0c93213fc56cae7.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/.babelCache/ff7c710ef91fc2422527e555596b3812.json.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/.cache/ffe1545d537ce526a27dc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/dist/about.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/dist/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/c7c0813435442289bce1f.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/cd7327c311ee844b4688a.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/cf57281b99b6230d41609.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/e19e7456ab7f79f25d733.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/m5335cd8ebd92c2028258.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/m55cd3eedc10796e4360f.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/m895fdf45461c5008a308.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/map/about.map.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/map/index.map.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/out/dist/lib/r7b1771680651ef3b12a4.js" afterDir="false" />
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="Promise fixed">
+      <change afterPath="$PROJECT_DIR$/test/src/hello_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/FireJSX.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/FireJSX.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/GlobalsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/GlobalsSetter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/LazyLoad.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/LazyLoad.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/architects/WebpackArchitect.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/architects/WebpackArchitect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FireJSX.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/FireJSX.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/architects/StaticArchitect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/architects/StaticArchitect.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GlobalsSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/GlobalsSetter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/architects/WebpackArchitect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/architects/WebpackArchitect.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/LazyLoad.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LazyLoad.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/plugins/PagePlugin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugins/PagePlugin.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/11aad32784f1a585762f34fc47ff322f.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/12858d72b1299fa6aca8e9500d5b4ea3.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/171548f98c6f11d0573875daca9c2cd9.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/21d5197e5d7c4a1289ba533d68b8e7a1.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/4d9174055b61ca8ef0aa66da86af7414.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/641ee80b93189ef53ef76afdbd6b9d08.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/6b2a49174efca891f65835d3e24d4c9c.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/7b09fc22b26e3e22456116dea152c2cc.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/81bb3543f36654388d958c0c2e9dc848.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/890801ca9092ae9cfb5325965a9bb531.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/8b60860af744ecaed47a1299b04cb04c.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/9f6336885af7f4718fb19fd81ff97e32.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/c704598f136e1dc1273e8634ef44409a.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/c738411caf4a8361bb013dc1a375d15b.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/cbe25b1ee54981db95b4d82a88abe050.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/e6e36b79ef25201c62c33fc0a2608537.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/ed6807c6149b8548f739d1d19392590f.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/f19585fa662850577ecd2131e9b3cb8b.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/f298ca8711f103242af8ef56e9540a5b.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/fac69ec29660522f788e615b55f4189c.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/fc559a9788f6ad10f0c93213fc56cae7.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/.babelCache/ff7c710ef91fc2422527e555596b3812.json.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/.cache/ffe1545d537ce526a27dc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/dist/about.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/dist/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/dist/lib/c7c0813435442289bce1f.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/dist/lib/cd7327c311ee844b4688a.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/dist/lib/cf57281b99b6230d41609.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/dist/lib/e19e7456ab7f79f25d733.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/dist/lib/m5335cd8ebd92c2028258.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/dist/lib/m55cd3eedc10796e4360f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/dist/lib/m895fdf45461c5008a308.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/dist/lib/map/about.map.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/dist/lib/map/index.map.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/out/dist/lib/r7b1771680651ef3b12a4.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/pages/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +104,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="settings.typescriptcompiler" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
@@ -110,7 +117,7 @@
       <recent name="$PROJECT_DIR$/test" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.publishDev">
     <configuration name="autopublish" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -206,7 +213,7 @@
       <workItem from="1593672874444" duration="59000" />
       <workItem from="1593672974922" duration="299000" />
       <workItem from="1593673942050" duration="551000" />
-      <workItem from="1593756512965" duration="21703000" />
+      <workItem from="1593756512965" duration="26448000" />
     </task>
     <task id="LOCAL-00001" summary=".gitignore">
       <created>1593598608476</created>
@@ -292,7 +299,21 @@
       <option name="project" value="LOCAL" />
       <updated>1593776247606</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Promise fixed">
+      <created>1593783423163</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1593783423163</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Promise fixed">
+      <created>1593783454984</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1593783454984</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,7 +351,8 @@
     <MESSAGE value="Changed map and lib root" />
     <MESSAGE value="webpack architect conditional" />
     <MESSAGE value="lOdable" />
-    <option name="LAST_COMMIT_MESSAGE" value="lOdable" />
+    <MESSAGE value="Promise fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Promise fixed" />
   </component>
   <component name="WindowStateProjectService">
     <state x="502" y="23" key="#autopublish" timestamp="1593598756287">
@@ -362,36 +384,36 @@
     </state>
     <state x="638" y="153" key="FileChooserDialogImpl/0.0.1920.1035@0.0.1920.1035" timestamp="1593599916306" />
     <state x="638" y="154" width="636" height="712" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593674487480" />
-    <state width="1889" height="165" key="GridCell.Tab.0.bottom" timestamp="1593782787719">
+    <state width="1889" height="287" key="GridCell.Tab.0.bottom" timestamp="1593784728383">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372243" />
-    <state width="1889" height="165" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593782787719" />
-    <state width="1889" height="165" key="GridCell.Tab.0.center" timestamp="1593782787717">
+    <state width="1889" height="287" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593784728383" />
+    <state width="1889" height="287" key="GridCell.Tab.0.center" timestamp="1593784728382">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372240" />
-    <state width="1889" height="165" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593782787717" />
-    <state width="1889" height="165" key="GridCell.Tab.0.left" timestamp="1593782787716">
+    <state width="1889" height="287" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593784728382" />
+    <state width="1889" height="287" key="GridCell.Tab.0.left" timestamp="1593784728380">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372239" />
-    <state width="1889" height="165" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593782787716" />
-    <state width="1889" height="165" key="GridCell.Tab.0.right" timestamp="1593782787718">
+    <state width="1889" height="287" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593784728380" />
+    <state width="1889" height="287" key="GridCell.Tab.0.right" timestamp="1593784728383">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372242" />
-    <state width="1889" height="165" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593782787718" />
+    <state width="1889" height="287" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593784728383" />
     <state x="207" y="0" key="SettingsEditor" timestamp="1593778840341">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1593598521864" />
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593778840341" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1593776250182">
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1593783458186">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="356" y="114" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1593599721937" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593776250182" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593783458186" />
     <state x="610" y="299" key="cloudConfig.PluginsDialog" timestamp="1593672925959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -408,10 +430,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="663" y="399" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593758446197" />
-    <state x="536" y="118" width="848" height="802" key="find.popup" timestamp="1593769672586">
+    <state x="536" y="118" width="848" height="802" key="find.popup" timestamp="1593788089389">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="536" y="118" width="848" height="802" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593769672586" />
+    <state x="536" y="118" width="848" height="802" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593788089389" />
     <state x="559" y="361" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1593606020199">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>

@@ -130,10 +130,9 @@ export default class {
                                                     content,
                                                     chunks: page.chunks
                                                 })}`,
-                                                this.$.outputFileSystem)
+                                                this.$.outputFileSystem).then(res)
                                         )
                                 })
-                            console.log("resolved")
                         }))
                     }).then(() => {
                         Promise.all(promises).then(resolve).catch(reject);

@@ -96,9 +96,8 @@ class default_1 {
                                     .then(() => Fs_1.writeFileRecursively(path_1.join(this.$.config.paths.map, `${path}.map.js`), `FireJSX.map=${JSON.stringify({
                                     content,
                                     chunks: page.chunks
-                                })}`, this.$.outputFileSystem));
+                                })}`, this.$.outputFileSystem).then(res));
                             });
-                            console.log("resolved");
                         }));
                     }).then(() => {
                         Promise.all(promises).then(resolve).catch(reject);

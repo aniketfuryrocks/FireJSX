@@ -7,6 +7,7 @@ export default (chunk, {
     }
 } = {}) => {
     FireJSX.lazyCount++;
+
     if (script && ssr)
         throw new Error("Scripts can't be rendered. Set either script or ssr to false");
     let id;
@@ -18,29 +19,28 @@ export default (chunk, {
     let setChild;
 
     function load(chunk) {
-        FireJSX.lazyDone++;
-        if (!script) {
-            if (FireJSX.isSSR && ssr) {
-                document.getElementById(id).innerHTML = window.ReactDOMServer.renderToString(
+        if (!script)
+            if (FireJSX.isSSR && ssr)
+                document.getElementById(id).outerHTML = window.ReactDOMServer.renderToString(
                     React.createElement(chunk.default, props, props.children)
                 );
-            } else
+            else
                 setChild(React.createElement(chunk.default, props, props.children))
-        }
-        if (FireJSX.lazyDone === FireJSX.lazyCount && FireJSX.isSSR)
-            console.log("render 2")
+        if ((++FireJSX.lazyDone) === FireJSX.lazyCount && FireJSX.isSSR)
+            FireJSX.finishRender();
     }
 
-    if (!(FireJSX.isSSR && script))
-        chunk().then(chunk => {
+    if (FireJSX.isSSR && ssr || !FireJSX.isSSR)
+        chunk()
+            .then(chunk => {
                 if (!delay)
                     load(chunk);
                 else
                     setTimeout(() => load(chunk), delay);
-            }
-        ).catch(onError)
+            })
+            .catch(onError)
     else if ((++FireJSX.lazyDone) === FireJSX.lazyCount && FireJSX.isSSR)
-            console.log("render")
+        FireJSX.finishRender();
 
     if (!script)
         return function (_props) {
