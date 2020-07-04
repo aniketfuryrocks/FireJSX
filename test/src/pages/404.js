@@ -22,8 +22,9 @@ export default () => {
             <Markdown>
                 By the way, I am a lazy loaded component 😺
             </Markdown>
+            <br/>
             <Markdown2>
-                Markdown2
+                And I am the second lazy loaded component
             </Markdown2>
             <br/>
             <br/>
