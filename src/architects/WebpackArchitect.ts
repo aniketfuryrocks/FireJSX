@@ -90,7 +90,7 @@ export default class {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
             entry: {
-                "e": join(__dirname, "../web/external_group_semi.js"),
+                "e": [...(this.$.config.pro ? [] : ['react-hot-loader/patch']), join(__dirname, "../web/external_group_semi.js")],
                 "r": join(__dirname, "../web/renderer.js"),
             },
             output: {
@@ -106,8 +106,7 @@ export default class {
         const mergedConfig = cloneDeep(this.defaultConfig);
         mergedConfig.name = page.toString()
         mergedConfig.entry = [
-            ...(this.$.config.pro ? [] : [`webpack-hot-middleware/client?path=/__webpack_hmr_/${mergedConfig.name}&reload=true&quiet=true&name=${mergedConfig.name}`]),
-            join(__dirname, "../web/wrapper.js")
+            ...(this.$.config.pro ? [join(__dirname, "../web/wrapper_pro.js")] : [`webpack-hot-middleware/client?path=/__webpack_hmr_/${mergedConfig.name}&reload=true&quiet=true&name=${mergedConfig.name}`, join(__dirname, "../web/wrapper.js")]),
         ];
         mergedConfig.plugins.push(new webpack.ProvidePlugin({
             __FIREJSX_APP__: join(this.$.config.paths.pages, mergedConfig.name)
