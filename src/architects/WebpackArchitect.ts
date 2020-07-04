@@ -69,9 +69,10 @@ export default class {
             plugins: [
                 ...(this.$.config.pro ? [new MiniCssExtractPlugin({
                     filename: "c[contentHash].css"
-                })] : [new webpack.HotModuleReplacementPlugin({
+                })] : []),
+                new webpack.HotModuleReplacementPlugin({
                     multiStep: true
-                })]),
+                }),
                 new CleanObsoleteChunks({
                     verbose: this.$.config.verbose
                 })
