@@ -41,9 +41,13 @@ class default_1 {
                                                 browsers: [`last 2 versions`, `not ie <= 11`, `not android 4.4.3`],
                                             },
                                         }], "@babel/preset-react"],
-                                plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime", ...(this.$.config.pro ? ["react-hot-loader/babel"] : [])]
+                                plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime", "react-hot-loader/babel"]
                             }
                         },
+                    }, {
+                        test: /\.(js|jsx)$/,
+                        use: 'react-hot-loader/webpack',
+                        include: /node_modules/
                     }, {
                         test: /\.css$/i,
                         use: [
@@ -66,10 +70,11 @@ class default_1 {
             plugins: [
                 ...(this.$.config.pro ? [new MiniCssExtractPlugin({
                         filename: "c[contentHash].css"
-                    })] : []),
-                new webpack.HotModuleReplacementPlugin({
-                    multiStep: true
-                }),
+                    })] : [
+                    new webpack.HotModuleReplacementPlugin({
+                        multiStep: true
+                    })
+                ]),
                 new CleanObsoleteChunks({
                     verbose: this.$.config.verbose
                 })
@@ -84,11 +89,6 @@ class default_1 {
                 "e": path_1.join(__dirname, "../web/external_group_semi.js"),
                 "r": path_1.join(__dirname, "../web/renderer.js"),
             },
-            resolve: {
-                alias: {
-                    'react-dom': '@hot-loader/react-dom',
-                },
-            },
             output: {
                 path: this.$.config.paths.lib,
                 filename: "[name][contentHash].js"
@@ -100,10 +100,10 @@ class default_1 {
     forPage(page) {
         const mergedConfig = lodash_1.cloneDeep(this.defaultConfig);
         mergedConfig.name = page.toString();
-        if (this.$.config.pro)
-            mergedConfig.entry = path_1.join(__dirname, "../web/wrapper_pro.js");
-        else
-            mergedConfig.entry = [`webpack-hot-middleware/client?path=/__webpack_hmr_/${mergedConfig.name}&reload=true&quiet=true&name=${mergedConfig.name}`, path_1.join(__dirname, "../web/wrapper.js")];
+        mergedConfig.entry = [
+            ...(this.$.config.pro ? [] : [`webpack-hot-middleware/client?path=/__webpack_hmr_/${mergedConfig.name}&reload=true&quiet=true&name=${mergedConfig.name}`]),
+            path_1.join(__dirname, "../web/wrapper.js")
+        ];
         mergedConfig.plugins.push(new webpack.ProvidePlugin({
             __FIREJSX_APP__: path_1.join(this.$.config.paths.pages, mergedConfig.name)
         }));

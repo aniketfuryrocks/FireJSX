@@ -10,14 +10,28 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="conditional Lazy Load">
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="0.2.2">
+      <change afterPath="$PROJECT_DIR$/test/yarn-error.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yarn-error.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/GlobalsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/GlobalsSetter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/LazyLoad.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/LazyLoad.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/architects/WebpackArchitect.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/architects/WebpackArchitect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/mappers/ArgsMapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/mappers/ArgsMapper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/mappers/PathMapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/mappers/PathMapper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/mappers/PluginMapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/mappers/PluginMapper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/plugins/FireJSXPlugin.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/plugins/FireJSXPlugin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/plugins/GlobalPlugin.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/plugins/GlobalPlugin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/plugins/PagePlugin.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/plugins/PagePlugin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/utils/Fs.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/utils/Fs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/utils/Require.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/utils/Require.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/web/external_group_semi.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/web/external_group_semi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/web/wrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/web/wrapper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/web/wrapper_pro.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GlobalsSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/GlobalsSetter.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/architects/WebpackArchitect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/architects/WebpackArchitect.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/external_group_semi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/web/external_group_semi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/wrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/web/wrapper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/wrapper_pro.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +49,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="LazyNew" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -78,7 +92,7 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.autopublish">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="autopublish" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -179,7 +193,7 @@
       <workItem from="1593850760945" duration="1045000" />
       <workItem from="1593857892695" duration="2763000" />
       <workItem from="1593861214020" duration="693000" />
-      <workItem from="1593869860714" duration="316000" />
+      <workItem from="1593869860714" duration="3961000" />
     </task>
     <task id="LOCAL-00001" summary=".gitignore">
       <created>1593598608476</created>
@@ -405,7 +419,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593868287859</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="0.2.2">
+      <created>1593870206768</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1593870206768</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -435,7 +456,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="rm dist" />
     <MESSAGE value="Fire JSX to FireJSX" />
     <MESSAGE value="fix" />
     <MESSAGE value="rm .js" />
@@ -460,7 +480,8 @@
     <MESSAGE value="suppressHydrationWarning" />
     <MESSAGE value="v0.2.1" />
     <MESSAGE value="conditional Lazy Load" />
-    <option name="LAST_COMMIT_MESSAGE" value="conditional Lazy Load" />
+    <MESSAGE value="0.2.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.2.2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="502" y="23" key="#autopublish" timestamp="1593598756287">
@@ -492,26 +513,26 @@
     </state>
     <state x="638" y="153" key="FileChooserDialogImpl/0.0.1920.1035@0.0.1920.1035" timestamp="1593599916306" />
     <state x="638" y="154" width="636" height="712" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593674487480" />
-    <state width="1889" height="203" key="GridCell.Tab.0.bottom" timestamp="1593868350734">
+    <state width="1889" height="202" key="GridCell.Tab.0.bottom" timestamp="1593870638853">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372243" />
-    <state width="1889" height="203" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593868350734" />
-    <state width="1889" height="203" key="GridCell.Tab.0.center" timestamp="1593868350733">
+    <state width="1889" height="202" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593870638853" />
+    <state width="1889" height="202" key="GridCell.Tab.0.center" timestamp="1593870638851">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372240" />
-    <state width="1889" height="203" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593868350733" />
-    <state width="1889" height="203" key="GridCell.Tab.0.left" timestamp="1593868350732">
+    <state width="1889" height="202" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593870638851" />
+    <state width="1889" height="202" key="GridCell.Tab.0.left" timestamp="1593870638849">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372239" />
-    <state width="1889" height="203" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593868350732" />
-    <state width="1889" height="203" key="GridCell.Tab.0.right" timestamp="1593868350734">
+    <state width="1889" height="202" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593870638849" />
+    <state width="1889" height="202" key="GridCell.Tab.0.right" timestamp="1593870638852">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372242" />
-    <state width="1889" height="203" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593868350734" />
+    <state width="1889" height="202" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593870638852" />
     <state x="652" y="0" width="605" height="1040" key="RollbackChangesDialog" timestamp="1593792912366">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -521,11 +542,11 @@
     </state>
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1593598521864" />
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593778840341" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1593868309795">
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1593870299683">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="356" y="114" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1593599721937" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593868309795" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593870299683" />
     <state x="610" y="299" key="cloudConfig.PluginsDialog" timestamp="1593672925959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
