@@ -1,7 +1,7 @@
 let count = 0;
 
 export default (chunkFunc, {
-    ssr = true, placeHolder = <div suppressHydrationWarning={true}></div>, onError = (e) => {
+    ssr = true, placeHolder = <div suppressHydrationWarning={true}/>, onError = (e) => {
         console.error("Error while lazy loading ");
         throw new Error(e);
     }
@@ -13,7 +13,6 @@ export default (chunkFunc, {
     async function starter() {
         try {
             const chunk = await chunkFunc();
-            console.log(FireJSX.isSSR && ssr)
             if (FireJSX.isSSR && ssr)
                 document.getElementById(id).outerHTML = window.ReactDOMServer.renderToString(
                     React.createElement(chunk.default, props)

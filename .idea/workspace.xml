@@ -10,21 +10,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="suppress hydration warning">
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="await LazyPromises">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/LazyLoad.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/LazyLoad.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/architects/StaticArchitect.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/architects/StaticArchitect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/mappers/ArgsMapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/mappers/ArgsMapper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/mappers/PathMapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/mappers/PathMapper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/mappers/PluginMapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/mappers/PluginMapper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/plugins/FireJSXPlugin.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/plugins/FireJSXPlugin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/plugins/GlobalPlugin.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/plugins/GlobalPlugin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/plugins/PagePlugin.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/plugins/PagePlugin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/utils/Fs.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/utils/Fs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/utils/Require.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/utils/Require.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/architects/StaticArchitect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/architects/StaticArchitect.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/LazyLoad.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LazyLoad.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/global.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/global.d.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +173,7 @@
       <workItem from="1593756512965" duration="31800000" />
       <workItem from="1593842073573" duration="2031000" />
       <workItem from="1593850760945" duration="1045000" />
-      <workItem from="1593857892695" duration="2292000" />
+      <workItem from="1593857892695" duration="2446000" />
     </task>
     <task id="LOCAL-00001" summary=".gitignore">
       <created>1593598608476</created>
@@ -382,7 +371,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593859010470</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="await LazyPromises">
+      <created>1593860223430</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1593860223430</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -433,7 +429,8 @@
     <MESSAGE value="Lazy load without div rapper" />
     <MESSAGE value="rm script from LazyLoad" />
     <MESSAGE value="suppress hydration warning" />
-    <option name="LAST_COMMIT_MESSAGE" value="suppress hydration warning" />
+    <MESSAGE value="await LazyPromises" />
+    <option name="LAST_COMMIT_MESSAGE" value="await LazyPromises" />
   </component>
   <component name="WindowStateProjectService">
     <state x="502" y="23" key="#autopublish" timestamp="1593598756287">
@@ -494,11 +491,11 @@
     </state>
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1593598521864" />
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593778840341" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1593859015489">
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1593860226875">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="356" y="114" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1593599721937" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593859015489" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593860226875" />
     <state x="610" y="299" key="cloudConfig.PluginsDialog" timestamp="1593672925959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
