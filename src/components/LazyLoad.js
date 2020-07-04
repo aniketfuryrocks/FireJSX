@@ -1,7 +1,7 @@
 let count = 0;
 
 export default (chunkFunc, {
-    ssr = true, script, placeHolder = <></>, onError = (e) => {
+    ssr = true, script, placeHolder = <div suppressHydrationWarning={true}></div>, onError = (e) => {
         console.error("Error while lazy loading ");
         throw new Error(e);
     }
@@ -22,7 +22,10 @@ export default (chunkFunc, {
                         React.createElement(chunk.default, props, props.children)
                     );
                 else
-                    setChild(React.createElement(chunk.default, props, props.children))
+                    setChild(React.createElement(chunk.default, {
+                        ...props,
+                        suppressHydrationWarning: true
+                    }, props.children))
         } catch (e) {
             onError(e)
         }
@@ -38,10 +41,6 @@ export default (chunkFunc, {
             const [child, _setChild] = React.useState(FireJSX.isSSR ? <div id={id}/> : placeHolder);
             setChild = _setChild;
             props = _props;
-            return (
-                <div suppressHydrationWarning={true}>
-                    {child}
-                </div>
-            );
+            return child
         }
 }
