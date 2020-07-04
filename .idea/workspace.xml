@@ -10,10 +10,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="Lazy load without div rapper">
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="rm script from LazyLoad">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LazyLoad.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LazyLoad.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/LazyLoad.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/LazyLoad.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +172,7 @@
       <workItem from="1593756512965" duration="31800000" />
       <workItem from="1593842073573" duration="2031000" />
       <workItem from="1593850760945" duration="1045000" />
-      <workItem from="1593857892695" duration="553000" />
+      <workItem from="1593857892695" duration="1107000" />
     </task>
     <task id="LOCAL-00001" summary=".gitignore">
       <created>1593598608476</created>
@@ -357,7 +356,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593858308747</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="rm script from LazyLoad">
+      <created>1593858505316</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1593858505316</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -406,7 +412,8 @@
     <MESSAGE value=".gitignore" />
     <MESSAGE value="0.2.0" />
     <MESSAGE value="Lazy load without div rapper" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lazy load without div rapper" />
+    <MESSAGE value="rm script from LazyLoad" />
+    <option name="LAST_COMMIT_MESSAGE" value="rm script from LazyLoad" />
   </component>
   <component name="WindowStateProjectService">
     <state x="502" y="23" key="#autopublish" timestamp="1593598756287">
@@ -438,26 +445,26 @@
     </state>
     <state x="638" y="153" key="FileChooserDialogImpl/0.0.1920.1035@0.0.1920.1035" timestamp="1593599916306" />
     <state x="638" y="154" width="636" height="712" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593674487480" />
-    <state width="1889" height="216" key="GridCell.Tab.0.bottom" timestamp="1593852648656">
+    <state width="1889" height="571" key="GridCell.Tab.0.bottom" timestamp="1593858956797">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372243" />
-    <state width="1889" height="216" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593852648656" />
-    <state width="1889" height="216" key="GridCell.Tab.0.center" timestamp="1593852648655">
+    <state width="1889" height="571" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593858956797" />
+    <state width="1889" height="571" key="GridCell.Tab.0.center" timestamp="1593858956795">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372240" />
-    <state width="1889" height="216" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593852648655" />
-    <state width="1889" height="216" key="GridCell.Tab.0.left" timestamp="1593852648655">
+    <state width="1889" height="571" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593858956795" />
+    <state width="1889" height="571" key="GridCell.Tab.0.left" timestamp="1593858956794">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372239" />
-    <state width="1889" height="216" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593852648655" />
-    <state width="1889" height="216" key="GridCell.Tab.0.right" timestamp="1593852648656">
+    <state width="1889" height="571" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593858956794" />
+    <state width="1889" height="571" key="GridCell.Tab.0.right" timestamp="1593858956796">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372242" />
-    <state width="1889" height="216" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593852648656" />
+    <state width="1889" height="571" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593858956796" />
     <state x="652" y="0" width="605" height="1040" key="RollbackChangesDialog" timestamp="1593792912366">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -467,11 +474,11 @@
     </state>
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1593598521864" />
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593778840341" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1593851132575">
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1593858509264">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="356" y="114" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1593599721937" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593851132575" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593858509264" />
     <state x="610" y="299" key="cloudConfig.PluginsDialog" timestamp="1593672925959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -500,9 +507,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="653" y="182" width="604" height="674" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593769683906" />
-    <state x="455" y="228" key="run.anything.popup" timestamp="1593779508981">
+    <state x="455" y="228" key="run.anything.popup" timestamp="1593858496611">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="455" y="228" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593779508981" />
+    <state x="455" y="228" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593858496611" />
   </component>
 </project>
