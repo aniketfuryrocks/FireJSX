@@ -13,11 +13,13 @@ export default (chunkFunc, {
     async function starter() {
         try {
             const chunk = await chunkFunc();
-            if (FireJSX.isSSR && ssr)
-                document.getElementById(id).outerHTML = window.ReactDOMServer.renderToString(
-                    React.createElement(chunk.default, props)
-                );
-            else
+            if (FireJSX.isSSR && ssr) {
+                const el = document.getElementById(id)
+                if (el)
+                    el.outerHTML = window.ReactDOMServer.renderToString(
+                        React.createElement(chunk.default, props)
+                    );
+            } else
                 setChild(React.createElement(chunk.default, {
                     ...props,
                     suppressHydrationWarning: true
