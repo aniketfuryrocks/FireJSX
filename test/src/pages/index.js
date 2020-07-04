@@ -3,6 +3,7 @@ import Head from "../../../src/components/Head.js";
 import "../style/main.css"
 import Loader from "../../../src/components/Loader.js";
 import LoadingBar from "../components/LoadingBar/LoadingBar.js";
+import LazyLoad from "../../../src/components/LazyLoad.js";
 
 export default ({content: {emoji}}) => {
     const [s, setS] = React.useState(0)
@@ -13,6 +14,7 @@ export default ({content: {emoji}}) => {
             clearInterval(interval);
         }
     }, []);
+    LazyLoad(() => import("../hello_script.js"), {ssr: false, script: true})
     return (
         <div>
             <Loader effect={React.useEffect}>

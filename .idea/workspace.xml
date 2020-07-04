@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="😺 on build error handling">
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GlobalsSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/GlobalsSetter.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1e553kS3TAgy2zbNhQYpknfREtG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="10.19.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/test" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="settings.typescriptcompiler" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.publishNitely">
+    <configuration name="autopublish" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="autopublish" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="publishDev" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="publishDev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="publishNitely" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="publishNitely" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="sync" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="sync" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/test/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="test" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="watch" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="watch" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.test" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.test" />
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="" />
+      <created>1593598415999</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1593598415999</updated>
+      <workItem from="1593598422042" duration="3486000" />
+      <workItem from="1593623975601" duration="1397000" />
+      <workItem from="1593672874444" duration="59000" />
+      <workItem from="1593672974922" duration="299000" />
+      <workItem from="1593673942050" duration="551000" />
+      <workItem from="1593756512965" duration="31800000" />
+      <workItem from="1593842073573" duration="2031000" />
+    </task>
+    <task id="LOCAL-00001" summary=".gitignore">
+      <created>1593598608476</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1593598608476</updated>
+    </task>
+    <task id="LOCAL-00002" summary="rm dist">
+      <created>1593598667601</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1593598667601</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Fire JSX to FireJSX">
+      <created>1593599719588</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1593599719588</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix">
+      <created>1593760685663</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1593760685663</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix">
+      <created>1593760691031</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1593760691031</updated>
+    </task>
+    <task id="LOCAL-00006" summary="rm .js">
+      <created>1593760816942</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1593760816942</updated>
+    </task>
+    <task id="LOCAL-00007" summary="rm .js">
+      <created>1593760820753</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1593760820753</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Changed map and lib root">
+      <created>1593764102677</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1593764102677</updated>
+    </task>
+    <task id="LOCAL-00009" summary="webpack architect conditional">
+      <created>1593768870134</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1593768870134</updated>
+    </task>
+    <task id="LOCAL-00010" summary="webpack architect conditional">
+      <created>1593772845645</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1593772845645</updated>
+    </task>
+    <task id="LOCAL-00011" summary="lOdable">
+      <created>1593776155050</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1593776155050</updated>
+    </task>
+    <task id="LOCAL-00012" summary="lOdable">
+      <created>1593776247605</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1593776247606</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Promise fixed">
+      <created>1593783423163</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1593783423163</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Promise fixed">
+      <created>1593783454984</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1593783454984</updated>
+    </task>
+    <task id="LOCAL-00015" summary="working for LazyLoad less than 2">
+      <created>1593789544451</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1593789544451</updated>
+    </task>
+    <task id="LOCAL-00016" summary="LazyLoad working">
+      <created>1593794405759</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1593794405760</updated>
+    </task>
+    <task id="LOCAL-00017" summary="0.1.0-dev.6">
+      <created>1593795046594</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1593795046594</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Fly build">
+      <created>1593795612258</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1593795612258</updated>
+    </task>
+    <task id="LOCAL-00019" summary="0.2.0-alpha.1">
+      <created>1593795780847</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1593795780847</updated>
+    </task>
+    <task id="LOCAL-00020" summary="extra logging, catching and fixed dev promise callback miss">
+      <created>1593842913592</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1593842913592</updated>
+    </task>
+    <task id="LOCAL-00021" summary="🏇 extra logging, catching and fixed dev promise callback miss">
+      <created>1593843011830</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1593843011830</updated>
+    </task>
+    <task id="LOCAL-00022" summary="😺 on build error handling">
+      <created>1593844020748</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1593844020748</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value=".gitignore" />
+    <MESSAGE value="rm dist" />
+    <MESSAGE value="Fire JSX to FireJSX" />
+    <MESSAGE value="fix" />
+    <MESSAGE value="rm .js" />
+    <MESSAGE value="Changed map and lib root" />
+    <MESSAGE value="webpack architect conditional" />
+    <MESSAGE value="lOdable" />
+    <MESSAGE value="Promise fixed" />
+    <MESSAGE value="working for LazyLoad less than 2" />
+    <MESSAGE value="LazyLoad working" />
+    <MESSAGE value="0.1.0-dev.6" />
+    <MESSAGE value="Fly build" />
+    <MESSAGE value="0.2.0-alpha.1" />
+    <MESSAGE value="extra logging, catching and fixed dev promise callback miss" />
+    <MESSAGE value=" extra logging, catching and fixed dev promise callback miss" />
+    <MESSAGE value=" on build error handling" />
+    <option name="LAST_COMMIT_MESSAGE" value=" on build error handling" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="502" y="23" key="#autopublish" timestamp="1593598756287">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="502" y="23" key="#autopublish/0.0.1920.1035@0.0.1920.1035" timestamp="1593598756287" />
+    <state x="502" y="23" key="#publishDev" timestamp="1593598765779">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="502" y="23" key="#publishDev/0.0.1920.1035@0.0.1920.1035" timestamp="1593598765779" />
+    <state x="502" y="23" key="#publishNitely" timestamp="1593598760132">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="502" y="23" key="#publishNitely/0.0.1920.1035@0.0.1920.1035" timestamp="1593598760132" />
+    <state x="502" y="23" key="#sync" timestamp="1593598723242">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="502" y="23" key="#sync/0.0.1920.1035@0.0.1920.1035" timestamp="1593598723242" />
+    <state x="502" y="23" key="#watch" timestamp="1593598741322">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="502" y="23" key="#watch/0.0.1920.1035@0.0.1920.1035" timestamp="1593598741322" />
+    <state x="100" y="99" width="1720" height="840" key="DiffContextDialog" timestamp="1593764063917">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="100" y="99" width="1720" height="840" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593764063917" />
+    <state x="638" y="154" width="636" height="712" key="FileChooserDialogImpl" timestamp="1593674487480">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="638" y="153" key="FileChooserDialogImpl/0.0.1920.1035@0.0.1920.1035" timestamp="1593599916306" />
+    <state x="638" y="154" width="636" height="712" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593674487480" />
+    <state width="1889" height="740" key="GridCell.Tab.0.bottom" timestamp="1593842836155">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1885" height="235" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372243" />
+    <state width="1889" height="740" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593842836155" />
+    <state width="1889" height="740" key="GridCell.Tab.0.center" timestamp="1593842836155">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1885" height="235" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372240" />
+    <state width="1889" height="740" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593842836155" />
+    <state width="1889" height="740" key="GridCell.Tab.0.left" timestamp="1593842836154">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1885" height="235" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372239" />
+    <state width="1889" height="740" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593842836154" />
+    <state width="1889" height="740" key="GridCell.Tab.0.right" timestamp="1593842836155">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1885" height="235" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372242" />
+    <state width="1889" height="740" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593842836155" />
+    <state x="652" y="0" width="605" height="1040" key="RollbackChangesDialog" timestamp="1593792912366">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="652" y="0" width="605" height="1040" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593792912366" />
+    <state x="207" y="0" key="SettingsEditor" timestamp="1593778840341">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="207" y="0" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1593598521864" />
+    <state x="207" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593778840341" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1593844023185">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="356" y="114" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1593599721937" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593844023185" />
+    <state x="610" y="299" key="cloudConfig.PluginsDialog" timestamp="1593672925959">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="610" y="299" key="cloudConfig.PluginsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593672925959" />
+    <state x="784" y="299" key="cloudConfig.SelfSettingsDialog" timestamp="1593672919509">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="784" y="299" key="cloudConfig.SelfSettingsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593672919509" />
+    <state x="675" y="8" width="915" height="1022" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1593776167755">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="675" y="8" width="915" height="1022" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593776167755" />
+    <state x="663" y="399" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1593758446197">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="663" y="399" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593758446197" />
+    <state x="536" y="118" width="848" height="802" key="find.popup" timestamp="1593788089389">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="536" y="118" width="848" height="802" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593788089389" />
+    <state x="559" y="361" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1593606020199">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="559" y="361" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1920.1035@0.0.1920.1035" timestamp="1593606020199" />
+    <state x="653" y="182" width="604" height="674" key="refactoring.ChangeSignatureDialog" timestamp="1593769683906">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="653" y="182" width="604" height="674" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593769683906" />
+    <state x="455" y="228" key="run.anything.popup" timestamp="1593779508981">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="455" y="228" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593779508981" />
+  </component>
+</project>

@@ -35,14 +35,13 @@ export default class {
                 path = path.replace(this.$.config.paths.pages + "/", "");
                 const page = this.$.pageMap.get(path) || new Page(path);
                 this.$.pageMap.set(page.toString(), page);
-                const compiler = this.app.buildPage(page, () => {
-                    }, (e) =>
-                        this.$.cli.error(`Error while rendering page ${page.toString()}\n`, e)
-                );
-                server.use(webpackhot(compiler, {
-                    log: false,
-                    path: `/__webpack_hmr_/${page.toString()}`
-                }));
+                this.app.buildPage(page, compiler => {
+                        server.use(webpackhot(compiler, {
+                            log: false,
+                            path: `/__webpack_hmr_/${page.toString()}`
+                        }))
+                    }
+                ).catch(e => this.$.cli.error(e));
             })
             .on('unlink', path => {
                 const page = this.$.pageMap.get(path.replace(this.$.config.paths.pages + "/", ""));
@@ -70,6 +69,7 @@ export default class {
                     ` │   Listening at http://${address}:${port}    │\n` +
                     " │                                         │\n" +
                     " └─────────────────────────────────────────┘\x1b[0m\n")
+            this.$.cli.ok("Building Pages")
         })
     }
 

@@ -39,6 +39,8 @@ export default class {
         map: string
     }> {
         const _page = this.pageMap.get(page);
+        if (!page)
+            throw new Error(`Page ${page} does not exist`)
         return {
             html: await this.renderer.render(_page, path, content),
             map: `FireJSX.map=${JSON.stringify({
