@@ -11,8 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="😺 on build error handling">
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GlobalsSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/GlobalsSetter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,6 +170,7 @@
       <workItem from="1593673942050" duration="551000" />
       <workItem from="1593756512965" duration="31800000" />
       <workItem from="1593842073573" duration="2031000" />
+      <workItem from="1593850760945" duration="13000" />
     </task>
     <task id="LOCAL-00001" summary=".gitignore">
       <created>1593598608476</created>
