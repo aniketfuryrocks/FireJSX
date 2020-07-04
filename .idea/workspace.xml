@@ -10,10 +10,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="0.2.0">
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="Lazy load without div rapper">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/LazyLoad.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LazyLoad.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/test/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/pages/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +74,7 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.autopublish">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="autopublish" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -147,8 +147,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.test" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.test" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.test" />
         <item itemvalue="npm.dev" />
@@ -173,7 +173,7 @@
       <workItem from="1593756512965" duration="31800000" />
       <workItem from="1593842073573" duration="2031000" />
       <workItem from="1593850760945" duration="1045000" />
-      <workItem from="1593857892695" duration="348000" />
+      <workItem from="1593857892695" duration="553000" />
     </task>
     <task id="LOCAL-00001" summary=".gitignore">
       <created>1593598608476</created>
@@ -350,7 +350,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593851118968</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Lazy load without div rapper">
+      <created>1593858308747</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1593858308747</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -398,7 +405,8 @@
     <MESSAGE value=" on build error handling" />
     <MESSAGE value=".gitignore" />
     <MESSAGE value="0.2.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.2.0" />
+    <MESSAGE value="Lazy load without div rapper" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lazy load without div rapper" />
   </component>
   <component name="WindowStateProjectService">
     <state x="502" y="23" key="#autopublish" timestamp="1593598756287">

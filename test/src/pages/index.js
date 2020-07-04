@@ -14,7 +14,9 @@ export default ({content: {emoji}}) => {
             clearInterval(interval);
         }
     }, []);
+/*
     LazyLoad(() => import("../hello_script.js"), {ssr: false, script: true})
+*/
     return (
         <div>
             <Loader effect={React.useEffect}>
