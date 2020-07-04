@@ -56,6 +56,8 @@ class default_1 {
                 rootPath: this.$.config.paths.root
             }));
         }
+        if (this.$.config.verbose)
+            this.$.cli.log(`${this.$.config.plugins.length} Plugins :  ${this.$.config.plugins}`);
     }
     constructParams(params) {
         params.config = params.config || {};
@@ -84,7 +86,7 @@ class default_1 {
                 //render
                 try {
                     const promises = [];
-                    page.plugin.onBuild((path, content = {}) => {
+                    const buildPromise = page.plugin.onBuild((path, content = {}) => {
                         if (this.$.config.verbose)
                             this.$.cli.log(`Rendering Path : ${path}`);
                         promises.push(new Promise((res, rej) => {
@@ -109,8 +111,13 @@ class default_1 {
                                 rej(e);
                             });
                         }));
-                    }).then(() => Promise.all(promises).then(resolve).catch(reject))
-                        .catch(reject);
+                    });
+                    if (buildPromise instanceof Promise)
+                        buildPromise
+                            .then(() => Promise.all(promises).then(resolve).catch(reject))
+                            .catch(reject);
+                    else
+                        reject(new TypeError(`Expected async onBuild() plugin function for page ${page.toString()}`));
                     //resolve after awaiting
                 }
                 catch (e) {

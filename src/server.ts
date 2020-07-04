@@ -41,7 +41,7 @@ export default class {
                             path: `/__webpack_hmr_/${page.toString()}`
                         }))
                     }
-                );
+                ).catch(e => this.$.cli.error(e));
             })
             .on('unlink', path => {
                 const page = this.$.pageMap.get(path.replace(this.$.config.paths.pages + "/", ""));

@@ -89,6 +89,8 @@ export default class {
                 rootPath: this.$.config.paths.root
             }))
         }
+        if (this.$.config.verbose)
+            this.$.cli.log(`${this.$.config.plugins.length} Plugins :  ${this.$.config.plugins}`)
     }
 
     async init() {
@@ -113,7 +115,7 @@ export default class {
                 //render
                 try {
                     const promises = [];
-                    page.plugin.onBuild((path, content = {}) => {
+                    const buildPromise = page.plugin.onBuild((path, content = {}) => {
                         if (this.$.config.verbose)
                             this.$.cli.log(`Rendering Path : ${path}`);
                         promises.push(new Promise((res, rej) => {
@@ -144,8 +146,13 @@ export default class {
                                     rej(e)
                                 })
                         }))
-                    }).then(() => Promise.all(promises).then(resolve).catch(reject))
-                        .catch(reject);
+                    });
+                    if (buildPromise instanceof Promise)
+                        buildPromise
+                            .then(() => Promise.all(promises).then(resolve).catch(reject))
+                            .catch(reject);
+                    else
+                        reject(new TypeError(`Expected async onBuild() plugin function for page ${page.toString()}`))
                     //resolve after awaiting
                 } catch (e) {
                     this.$.cli.error(`Error while calling onBuild() of pagePlugin for page ${page.toString()}\n\nFunc:`, page.plugin.onBuild.toString(), "\n\n");
