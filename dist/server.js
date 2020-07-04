@@ -73,6 +73,7 @@ class default_1 {
                         ` │   Listening at http://${address}:${port}    │\n` +
                         " │                                         │\n" +
                         " └─────────────────────────────────────────┘\x1b[0m\n");
+                this.$.cli.ok("Building Pages");
             });
         });
     }

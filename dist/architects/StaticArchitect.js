@@ -108,18 +108,18 @@ class default_1 {
                 }
             }
             //static render
-            if (this.config.ssr) {
+            if (this.config.ssr)
                 document.getElementById("root").innerHTML = global.window.ReactDOMServer.renderToString(global.React.createElement(global.FireJSX.app, { content: global.FireJSX.map.content }));
-                Promise.all(global.FireJSX.lazyPromises).then(() => {
-                    if (this.config.ssr) {
-                        const helmet = react_helmet_1.Helmet.renderStatic();
-                        for (let helmetKey in helmet)
-                            document.head.innerHTML += helmet[helmetKey].toString();
-                    }
-                    page.plugin.onRender(dom); //call plugin
-                    resolve(dom.serialize()); //serialize i.e get html
-                });
-            }
+            //resolve all promises
+            Promise.all(global.FireJSX.lazyPromises).then(() => {
+                if (this.config.ssr) {
+                    const helmet = react_helmet_1.Helmet.renderStatic();
+                    for (let helmetKey in helmet)
+                        document.head.innerHTML += helmet[helmetKey].toString();
+                }
+                page.plugin.onRender(dom); //call plugin
+                resolve(dom.serialize()); //serialize i.e get html
+            });
         });
     }
 }

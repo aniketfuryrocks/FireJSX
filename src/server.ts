@@ -69,6 +69,7 @@ export default class {
                     ` │   Listening at http://${address}:${port}    │\n` +
                     " │                                         │\n" +
                     " └─────────────────────────────────────────┘\x1b[0m\n")
+            this.$.cli.ok("Building Pages")
         })
     }
 

@@ -116,10 +116,9 @@ export default class {
                     page.plugin.onBuild((path, content = {}) => {
                         if (this.$.config.verbose)
                             this.$.cli.log(`Rendering Path : ${path}`);
-                        promises.push(new Promise(res => {
+                        promises.push(new Promise((res, rej) => {
                             this.$.renderer.render(page, path, content)
                                 .then(html => {
-                                    //write map
                                     this.$.cli.ok(`Rendered Path : ${path}`)
                                     writeFileRecursively(join(this.$.config.paths.dist, `${path}.html`),
                                         html,
@@ -130,13 +129,23 @@ export default class {
                                                     content,
                                                     chunks: page.chunks
                                                 })}`,
-                                                this.$.outputFileSystem).then(res)
-                                        )
+                                                this.$.outputFileSystem
+                                            ).then(res)).catch(e => {
+                                        this.$.cli.error(`Error writing map ${path}`)
+                                        rej(e)
+                                    })
+                                        .catch(e => {
+                                            this.$.cli.error(`Error writing html ${path}`)
+                                            rej(e)
+                                        })
+                                })
+                                .catch(e => {
+                                    this.$.cli.error(`Error rendering path ${path}`)
+                                    rej(e)
                                 })
                         }))
-                    }).then(() => {
-                        Promise.all(promises).then(resolve).catch(reject);
-                    });
+                    }).then(() => Promise.all(promises).then(resolve).catch(reject))
+                        .catch(reject);
                     //resolve after awaiting
                 } catch (e) {
                     this.$.cli.error(`Error while calling onBuild() of pagePlugin for page ${page.toString()}\n\nFunc:`, page.plugin.onBuild.toString(), "\n\n");
