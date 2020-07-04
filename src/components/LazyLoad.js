@@ -13,6 +13,7 @@ export default (chunkFunc, {
     async function starter() {
         try {
             const chunk = await chunkFunc();
+            console.log(FireJSX.isSSR && ssr)
             if (FireJSX.isSSR && ssr)
                 document.getElementById(id).outerHTML = window.ReactDOMServer.renderToString(
                     React.createElement(chunk.default, props)

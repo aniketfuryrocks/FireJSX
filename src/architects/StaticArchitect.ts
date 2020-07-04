@@ -81,7 +81,7 @@ export default class {
             //isSSR
             global.FireJSX.isSSR = this.config.ssr
             //reset lazy count
-            global.FireJSX.lazyPromises = [];
+            global.FireJSX.lazyPromises = <Promise<any>[]>[];
             //chunks
             {
                 let index;
@@ -127,15 +127,19 @@ export default class {
                 }
             }
             //static render
-            if (this.config.ssr)
+            if (this.config.ssr) {
                 document.getElementById("root").innerHTML = global.window.ReactDOMServer.renderToString(
                     global.React.createElement(
                         global.FireJSX.app,
                         {content: global.FireJSX.map.content}
                     )
                 )
+            }
             //resolve all promises
-            Promise.all(global.FireJSX.lazyPromises).then(() => {
+            (async () => {
+                for await (const lazyPromise of global.FireJSX.lazyPromises) {
+                    await lazyPromise()
+                }
                 if (this.config.ssr) {
                     const helmet = Helmet.renderStatic();
                     for (let helmetKey in helmet)
@@ -143,7 +147,7 @@ export default class {
                 }
                 page.plugin.onRender(dom);//call plugin
                 resolve(dom.serialize());//serialize i.e get html
-            })
+            })()
         });
     }
 }

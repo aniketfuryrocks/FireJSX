@@ -23,7 +23,7 @@ declare module NodeJS {
             pages?: {
                 404: string
             },
-            lazyPromises?: [],
+            lazyPromises?: Promise<any>[],
             showLoader?: () => void
         },
         React?: any,
