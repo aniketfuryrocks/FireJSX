@@ -57,7 +57,7 @@ class default_1 {
             }));
         }
         if (this.$.config.verbose)
-            this.$.cli.log(`${this.$.config.plugins.length} Plugins :  ${this.$.config.plugins}`);
+            this.$.cli.log(`${this.$.config.plugins.length} Plugin(s) :  ${this.$.config.plugins}`);
     }
     constructParams(params) {
         params.config = params.config || {};

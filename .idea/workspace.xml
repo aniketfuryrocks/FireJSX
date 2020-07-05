@@ -13,13 +13,10 @@
     <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="production">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/GlobalsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/GlobalsSetter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/architects/StaticArchitect.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/architects/StaticArchitect.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FireJSX.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/FireJSX.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GlobalsSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/GlobalsSetter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/architects/StaticArchitect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/architects/StaticArchitect.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/global.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/global.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/web/LinkApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/web/LinkApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/src/pages/404.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/pages/404.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LazyLoad.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LazyLoad.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,6 +180,7 @@
       <workItem from="1593861214020" duration="693000" />
       <workItem from="1593869860714" duration="8124000" />
       <workItem from="1593925515229" duration="256000" />
+      <workItem from="1593930386746" duration="112000" />
     </task>
     <task id="LOCAL-00001" summary=".gitignore">
       <created>1593598608476</created>
@@ -559,11 +557,11 @@
     </state>
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1593598521864" />
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593778840341" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1593878257079">
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1593927059101">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="356" y="114" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1593599721937" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593878257079" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593927059101" />
     <state x="610" y="299" key="cloudConfig.PluginsDialog" timestamp="1593672925959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

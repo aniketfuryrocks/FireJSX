@@ -31,13 +31,14 @@ export default (chunkFunc, {
 
     if (FireJSX.isSSR && ssr)
         FireJSX.lazyPromises.push(starter)
-    else
-        starter()
 
-    return function (_props) {
+    return (_props) => {
         const [child, _setChild] = React.useState(FireJSX.isSSR ? <div id={id}/> : placeHolder);
         setChild = _setChild;
         props = _props;
+        React.useEffect(() => {
+            starter()
+        }, [])
         return child
     }
 }
