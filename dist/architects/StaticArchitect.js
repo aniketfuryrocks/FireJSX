@@ -51,11 +51,12 @@ class default_1 {
             meta.name = "generator";
             this.config.template.window.document.head.appendChild(meta);
         }
+        //require uncached to prevent bugs in lambda because node clears these 2 when a new request is assigned
         //if ssr then load react,react dom,LinkApi,ReactDOMServer chunks
         if (param.ssr)
-            require(path_1.join(this.config.pathToLib, this.config.externals[0]));
+            Require_1.requireUncached(path_1.join(this.config.pathToLib, this.config.externals[0]));
         else //just load LinkApi
-            require("../web/LinkApi");
+            Require_1.requireUncached("../web/LinkApi");
     }
     renderGlobalPlugin(globalPlugin) {
         globalPlugin.initDom(this.config.template);
