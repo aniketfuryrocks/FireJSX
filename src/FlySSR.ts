@@ -27,9 +27,9 @@ export default class {
         }
     }
 
-    loadPlugin(pluginPath: string) {
+    loadGlobalPlugin(pluginPath: string, config) {
         const gp: GlobalPlugin[] = [];
-        mapPlugin(pluginPath, {pageMap: this.pageMap, rootPath: this.rootDir, globalPlugins: gp});
+        mapPlugin(pluginPath, {pageMap: this.pageMap, rootPath: this.rootDir, globalPlugins: gp, config});
         gp.forEach(plug => this.renderer.renderGlobalPlugin(plug))
         this.globalPlugins.push(...gp);
     }

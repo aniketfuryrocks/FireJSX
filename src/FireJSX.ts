@@ -178,7 +178,7 @@ export default class {
             //wait for all exports to finish
             Promise.all(promises).then(() => {
                 //call postExport functions
-                Promise.all(this.$.globalPlugins.map(plug => plug.postExport))
+                Promise.all(this.$.globalPlugins.map(plug => plug.postExport()))
                     .then(res)
                     .catch(rej)
             }).catch(rej)

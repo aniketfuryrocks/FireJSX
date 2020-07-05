@@ -9,7 +9,7 @@ export default class {
     readonly rootDir: string;
     readonly globalPlugins: GlobalPlugin[];
     constructor(pathToLibDir: string, rootDir?: string);
-    loadPlugin(pluginPath: string): void;
+    loadGlobalPlugin(pluginPath: string, config: any): void;
     render(page: string, path: string, content?: any): Promise<{
         html: string;
         map: string;

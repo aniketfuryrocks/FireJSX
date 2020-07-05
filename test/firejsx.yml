@@ -1,2 +1,6 @@
 plugins:
   - ./plugin/hello.js
+  - ./plugin/exportListener.js
+
+custom:
+  name: "aniket"

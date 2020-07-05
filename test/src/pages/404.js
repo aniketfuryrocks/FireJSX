@@ -8,7 +8,6 @@ import Loader from "../../../src/components/Loader.js";
 export default () => {
     const Markdown = LazyLoad(() => import("markdown-to-jsx"));
     const Markdown2 = LazyLoad(() => import("markdown-to-jsx"));
-    console.log(window)
     return (
         <div>
             <Head>

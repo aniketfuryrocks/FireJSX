@@ -29,9 +29,9 @@ class default_1 {
             this.pageMap.set(__page, page);
         }
     }
-    loadPlugin(pluginPath) {
+    loadGlobalPlugin(pluginPath, config) {
         const gp = [];
-        PluginMapper_1.mapPlugin(pluginPath, { pageMap: this.pageMap, rootPath: this.rootDir, globalPlugins: gp });
+        PluginMapper_1.mapPlugin(pluginPath, { pageMap: this.pageMap, rootPath: this.rootDir, globalPlugins: gp, config });
         gp.forEach(plug => this.renderer.renderGlobalPlugin(plug));
         this.globalPlugins.push(...gp);
     }
