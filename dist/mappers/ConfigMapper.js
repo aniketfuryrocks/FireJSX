@@ -43,6 +43,8 @@ class default_1 {
         config.plugins = config.disablePlugins ? [] : config.plugins || [];
         //custom
         config.custom = config.custom || {};
+        //server
+        config.devServer = config.devServer || {};
         return config;
     }
     makeAbsolute(root, pathTo) {

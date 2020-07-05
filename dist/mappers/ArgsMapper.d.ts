@@ -6,6 +6,7 @@ export interface Args {
     "--ssr": boolean;
     "--port": number;
     "--addr": string;
+    "--disable-gzip": boolean;
     "--conf": string;
     "--verbose": boolean;
     "--log-mode": "silent" | "plain";

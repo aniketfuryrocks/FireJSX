@@ -15,6 +15,7 @@ const Page_1 = require("./classes/Page");
 const express = require("express");
 const webpackhot = require("webpack-hot-middleware");
 const mime = require("mime");
+const compression = require("compression");
 class default_1 {
     constructor(app) {
         this.app = app;
@@ -25,6 +26,10 @@ class default_1 {
         return __awaiter(this, void 0, void 0, function* () {
             //init server
             const server = express();
+            //gzip
+            if (this.$.config.devServer.gzip)
+                server.use(compression);
+            console.log(this.$.config.devServer);
             //turn off caching
             server.use((req, res, next) => {
                 res.setHeader('Surrogate-Control', 'no-store');

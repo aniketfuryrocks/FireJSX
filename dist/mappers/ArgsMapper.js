@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getArgs = void 0;
 const SmartArg_1 = require("smartarg/SmartArg");
 function getArgs() {
     return new SmartArg_1.default()
@@ -17,6 +16,7 @@ function getArgs() {
         //dev server
         .option(["--port"], Number, "port for dev server, default: 5000")
         .option(["--addr"], String, "address for dev server, default: localhost")
+        .option(["--disable-gzip"], Boolean, "Disable gzip in dev server")
         //conf
         .option(["-c", "--conf"], String, "path to code config file")
         //logging

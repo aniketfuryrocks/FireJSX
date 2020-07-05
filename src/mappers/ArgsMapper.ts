@@ -10,6 +10,7 @@ export interface Args {
     //dev server
     "--port": number,                  //port for dev server eg 5001,5003
     "--addr": string,                  //address for dev server eg 127.0.0.2, 127.0.2.10
+    "--disable-gzip":boolean,          //Disable gzip
     //conf
     "--conf": string,                  //Path to Config file
     //log
@@ -45,6 +46,7 @@ export function getArgs(): Args {
         //dev server
         .option(["--port"], Number, "port for dev server, default: 5000")
         .option(["--addr"], String, "address for dev server, default: localhost")
+        .option(["--disable-gzip"], Boolean, "Disable gzip in dev server")
         //conf
         .option(["-c", "--conf"], String, "path to code config file")
         //logging

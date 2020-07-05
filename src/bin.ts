@@ -29,6 +29,10 @@ function initConfig(args: Args): [boolean, Config] {
         lib: args["--lib"] || userConfig.paths.lib,
     }
     userConfig.ssr = args["--ssr"] || userConfig.ssr;
+    userConfig.devServer = userConfig.devServer || {};
+    userConfig.devServer = {
+        gzip: args["--disable-gzip"] ? false : userConfig.devServer.gzip
+    }
     return [customConfig, userConfig];
 }
 

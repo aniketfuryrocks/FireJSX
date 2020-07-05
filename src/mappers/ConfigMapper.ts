@@ -22,7 +22,10 @@ export interface Config {
     },
     plugins?: [],
     pages?: ExplicitPages,
-    custom?: { [key: string]: any }
+    custom?: { [key: string]: any },
+    devServer?: {
+        gzip?: boolean
+    }
 }
 
 export interface ExplicitPages {
@@ -75,6 +78,8 @@ export default class {
         config.plugins = config.disablePlugins ? [] : config.plugins || [];
         //custom
         config.custom = config.custom || {};
+        //server
+        config.devServer = config.devServer || {};
         return config;
     }
 

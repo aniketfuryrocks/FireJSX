@@ -23,6 +23,9 @@ export interface Config {
     custom?: {
         [key: string]: any;
     };
+    devServer?: {
+        gzip?: boolean;
+    };
 }
 export interface ExplicitPages {
     "404"?: string;

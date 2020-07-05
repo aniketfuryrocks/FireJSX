@@ -5,6 +5,7 @@ import Page from "./classes/Page";
 import express = require("express");
 import webpackhot = require("webpack-hot-middleware");
 import mime = require("mime");
+import compression = require("compression");
 
 export default class {
     private readonly $: $
@@ -19,6 +20,10 @@ export default class {
     async init(port: number = 5000, addr: string = "localhost") {
         //init server
         const server: express.Application = express();
+        //gzip
+        if (this.$.config.devServer.gzip)
+            server.use(compression)
+        console.log(this.$.config.devServer)
         //turn off caching
         server.use((req, res, next) => {
             res.setHeader('Surrogate-Control', 'no-store');
