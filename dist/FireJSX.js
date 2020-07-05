@@ -141,6 +141,7 @@ class default_1 {
             const promises = [];
             for (const page of this.$.pageMap.values()) {
                 promises.push(new Promise(resolve => this.$.pageArchitect.buildPage(page, () => {
+                    this.$.cli.ok(`Page : ${page.toString()}`);
                     map.pageMap[page.toString()] = page.chunks;
                     page.chunks.forEach(chunk => {
                         if (chunk.endsWith(".js")) {
@@ -148,19 +149,19 @@ class default_1 {
                             this.$.outputFileSystem.copyFile(chunkPath, path_1.join(this.$.config.paths.fly, chunk), err => {
                                 resolve();
                                 if (err)
-                                    throw new Error(`Error while moving ${chunkPath} to ${this.$.config.paths.fly}`);
+                                    throw new Error(`Error moving ${chunkPath} to ${this.$.config.paths.fly}`);
                             });
                         }
                     });
                 }, (e) => {
-                    this.$.cli.error(`Error while building page ${page}\n`, e);
+                    this.$.cli.error(`Error building page ${page}\n`, e);
                     throw "";
                 })));
             }
             const fullExternalName = map.staticConfig.externals[0].substr(map.staticConfig.externals[0].lastIndexOf("/") + 1);
             this.$.outputFileSystem.rename(path_1.join(this.$.config.paths.lib, map.staticConfig.externals[0]), path_1.join(this.$.config.paths.fly, fullExternalName), err => {
                 if (err)
-                    throw new Error(`Error while moving ${fullExternalName} to ${this.$.config.paths.fly}`);
+                    throw new Error(`Error moving ${fullExternalName} to ${this.$.config.paths.fly}`);
                 map.staticConfig.externals[0] = fullExternalName;
                 Promise.all(promises).then(() => this.$.outputFileSystem.writeFile(path_1.join(this.$.config.paths.fly, "firejsx.map.json"), JSON.stringify(map), resolve));
             });
