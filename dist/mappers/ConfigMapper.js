@@ -41,6 +41,8 @@ class default_1 {
         //ssr convert to boolean
         config.ssr = !!config.ssr;
         config.plugins = config.disablePlugins ? [] : config.plugins || [];
+        //custom
+        config.custom = config.custom || {};
         return config;
     }
     makeAbsolute(root, pathTo) {

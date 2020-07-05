@@ -21,7 +21,8 @@ export interface Config {
         static?: string,        //dir where page static elements are stored eg. images, default : root/src/static
     },
     plugins?: [],
-    pages?: ExplicitPages
+    pages?: ExplicitPages,
+    custom?: { [key: string]: any }
 }
 
 export interface ExplicitPages {
@@ -72,6 +73,8 @@ export default class {
         //ssr convert to boolean
         config.ssr = !!config.ssr;
         config.plugins = config.disablePlugins ? [] : config.plugins || [];
+        //custom
+        config.custom = config.custom || {};
         return config;
     }
 

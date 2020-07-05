@@ -1,7 +1,7 @@
 import FireJSXPlugin, {PluginCode} from "./FireJSXPlugin";
 import {JSDOM} from "jsdom";
 
-export const GlobalPlugMinVer = 1.0;
+export const GlobalPlugMinVer = 2.0;
 
 export default class extends FireJSXPlugin {
 
@@ -13,5 +13,9 @@ export default class extends FireJSXPlugin {
     }
 
     initDom(dom: JSDOM) {
+    }
+
+    postExport() {
+
     }
 }

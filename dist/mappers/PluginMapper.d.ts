@@ -5,9 +5,14 @@ interface gParam {
     webpackArchitect?: WebpackArchitect;
     globalPlugins: GlobalPlugin[];
 }
-interface mParam extends gParam {
-    rootPath: string;
+interface pParam {
     pageMap: Map<string, Page>;
 }
-export declare function mapPlugin(pluginPath: string, { rootPath, pageMap, webpackArchitect, globalPlugins }: mParam): void;
+declare type param = {
+    config: {
+        [key: string]: any;
+    };
+    rootPath: string;
+} & gParam & pParam;
+export declare function mapPlugin(pluginPath: string, { rootPath, pageMap, webpackArchitect, globalPlugins, config }: param): void;
 export {};

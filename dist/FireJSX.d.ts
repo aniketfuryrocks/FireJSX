@@ -38,8 +38,8 @@ export default class {
     private constructParams;
     constructor(params?: Params);
     init(): Promise<void>;
-    buildPage(page: Page, setCompiler?: (Compiler: any) => void): Promise<any>;
-    export(): Promise<any[]>;
+    buildPage(page: Page, setCompiler?: (Compiler: any) => void, isExported?: boolean): Promise<any>;
+    export(): Promise<unknown>;
     exportFly(): Promise<unknown>;
     getContext(): $;
 }

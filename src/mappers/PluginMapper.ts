@@ -9,21 +9,33 @@ interface gParam {
     globalPlugins: GlobalPlugin[],
 }
 
-interface mParam extends gParam {
-    rootPath: string,
+interface pParam {
     pageMap: Map<string, Page>
 }
 
-export function mapPlugin(pluginPath: string, {rootPath, pageMap, webpackArchitect, globalPlugins}: mParam) {
+type param = { config: { [key: string]: any }, rootPath: string } & gParam & pParam
+
+export function mapPlugin(pluginPath: string, {rootPath, pageMap, webpackArchitect, globalPlugins, config}: param) {
     const rawPlugs = require(require.resolve(pluginPath, {paths: [rootPath]}));
     for (const rawPlugKey in rawPlugs) {
+        //check for own property
         if (rawPlugs.hasOwnProperty(rawPlugKey)) {
+            //get plug from list
             const rawPlug = new (rawPlugs[rawPlugKey])() as FireJSXPlugin;
+            //set config
+            rawPlug.config = config
+            //check for plugCode
             if (rawPlug.plugCode === PluginCode.PagePlugin) {
+                //check ver
                 checkVer(rawPlug, PagePlugMinVer, rawPlugKey, pluginPath)
-                managePagePlugin(<PagePlugin>rawPlug, pluginPath, pageMap);
+                //pass params
+                managePagePlugin(<PagePlugin>rawPlug, pluginPath, {
+                    pageMap
+                });
             } else if (rawPlug.plugCode === PluginCode.GlobalPlugin) {
+                //check ver
                 checkVer(rawPlug, GlobalPlugMinVer, rawPlugKey, pluginPath)
+                //pass params
                 manageGlobalPlugin(<GlobalPlugin>rawPlug, pluginPath, {
                     webpackArchitect,
                     globalPlugins
@@ -39,12 +51,12 @@ function checkVer(rawPlug: FireJSXPlugin, minVer: number, name: string, path: st
         throw new Error(`PagePlugin [${name}] in ${path} is outdated. Expected min version ${minVer} but found ${rawPlug.version}`)
 }
 
-function managePagePlugin(plugin: PagePlugin, pluginFile: string, pageMap: Map<string, Page>): void | never {
+function managePagePlugin(plugin: PagePlugin, pluginFile: string, {pageMap}: pParam): void | never {
     const page = pageMap.get(plugin.page);
     if (page)
         page.plugin = plugin;
     else
-        throw new Error(`Page ${plugin.page} requested by plugin ${pluginFile} does not exist`)
+        throw new Error(`Page ${plugin.page} requested by PagePlugin ${pluginFile} does not exist`)
 }
 
 function manageGlobalPlugin(plugin: GlobalPlugin, pluginFile: string, {webpackArchitect, globalPlugins}: gParam): void | never {

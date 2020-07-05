@@ -8,6 +8,7 @@ export enum PluginCode {
 export default abstract class FireJSXPlugin {
     public readonly version;
     public readonly plugCode;
+    public config: { [key: string]: any };
 
     protected constructor(version: number, plugCode: PluginCode) {
         this.plugCode = plugCode;

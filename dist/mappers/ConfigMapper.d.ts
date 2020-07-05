@@ -20,6 +20,9 @@ export interface Config {
     };
     plugins?: [];
     pages?: ExplicitPages;
+    custom?: {
+        [key: string]: any;
+    };
 }
 export interface ExplicitPages {
     "404"?: string;

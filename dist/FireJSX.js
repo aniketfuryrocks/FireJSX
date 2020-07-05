@@ -53,7 +53,8 @@ class default_1 {
                 globalPlugins: this.$.globalPlugins,
                 webpackArchitect: this.$.pageArchitect.webpackArchitect,
                 pageMap: this.$.pageMap,
-                rootPath: this.$.config.paths.root
+                rootPath: this.$.config.paths.root,
+                config: this.$.config.custom
             }));
         }
         if (this.$.config.verbose)
@@ -78,7 +79,7 @@ class default_1 {
         });
     }
     buildPage(page, setCompiler = () => {
-    }) {
+    }, isExported = false) {
         return new Promise((resolve, reject) => {
             setCompiler(this.$.pageArchitect.buildPage(page, () => {
                 if (this.$.config.verbose)
@@ -86,31 +87,37 @@ class default_1 {
                 //render
                 try {
                     const promises = [];
-                    const buildPromise = page.plugin.onBuild((path, content = {}) => {
-                        if (this.$.config.verbose)
-                            this.$.cli.log(`Rendering Path : ${path}`);
-                        promises.push(new Promise((res, rej) => {
-                            this.$.renderer.render(page, path, content)
-                                .then(html => {
-                                this.$.cli.ok(`Rendered Path : ${path}`);
-                                Fs_1.writeFileRecursively(path_1.join(this.$.config.paths.dist, `${path}.html`), html, this.$.outputFileSystem)
-                                    .then(() => Fs_1.writeFileRecursively(path_1.join(this.$.config.paths.map, `${path}.map.js`), `FireJSX.map=${JSON.stringify({
-                                    content,
-                                    chunks: page.chunks
-                                })}`, this.$.outputFileSystem).then(res)).catch(e => {
-                                    this.$.cli.error(`Error writing map ${path}`);
-                                    rej(e);
+                    const buildPromise = page.plugin.onBuild({
+                        renderPage: (path, content = {}) => {
+                            if (this.$.config.verbose)
+                                this.$.cli.log(`Rendering Path : ${path}`);
+                            promises.push(new Promise((res, rej) => {
+                                this.$.renderer.render(page, path, content)
+                                    .then(html => {
+                                    this.$.cli.ok(`Rendered Path : ${path}`);
+                                    Fs_1.writeFileRecursively(path_1.join(this.$.config.paths.dist, `${path}.html`), html, this.$.outputFileSystem)
+                                        .then(() => Fs_1.writeFileRecursively(path_1.join(this.$.config.paths.map, `${path}.map.js`), `FireJSX.map=${JSON.stringify({
+                                        content,
+                                        chunks: page.chunks
+                                    })}`, this.$.outputFileSystem).then(res)).catch(e => {
+                                        this.$.cli.error(`Error writing map ${path}`);
+                                        rej(e);
+                                    })
+                                        .catch(e => {
+                                        this.$.cli.error(`Error writing html ${path}`);
+                                        rej(e);
+                                    });
                                 })
                                     .catch(e => {
-                                    this.$.cli.error(`Error writing html ${path}`);
+                                    this.$.cli.error(`Error rendering path ${path}`);
                                     rej(e);
                                 });
-                            })
-                                .catch(e => {
-                                this.$.cli.error(`Error rendering path ${path}`);
-                                rej(e);
-                            });
-                        }));
+                            }));
+                        }
+                    }, {
+                        isExported,
+                        isPro: this.$.config.pro,
+                        isSSR: this.$.renderer.config.ssr
                     });
                     if (buildPromise instanceof Promise)
                         buildPromise
@@ -129,8 +136,16 @@ class default_1 {
     }
     export() {
         const promises = [];
-        this.$.pageMap.forEach((page) => promises.push(this.buildPage(page)));
-        return Promise.all(promises);
+        this.$.pageMap.forEach((page) => promises.push(this.buildPage(page, undefined, true)));
+        return new Promise((res, rej) => {
+            //wait for all exports to finish
+            Promise.all(promises).then(() => {
+                //call postExport functions
+                Promise.all(this.$.globalPlugins.map(plug => plug.postExport))
+                    .then(res)
+                    .catch(rej);
+            }).catch(rej);
+        });
     }
     exportFly() {
         return new Promise((resolve) => {

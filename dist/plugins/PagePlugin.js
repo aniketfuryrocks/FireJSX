@@ -10,16 +10,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const FireJSXPlugin_1 = require("./FireJSXPlugin");
-exports.PagePlugMinVer = 1.0;
+exports.PagePlugMinVer = 2.0;
 class default_1 extends FireJSXPlugin_1.default {
     constructor(page) {
-        super(1.0, FireJSXPlugin_1.PluginCode.PagePlugin);
+        super(2.0, FireJSXPlugin_1.PluginCode.PagePlugin);
         this.page = page;
     }
-    onBuild(renderPage, ...extra) {
+    onBuild(actions, info, ...extra) {
         return __awaiter(this, void 0, void 0, function* () {
             // @ts-ignore
-            renderPage("/" + this.page.toString().substring(0, this.page.toString().lastIndexOf(".")));
+            actions.renderPage("/" + this.page.toString().substring(0, this.page.toString().lastIndexOf(".")));
         });
     }
     onRender(dom) {
