@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PluginCode = void 0;
 var PluginCode;
 (function (PluginCode) {
     PluginCode[PluginCode["GlobalPlugin"] = 1] = "GlobalPlugin";
