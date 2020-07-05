@@ -20,9 +20,7 @@ FireJSX.linkApi = {
         };
     },
     loadPage: function (url, pushState = true) {
-        window.webpackJsonp_FIREJS_APP_ = undefined
-        FireJSX.lazyCount = 0;
-        FireJSX.lazyDone = 0;
+        window.webpackJsonp = undefined
         const script = document.createElement("script");
         script.src = `/${FireJSX.libRel}/${FireJSX.map.chunks.shift()}`
         this.loadChunks(FireJSX.map.chunks);

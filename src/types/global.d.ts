@@ -24,8 +24,9 @@ declare module NodeJS {
                 404: string
             },
             lazyPromises?: Promise<any>[],
-            showLoader?: () => void
+            showLoader?: () => void,
         },
+        webpackJsonp?: any
         React?: any,
         ReactDOM?: any,
         ReactDOMServer?: any,

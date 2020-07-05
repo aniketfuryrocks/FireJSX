@@ -62,6 +62,8 @@ class default_1 {
     }
     render(page, path, content) {
         return new Promise(resolve => {
+            //webpack global variable reset
+            global.window.webpackJsonp = undefined;
             //template serialize to prevent overwriting
             const dom = new jsdom_1.JSDOM(this.config.template.serialize(), {
                 url: "https://localhost:5000" + path,
