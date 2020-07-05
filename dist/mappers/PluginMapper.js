@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.mapPlugin = void 0;
 const PagePlugin_1 = require("../plugins/PagePlugin");
 const GlobalPlugin_1 = require("../plugins/GlobalPlugin");
 const FireJSXPlugin_1 = require("../plugins/FireJSXPlugin");

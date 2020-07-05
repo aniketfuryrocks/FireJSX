@@ -10,18 +10,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="0.3.2">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/architects/StaticArchitect.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/architects/StaticArchitect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/mappers/ArgsMapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/mappers/ArgsMapper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/mappers/PathMapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/mappers/PathMapper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/mappers/PluginMapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/mappers/PluginMapper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/plugins/FireJSXPlugin.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/plugins/FireJSXPlugin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/plugins/GlobalPlugin.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/plugins/GlobalPlugin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/plugins/PagePlugin.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/plugins/PagePlugin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/utils/Fs.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/utils/Fs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/utils/Require.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/utils/Require.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/architects/StaticArchitect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/architects/StaticArchitect.ts" afterDir="false" />
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="requireUncached">
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GlobalsSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/GlobalsSetter.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +178,7 @@
       <workItem from="1593925515229" duration="256000" />
       <workItem from="1593930386746" duration="2326000" />
       <workItem from="1593938363826" duration="130000" />
-      <workItem from="1593938860095" duration="67000" />
+      <workItem from="1593938860095" duration="104000" />
     </task>
     <task id="LOCAL-00001" summary=".gitignore">
       <created>1593598608476</created>
@@ -483,7 +474,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593935833402</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="requireUncached">
+      <created>1593938935490</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1593938935490</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -513,7 +511,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="0.1.0-dev.6" />
     <MESSAGE value="Fly build" />
     <MESSAGE value="0.2.0-alpha.1" />
     <MESSAGE value="extra logging, catching and fixed dev promise callback miss" />
@@ -538,7 +535,8 @@
     <MESSAGE value="test" />
     <MESSAGE value="Head reduced and Link to href with spread" />
     <MESSAGE value="0.3.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.3.2" />
+    <MESSAGE value="requireUncached" />
+    <option name="LAST_COMMIT_MESSAGE" value="requireUncached" />
   </component>
   <component name="WindowStateProjectService">
     <state x="502" y="23" key="#autopublish" timestamp="1593598756287">
@@ -599,11 +597,11 @@
     </state>
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1593598521864" />
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593778840341" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1593935867059">
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1593938939934">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="356" y="114" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1593599721937" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593935867059" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593938939934" />
     <state x="610" y="299" key="cloudConfig.PluginsDialog" timestamp="1593672925959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
