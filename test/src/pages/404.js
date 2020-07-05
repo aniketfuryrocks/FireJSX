@@ -28,7 +28,7 @@ export default () => {
             </Markdown2>
             <br/>
             <br/>
-            <Link to={"/"}> 👻 Click Here To Go Home</Link>
+            <Link href={"/"}> 👻 Click Here To Go Home</Link>
         </div>
     )
 }

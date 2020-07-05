@@ -15,7 +15,7 @@ export default () => {
             </Loader>
             <h1>This is the about page</h1>
             <br/>
-            <Link to={"/"}> 👻 Click Here To Go Home. Ha ha </Link>
+            <Link href={"/"}> 👻 Click Here To Go Home. Ha ha </Link>
         </div>
     )
 }

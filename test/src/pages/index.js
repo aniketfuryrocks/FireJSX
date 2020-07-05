@@ -3,7 +3,6 @@ import Head from "../../../src/components/Head.js";
 import "../style/main.css"
 import Loader from "../../../src/components/Loader.js";
 import LoadingBar from "../components/LoadingBar/LoadingBar.js";
-import LazyLoad from "../../../src/components/LazyLoad.js";
 
 export default ({content: {emoji}}) => {
     const [s, setS] = React.useState(0)
@@ -14,9 +13,7 @@ export default ({content: {emoji}}) => {
             clearInterval(interval);
         }
     }, []);
-/*
-    LazyLoad(() => import("../hello_script.js"), {ssr: false, script: true})
-*/
+
     return (
         <div>
             <Loader effect={React.useEffect}>
@@ -30,10 +27,10 @@ export default ({content: {emoji}}) => {
             You have been here for {s}s
             <br/>
             <br/>
-            <Link to={"/about"}>🤠 Click Here To Go To About Page</Link>
+            <Link href={"/about"}>🤠 Click Here To Go To About Page</Link>
             <br/>
             <br/>
-            <Link to={"/this page does not exist"}>🤔 Click Here To Go Mock 404</Link>
+            <Link href={"/this page does not exist"}>🤔 Click Here To Go Mock 404</Link>
         </div>
     )
 }
