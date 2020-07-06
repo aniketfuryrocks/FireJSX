@@ -10,12 +10,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="checkFunction and WebpackArchitect.ts">
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="plugins working">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FireJSX.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/FireJSX.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/Page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Page.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mappers/PluginMapper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/mappers/PluginMapper.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/Plugin.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/Plugin.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/plugin/hello.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/plugin/hello.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -204,14 +201,7 @@
       <workItem from="1594030884702" duration="85000" />
       <workItem from="1594037325134" duration="775000" />
       <workItem from="1594041533337" duration="13285000" />
-      <workItem from="1594054958071" duration="3350000" />
-    </task>
-    <task id="LOCAL-00034" summary="working without patch">
-      <created>1593875058216</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1593875058216</updated>
+      <workItem from="1594054958071" duration="3684000" />
     </task>
     <task id="LOCAL-00035" summary="showReactDomPatchNotification: false">
       <created>1593875500373</created>
@@ -549,7 +539,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594057259424</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="plugins working">
+      <created>1594058349439</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1594058349439</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -579,7 +576,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="log fix, min node ver, dependency graph clean,&#10;gzip log" />
     <MESSAGE value="updated keywords" />
     <MESSAGE value="export loggig" />
     <MESSAGE value="0.5.2" />
@@ -604,7 +600,8 @@
     <MESSAGE value="gzip fix" />
     <MESSAGE value="onBuild Sync" />
     <MESSAGE value="checkFunction and WebpackArchitect.ts" />
-    <option name="LAST_COMMIT_MESSAGE" value="checkFunction and WebpackArchitect.ts" />
+    <MESSAGE value="plugins working" />
+    <option name="LAST_COMMIT_MESSAGE" value="plugins working" />
   </component>
   <component name="WindowStateProjectService">
     <state x="502" y="23" key="#autopublish" timestamp="1593598756287">
@@ -640,26 +637,26 @@
     </state>
     <state x="638" y="153" key="FileChooserDialogImpl/0.0.1920.1035@0.0.1920.1035" timestamp="1593599916306" />
     <state x="638" y="154" width="636" height="712" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1594024825591" />
-    <state width="1889" height="454" key="GridCell.Tab.0.bottom" timestamp="1594058273494">
+    <state width="1889" height="472" key="GridCell.Tab.0.bottom" timestamp="1594058586072">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372243" />
-    <state width="1889" height="454" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594058273494" />
-    <state width="1889" height="454" key="GridCell.Tab.0.center" timestamp="1594058273493">
+    <state width="1889" height="472" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594058586072" />
+    <state width="1889" height="472" key="GridCell.Tab.0.center" timestamp="1594058586072">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372240" />
-    <state width="1889" height="454" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594058273493" />
-    <state width="1889" height="454" key="GridCell.Tab.0.left" timestamp="1594058273493">
+    <state width="1889" height="472" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594058586072" />
+    <state width="1889" height="472" key="GridCell.Tab.0.left" timestamp="1594058586072">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372239" />
-    <state width="1889" height="454" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594058273493" />
-    <state width="1889" height="454" key="GridCell.Tab.0.right" timestamp="1594058273493">
+    <state width="1889" height="472" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594058586072" />
+    <state width="1889" height="472" key="GridCell.Tab.0.right" timestamp="1594058586072">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372242" />
-    <state width="1889" height="454" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594058273493" />
+    <state width="1889" height="472" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594058586072" />
     <state x="652" y="0" width="605" height="1040" key="RollbackChangesDialog" timestamp="1594044038483">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -669,11 +666,11 @@
     </state>
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1593598521864" />
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594010859017" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1594057261717">
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1594058432662">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="356" y="114" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1593599721937" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594057261717" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594058432662" />
     <state x="610" y="299" key="cloudConfig.PluginsDialog" timestamp="1593672925959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

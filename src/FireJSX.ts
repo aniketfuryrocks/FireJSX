@@ -51,7 +51,6 @@ export default class {
     private readonly $: $ = {
         hooks: {
             postRender: [],
-            onBuild: [],
             initServer: [],
             initWebpack: [],
             postExport: []
@@ -134,9 +133,11 @@ export default class {
                             page.hooks.postRender.forEach(postRender => postRender(dom))
                             //call global postRender hooks
                             this.$.hooks.postRender.forEach(postRender => postRender(dom))
+                            //write html file
                             await writeFileRecursively(join(this.$.config.paths.dist, `${path}.html`),
                                 dom.serialize(),
                                 this.$.outputFileSystem)
+                            //write map
                             await writeFileRecursively(join(this.$.config.paths.map, `${path}.map.js`),
                                 `FireJSX.map=${JSON.stringify({
                                     content,
