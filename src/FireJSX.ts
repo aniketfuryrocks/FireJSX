@@ -117,7 +117,7 @@ export default class {
                 if (this.$.config.verbose)
                     this.$.cli.ok(`Page : ${page.toString()}`)
                 const renderPromises = [];
-                page.hooks.onBuild.forEach(onBuild => onBuild({
+                Promise.all(page.hooks.onBuild.map(onBuild => onBuild({
                     renderPage: (path, content = {}) => {
                         if (this.$.config.verbose)
                             this.$.cli.log(`Rendering Path : ${path}`);
@@ -141,8 +141,11 @@ export default class {
                             )
                         })())
                     }
-                }))
-                Promise.all(renderPromises).then(resolve).catch(reject)
+                }))).then(() =>
+                    Promise.all(renderPromises)
+                        .then(resolve)
+                        .catch(reject))
+                    .catch(reject)
             }, reject))
         })
     }

@@ -1,5 +1,5 @@
-devServer:
-  gzip : true
+plugins:
+  - ./plugin/hello.js
 
 custom:
   name: "aniket"
