@@ -15,7 +15,7 @@ interface pParam {
 
 type param = { config: { [key: string]: any }, rootPath: string } & gParam & pParam
 
-export function mapPlugin(pluginPath: string, {rootPath, pageMap, webpackArchitect, globalPlugins, config}: param) {
+export async function mapPlugin(pluginPath: string, {rootPath, pageMap, webpackArchitect, globalPlugins, config}: param) {
     const rawPlugs = require(require.resolve(pluginPath, {paths: [rootPath]}));
     for (const rawPlugKey in rawPlugs) {
         //check for own property
@@ -24,6 +24,8 @@ export function mapPlugin(pluginPath: string, {rootPath, pageMap, webpackArchite
             const rawPlug = new (rawPlugs[rawPlugKey])() as FireJSXPlugin;
             //set config
             rawPlug.config = config
+            //init
+            await rawPlug.init();
             //check for plugCode
             if (rawPlug.plugCode === PluginCode.PagePlugin) {
                 //check ver

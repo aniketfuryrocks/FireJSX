@@ -16,6 +16,10 @@ export default abstract class FireJSXPlugin {
         this.version = version;
     }
 
+    async init() {
+
+    }
+
     initWebpack(webpackConfig: WebpackConfig) {
     }
 }

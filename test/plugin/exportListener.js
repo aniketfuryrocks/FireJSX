@@ -1,8 +1,9 @@
 const GlobalPlugin = require("../../dist/plugins/GlobalPlugin.js");
 
 exports.default = class extends GlobalPlugin.default {
-    constructor() {
+    constructor(config) {
         super();
+        console.log(config)
     }
 
     async postExport() {

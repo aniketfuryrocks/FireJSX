@@ -10,9 +10,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="0.5.3">
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="Config ts">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FireJSX.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/FireJSX.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GlobalsSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/GlobalsSetter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mappers/PluginMapper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/mappers/PluginMapper.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/plugins/FireJSXPlugin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugins/FireJSXPlugin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/plugin/exportListener.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/plugin/exportListener.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +79,13 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.autopublish">
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="yarn test -esp" />
+      <command value="cd test  &amp;&amp; yarn test --esp" />
+    </option>
+  </component>
+  <component name="RunManager" selected="npm.test">
     <configuration name="autopublish" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -186,14 +197,9 @@
       <workItem from="1594007833310" duration="55000" />
       <workItem from="1594008769589" duration="3294000" />
       <workItem from="1594017879652" duration="139000" />
-      <workItem from="1594018215331" duration="40000" />
-    </task>
-    <task id="LOCAL-00013" summary="Promise fixed">
-      <created>1593783423163</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1593783423163</updated>
+      <workItem from="1594018215331" duration="107000" />
+      <workItem from="1594020508431" duration="107000" />
+      <workItem from="1594021751766" duration="629000" />
     </task>
     <task id="LOCAL-00014" summary="Promise fixed">
       <created>1593783454984</created>
@@ -531,7 +537,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594018008819</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Config ts">
+      <created>1594018263749</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1594018263749</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -561,7 +574,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="showReactDomPatchNotification: false" />
     <MESSAGE value="ContentType resolution" />
     <MESSAGE value="production" />
     <MESSAGE value="LazyLoad 0.3.1" />
@@ -586,7 +598,8 @@
     <MESSAGE value="0.5.2" />
     <MESSAGE value="config" />
     <MESSAGE value="0.5.3" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.5.3" />
+    <MESSAGE value="Config ts" />
+    <option name="LAST_COMMIT_MESSAGE" value="Config ts" />
   </component>
   <component name="WindowStateProjectService">
     <state x="502" y="23" key="#autopublish" timestamp="1593598756287">
@@ -609,39 +622,39 @@
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
     <state x="502" y="23" key="#watch/0.0.1920.1035@0.0.1920.1035" timestamp="1593598741322" />
-    <state x="100" y="99" width="1720" height="840" key="DiffContextDialog" timestamp="1593764063917">
+    <state x="100" y="99" width="1720" height="840" key="DiffContextDialog" timestamp="1594022055905">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="100" y="99" width="1720" height="840" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593764063917" />
+    <state x="100" y="99" width="1720" height="840" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594022055905" />
     <state x="638" y="154" width="636" height="712" key="FileChooserDialogImpl" timestamp="1593674487480">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="638" y="153" key="FileChooserDialogImpl/0.0.1920.1035@0.0.1920.1035" timestamp="1593599916306" />
     <state x="638" y="154" width="636" height="712" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593674487480" />
-    <state width="1889" height="353" key="GridCell.Tab.0.bottom" timestamp="1594018018569">
+    <state width="1889" height="353" key="GridCell.Tab.0.bottom" timestamp="1594021925659">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372243" />
-    <state width="1889" height="353" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594018018569" />
-    <state width="1889" height="353" key="GridCell.Tab.0.center" timestamp="1594018018568">
+    <state width="1889" height="353" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594021925659" />
+    <state width="1889" height="353" key="GridCell.Tab.0.center" timestamp="1594021925656">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372240" />
-    <state width="1889" height="353" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594018018568" />
-    <state width="1889" height="353" key="GridCell.Tab.0.left" timestamp="1594018018568">
+    <state width="1889" height="353" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594021925656" />
+    <state width="1889" height="353" key="GridCell.Tab.0.left" timestamp="1594021925654">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372239" />
-    <state width="1889" height="353" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594018018568" />
-    <state width="1889" height="353" key="GridCell.Tab.0.right" timestamp="1594018018568">
+    <state width="1889" height="353" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594021925654" />
+    <state width="1889" height="353" key="GridCell.Tab.0.right" timestamp="1594021925658">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372242" />
-    <state width="1889" height="353" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594018018568" />
-    <state x="652" y="0" width="605" height="1040" key="RollbackChangesDialog" timestamp="1593792912366">
+    <state width="1889" height="353" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594021925658" />
+    <state x="652" y="0" width="605" height="1040" key="RollbackChangesDialog" timestamp="1594022057011">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="652" y="0" width="605" height="1040" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593792912366" />
+    <state x="652" y="0" width="605" height="1040" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594022057011" />
     <state x="207" y="0" key="SettingsEditor" timestamp="1594010859017">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -680,10 +693,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="653" y="182" width="604" height="674" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593769683906" />
-    <state x="455" y="228" key="run.anything.popup" timestamp="1593858496611">
+    <state x="455" y="228" width="1009" height="1469" key="run.anything.popup" timestamp="1594021919515">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="455" y="228" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593858496611" />
+    <state x="455" y="228" width="1009" height="1469" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1594021919515" />
     <state x="453" y="-2" width="1009" height="1470" key="search.everywhere.popup" timestamp="1594013078225">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

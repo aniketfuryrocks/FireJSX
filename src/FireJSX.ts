@@ -78,22 +78,25 @@ export default class {
         }
         //pageArchitect
         this.$.pageArchitect = new PageArchitect(this.$, new WebpackArchitect(this.$), !!params.outputFileSystem, !!params.inputFileSystem);
-        //mapPlugins
-        if (this.$.config.plugins.length > 0) {
-            this.$.cli.log("Mapping plugins");
-            this.$.config.plugins.forEach(plugin => mapPlugin(plugin, {
-                globalPlugins: this.$.globalPlugins,
-                webpackArchitect: this.$.pageArchitect.webpackArchitect,
-                pageMap: this.$.pageMap,
-                rootPath: this.$.config.paths.root,
-                config: this.$.config
-            }))
-        }
-        if (this.$.config.verbose)
-            this.$.cli.log(`${this.$.config.plugins.length} Plugin(s) :  ${this.$.config.plugins}`)
     }
 
     async init() {
+        //mapPlugins
+        if (this.$.config.plugins.length > 0) {
+            this.$.cli.log("Mapping plugins");
+            for await (const plugin of this.$.config.plugins) {
+                await mapPlugin(plugin, {
+                    globalPlugins: this.$.globalPlugins,
+                    webpackArchitect: this.$.pageArchitect.webpackArchitect,
+                    pageMap: this.$.pageMap,
+                    rootPath: this.$.config.paths.root,
+                    config: this.$.config
+                })
+            }
+        }
+        if (this.$.config.verbose)
+            this.$.cli.log(`${this.$.config.plugins.length} Plugin(s) :  ${this.$.config.plugins}`)
+        //build externals
         this.$.cli.log("Building Externals");
         this.$.renderer = new StaticArchitect({
             rel: this.$.rel,
