@@ -23,7 +23,7 @@ export default class {
         //gzip
         this.$.cli.ok("GZIP :", !!this.$.config.devServer.gzip)
         if (this.$.config.devServer.gzip)
-            server.use(compression)
+            server.use(compression())
         //turn off caching
         server.use((req, res, next) => {
             res.setHeader('Surrogate-Control', 'no-store');
@@ -80,6 +80,8 @@ export default class {
     }
 
     private get(req: express.Request, res: express.Response) {
+        if (this.$.config.verbose)
+            this.$.cli.log("Request :", req.url)
         // @ts-ignore
         const pathname = join(this.$.config.paths.dist, decodeURI(req._parsedUrl.pathname));
         res.contentType(mime.getType(pathname.substr(pathname.lastIndexOf("."))))
@@ -91,6 +93,8 @@ export default class {
     }
 
     private getPage(req: express.Request, res: express.Response, next) {
+        if (this.$.config.verbose)
+            this.$.cli.log("HTML Request :", req.url)
         // @ts-ignore
         const pathname = decodeURI(req._parsedUrl.pathname);
         if (pathname.startsWith("/__webpack_hmr")) {

@@ -1,6 +1,3 @@
-plugins:
-  - ./plugin/hello.js
-
 devServer:
   gzip : true
 
