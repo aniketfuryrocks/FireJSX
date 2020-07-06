@@ -7,6 +7,5 @@ exports.default = class extends GlobalPlugin.default {
 
     async postExport() {
         console.log("Export complete")
-        console.log(this.config)
     }
 }

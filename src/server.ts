@@ -21,9 +21,9 @@ export default class {
         //init server
         const server: express.Application = express();
         //gzip
+        this.$.cli.ok("GZIP :", !!this.$.config.devServer.gzip)
         if (this.$.config.devServer.gzip)
             server.use(compression)
-        console.log(this.$.config.devServer)
         //turn off caching
         server.use((req, res, next) => {
             res.setHeader('Surrogate-Control', 'no-store');

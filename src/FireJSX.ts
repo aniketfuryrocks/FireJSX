@@ -67,8 +67,8 @@ export default class {
         //cli
         this.$.cli = new Cli(this.$.config.logMode);
         //log
-        this.$.cli.ok(`NODE_ENV : ${process.env.NODE_ENV}`)
-        this.$.cli.ok(`SSR : ${this.$.config.ssr}`)
+        this.$.cli.ok("NODE_ENV :", process.env.NODE_ENV)
+        this.$.cli.ok("SSR :", this.$.config.ssr)
         //pageMap
         this.$.pageMap = createMap(this.$.config.paths.pages, this.$.inputFileSystem);
         //rel

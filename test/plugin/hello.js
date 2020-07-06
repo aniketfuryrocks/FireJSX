@@ -7,6 +7,5 @@ exports.default = class extends PagePlugin.default {
 
     async onBuild({renderPage}, info, ...extra) {
         renderPage("/index", {emoji: "🔥"})
-        console.log(info)
     }
 }
