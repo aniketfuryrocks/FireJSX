@@ -1,3 +1,5 @@
+import {Config} from "./mappers/ConfigMapper";
+
 require("./GlobalsSetter")
 
 import GlobalPlugin from "./plugins/GlobalPlugin";
@@ -7,6 +9,7 @@ import {join} from "path";
 import {mapPlugin} from "./mappers/PluginMapper";
 import {FIREJSX_MAP, PathRelatives} from "./FireJSX";
 import * as fs from "fs"
+import {Args} from "./mappers/ArgsMapper";
 
 export default class {
     readonly pageMap: Map<string, Page> = new Map()
@@ -27,7 +30,7 @@ export default class {
         }
     }
 
-    async loadGlobalPlugin(pluginPath: string, config, args) {
+    async loadGlobalPlugin(pluginPath: string, config: Config = {}, args:Args = {_: []}) {
         const gp: GlobalPlugin[] = [];
         await mapPlugin(pluginPath, {pageMap: this.pageMap, rootPath: this.rootDir, globalPlugins: gp, config, args});
         gp.forEach(plug => this.renderer.renderGlobalPlugin(plug))

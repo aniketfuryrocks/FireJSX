@@ -2,33 +2,34 @@ import SmartArg from "smartarg/SmartArg";
 
 export interface Args {
     //mode
-    "--pro": boolean,                  //Production mode
-    "--export": boolean,               //Export
-    "--export-fly": boolean,           //Export path for on the fly builds
-    "--disk": boolean,                 //Write to disk instead of memory
-    "--ssr": boolean,                  //Server Side Render, Enabled when exporting
+    "--pro"?: boolean,                  //Production mode
+    "--export"?: boolean,               //Export
+    "--export-fly"?: boolean,           //Export path for on the fly builds
+    "--disk"?: boolean,                 //Write to disk instead of memory
+    "--ssr"?: boolean,                  //Server Side Render, Enabled when exporting
     //dev server
-    "--port": number,                  //port for dev server eg 5001,5003
-    "--addr": string,                  //address for dev server eg 127.0.0.2, 127.0.2.10
-    "--disable-gzip": boolean,          //Disable gzip
+    "--port"?: number,                  //port for dev server eg 5001,5003
+    "--addr"?: string,                  //address for dev server eg 127.0.0.2, 127.0.2.10
+    "--disable-gzip"?: boolean,          //Disable gzip
     //conf
-    "--conf": string,                  //Path to Config file
+    "--conf"?: string,                  //Path to Config file
     //log
-    "--verbose": boolean,              //Log Webpack Stat
-    "--log-mode": "silent" | "plain",  //Log Mode. silent(log error only) | plain(Log without styling i.e colors and symbols)
-    "--disable-plugins": boolean,      //Disable plugins
+    "--verbose"?: boolean,              //Log Webpack Stat
+    "--log-mode"?: "silent" | "plain",  //Log Mode. silent(log error only) | plain(Log without styling i.e colors and symbols)
+    "--disable-plugins"?: boolean,      //Disable plugins
     //path
-    "--root": string,      //project root, default : process.cwd()
-    "--src": string,       //src dir, default : root/src
-    "--pages": string,     //pages dir, default : root/src/pages
-    "--out": string,       //production dist, default : root/out
-    "--dist": string,      //production dist, default : root/out/dist
-    "--cache": string,     //cache dir, default : root/out/.cache
-    "--fly": string,       //cache dir, default : root/out/fly
-    "--lib": string,       //dir where chunks are exported, default : root/out/dist/lib
-    "--map": string,       //dir where chunk map and page data is exported, default : root/out/dist/lib/map
-    "--static": string,    //dir where page static elements are stored eg. images, default : root/src/static
-    "--plugins": string,   //plugins dir, default : root/src/plugins
+    "--root"?: string,      //project root, default : process.cwd()
+    "--src"?: string,       //src dir, default : root/src
+    "--pages"?: string,     //pages dir, default : root/src/pages
+    "--out"?: string,       //production dist, default : root/out
+    "--dist"?: string,      //production dist, default : root/out/dist
+    "--cache"?: string,     //cache dir, default : root/out/.cache
+    "--fly"?: string,       //cache dir, default : root/out/fly
+    "--lib"?: string,       //dir where chunks are exported, default : root/out/dist/lib
+    "--map"?: string,       //dir where chunk map and page data is exported, default : root/out/dist/lib/map
+    "--static"?: string,    //dir where page static elements are stored eg. images, default : root/src/static
+    "--plugins"?: string,   //plugins dir, default : root/src/plugins,
+    _?: string[]
 }
 
 export function getArgs(): Args {
