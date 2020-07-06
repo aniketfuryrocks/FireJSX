@@ -1,18 +1,16 @@
 const GlobalPlugin = require("../../dist/plugins/GlobalPlugin.js");
 
 exports.default = class extends GlobalPlugin.default {
-    constructor(config) {
+    constructor() {
         super();
-        console.log(config)
     }
 
-    async init(args) {
-        console.log({args})
+    async init({_}) {
         return new Promise(res => void
             setTimeout(() => {
                 console.log("20s passed")
                 res();
-            }, 20000)
+            }, _.includes('--wait') ? 20000 : 0)
         )
     }
 

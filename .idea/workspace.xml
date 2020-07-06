@@ -12,8 +12,11 @@
   <component name="ChangeListManager">
     <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="args in plugins">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FlySSR.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/FlySSR.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mappers/ArgsMapper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/mappers/ArgsMapper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/plugins/GlobalPlugin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugins/GlobalPlugin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/plugins/PagePlugin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugins/PagePlugin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/test/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fly_test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/fly_test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/plugin/exportListener.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/plugin/exportListener.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,14 +198,7 @@
       <workItem from="1594017879652" duration="139000" />
       <workItem from="1594018215331" duration="107000" />
       <workItem from="1594020508431" duration="107000" />
-      <workItem from="1594021751766" duration="1861000" />
-    </task>
-    <task id="LOCAL-00017" summary="0.1.0-dev.6">
-      <created>1593795046594</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1593795046594</updated>
+      <workItem from="1594021751766" duration="4329000" />
     </task>
     <task id="LOCAL-00018" summary="Fly build">
       <created>1593795612258</created>
@@ -540,7 +536,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594023318274</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="args in plugins">
+      <created>1594023622491</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1594023622491</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -622,11 +625,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="100" y="99" width="1720" height="840" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594022055905" />
-    <state x="638" y="154" width="636" height="712" key="FileChooserDialogImpl" timestamp="1593674487480">
+    <state x="638" y="154" width="636" height="712" key="FileChooserDialogImpl" timestamp="1594024825591">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="638" y="153" key="FileChooserDialogImpl/0.0.1920.1035@0.0.1920.1035" timestamp="1593599916306" />
-    <state x="638" y="154" width="636" height="712" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593674487480" />
+    <state x="638" y="154" width="636" height="712" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1594024825591" />
     <state width="1889" height="712" key="GridCell.Tab.0.bottom" timestamp="1594022985454">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -656,11 +659,11 @@
     </state>
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1593598521864" />
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594010859017" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1594023320890">
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1594023625070">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="356" y="114" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1593599721937" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594023320890" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594023625070" />
     <state x="610" y="299" key="cloudConfig.PluginsDialog" timestamp="1593672925959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

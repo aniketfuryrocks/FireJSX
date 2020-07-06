@@ -6,7 +6,7 @@ export const GlobalPlugMinVer = 1.0;
 export default class extends FireJSXPlugin {
 
     protected constructor() {
-        super(2.0, PluginCode.GlobalPlugin);
+        super(3.0, PluginCode.GlobalPlugin);
     }
 
     initServer(server: Express.Application) {

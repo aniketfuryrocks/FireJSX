@@ -17,7 +17,7 @@ export default abstract class extends FireJSXPlugin {
     page: string;
 
     protected constructor(page: string) {
-        super(2.0, PluginCode.PagePlugin);
+        super(3.0, PluginCode.PagePlugin);
         this.page = page;
     }
 
