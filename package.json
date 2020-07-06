@@ -9,11 +9,19 @@
     "react-static",
     "gatsby",
     "nextjs",
-    "firejsx",
-    "firejs",
     "jsx",
     "SSR",
-    "SSB"
+    "SSB",
+    "framework",
+    "js",
+    "nodejs",
+    "cli",
+    "backend",
+    "front-end",
+    "express",
+    "web",
+    "html",
+    "app"
   ],
   "engines": {
     "node": ">=10.21.0"
