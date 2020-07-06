@@ -87,7 +87,7 @@ async function main() {
     else
         $.cli.log("Using default config")
     try {
-        await app.init(args);
+        await app.init();
         if (args["--export-fly"]) {
             const startTime = new Date().getTime();
             $.cli.ok("Exporting for fly builds");

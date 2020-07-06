@@ -33,7 +33,7 @@ export default class {
             next();
         })
         //init plugins
-        this.$.globalPlugins.forEach(plugin => plugin.initServer(server))
+        this.$.hooks.initServer.forEach(initServer => initServer(server))
         //watch changes
         this.$.cli.ok("Watching for file changes")
         watch(this.$.config.paths.pages)
