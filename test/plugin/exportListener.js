@@ -6,7 +6,8 @@ exports.default = class extends GlobalPlugin.default {
         console.log(config)
     }
 
-    async init() {
+    async init(args) {
+        console.log({args})
         return new Promise(res => void
             setTimeout(() => {
                 console.log("20s passed")

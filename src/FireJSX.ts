@@ -80,7 +80,7 @@ export default class {
         this.$.pageArchitect = new PageArchitect(this.$, new WebpackArchitect(this.$), !!params.outputFileSystem, !!params.inputFileSystem);
     }
 
-    async init() {
+    async init(args) {
         //mapPlugins
         if (this.$.config.plugins.length > 0) {
             this.$.cli.log("Mapping plugins");
@@ -90,7 +90,8 @@ export default class {
                     webpackArchitect: this.$.pageArchitect.webpackArchitect,
                     pageMap: this.$.pageMap,
                     rootPath: this.$.config.paths.root,
-                    config: this.$.config
+                    config: this.$.config,
+                    args
                 })
             }
         }

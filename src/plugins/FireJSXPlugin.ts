@@ -1,5 +1,6 @@
 import {WebpackConfig} from "../FireJSX";
 import {Config} from "../mappers/ConfigMapper";
+import {Args} from "../mappers/ArgsMapper";
 
 export enum PluginCode {
     GlobalPlugin = 1,
@@ -16,7 +17,7 @@ export default abstract class FireJSXPlugin {
         this.version = version;
     }
 
-    async init() {
+    async init(args: Args) {
 
     }
 

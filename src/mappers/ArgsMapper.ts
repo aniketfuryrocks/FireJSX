@@ -10,7 +10,7 @@ export interface Args {
     //dev server
     "--port": number,                  //port for dev server eg 5001,5003
     "--addr": string,                  //address for dev server eg 127.0.0.2, 127.0.2.10
-    "--disable-gzip":boolean,          //Disable gzip
+    "--disable-gzip": boolean,          //Disable gzip
     //conf
     "--conf": string,                  //Path to Config file
     //log
@@ -68,5 +68,5 @@ export function getArgs(): Args {
         .option(["--plugins"], String, "path to plugins dir, default : root/src/plugins")
         .example("firejsx -esp", "export server side rendered production build")
         .example("firejsx -dsp", "write to disk when using dev server with server side rendered production build")
-        .smartParse()
+        .smartParse({permissive: true})
 }

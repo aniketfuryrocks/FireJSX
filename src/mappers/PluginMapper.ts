@@ -3,6 +3,8 @@ import GlobalPlugin, {GlobalPlugMinVer} from "../plugins/GlobalPlugin";
 import Page from "../classes/Page";
 import FireJSXPlugin, {PluginCode} from "../plugins/FireJSXPlugin";
 import WebpackArchitect from "../architects/WebpackArchitect";
+import {Config} from "./ConfigMapper";
+import {Args} from "./ArgsMapper";
 
 interface gParam {
     webpackArchitect?: WebpackArchitect,
@@ -13,9 +15,9 @@ interface pParam {
     pageMap: Map<string, Page>
 }
 
-type param = { config: { [key: string]: any }, rootPath: string } & gParam & pParam
+type param = { config: Config, args: Args, rootPath: string } & gParam & pParam
 
-export async function mapPlugin(pluginPath: string, {rootPath, pageMap, webpackArchitect, globalPlugins, config}: param) {
+export async function mapPlugin(pluginPath: string, {rootPath, pageMap, webpackArchitect, globalPlugins, config, args}: param) {
     const rawPlugs = require(require.resolve(pluginPath, {paths: [rootPath]}));
     for (const rawPlugKey in rawPlugs) {
         //check for own property
@@ -25,7 +27,7 @@ export async function mapPlugin(pluginPath: string, {rootPath, pageMap, webpackA
             //set config
             rawPlug.config = config
             //init
-            await rawPlug.init();
+            await rawPlug.init(args);
             //check for plugCode
             if (rawPlug.plugCode === PluginCode.PagePlugin) {
                 //check ver
