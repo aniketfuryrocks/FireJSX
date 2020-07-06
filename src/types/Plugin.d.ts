@@ -31,7 +31,9 @@ interface PageHooks {
     onBuild: onBuild_Callback[]
 }
 
-interface GlobalHooks extends PageHooks {
+interface GlobalHooks {
+    initWebpack: initWebpack_Callback[],
+    postRender: dom_Callback[],
     initServer: initServer_Callback[],
     postExport: postExport_Callback[]
 }

@@ -1,14 +1,12 @@
 exports.default = function ({onBuild, initWebpack}, $) {
     $.cli.log("[HELLO] I was called")
-    onBuild("index.js", async ({renderPage}) => {
+    onBuild("index.js", ({renderPage}) => {
             renderPage("/index", {emoji: "🔥"})
         }
     )
-    onBuild("about.js", async ({renderPage}) => {
-            renderPage("/hola", {emoji: "🔥"})
+    onBuild("about.js", ({renderPage}) => {
+            renderPage("/hola")
+            renderPage("/about")
         }
     )
-    initWebpack("index.js", (webpack) => {
-        console.log("asdasd",webpack)
-    })
 }

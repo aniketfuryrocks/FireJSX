@@ -10,11 +10,7 @@ export default class {
         this.hooks = {
             initWebpack: [],
             postRender: [],
-            onBuild: [
-                async ({renderPage}) => {
-                    await renderPage("/" + page.substring(0, page.lastIndexOf(".")))
-                }
-            ]
+            onBuild: []
         }
     }
 

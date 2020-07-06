@@ -117,6 +117,11 @@ export default class {
                 if (this.$.config.verbose)
                     this.$.cli.ok(`Page : ${page.toString()}`)
                 const renderPromises = [];
+                //if there is not hook then build the default page
+                if (page.hooks.onBuild.length === 0)
+                    page.hooks.onBuild.push(async ({renderPage}) => {
+                        await renderPage("/" + page.toString().substring(0, page.toString().lastIndexOf(".")))
+                    })
                 Promise.all(page.hooks.onBuild.map(onBuild => onBuild({
                     renderPage: (path, content = {}) => {
                         if (this.$.config.verbose)
