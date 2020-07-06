@@ -6,6 +6,15 @@ exports.default = class extends GlobalPlugin.default {
         console.log(config)
     }
 
+    async init() {
+        return new Promise(res => void
+            setTimeout(() => {
+                console.log("20s passed")
+                res();
+            }, 20000)
+        )
+    }
+
     async postExport() {
         console.log("Export complete")
     }
