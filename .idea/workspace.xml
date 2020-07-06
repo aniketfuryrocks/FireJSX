@@ -10,14 +10,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="Plugin.d.ts">
-      <change afterPath="$PROJECT_DIR$/src/plugins/SsrPlugin.ts" afterDir="false" />
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="PageHooks and clean">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FireJSX.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/FireJSX.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/Page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Page.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mappers/PluginMapper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/mappers/PluginMapper.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/plugins/FireJSXPlugin.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/plugins/GlobalPlugin.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/plugins/PagePlugin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugins/PagePlugin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/Plugin.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/Plugin.d.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,14 +202,7 @@
       <workItem from="1594021751766" duration="5085000" />
       <workItem from="1594030884702" duration="85000" />
       <workItem from="1594037325134" duration="775000" />
-      <workItem from="1594041533337" duration="7040000" />
-    </task>
-    <task id="LOCAL-00024" summary="0.2.0">
-      <created>1593851063958</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1593851063958</updated>
+      <workItem from="1594041533337" duration="8737000" />
     </task>
     <task id="LOCAL-00025" summary="0.2.0">
       <created>1593851118968</created>
@@ -549,7 +540,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594047843149</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="PageHooks and clean">
+      <created>1594048637617</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1594048637618</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -579,7 +577,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="0.3.3" />
     <MESSAGE value=".gitignore" />
     <MESSAGE value="Logging in export fly" />
     <MESSAGE value="new Plugin" />
@@ -604,7 +601,8 @@
     <MESSAGE value="not premessive" />
     <MESSAGE value="0.6.1" />
     <MESSAGE value="Plugin.d.ts" />
-    <option name="LAST_COMMIT_MESSAGE" value="Plugin.d.ts" />
+    <MESSAGE value="PageHooks and clean" />
+    <option name="LAST_COMMIT_MESSAGE" value="PageHooks and clean" />
   </component>
   <component name="WindowStateProjectService">
     <state x="502" y="23" key="#autopublish" timestamp="1593598756287">
@@ -669,11 +667,11 @@
     </state>
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1593598521864" />
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594010859017" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1594047846722">
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1594048639981">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="356" y="114" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1593599721937" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594047846722" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594048639981" />
     <state x="610" y="299" key="cloudConfig.PluginsDialog" timestamp="1593672925959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

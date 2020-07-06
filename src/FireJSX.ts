@@ -1,5 +1,4 @@
 import "./GlobalsSetter"
-import GlobalPlugin from "./plugins/GlobalPlugin";
 import ConfigMapper, {Config} from "./mappers/ConfigMapper";
 import Cli from "./utils/Cli";
 import Page from "./classes/Page";
@@ -13,6 +12,7 @@ import * as fs from "fs"
 import StaticArchitect, {StaticConfig} from "./architects/StaticArchitect";
 import {createMap} from "./mappers/PathMapper";
 import WebpackArchitect from "./architects/WebpackArchitect";
+import {GlobalHooks} from "./types/Plugin";
 
 export type WebpackConfig = Configuration;
 export type WebpackStat = Stats;
@@ -31,7 +31,7 @@ export interface $ {
     inputFileSystem?,
     renderer?: StaticArchitect,
     pageArchitect?: PageArchitect,
-    globalPlugins?: GlobalPlugin[]
+    hooks: GlobalHooks
 }
 
 export interface Params {
@@ -48,7 +48,15 @@ export interface FIREJSX_MAP {
 }
 
 export default class {
-    private readonly $: $ = {globalPlugins: []};
+    private readonly $: $ = {
+        hooks: {
+            postRender: [],
+            onBuild: [],
+            initServer: [],
+            initWebpack: [],
+            postExport: []
+        }
+    };
 
     private constructParams(params: Params): void {
         params.config = params.config || {};
@@ -85,13 +93,8 @@ export default class {
         if (this.$.config.plugins.length > 0) {
             this.$.cli.log("Mapping plugins");
             for await (const plugin of this.$.config.plugins) {
-                await mapPlugin(plugin, {
-                    globalPlugins: this.$.globalPlugins,
-                    webpackArchitect: this.$.pageArchitect.webpackArchitect,
-                    pageMap: this.$.pageMap,
-                    rootPath: this.$.config.paths.root,
-                    config: this.$.config,
-                    args
+                await mapPlugin({
+                    path : plugin,
                 })
             }
         }

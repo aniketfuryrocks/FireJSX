@@ -1,22 +1,29 @@
-import {Extra, Plugin} from "../types/Plugin";
+import {Plugin} from "../types/Plugin";
+import {$} from "../FireJSX";
 
-interface Options {
-    path: string,
-    root: string,
-    extra: Extra
-}
 
-export default async function
-    mapPlugin({path, root, extra}: Options) {
-    //list of exports
-    const rawPlugs = <{ [key: string]: Plugin }>require(require.resolve(path, {paths: [root]}))
-    //iterate
-    for (const plugName in rawPlugs) {
-        (<Plugin>rawPlugs[plugName])({
-            initWebpack: (page, callback) => {
-                if (page === '*')
-                    callback(extra.$.pageArchitect.webpackArchitect.defaultConfig)
-            }
-        }, extra)
-    }
+export async function mapPlugin(plugin: string, $: $) {
+    //require default and call
+    await <Plugin>(require(require.resolve(plugin, {paths: [$.config.paths.root]})).default)({
+        initWebpack: (page, callback) => {
+            if (page === '*')
+                callback($.pageArchitect.webpackArchitect.defaultConfig)
+            else
+                $.hooks.initWebpack.push(callback)
+        },
+        onBuild: (page, callback) => {
+            if (page === '*')
+                $.pageMap.get(page).hooks.onBuild.push(callback)
+            else
+                $.hooks.onBuild.push(callback)
+        },
+        postRender: (page, callback) => {
+            if (page === '*')
+                $.pageMap.get(page).hooks.postRender.push(callback)
+            else
+                $.hooks.postRender.push(callback)
+        },
+        initServer: $.hooks.initServer.push,
+        postExport: $.hooks.initServer.push
+    }, $)
 }

@@ -11,8 +11,8 @@ export default class {
             initWebpack: [],
             postRender: [],
             onBuild: [
-                ({renderPage}) => {
-                    renderPage("/" + page.substring(0, page.lastIndexOf(".")))
+                async ({renderPage}) => {
+                    await renderPage("/" + page.substring(0, page.lastIndexOf(".")))
                 }
             ]
         }
