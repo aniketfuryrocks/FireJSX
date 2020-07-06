@@ -116,12 +116,12 @@ export default class {
             setCompiler(this.$.pageArchitect.buildPage(page, () => {
                 if (this.$.config.verbose)
                     this.$.cli.ok(`Page : ${page.toString()}`)
-
                 const renderPromises = [];
-                Promise.all(page.hooks.onBuild.map(onBuild => onBuild({
+                page.hooks.onBuild.forEach(onBuild => onBuild({
                     renderPage: (path, content = {}) => {
                         if (this.$.config.verbose)
                             this.$.cli.log(`Rendering Path : ${path}`);
+                        //push promise
                         renderPromises.push((async () => {
                             const dom = await this.$.renderer.render(page, path, content)
                             this.$.cli.ok(`Rendered Path : ${path}`)
@@ -141,14 +141,8 @@ export default class {
                             )
                         })())
                     }
-                })))
-                    //wait for all onBuild Hooks to finish
-                    .then(() =>
-                        //wait for all renders to finish
-                        Promise.all(renderPromises)
-                            .then(resolve)
-                            .catch(reject))
-                    .catch(reject);
+                }))
+                Promise.all(renderPromises).then(resolve).catch(reject)
             }, reject))
         })
     }

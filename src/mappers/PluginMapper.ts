@@ -13,15 +13,15 @@ export async function mapPlugin(plugin: string, $: $) {
         },
         onBuild: (page, callback) => {
             if (page === '*')
-                $.pageMap.get(page).hooks.onBuild.push(callback)
-            else
                 $.hooks.onBuild.push(callback)
+            else
+                $.pageMap.get(page).hooks.onBuild.push(callback)
         },
         postRender: (page, callback) => {
             if (page === '*')
-                $.pageMap.get(page).hooks.postRender.push(callback)
-            else
                 $.hooks.postRender.push(callback)
+            else
+                $.pageMap.get(page).hooks.postRender.push(callback)
         },
         initServer: $.hooks.initServer.push,
         postExport: $.hooks.initServer.push

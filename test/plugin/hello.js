@@ -1,11 +1,8 @@
-const PagePlugin = require("../../dist/plugins/PagePlugin.js");
-
-exports.default = class extends PagePlugin.default {
-    constructor() {
-        super("index.js");
-    }
-
-    async onBuild({renderPage}, info, ...extra) {
-        renderPage("/index", {emoji: "🔥"})
-    }
+exports.default = function ({onBuild}, $) {
+    $.cli.log("[HELLO] I was called")
+    onBuild("index.js", async ({renderPage}) => {
+            console.log("on build callback")
+            renderPage("/index", {emoji: "🔥"})
+        }
+    )
 }
