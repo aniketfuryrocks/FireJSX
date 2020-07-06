@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import FireJS from "./FireJSX"
+import FireJS,{$} from "./FireJSX"
 import Server from "./server"
 import {join} from "path"
 import {Args, getArgs} from "./mappers/ArgsMapper";
@@ -81,7 +81,7 @@ function init(): { app: FireJS, args: Args, customConfig: boolean } {
 
 async function main() {
     const {app, args, customConfig} = init();
-    const $ = app.getContext();
+    const $:$ = app.getContext();
     if (customConfig)
         $.cli.log("Using config from user")
     else
@@ -92,13 +92,13 @@ async function main() {
             const startTime = new Date().getTime();
             $.cli.ok("Exporting for fly builds");
             await app.exportFly();
+            $.cli.ok("Exported to",$.config.paths.fly)
             $.cli.ok("Finished in", (new Date().getTime() - startTime) / 1000 + "s");
-            if ($.config.paths.static)
-                $.cli.warn("Don't forget to copy the static folder to dist");
         } else if (args["--export"]) {
             $.cli.ok("Exporting");
             const startTime = new Date().getTime();
             await app.export();
+            $.cli.ok("Exported to",$.config.paths.dist)
             $.cli.ok("Finished in", (new Date().getTime() - startTime) / 1000 + "s");
             if ($.config.paths.static)
                 $.cli.warn("Don't forget to copy the static folder to dist");
