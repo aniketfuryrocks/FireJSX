@@ -1,3 +1,4 @@
+import "./GlobalsSetter";
 import GlobalPlugin from "./plugins/GlobalPlugin";
 import { Config } from "./mappers/ConfigMapper";
 import Cli from "./utils/Cli";

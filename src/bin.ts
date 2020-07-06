@@ -3,9 +3,8 @@ import FireJS from "./FireJSX"
 import Server from "./server"
 import {join} from "path"
 import {Args, getArgs} from "./mappers/ArgsMapper";
-
 import ConfigMapper, {Config} from "./mappers/ConfigMapper";
-import MemoryFS = require("memory-fs");
+import * as MemoryFS from "memory-fs";
 
 function initConfig(args: Args): [boolean, Config] {
     let userConfig = new ConfigMapper().getUserConfig(args["--conf"])

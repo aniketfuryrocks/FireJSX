@@ -1,5 +1,4 @@
-require("./GlobalsSetter")
-
+import "./GlobalsSetter"
 import GlobalPlugin from "./plugins/GlobalPlugin";
 import ConfigMapper, {Config} from "./mappers/ConfigMapper";
 import Cli from "./utils/Cli";

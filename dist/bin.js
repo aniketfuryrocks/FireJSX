@@ -1,14 +1,5 @@
 #!/usr/bin/env node
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const FireJSX_1 = require("./FireJSX");
 const server_1 = require("./server");
@@ -85,41 +76,39 @@ function init() {
         customConfig
     };
 }
-function main() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const { app, args, customConfig } = init();
-        const $ = app.getContext();
-        if (customConfig)
-            $.cli.log("Using config from user");
-        else
-            $.cli.log("Using default config");
-        try {
-            yield app.init();
-            if (args["--export-fly"]) {
-                const startTime = new Date().getTime();
-                $.cli.ok("Exporting for fly builds");
-                yield app.exportFly();
-                $.cli.ok("Finished in", (new Date().getTime() - startTime) / 1000 + "s");
-                if ($.config.paths.static)
-                    $.cli.warn("Don't forget to copy the static folder to dist");
-            }
-            else if (args["--export"]) {
-                $.cli.ok("Exporting");
-                const startTime = new Date().getTime();
-                yield app.export();
-                $.cli.ok("Finished in", (new Date().getTime() - startTime) / 1000 + "s");
-                if ($.config.paths.static)
-                    $.cli.warn("Don't forget to copy the static folder to dist");
-            }
-            else {
-                const server = new server_1.default(app);
-                yield server.init(args["--port"], args["--addr"]);
-            }
+async function main() {
+    const { app, args, customConfig } = init();
+    const $ = app.getContext();
+    if (customConfig)
+        $.cli.log("Using config from user");
+    else
+        $.cli.log("Using default config");
+    try {
+        await app.init();
+        if (args["--export-fly"]) {
+            const startTime = new Date().getTime();
+            $.cli.ok("Exporting for fly builds");
+            await app.exportFly();
+            $.cli.ok("Finished in", (new Date().getTime() - startTime) / 1000 + "s");
+            if ($.config.paths.static)
+                $.cli.warn("Don't forget to copy the static folder to dist");
         }
-        catch (err) {
-            $.cli.error(err);
+        else if (args["--export"]) {
+            $.cli.ok("Exporting");
+            const startTime = new Date().getTime();
+            await app.export();
+            $.cli.ok("Finished in", (new Date().getTime() - startTime) / 1000 + "s");
+            if ($.config.paths.static)
+                $.cli.warn("Don't forget to copy the static folder to dist");
         }
-    });
+        else {
+            const server = new server_1.default(app);
+            await server.init(args["--port"], args["--addr"]);
+        }
+    }
+    catch (err) {
+        $.cli.error(err);
+    }
 }
 let doneOnce = false;
 const mainInterval = setInterval(() => {

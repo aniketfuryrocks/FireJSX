@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __asyncValues = (this && this.__asyncValues) || function (o) {
     if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
     var m = o[Symbol.asyncIterator], i;
@@ -131,18 +122,18 @@ class default_1 {
                 document.getElementById("root").innerHTML = global.window.ReactDOMServer.renderToString(global.React.createElement(global.FireJSX.app, { content: global.FireJSX.map.content }));
             }
             //resolve all promises
-            (() => __awaiter(this, void 0, void 0, function* () {
+            (async () => {
                 var e_1, _a;
                 try {
-                    for (var _b = __asyncValues(global.FireJSX.lazyPromises), _c; _c = yield _b.next(), !_c.done;) {
+                    for (var _b = __asyncValues(global.FireJSX.lazyPromises), _c; _c = await _b.next(), !_c.done;) {
                         const lazyPromise = _c.value;
-                        yield lazyPromise();
+                        await lazyPromise();
                     }
                 }
                 catch (e_1_1) { e_1 = { error: e_1_1 }; }
                 finally {
                     try {
-                        if (_c && !_c.done && (_a = _b.return)) yield _a.call(_b);
+                        if (_c && !_c.done && (_a = _b.return)) await _a.call(_b);
                     }
                     finally { if (e_1) throw e_1.error; }
                 }
@@ -153,7 +144,7 @@ class default_1 {
                 }
                 page.plugin.onRender(dom); //call plugin
                 resolve(dom.serialize()); //serialize i.e get html
-            }))();
+            })();
         });
     }
 }

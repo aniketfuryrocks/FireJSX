@@ -2,10 +2,10 @@ import {join} from "path"
 import {watch} from "chokidar"
 import FireJS, {$} from "./FireJSX"
 import Page from "./classes/Page";
-import express = require("express");
-import webpackhot = require("webpack-hot-middleware");
-import mime = require("mime");
-import compression = require("compression");
+import * as express from "express";
+import * as webpackhot from "webpack-hot-middleware"
+import * as mime from "mime"
+import * as compression from "compression"
 
 export default class {
     private readonly $: $

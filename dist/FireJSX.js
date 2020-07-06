@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 require("./GlobalsSetter");
 const ConfigMapper_1 = require("./mappers/ConfigMapper");
@@ -64,19 +55,17 @@ class default_1 {
         params.config = params.config || {};
         params.config.paths = params.config.paths || {};
     }
-    init() {
-        return __awaiter(this, void 0, void 0, function* () {
-            this.$.cli.log("Building Externals");
-            this.$.renderer = new StaticArchitect_1.default({
-                rel: this.$.rel,
-                pathToLib: this.$.config.paths.lib,
-                externals: yield this.$.pageArchitect.buildExternals(),
-                explicitPages: this.$.config.pages,
-                template: this.$.inputFileSystem.readFileSync(path_1.join(__dirname, "./web/template.html")).toString(),
-                ssr: this.$.config.ssr,
-            });
-            this.$.globalPlugins.forEach(globalPlugin => this.$.renderer.renderGlobalPlugin(globalPlugin));
+    async init() {
+        this.$.cli.log("Building Externals");
+        this.$.renderer = new StaticArchitect_1.default({
+            rel: this.$.rel,
+            pathToLib: this.$.config.paths.lib,
+            externals: await this.$.pageArchitect.buildExternals(),
+            explicitPages: this.$.config.pages,
+            template: this.$.inputFileSystem.readFileSync(path_1.join(__dirname, "./web/template.html")).toString(),
+            ssr: this.$.config.ssr,
         });
+        this.$.globalPlugins.forEach(globalPlugin => this.$.renderer.renderGlobalPlugin(globalPlugin));
     }
     buildPage(page, setCompiler = () => {
     }, isExported = false) {

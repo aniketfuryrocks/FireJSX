@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = require("path");
 const chokidar_1 = require("chokidar");
@@ -22,65 +13,63 @@ class default_1 {
         this.$ = app.getContext();
         this.$.pageArchitect.webpackArchitect.defaultConfig.watch = true;
     }
-    init(port = 5000, addr = "localhost") {
-        return __awaiter(this, void 0, void 0, function* () {
-            //init server
-            const server = express();
-            //gzip
-            if (this.$.config.devServer.gzip)
-                server.use(compression);
-            console.log(this.$.config.devServer);
-            //turn off caching
-            server.use((req, res, next) => {
-                res.setHeader('Surrogate-Control', 'no-store');
-                res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-                res.setHeader('Pragma', 'no-cache');
-                res.setHeader('Expires', '0');
-                next();
+    async init(port = 5000, addr = "localhost") {
+        //init server
+        const server = express();
+        //gzip
+        if (this.$.config.devServer.gzip)
+            server.use(compression);
+        console.log(this.$.config.devServer);
+        //turn off caching
+        server.use((req, res, next) => {
+            res.setHeader('Surrogate-Control', 'no-store');
+            res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+            res.setHeader('Pragma', 'no-cache');
+            res.setHeader('Expires', '0');
+            next();
+        });
+        //init plugins
+        this.$.globalPlugins.forEach(plugin => plugin.initServer(server));
+        //watch changes
+        this.$.cli.ok("Watching for file changes");
+        chokidar_1.watch(this.$.config.paths.pages)
+            .on('add', path => {
+            path = path.replace(this.$.config.paths.pages + "/", "");
+            const page = this.$.pageMap.get(path) || new Page_1.default(path);
+            this.$.pageMap.set(page.toString(), page);
+            this.app.buildPage(page, compiler => {
+                server.use(webpackhot(compiler, {
+                    log: false,
+                    path: `/__webpack_hmr_/${page.toString()}`
+                }));
+            }).catch(e => this.$.cli.error(e));
+        })
+            .on('unlink', path => {
+            const page = this.$.pageMap.get(path.replace(this.$.config.paths.pages + "/", ""));
+            page.chunks.forEach(chunk => {
+                this.$.outputFileSystem.unlinkSync(path_1.join(this.$.config.paths.lib, chunk));
             });
-            //init plugins
-            this.$.globalPlugins.forEach(plugin => plugin.initServer(server));
-            //watch changes
-            this.$.cli.ok("Watching for file changes");
-            chokidar_1.watch(this.$.config.paths.pages)
-                .on('add', path => {
-                path = path.replace(this.$.config.paths.pages + "/", "");
-                const page = this.$.pageMap.get(path) || new Page_1.default(path);
-                this.$.pageMap.set(page.toString(), page);
-                this.app.buildPage(page, compiler => {
-                    server.use(webpackhot(compiler, {
-                        log: false,
-                        path: `/__webpack_hmr_/${page.toString()}`
-                    }));
-                }).catch(e => this.$.cli.error(e));
-            })
-                .on('unlink', path => {
-                const page = this.$.pageMap.get(path.replace(this.$.config.paths.pages + "/", ""));
-                page.chunks.forEach(chunk => {
-                    this.$.outputFileSystem.unlinkSync(path_1.join(this.$.config.paths.lib, chunk));
-                });
-                this.$.pageMap.delete(path.replace(this.$.config.paths.pages + "/", ""));
-            });
-            //routing
-            if (this.$.config.paths.static)
-                server.use(`${this.$.config.paths.static.substring(this.$.config.paths.static.lastIndexOf("/"))}`, express.static(this.$.config.paths.static));
-            server.get(`/${this.$.rel.mapRel}/*`, this.get.bind(this));
-            server.get(`/${this.$.rel.libRel}/*`, this.get.bind(this));
-            server.use('*', this.getPage.bind(this));
-            //listen
-            const listener = server.listen(port, addr, () => {
-                // @ts-ignore
-                let { port, address } = listener.address();
-                if (this.$.config.logMode === "plain")
-                    this.$.cli.normal(`Listening at http://${address}:${port}`);
-                else
-                    this.$.cli.normal(" \n \x1b[32m┌─────────────────────────────────────────┐\n" +
-                        " │                                         │\n" +
-                        ` │   Listening at http://${address}:${port}    │\n` +
-                        " │                                         │\n" +
-                        " └─────────────────────────────────────────┘\x1b[0m\n");
-                this.$.cli.ok("Building Pages");
-            });
+            this.$.pageMap.delete(path.replace(this.$.config.paths.pages + "/", ""));
+        });
+        //routing
+        if (this.$.config.paths.static)
+            server.use(`${this.$.config.paths.static.substring(this.$.config.paths.static.lastIndexOf("/"))}`, express.static(this.$.config.paths.static));
+        server.get(`/${this.$.rel.mapRel}/*`, this.get.bind(this));
+        server.get(`/${this.$.rel.libRel}/*`, this.get.bind(this));
+        server.use('*', this.getPage.bind(this));
+        //listen
+        const listener = server.listen(port, addr, () => {
+            // @ts-ignore
+            let { port, address } = listener.address();
+            if (this.$.config.logMode === "plain")
+                this.$.cli.normal(`Listening at http://${address}:${port}`);
+            else
+                this.$.cli.normal(" \n \x1b[32m┌─────────────────────────────────────────┐\n" +
+                    " │                                         │\n" +
+                    ` │   Listening at http://${address}:${port}    │\n` +
+                    " │                                         │\n" +
+                    " └─────────────────────────────────────────┘\x1b[0m\n");
+            this.$.cli.ok("Building Pages");
         });
     }
     get(req, res) {
