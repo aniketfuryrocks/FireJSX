@@ -15,6 +15,9 @@
     "SSR",
     "SSB"
   ],
+  "engines": {
+    "node": ">=10.21.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eAdded/firejsx.git"
