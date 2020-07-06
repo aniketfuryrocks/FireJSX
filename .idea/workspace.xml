@@ -10,9 +10,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="0.5.2">
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="config">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FireJSX.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/FireJSX.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GlobalsSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/GlobalsSetter.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,14 +186,7 @@
       <workItem from="1594004232762" duration="388000" />
       <workItem from="1594007833310" duration="55000" />
       <workItem from="1594008769589" duration="3294000" />
-      <workItem from="1594017879652" duration="22000" />
-    </task>
-    <task id="LOCAL-00011" summary="lOdable">
-      <created>1593776155050</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1593776155050</updated>
+      <workItem from="1594017879652" duration="107000" />
     </task>
     <task id="LOCAL-00012" summary="lOdable">
       <created>1593776247605</created>
@@ -530,7 +524,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594013768563</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="config">
+      <created>1594017963255</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1594017963255</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -560,7 +561,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="0.2.2" />
     <MESSAGE value="working without patch" />
     <MESSAGE value="showReactDomPatchNotification: false" />
     <MESSAGE value="ContentType resolution" />
@@ -585,7 +585,8 @@
     <MESSAGE value="updated keywords" />
     <MESSAGE value="export loggig" />
     <MESSAGE value="0.5.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.5.2" />
+    <MESSAGE value="config" />
+    <option name="LAST_COMMIT_MESSAGE" value="config" />
   </component>
   <component name="WindowStateProjectService">
     <state x="502" y="23" key="#autopublish" timestamp="1593598756287">
