@@ -86,7 +86,7 @@ export default class {
                 webpackArchitect: this.$.pageArchitect.webpackArchitect,
                 pageMap: this.$.pageMap,
                 rootPath: this.$.config.paths.root,
-                config: this.$.config.custom
+                config: this.$.config
             }))
         }
         if (this.$.config.verbose)
