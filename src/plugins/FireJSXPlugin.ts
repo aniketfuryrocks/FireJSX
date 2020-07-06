@@ -1,4 +1,5 @@
 import {WebpackConfig} from "../FireJSX";
+import {Config} from "../mappers/ConfigMapper";
 
 export enum PluginCode {
     GlobalPlugin = 1,
@@ -8,7 +9,7 @@ export enum PluginCode {
 export default abstract class FireJSXPlugin {
     public readonly version;
     public readonly plugCode;
-    public config: { [key: string]: any };
+    public config: Config;
 
     protected constructor(version: number, plugCode: PluginCode) {
         this.plugCode = plugCode;
