@@ -3,7 +3,6 @@ import {join} from "path"
 import {ExplicitPages} from "../mappers/ConfigMapper";
 import Page from "../classes/Page";
 import {JSDOM} from "jsdom"
-import GlobalPlugin from "../plugins/GlobalPlugin";
 import {requireUncached} from "../utils/Require";
 import {Helmet} from "react-helmet"
 
@@ -59,10 +58,6 @@ export default class {
             requireUncached(join(this.config.pathToLib, this.config.externals[0]));
         else //just load LinkApi
             requireUncached("../web/LinkApi")
-    }
-
-    renderGlobalPlugin(globalPlugin: GlobalPlugin) {
-        globalPlugin.initDom(this.config.template);
     }
 
     render(page: Page, path: string, content: any): Promise<string> {
@@ -148,7 +143,8 @@ export default class {
                     for (let helmetKey in helmet)
                         document.head.innerHTML += helmet[helmetKey].toString()
                 }
-                page.plugin.onRender(dom);//call plugin
+                //call plugins
+                page.hooks.postRender.forEach(postRender => postRender(dom))
                 resolve(dom.serialize());//serialize i.e get html
             })()
         });

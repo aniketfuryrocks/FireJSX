@@ -89,15 +89,7 @@ export default class {
     }
 
     async init(args) {
-        //mapPlugins
-        if (this.$.config.plugins.length > 0) {
-            this.$.cli.log("Mapping plugins");
-            for await (const plugin of this.$.config.plugins) {
-                await mapPlugin({
-                    path : plugin,
-                })
-            }
-        }
+        //Verbose
         if (this.$.config.verbose)
             this.$.cli.log(`${this.$.config.plugins.length} Plugin(s) :  ${this.$.config.plugins}`)
         //build externals
@@ -110,7 +102,12 @@ export default class {
             template: this.$.inputFileSystem.readFileSync(join(__dirname, "./web/template.html")).toString(),
             ssr: this.$.config.ssr,
         });
-        this.$.globalPlugins.forEach(globalPlugin => this.$.renderer.renderGlobalPlugin(globalPlugin));
+        //mapPlugins
+        if (this.$.config.plugins.length > 0) {
+            this.$.cli.log("Mapping plugins");
+            for await (const plugin of this.$.config.plugins)
+                await mapPlugin(plugin, this.$)
+        }
     }
 
     buildPage(page: Page, setCompiler: (Compiler) => void = () => {
