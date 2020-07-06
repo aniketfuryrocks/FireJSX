@@ -10,7 +10,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="log fix, min node ver, dependency graph clean,&#10;gzip log">
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="updated keywords">
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -184,13 +184,6 @@
       <workItem from="1594004232762" duration="388000" />
       <workItem from="1594007833310" duration="55000" />
       <workItem from="1594008769589" duration="3294000" />
-    </task>
-    <task id="LOCAL-00007" summary="rm .js">
-      <created>1593760820753</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1593760820753</updated>
     </task>
     <task id="LOCAL-00008" summary="Changed map and lib root">
       <created>1593764102677</created>
@@ -528,7 +521,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594011989515</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="updated keywords">
+      <created>1594013126830</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1594013126830</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -558,7 +558,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="suppressHydrationWarning" />
     <MESSAGE value="v0.2.1" />
     <MESSAGE value="conditional Lazy Load" />
     <MESSAGE value="0.2.2" />
@@ -583,7 +582,8 @@
     <MESSAGE value="min node version 10.21.0" />
     <MESSAGE value="log fixes" />
     <MESSAGE value="log fix, min node ver, dependency graph clean,&#10;gzip log" />
-    <option name="LAST_COMMIT_MESSAGE" value="log fix, min node ver, dependency graph clean,&#10;gzip log" />
+    <MESSAGE value="updated keywords" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated keywords" />
   </component>
   <component name="WindowStateProjectService">
     <state x="502" y="23" key="#autopublish" timestamp="1593598756287">

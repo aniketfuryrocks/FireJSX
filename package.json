@@ -21,7 +21,7 @@
     "express",
     "web",
     "html",
-    "app"
+    "web-app"
   ],
   "engines": {
     "node": ">=10.21.0"
