@@ -88,7 +88,7 @@ export default class {
         this.$.pageArchitect = new PageArchitect(this.$, new WebpackArchitect(this.$), !!params.outputFileSystem, !!params.inputFileSystem);
     }
 
-    async init(args) {
+    async init() {
         //Verbose
         if (this.$.config.verbose)
             this.$.cli.log(`${this.$.config.plugins.length} Plugin(s) :  ${this.$.config.plugins}`)
@@ -102,7 +102,7 @@ export default class {
             template: this.$.inputFileSystem.readFileSync(join(__dirname, "./web/template.html")).toString(),
             ssr: this.$.config.ssr,
         });
-        //mapPlugins
+        //mapPlugins after everything is initialized
         if (this.$.config.plugins.length > 0) {
             this.$.cli.log("Mapping plugins");
             for await (const plugin of this.$.config.plugins)
@@ -111,81 +111,57 @@ export default class {
     }
 
     buildPage(page: Page, setCompiler: (Compiler) => void = () => {
-    }, isExported = false) {
+    }) {
         return new Promise<any>((resolve, reject) => {
             setCompiler(this.$.pageArchitect.buildPage(page, () => {
                 if (this.$.config.verbose)
                     this.$.cli.ok(`Page : ${page.toString()}`)
-                //render
-                try {
-                    const promises = [];
-                    const buildPromise = page.plugin.onBuild({
-                        renderPage: (path, content = {}) => {
-                            if (this.$.config.verbose)
-                                this.$.cli.log(`Rendering Path : ${path}`);
-                            promises.push(new Promise((res, rej) => {
-                                this.$.renderer.render(page, path, content)
-                                    .then(html => {
-                                        this.$.cli.ok(`Rendered Path : ${path}`)
-                                        writeFileRecursively(join(this.$.config.paths.dist, `${path}.html`),
-                                            html,
-                                            this.$.outputFileSystem)
-                                            .then(() =>
-                                                writeFileRecursively(join(this.$.config.paths.map, `${path}.map.js`),
-                                                    `FireJSX.map=${JSON.stringify({
-                                                        content,
-                                                        chunks: page.chunks
-                                                    })}`,
-                                                    this.$.outputFileSystem
-                                                ).then(res)).catch(e => {
-                                            this.$.cli.error(`Error writing map ${path}`)
-                                            rej(e)
-                                        })
-                                            .catch(e => {
-                                                this.$.cli.error(`Error writing html ${path}`)
-                                                rej(e)
-                                            })
-                                    })
-                                    .catch(e => {
-                                        this.$.cli.error(`Error rendering path ${path}`)
-                                        rej(e)
-                                    })
-                            }))
-                        }
-                    }, {
-                        isExported,
-                        isPro: this.$.config.pro,
-                        isSSR: this.$.renderer.config.ssr
-                    });
-                    if (buildPromise instanceof Promise)
-                        buildPromise
-                            .then(() => Promise.all(promises).then(resolve).catch(reject))
-                            .catch(reject);
-                    else
-                        reject(new TypeError(`Expected async onBuild() plugin function for page ${page.toString()}`))
-                    //resolve after awaiting
-                } catch (e) {
-                    this.$.cli.error(`Error while calling onBuild() of pagePlugin for page ${page.toString()}\n\nFunc:`, page.plugin.onBuild.toString(), "\n\n");
-                    reject(e);
-                }
+
+                const renderPromises = [];
+                Promise.all(page.hooks.onBuild.map(onBuild => onBuild({
+                    renderPage: (path, content = {}) => {
+                        if (this.$.config.verbose)
+                            this.$.cli.log(`Rendering Path : ${path}`);
+                        renderPromises.push((async () => {
+                            const dom = await this.$.renderer.render(page, path, content)
+                            this.$.cli.ok(`Rendered Path : ${path}`)
+                            //call page postRender hooks
+                            page.hooks.postRender.forEach(postRender => postRender(dom))
+                            //call global postRender hooks
+                            this.$.hooks.postRender.forEach(postRender => postRender(dom))
+                            await writeFileRecursively(join(this.$.config.paths.dist, `${path}.html`),
+                                dom.serialize(),
+                                this.$.outputFileSystem)
+                            await writeFileRecursively(join(this.$.config.paths.map, `${path}.map.js`),
+                                `FireJSX.map=${JSON.stringify({
+                                    content,
+                                    chunks: page.chunks
+                                })}`,
+                                this.$.outputFileSystem
+                            )
+                        })())
+                    }
+                })))
+                    //wait for all onBuild Hooks to finish
+                    .then(() =>
+                        //wait for all renders to finish
+                        Promise.all(renderPromises)
+                            .then(resolve)
+                            .catch(reject))
+                    .catch(reject);
             }, reject))
         })
     }
 
-    export() {
+    async export() {
         const promises = [];
         this.$.pageMap.forEach((page) =>
-            promises.push(this.buildPage(page, undefined, true))
+            promises.push(this.buildPage(page, undefined))
         )
-        return new Promise((res, rej) => {
-            //wait for all exports to finish
-            Promise.all(promises).then(() => {
-                //call postExport functions
-                Promise.all(this.$.globalPlugins.map(plug => plug.postExport()))
-                    .then(res)
-                    .catch(rej)
-            }).catch(rej)
-        })
+        //wait for all export promises to resolve
+        await Promise.all(promises)
+        //call postExport Hooks
+        await Promise.all(this.$.hooks.postExport.map(postExport => postExport()))
     }
 
     exportFly() {

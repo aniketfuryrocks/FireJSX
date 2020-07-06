@@ -60,7 +60,7 @@ export default class {
             requireUncached("../web/LinkApi")
     }
 
-    render(page: Page, path: string, content: any): Promise<string> {
+    render(page: Page, path: string, content: any): Promise<JSDOM> {
         return new Promise(resolve => {
             //webpack global variable reset
             global.window.webpackJsonp = undefined
@@ -143,9 +143,7 @@ export default class {
                     for (let helmetKey in helmet)
                         document.head.innerHTML += helmet[helmetKey].toString()
                 }
-                //call plugins
-                page.hooks.postRender.forEach(postRender => postRender(dom))
-                resolve(dom.serialize());//serialize i.e get html
+                resolve(dom);//resolve DOM
             })()
         });
     }

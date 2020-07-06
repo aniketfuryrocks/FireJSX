@@ -111,7 +111,7 @@ export default class {
         mergedConfig.plugins.push(new webpack.ProvidePlugin({
             __FIREJSX_APP__: join(this.$.config.paths.pages, mergedConfig.name)
         }))
-        page.plugin.initWebpack(mergedConfig);
+        page.hooks.initWebpack.forEach(initWebpack => initWebpack(mergedConfig));
         return mergedConfig;
     }
 }
