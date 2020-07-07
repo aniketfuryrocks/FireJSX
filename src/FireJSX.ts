@@ -178,7 +178,8 @@ export default class {
             const map: FIREJSX_MAP = {
                 staticConfig: {
                     ...this.$.renderer.config,
-                    template: this.$.inputFileSystem.readFileSync(join(__dirname, "./web/template.html")).toString()
+                    template: this.$.inputFileSystem.readFileSync(join(__dirname, "./web/template.html")).toString(),
+                    ssr: true
                 },
                 pageMap: {},
             }

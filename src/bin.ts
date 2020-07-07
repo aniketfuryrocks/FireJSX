@@ -45,7 +45,6 @@ function init(): { app: FireJS, args: Args, customConfig: boolean } {
             throw new Error("flag [-p, --pro] are redundant when exporting for fly build. Rerun after removing this flag");
         if (args["--ssr"])
             throw new Error("flag [-s, --ssr] are redundant when exporting for fly build. Rerun after removing this flag");
-        args["--ssr"] = true;
         args["--pro"] = true;
     }
     //check if log mode is valid
@@ -114,6 +113,6 @@ let doneOnce = false;
 const mainInterval = setInterval(() => {
     if (!doneOnce) {
         doneOnce = true;
-        main().then(() => clearInterval(mainInterval))
+        main().finally(() => clearInterval(mainInterval))
     }
 }, 1000)
