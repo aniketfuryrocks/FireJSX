@@ -10,13 +10,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="throw Error on no default export">
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="args">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/sync.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/sync.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/watch.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/watch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FireJSX.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/FireJSX.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bin.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/plugin/hello.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/plugin/hello.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GlobalsSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/GlobalsSetter.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +83,7 @@
       <command value="cd test  &amp;&amp; yarn test --esp" />
     </option>
   </component>
-  <component name="RunManager" selected="npm.test">
+  <component name="RunManager" selected="npm.autopublish">
     <configuration name="autopublish" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -207,14 +204,7 @@
       <workItem from="1594054958071" duration="3772000" />
       <workItem from="1594059189849" duration="35000" />
       <workItem from="1594059947723" duration="14000" />
-      <workItem from="1594093026165" duration="2781000" />
-    </task>
-    <task id="LOCAL-00037" summary="production">
-      <created>1593878254219</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1593878254219</updated>
+      <workItem from="1594093026165" duration="3157000" />
     </task>
     <task id="LOCAL-00038" summary="LazyLoad 0.3.1">
       <created>1593930515004</created>
@@ -552,7 +542,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594093638495</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="args">
+      <created>1594095849680</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1594095849680</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -582,7 +579,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="0.5.2" />
     <MESSAGE value="config" />
     <MESSAGE value="0.5.3" />
     <MESSAGE value="Config ts" />
@@ -607,7 +603,8 @@
     <MESSAGE value="plugins working" />
     <MESSAGE value="purge onBuild global hook" />
     <MESSAGE value="throw Error on no default export" />
-    <option name="LAST_COMMIT_MESSAGE" value="throw Error on no default export" />
+    <MESSAGE value="args" />
+    <option name="LAST_COMMIT_MESSAGE" value="args" />
   </component>
   <component name="WindowStateProjectService">
     <state x="502" y="23" key="#autopublish" timestamp="1593598756287">
@@ -643,26 +640,26 @@
     </state>
     <state x="638" y="153" key="FileChooserDialogImpl/0.0.1920.1035@0.0.1920.1035" timestamp="1593599916306" />
     <state x="638" y="154" width="636" height="712" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1594024825591" />
-    <state width="1889" height="44" key="GridCell.Tab.0.bottom" timestamp="1594095725716">
+    <state width="1889" height="60" key="GridCell.Tab.0.bottom" timestamp="1594096183550">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372243" />
-    <state width="1889" height="44" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594095725716" />
-    <state width="1889" height="44" key="GridCell.Tab.0.center" timestamp="1594095725716">
+    <state width="1889" height="60" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594096183550" />
+    <state width="1889" height="60" key="GridCell.Tab.0.center" timestamp="1594096183550">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372240" />
-    <state width="1889" height="44" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594095725716" />
-    <state width="1889" height="44" key="GridCell.Tab.0.left" timestamp="1594095725715">
+    <state width="1889" height="60" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594096183550" />
+    <state width="1889" height="60" key="GridCell.Tab.0.left" timestamp="1594096183549">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372239" />
-    <state width="1889" height="44" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594095725715" />
-    <state width="1889" height="44" key="GridCell.Tab.0.right" timestamp="1594095725716">
+    <state width="1889" height="60" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594096183549" />
+    <state width="1889" height="60" key="GridCell.Tab.0.right" timestamp="1594096183550">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372242" />
-    <state width="1889" height="44" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594095725716" />
+    <state width="1889" height="60" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594096183550" />
     <state x="652" y="0" width="605" height="1040" key="RollbackChangesDialog" timestamp="1594044038483">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -672,11 +669,11 @@
     </state>
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1593598521864" />
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594010859017" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1594094059981">
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1594095853444">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="356" y="114" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1593599721937" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594094059981" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594095853444" />
     <state x="610" y="299" key="cloudConfig.PluginsDialog" timestamp="1593672925959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
