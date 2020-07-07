@@ -14,6 +14,12 @@ watch("src/components")
     .on('change', path =>
         copyFile(path, "dist"))
 
+watch("src/types")
+    .on('add', path =>
+        copyFile(path, "dist/types"))
+    .on('change', path =>
+        copyFile(path, "dist/types"))
+
 function copyFile(path, dist) {
     const to = `${dist}/${path.substring(path.lastIndexOf("/") + 1)}`;
     console.log(`Copying ${path} to ${to}`)

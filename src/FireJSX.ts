@@ -13,6 +13,7 @@ import StaticArchitect, {StaticConfig} from "./architects/StaticArchitect";
 import {createMap} from "./mappers/PathMapper";
 import WebpackArchitect from "./architects/WebpackArchitect";
 import {GlobalHooks} from "./types/Plugin";
+import {Args} from "./mappers/ArgsMapper";
 
 export type WebpackConfig = Configuration;
 export type WebpackStat = Stats;
@@ -31,13 +32,15 @@ export interface $ {
     inputFileSystem?,
     renderer?: StaticArchitect,
     pageArchitect?: PageArchitect,
-    hooks: GlobalHooks
+    hooks: GlobalHooks,
+    args?: Args
 }
 
 export interface Params {
     config?: Config,
     outputFileSystem?,
-    inputFileSystem?
+    inputFileSystem?,
+    args?: Args
 }
 
 export interface FIREJSX_MAP {
@@ -60,6 +63,7 @@ export default class {
     private constructParams(params: Params): void {
         params.config = params.config || {};
         params.config.paths = params.config.paths || {};
+        params.args = params.args || {_: []}
     }
 
     constructor(params: Params = {}) {
@@ -69,6 +73,8 @@ export default class {
         fs.mkdirp = mkdirp;
         this.$.inputFileSystem = params.inputFileSystem || fs
         this.$.outputFileSystem = params.outputFileSystem || fs;
+        //args
+        this.$.args = params.args
         //config
         this.$.config = new ConfigMapper(this.$.inputFileSystem, this.$.outputFileSystem).getConfig(params.config)
         //cli

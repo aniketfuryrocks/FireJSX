@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import FireJS,{$} from "./FireJSX"
+import FireJS, {$} from "./FireJSX"
 import Server from "./server"
 import {join} from "path"
 import {Args, getArgs} from "./mappers/ArgsMapper";
@@ -48,8 +48,6 @@ function init(): { app: FireJS, args: Args, customConfig: boolean } {
         args["--ssr"] = true;
         args["--pro"] = true;
     }
-    //export if export-fly
-    args["--export"] = args["--export-fly"] || args["--export"]
     //check if log mode is valid
     if (args["--log-mode"])
         if (args["--log-mode"] !== "silent" && args["--log-mode"] !== "plain")
@@ -58,7 +56,7 @@ function init(): { app: FireJS, args: Args, customConfig: boolean } {
     const [customConfig, config] = initConfig(args);
     //config disk
     if (args["--disk"]) {
-        if (args["--export"])
+        if (args["--export"] || args["--export-fly"])
             throw new Error("flags [-d, --disk] are redundant when exporting")
         config.paths.dist = join(config.paths.cache || "out/.cache", "disk");
     }
@@ -68,11 +66,12 @@ function init(): { app: FireJS, args: Args, customConfig: boolean } {
             throw new Error("flags [-s, --ssr] should be accompanied either by flags [-e,--export] or flags [-d, --disk]")
 
     return {
-        app: args["--export"] ?
-            new FireJS({config}) :
+        app: (args["--export"] || args["--export-fly"]) ?
+            new FireJS({config, args}) :
             new FireJS({
                 config,
-                outputFileSystem: args["--disk"] ? undefined : new MemoryFS()
+                outputFileSystem: args["--disk"] ? undefined : new MemoryFS(),
+                args
             }),
         args,
         customConfig
@@ -81,7 +80,7 @@ function init(): { app: FireJS, args: Args, customConfig: boolean } {
 
 async function main() {
     const {app, args, customConfig} = init();
-    const $:$ = app.getContext();
+    const $: $ = app.getContext();
     if (customConfig)
         $.cli.log("Using config from user")
     else
@@ -92,13 +91,13 @@ async function main() {
             const startTime = new Date().getTime();
             $.cli.ok("Exporting for fly builds");
             await app.exportFly();
-            $.cli.ok("Exported to",$.config.paths.fly)
+            $.cli.ok("Exported to", $.config.paths.fly)
             $.cli.ok("Finished in", (new Date().getTime() - startTime) / 1000 + "s");
         } else if (args["--export"]) {
             $.cli.ok("Exporting");
             const startTime = new Date().getTime();
             await app.export();
-            $.cli.ok("Exported to",$.config.paths.dist)
+            $.cli.ok("Exported to", $.config.paths.dist)
             $.cli.ok("Finished in", (new Date().getTime() - startTime) / 1000 + "s");
             if ($.config.paths.static)
                 $.cli.warn("Don't forget to copy the static folder to dist");
