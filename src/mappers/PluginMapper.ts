@@ -9,8 +9,8 @@ export async function mapPlugin(plugin: string, $: $) {
             initWebpack: (page, callback) => check('initWebpack', plugin, $, page, callback),
             onBuild: (page, callback) => check('onBuild', plugin, $, page, callback, false),
             postRender: (page, callback) => check('postRender', plugin, $, page, callback),
-            initServer: $.hooks.initServer.push,
-            postExport: $.hooks.postExport.push
+            initServer: (callback) => $.hooks.initServer.push(callback),
+            postExport: (callback) => $.hooks.postExport.push(callback)
         }, $)
     else
         throw new Error(`Plugin ${plugin} has no default export`)
