@@ -129,6 +129,10 @@ export default class {
                     })
                 Promise.all(page.hooks.onBuild.map(onBuild => onBuild({
                     renderPage: (path, content = {}) => {
+                        if (!path) {
+                            this.$.cli.warn(`Skipping render for page "${page.toString()}", since onBuild -> renderPage hook was called without a path`)
+                            return
+                        }
                         if (this.$.config.verbose)
                             this.$.cli.log(`Rendering Path : ${path}`);
                         //push promise
