@@ -10,12 +10,14 @@ export async function mapPlugin(plugin: string, $: $) {
             onBuild: (page, callback) => check('onBuild', plugin, $, page, callback, false),
             postRender: (page, callback) => check('postRender', plugin, $, page, callback),
             initServer: (callback) => {
-                if (callback)
-                    $.hooks.initServer.push(callback)
+                if (!callback)
+                    throw new Error(`Plugin ${plugin} provided not callback for initServer hook`)
+                $.hooks.initServer.push(callback)
             },
             postExport: (callback) => {
-                if (callback)
-                    $.hooks.postExport.push(callback)
+                if (!callback)
+                    throw new Error(`Plugin ${plugin} provided not callback for postExport hook`)
+                $.hooks.postExport.push(callback)
             }
         }, $)
     else
