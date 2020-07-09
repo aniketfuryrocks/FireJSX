@@ -10,10 +10,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="conditional path">
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="0.7.4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GlobalsSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/GlobalsSetter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mappers/PluginMapper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/mappers/PluginMapper.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,13 +218,7 @@
       <workItem from="1594215234997" duration="644000" />
       <workItem from="1594223599439" duration="22000" />
       <workItem from="1594225242213" duration="111000" />
-    </task>
-    <task id="LOCAL-00046" summary="Logging in export fly">
-      <created>1593939320447</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1593939320447</updated>
+      <workItem from="1594258974061" duration="46000" />
     </task>
     <task id="LOCAL-00047" summary="new Plugin">
       <created>1593955433836</created>
@@ -563,7 +556,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594215832156</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="0.7.4">
+      <created>1594258990815</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1594258990816</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -593,7 +593,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="not premessive" />
     <MESSAGE value="0.6.1" />
     <MESSAGE value="Plugin.d.ts" />
     <MESSAGE value="PageHooks and clean" />
@@ -618,7 +617,8 @@
     <MESSAGE value="plugin push hooks" />
     <MESSAGE value="v0.7.4" />
     <MESSAGE value="conditional path" />
-    <option name="LAST_COMMIT_MESSAGE" value="conditional path" />
+    <MESSAGE value="0.7.4" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.7.4" />
   </component>
   <component name="WindowStateProjectService">
     <state x="502" y="23" key="#autopublish" timestamp="1593598756287">
