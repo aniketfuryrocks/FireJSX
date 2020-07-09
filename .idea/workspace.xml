@@ -10,11 +10,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="callback check">
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="hooks error logging">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GlobalsSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/GlobalsSetter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mappers/PluginMapper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/mappers/PluginMapper.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,14 +221,7 @@
       <workItem from="1594225242213" duration="111000" />
       <workItem from="1594258974061" duration="692000" />
       <workItem from="1594259963966" duration="12000" />
-      <workItem from="1594260003497" duration="254000" />
-    </task>
-    <task id="LOCAL-00048" summary="new Plugin working">
-      <created>1593956456064</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1593956456064</updated>
+      <workItem from="1594260003497" duration="291000" />
     </task>
     <task id="LOCAL-00049" summary="devServer gzip">
       <created>1593957156753</created>
@@ -567,7 +559,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594259027858</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="hooks error logging">
+      <created>1594260276681</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1594260276681</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -597,7 +596,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Plugin.d.ts" />
     <MESSAGE value="PageHooks and clean" />
     <MESSAGE value="Basic Set" />
     <MESSAGE value="basics set" />
@@ -622,7 +620,8 @@
     <MESSAGE value="conditional path" />
     <MESSAGE value="0.7.4" />
     <MESSAGE value="callback check" />
-    <option name="LAST_COMMIT_MESSAGE" value="callback check" />
+    <MESSAGE value="hooks error logging" />
+    <option name="LAST_COMMIT_MESSAGE" value="hooks error logging" />
   </component>
   <component name="WindowStateProjectService">
     <state x="502" y="23" key="#autopublish" timestamp="1593598756287">
@@ -687,11 +686,11 @@
     </state>
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1593598521864" />
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594010859017" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1594259030199">
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1594260279479">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="356" y="114" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1593599721937" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594259030199" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594260279479" />
     <state x="610" y="299" key="cloudConfig.PluginsDialog" timestamp="1593672925959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
