@@ -10,9 +10,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="v0.7.7">
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="fix Plugin.d.ts ts">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/Plugin.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/Plugin.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GlobalsSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/GlobalsSetter.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,14 +224,7 @@
       <workItem from="1594260003497" duration="583000" />
       <workItem from="1594260699509" duration="40000" />
       <workItem from="1594288270750" duration="685000" />
-      <workItem from="1594296309736" duration="76000" />
-    </task>
-    <task id="LOCAL-00050" summary="devServer gzip">
-      <created>1593960477073</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1593960477073</updated>
+      <workItem from="1594296309736" duration="130000" />
     </task>
     <task id="LOCAL-00051" summary="dist">
       <created>1594004617875</created>
@@ -568,7 +562,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594260320350</updated>
     </task>
-    <option name="localTasksCounter" value="99" />
+    <task id="LOCAL-00099" summary="fix Plugin.d.ts ts">
+      <created>1594296397138</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1594296397138</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -598,7 +599,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Basic Set" />
     <MESSAGE value="basics set" />
     <MESSAGE value="done" />
     <MESSAGE value="FlySSR free from plugins" />
@@ -623,7 +623,8 @@
     <MESSAGE value="callback check" />
     <MESSAGE value="hooks error logging" />
     <MESSAGE value="v0.7.7" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.7.7" />
+    <MESSAGE value="fix Plugin.d.ts ts" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix Plugin.d.ts ts" />
   </component>
   <component name="WindowStateProjectService">
     <state x="502" y="23" key="#autopublish" timestamp="1593598756287">
@@ -659,26 +660,26 @@
     </state>
     <state x="638" y="153" key="FileChooserDialogImpl/0.0.1920.1035@0.0.1920.1035" timestamp="1593599916306" />
     <state x="638" y="154" width="636" height="712" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1594024825591" />
-    <state width="1788" height="473" key="GridCell.Tab.0.bottom" timestamp="1594260586334">
+    <state width="1788" height="765" key="GridCell.Tab.0.bottom" timestamp="1594296439132">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.bottom/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372243" />
-    <state width="1788" height="473" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594260586334" />
-    <state width="1788" height="473" key="GridCell.Tab.0.center" timestamp="1594260586334">
+    <state width="1788" height="765" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594296439132" />
+    <state width="1788" height="765" key="GridCell.Tab.0.center" timestamp="1594296439130">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.center/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372240" />
-    <state width="1788" height="473" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594260586334" />
-    <state width="1788" height="473" key="GridCell.Tab.0.left" timestamp="1594260586334">
+    <state width="1788" height="765" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594296439130" />
+    <state width="1788" height="765" key="GridCell.Tab.0.left" timestamp="1594296439129">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.left/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372239" />
-    <state width="1788" height="473" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594260586334" />
-    <state width="1788" height="473" key="GridCell.Tab.0.right" timestamp="1594260586334">
+    <state width="1788" height="765" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594296439129" />
+    <state width="1788" height="765" key="GridCell.Tab.0.right" timestamp="1594296439131">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1885" height="235" key="GridCell.Tab.0.right/0.0.1920.1035@0.0.1920.1035" timestamp="1593625372242" />
-    <state width="1788" height="473" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594260586334" />
+    <state width="1788" height="765" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594296439131" />
     <state x="652" y="0" width="605" height="1040" key="RollbackChangesDialog" timestamp="1594044038483">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -688,11 +689,11 @@
     </state>
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1593598521864" />
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594010859017" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1594260324134">
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1594296400096">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="356" y="114" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1593599721937" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594260324134" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594296400096" />
     <state x="610" y="299" key="cloudConfig.PluginsDialog" timestamp="1593672925959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
