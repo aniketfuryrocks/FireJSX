@@ -8,11 +8,12 @@ export interface Args {
     "--disk"?: boolean,                 //Write to disk instead of memory
     "--ssr"?: boolean,                  //Server Side Render, Enabled when exporting
     //prefix
-    "--prefix"?:string,                  //Path Prefix
+    "--prefix"?:string,                 //Path Prefix
+    "--static-prefix"?:string,          //Static Path Prefix
     //dev server
     "--port"?: number,                  //port for dev server eg 5001,5003
     "--addr"?: string,                  //address for dev server eg 127.0.0.2, 127.0.2.10
-    "--disable-gzip"?: boolean,          //Disable gzip
+    "--disable-gzip"?: boolean,         //Disable gzip
     //conf
     "--conf"?: string,                  //Path to Config file
     //log
@@ -48,6 +49,7 @@ export function getArgs(): Args {
         .option(["-E", "--export-fly"], Boolean, "export project for distribution and for fly build")
         //prefix
         .option(["--prefix"], String, "Path prefix")
+        .option(["--static-prefix"], String, "Static Path prefix")
         //dev server
         .option(["--port"], Number, "port for dev server, default: 5000")
         .option(["--addr"], String, "address for dev server, default: localhost")

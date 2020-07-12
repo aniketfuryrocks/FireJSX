@@ -5,6 +5,7 @@ declare module NodeJS {
             app?: any,
             libRel?: string,
             mapRel?: string,
+            prefix?: string,
             map?: {
                 content: any,
                 chunks: string[]

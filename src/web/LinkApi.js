@@ -27,7 +27,7 @@ FireJSX.linkApi = {
         script.onload = () => this.runApp()
         document.body.appendChild(script);
         if (pushState)
-            window.history.pushState(undefined, undefined, url);
+            window.history.pushState(undefined, undefined,`${FireJSX.prefix==="/"?"":FireJSX.prefix}${url}`);
     },
     runApp: function (func = ReactDOM.render) {
         func(React.createElement(FireJSX.app, {content: FireJSX.map.content}),

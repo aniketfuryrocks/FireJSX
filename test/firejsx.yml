@@ -3,3 +3,5 @@ plugins:
 
 custom:
   name: "aniket"
+
+staticPrefix : /hello

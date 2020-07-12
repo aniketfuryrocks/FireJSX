@@ -106,6 +106,7 @@ export default class {
             explicitPages: this.$.config.pages,
             template: this.$.inputFileSystem.readFileSync(join(__dirname, "./web/template.html")).toString(),
             ssr: this.$.config.ssr,
+            prefix: this.$.config.prefix
         });
         //mapPlugins after everything is initialized
         if (this.$.config.plugins.length > 0) {

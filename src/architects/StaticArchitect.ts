@@ -13,6 +13,7 @@ export interface StaticConfig {
     pathToLib: string,
     template: string | any,
     ssr: boolean,
+    prefix: string,
 }
 
 export interface StaticData extends StaticConfig {
@@ -42,7 +43,8 @@ export default class {
                 `libRel:"${this.config.rel.libRel}",` +
                 `mapRel:"${this.config.rel.mapRel}",` +
                 `pages:{404:"/${this.config.explicitPages["404"].substring(0, this.config.explicitPages["404"].lastIndexOf("."))}"}` +
-                `${param.ssr ? `,isHydrated:true` : ""}` +
+                `${param.ssr ? `,isHydrated:true` : ""},` +
+                `prefix:"${this.config.prefix}"` +
                 "}";
             this.config.template.window.document.head.appendChild(script);
         }
