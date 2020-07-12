@@ -27,6 +27,7 @@ function initConfig(args: Args): [boolean, Config] {
         static: args["--static"] || userConfig.paths.static,
         lib: args["--lib"] || userConfig.paths.lib,
     }
+    userConfig.prefix = args["--prefix"] || userConfig.prefix
     userConfig.ssr = args["--ssr"] || userConfig.ssr;
     userConfig.devServer = userConfig.devServer || {};
     userConfig.devServer = {

@@ -20,6 +20,7 @@ export interface Config {
         map?: string,           //dir where chunk map and page data is exported, default : root/out/dist/lib/map
         static?: string,        //dir where page static elements are stored eg. images, default : root/src/static
     },
+    prefix?: string,
     plugins?: [],
     pages?: ExplicitPages,
     custom?: { [key: string]: any },
@@ -80,6 +81,8 @@ export default class {
         config.custom = config.custom || {};
         //server
         config.devServer = config.devServer || {};
+        //prefix
+        config.prefix = config.prefix || "/";
         return config;
     }
 

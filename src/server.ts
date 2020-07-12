@@ -59,8 +59,8 @@ export default class {
         //routing
         if (this.$.config.paths.static)
             server.use(`${this.$.config.paths.static.substring(this.$.config.paths.static.lastIndexOf("/"))}`, express.static(this.$.config.paths.static));
-        server.get(`/${this.$.rel.mapRel}/*`, this.get.bind(this))
-        server.get(`/${this.$.rel.libRel}/*`, this.get.bind(this))
+        server.get(this.$.rel.mapRel + '/*', this.get.bind(this))
+        server.get(this.$.rel.libRel + '/*', this.get.bind(this))
         server.use('*', this.getPage.bind(this));
         //listen
         const listener = server.listen(port, addr, () => {
@@ -83,7 +83,11 @@ export default class {
         if (this.$.config.verbose)
             this.$.cli.log("Request :", req.url)
         // @ts-ignore
-        const pathname = join(this.$.config.paths.dist, decodeURI(req._parsedUrl.pathname));
+        let pathname = decodeURI(req._parsedUrl.pathname)
+        if (pathname !== "/")
+            pathname = pathname.replace(this.$.config.prefix, "")
+        pathname = join(this.$.config.paths.dist, pathname);
+
         res.contentType(mime.getType(pathname.substr(pathname.lastIndexOf("."))))
         if (this.$.outputFileSystem.existsSync(pathname))
             res.write(this.$.outputFileSystem.readFileSync(pathname));
@@ -96,7 +100,10 @@ export default class {
         if (this.$.config.verbose)
             this.$.cli.log("HTML Request :", req.url)
         // @ts-ignore
-        const pathname = decodeURI(req._parsedUrl.pathname);
+        let pathname = decodeURI(req._parsedUrl.pathname);
+        if (pathname !== "/")
+            pathname = pathname.replace(this.$.config.prefix, "")
+        console.log(pathname)
         if (pathname.startsWith("/__webpack_hmr")) {
             next();
             return;

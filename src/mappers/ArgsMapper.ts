@@ -7,6 +7,8 @@ export interface Args {
     "--export-fly"?: boolean,           //Export path for on the fly builds
     "--disk"?: boolean,                 //Write to disk instead of memory
     "--ssr"?: boolean,                  //Server Side Render, Enabled when exporting
+    //prefix
+    "--prefix"?:string,                  //Path Prefix
     //dev server
     "--port"?: number,                  //port for dev server eg 5001,5003
     "--addr"?: string,                  //address for dev server eg 127.0.0.2, 127.0.2.10
@@ -44,6 +46,8 @@ export function getArgs(): Args {
         .option(["-d", "--disk"], Boolean, "store chunks to disk instead of memory while in dev server")
         .option(["-s", "--ssr"], Boolean, "Server Side Render. Available only with -d and -e")
         .option(["-E", "--export-fly"], Boolean, "export project for distribution and for fly build")
+        //prefix
+        .option(["--prefix"], String, "Path prefix")
         //dev server
         .option(["--port"], Number, "port for dev server, default: 5000")
         .option(["--addr"], String, "address for dev server, default: localhost")

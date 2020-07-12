@@ -86,8 +86,8 @@ export default class {
         this.$.pageMap = createMap(this.$.config.paths.pages, this.$.inputFileSystem);
         //rel
         this.$.rel = {
-            libRel: relative(this.$.config.paths.dist, this.$.config.paths.lib),
-            mapRel: relative(this.$.config.paths.dist, this.$.config.paths.map)
+            libRel: join(this.$.config.prefix, relative(this.$.config.paths.dist, this.$.config.paths.lib)),
+            mapRel: join(this.$.config.prefix, relative(this.$.config.paths.dist, this.$.config.paths.map))
         }
         //pageArchitect
         this.$.pageArchitect = new PageArchitect(this.$, new WebpackArchitect(this.$), !!params.outputFileSystem, !!params.inputFileSystem);
