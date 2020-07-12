@@ -103,25 +103,24 @@ export default class {
         let pathname = decodeURI(req._parsedUrl.pathname);
         if (pathname !== "/")
             pathname = pathname.replace(this.$.config.prefix, "")
-        console.log(pathname)
-        if (pathname.startsWith("/__webpack_hmr")) {
-            next();
-            return;
-        }
-        res.contentType("text/html")
-        try {
-            let path = join(this.$.config.paths.dist, pathname);
-            if (this.$.outputFileSystem.existsSync(join(path, "index.html")))
-                res.end(this.$.outputFileSystem.readFileSync(join(path, "index.html")));
-            else if (this.$.outputFileSystem.existsSync(path + ".html"))
-                res.end(this.$.outputFileSystem.readFileSync(path + ".html"))
-            else {
-                const _404 = this.$.pageMap.get(this.$.config.pages["404"]).toString();
-                res.end(this.$.outputFileSystem.readFileSync(join(this.$.config.paths.dist, _404.substring(0, _404.lastIndexOf(".")) + ".html")));
+
+        if (req.method === "GET" && !pathname.startsWith("/__webpack_hmr")) {
+            res.contentType("text/html")
+            try {
+                let path = join(this.$.config.paths.dist, pathname);
+                if (this.$.outputFileSystem.existsSync(join(path, "index.html")))
+                    res.end(this.$.outputFileSystem.readFileSync(join(path, "index.html")));
+                else if (this.$.outputFileSystem.existsSync(path + ".html"))
+                    res.end(this.$.outputFileSystem.readFileSync(path + ".html"))
+                else {
+                    const _404 = this.$.pageMap.get(this.$.config.pages["404"]).toString();
+                    res.end(this.$.outputFileSystem.readFileSync(join(this.$.config.paths.dist, _404.substring(0, _404.lastIndexOf(".")) + ".html")));
+                }
+            } catch (e) {
+                this.$.cli.error("Error serving " + pathname);
+                res.status(500);
             }
-        } catch (e) {
-            this.$.cli.error("Error serving " + pathname);
-            res.status(500);
-        }
+        } else
+            next()
     }
 }
