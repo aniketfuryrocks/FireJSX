@@ -49,7 +49,7 @@ export default class {
                                 plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime", "react-hot-loader/babel"]
                             }
                         },
-                        ...(this.$.config.pro ? [{loader: 'react-hot-loader/webpack',}] : [])
+                        ...(this.$.config.pro ? [] : [{loader: 'react-hot-loader/webpack'}])
                     ],
                 }, {
                     test: /\.css$/i,

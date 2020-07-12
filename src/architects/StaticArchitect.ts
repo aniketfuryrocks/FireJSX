@@ -89,7 +89,7 @@ export default class {
                 for (index = 1; index < page.chunks.length; index++) {
                     if (!page.chunks[index].endsWith(".js")) {
                         const cssLink = document.createElement("link");
-                        cssLink.href = `/${this.config.rel.libRel}/${page.chunks[index]}`;
+                        cssLink.href = `${this.config.rel.libRel}/${page.chunks[index]}`;
                         cssLink.rel = "stylesheet";
                         cssLink.crossOrigin = "anonymous";
                         document.head.prepend(cssLink);
