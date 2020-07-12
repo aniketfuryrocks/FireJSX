@@ -88,7 +88,7 @@ export default class {
 
         config.staticPrefix = config.staticPrefix || (() => {
             const dirName = config.paths.static.substring(config.paths.static.lastIndexOf("/"))
-            return config.prefix === "" ? dirName : ("/" + config.prefix + dirName)
+            return config.prefix === "" ? dirName : (config.prefix + dirName)
         })()
         return config;
     }
