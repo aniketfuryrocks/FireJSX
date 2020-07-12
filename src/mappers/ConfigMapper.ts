@@ -21,6 +21,7 @@ export interface Config {
         static?: string,        //dir where page static elements are stored eg. images, default : root/src/static
     },
     prefix?: string,
+    staticPrefix?: string,
     plugins?: [],
     pages?: ExplicitPages,
     custom?: { [key: string]: any },
@@ -83,6 +84,7 @@ export default class {
         config.devServer = config.devServer || {};
         //prefix
         config.prefix = config.prefix || "/";
+        config.staticPrefix = config.staticPrefix || config.prefix;
         return config;
     }
 

@@ -22,9 +22,9 @@ export default ({content: {emoji}}) => {
             <Head>
                 <title>Index</title>
             </Head>
-            <h1>Welcome to FireJS {emoji}</h1>
+            <h1>Welcome to FireJS <img height={30} width={30} src={"/webbuddy360.com/static/fire.svg"}/></h1>
             <br/>
-            You have been here for {s}s
+            You have been here for {s}s {emoji}
             <br/>
             <br/>
             <Link href={"/about"}>🤠 Click Here To Go To About Page</Link>

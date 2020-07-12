@@ -27,7 +27,7 @@ export default class {
             output: {
                 filename: `m[${this.$.config.pro ? "chunkhash" : "hash"}].js`,
                 chunkFilename: "c[contentHash].js",
-                publicPath: this.$.rel.libRel,
+                publicPath: this.$.rel.libRel + "/",
                 path: this.$.config.paths.lib,
                 hotUpdateMainFilename: 'hot/[hash].hot.json',
                 hotUpdateChunkFilename: 'hot/[hash].hot.js'
@@ -35,23 +35,22 @@ export default class {
             module: {
                 rules: [{
                     test: /\.(js|jsx)$/,
-                    use: {
-                        loader: 'babel-loader',
-                        options: {
-                            cacheDirectory: join(this.$.config.paths.cache, ".babelCache"),
-                            presets: [["@babel/preset-env", {
-                                loose: true,
-                                targets: {
-                                    browsers: [`last 2 versions`, `not ie <= 11`, `not android 4.4.3`],
-                                },
-                            }], "@babel/preset-react"],
-                            plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime", "react-hot-loader/babel"]
-                        }
-                    },
-                }, {
-                    test: /\.(js|jsx)$/,
-                    use: 'react-hot-loader/webpack',
-                    include: /node_modules/
+                    use: [
+                        {
+                            loader: 'babel-loader',
+                            options: {
+                                cacheDirectory: join(this.$.config.paths.cache, ".babelCache"),
+                                presets: [["@babel/preset-env", {
+                                    loose: true,
+                                    targets: {
+                                        browsers: [`last 2 versions`, `not ie <= 11`, `not android 4.4.3`],
+                                    },
+                                }], "@babel/preset-react"],
+                                plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime", "react-hot-loader/babel"]
+                            }
+                        },
+                        ...(this.$.config.pro ? [{loader: 'react-hot-loader/webpack',}] : [])
+                    ],
                 }, {
                     test: /\.css$/i,
                     use: [
@@ -112,7 +111,7 @@ export default class {
         else
             // @ts-ignore
             mergedConfig.entry.unshift(
-                `webpack-hot-middleware/client?path=/__webpack_hmr_/${mergedConfig.name}&reload=true&quiet=true&name=${mergedConfig.name}`,
+                `webpack-hot-middleware/client?path=/__webpack_hmr/${mergedConfig.name}&reload=true&quiet=true&name=${mergedConfig.name}`,
                 join(__dirname, "../web/wrapper.js")
             )
         mergedConfig.plugins.push(new webpack.ProvidePlugin({

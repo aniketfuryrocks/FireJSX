@@ -44,7 +44,7 @@ export default class {
                 this.app.buildPage(page, compiler => {
                         server.use(webpackhot(compiler, {
                             log: false,
-                            path: `/__webpack_hmr_/${page.toString()}`
+                            path: `/__webpack_hmr/${page.toString()}`
                         }))
                     }
                 ).catch(e => this.$.cli.error(e));
@@ -57,8 +57,12 @@ export default class {
                 this.$.pageMap.delete(path.replace(this.$.config.paths.pages + "/", ""));
             });
         //routing
-        if (this.$.config.paths.static)
-            server.use(`${this.$.config.paths.static.substring(this.$.config.paths.static.lastIndexOf("/"))}`, express.static(this.$.config.paths.static));
+        {
+            const staticDirName = this.$.config.paths.static.substring(this.$.config.paths.static.lastIndexOf("/"))
+            if (this.$.config.paths.static)
+                server.use(`${this.$.config.staticPrefix}${staticDirName}`, express.static(this.$.config.paths.static));
+        }
+
         server.get(this.$.rel.mapRel + '/*', this.get.bind(this))
         server.get(this.$.rel.libRel + '/*', this.get.bind(this))
         server.use('*', this.getPage.bind(this));
@@ -84,7 +88,7 @@ export default class {
             this.$.cli.log("Request :", req.url)
         // @ts-ignore
         let pathname = decodeURI(req._parsedUrl.pathname)
-        if (pathname !== "/")
+        if (this.$.config.prefix !== "/")
             pathname = pathname.replace(this.$.config.prefix, "")
         pathname = join(this.$.config.paths.dist, pathname);
 
@@ -101,12 +105,12 @@ export default class {
             this.$.cli.log("HTML Request :", req.url)
         // @ts-ignore
         let pathname = decodeURI(req._parsedUrl.pathname);
-        if (pathname !== "/")
+        if (this.$.config.prefix !== "/")
             pathname = pathname.replace(this.$.config.prefix, "")
-
-        if (req.method === "GET" && !pathname.startsWith("/__webpack_hmr")) {
-            res.contentType("text/html")
+        // @ts-ignore
+        if (req.method === "GET" && !req._parsedUrl.pathname.startsWith("/__webpack_hmr/")) {
             try {
+                res.contentType("text/html")
                 let path = join(this.$.config.paths.dist, pathname);
                 if (this.$.outputFileSystem.existsSync(join(path, "index.html")))
                     res.end(this.$.outputFileSystem.readFileSync(join(path, "index.html")));
@@ -117,7 +121,7 @@ export default class {
                     res.end(this.$.outputFileSystem.readFileSync(join(this.$.config.paths.dist, _404.substring(0, _404.lastIndexOf(".")) + ".html")));
                 }
             } catch (e) {
-                this.$.cli.error("Error serving " + pathname);
+                this.$.cli.error("Error serving HTML", pathname, e);
                 res.status(500);
             }
         } else
