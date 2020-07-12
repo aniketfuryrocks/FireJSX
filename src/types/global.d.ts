@@ -6,6 +6,7 @@ declare module NodeJS {
             libRel?: string,
             mapRel?: string,
             prefix?: string,
+            addStaticPrefix?: (url: string) => string,
             map?: {
                 content: any,
                 chunks: string[]

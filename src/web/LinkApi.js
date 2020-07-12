@@ -1,8 +1,5 @@
 FireJSX.linkApi = {
-    getMapUrl: function (url) {
-        //remove the starting / from url
-        return `${FireJSX.mapRel}${url === "/" ? "/index" : url.substring(1)}.map.js`;
-    },
+    getMapUrl: url => `${FireJSX.mapRel}${url === "/" ? "/index" : url}.map.js`,
     loadMap: function (url) {
         const map_script = document.createElement("script");
         map_script.src = this.getMapUrl(url);
@@ -23,12 +20,12 @@ FireJSX.linkApi = {
     loadPage: function (url, pushState = true) {
         window.webpackJsonp = undefined
         const script = document.createElement("script");
-        script.src = `${FireJSX.libRel}${FireJSX.map.chunks.shift()}`
+        script.src = `${FireJSX.libRel}/${FireJSX.map.chunks.shift()}`
         this.loadChunks(FireJSX.map.chunks);
         script.onload = () => this.runApp()
         document.body.appendChild(script);
         if (pushState) {
-            window.history.pushState(undefined, undefined, `${FireJSX.prefix}${url.substring(1)}`);
+            window.history.pushState(undefined, undefined, FireJSX.prefix + url);
         }
     },
     runApp: function (func = ReactDOM.render) {
@@ -41,7 +38,7 @@ FireJSX.linkApi = {
         chunks.forEach(chunk => {
             const ele = document.createElement("link");
             ele.rel = rel;
-            ele.href = `${FireJSX.libRel}${chunk}`;
+            ele.href = `${FireJSX.libRel}/${chunk}`;
             ele.crossOrigin = "anonymous";
             if (chunk.endsWith(".js"))
                 ele.setAttribute("as", "script");
@@ -55,10 +52,10 @@ FireJSX.linkApi = {
             let ele;
             if (chunk.endsWith(".js")) {
                 ele = document.createElement("script");
-                ele.src = `${FireJSX.libRel}${chunk}`
+                ele.src = `${FireJSX.libRel}/${chunk}`
             } else {
                 ele = document.createElement("link");
-                ele.href = `${FireJSX.libRel}${chunk}`
+                ele.href = `${FireJSX.libRel}/${chunk}`
                 if (chunk.endsWith(".css"))
                     ele.rel = "stylesheet";
             }

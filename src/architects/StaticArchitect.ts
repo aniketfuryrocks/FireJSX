@@ -47,7 +47,7 @@ export default class {
                 `pages:{404:"/${this.config.explicitPages["404"].substring(0, this.config.explicitPages["404"].lastIndexOf("."))}"}` +
                 `${param.ssr ? `,isHydrated:true` : ""},` +
                 `prefix:"${this.config.prefix}",` +
-                `staticPrefix:"${this.config.staticPrefix}"` +
+                `addStaticPrefix:(url)=>"${this.config.staticPrefix}"+url` +
                 "}";
             this.config.template.window.document.head.appendChild(script);
         }

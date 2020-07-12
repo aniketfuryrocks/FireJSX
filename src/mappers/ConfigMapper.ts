@@ -84,11 +84,11 @@ export default class {
         config.devServer = config.devServer || {};
         config.devServer.gzip = config.devServer.gzip === undefined ? true : config.devServer.gzip
         //prefix
-        config.prefix = config.prefix || "/";
+        config.prefix = config.prefix || "";
 
         config.staticPrefix = config.staticPrefix || (() => {
-            const dirName = config.paths.static.substring(config.paths.static.lastIndexOf("/")) + "/"
-            return config.prefix === "/" ? dirName : (config.prefix + dirName)
+            const dirName = config.paths.static.substring(config.paths.static.lastIndexOf("/"))
+            return config.prefix === "" ? dirName : ("/" + config.prefix + dirName)
         })()
         return config;
     }
