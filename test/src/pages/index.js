@@ -22,7 +22,7 @@ export default ({content: {emoji}}) => {
             <Head>
                 <title>Index</title>
             </Head>
-            <h1>Welcome to FireJS <img height={30} width={30} src={"/hello/static/fire.svg"}/></h1>
+            <h1>Welcome to FireJS <img height={30} width={30} src={`${FireJSX.staticPrefix}fire.svg`}/></h1>
             <br/>
             You have been here for {s}s {emoji}
             <br/>

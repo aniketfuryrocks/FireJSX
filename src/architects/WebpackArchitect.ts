@@ -27,7 +27,7 @@ export default class {
             output: {
                 filename: `m[${this.$.config.pro ? "chunkhash" : "hash"}].js`,
                 chunkFilename: "c[contentHash].js",
-                publicPath: this.$.rel.libRel + "/",
+                publicPath: this.$.rel.libRel,
                 path: this.$.config.paths.lib,
                 hotUpdateMainFilename: 'hot/[hash].hot.json',
                 hotUpdateChunkFilename: 'hot/[hash].hot.js'

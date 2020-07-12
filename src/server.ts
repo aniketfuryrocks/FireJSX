@@ -59,8 +59,8 @@ export default class {
         //routing
         if (this.$.config.paths.static)
             server.use(this.$.config.staticPrefix, express.static(this.$.config.paths.static));
-        server.get(this.$.rel.mapRel + '/*', this.get.bind(this))
-        server.get(this.$.rel.libRel + '/*', this.get.bind(this))
+        server.get(this.$.rel.mapRel + '*', this.get.bind(this))
+        server.get(this.$.rel.libRel + '*', this.get.bind(this))
         server.use('*', this.getPage.bind(this));
         //listen
         const listener = server.listen(port, addr, () => {
@@ -83,9 +83,8 @@ export default class {
         if (this.$.config.verbose)
             this.$.cli.log("Request :", req.url)
         // @ts-ignore
-        let pathname = decodeURI(req._parsedUrl.pathname)
-        if (this.$.config.prefix !== "/")
-            pathname = pathname.replace(this.$.config.prefix, "")
+        let pathname =  "/" + decodeURI(req._parsedUrl.pathname);
+        pathname = pathname.replace(this.$.config.prefix, "")
         pathname = join(this.$.config.paths.dist, pathname);
 
         res.contentType(mime.getType(pathname.substr(pathname.lastIndexOf("."))))
@@ -100,9 +99,8 @@ export default class {
         if (this.$.config.verbose)
             this.$.cli.log("HTML Request :", req.url)
         // @ts-ignore
-        let pathname = decodeURI(req._parsedUrl.pathname);
-        if (this.$.config.prefix !== "/")
-            pathname = pathname.replace(this.$.config.prefix, "")
+        let pathname =  "/" + decodeURI(req._parsedUrl.pathname);
+        pathname = pathname.replace(this.$.config.prefix, "")
         // @ts-ignore
         if (req.method === "GET" && !req._parsedUrl.pathname.startsWith("/__webpack_hmr/")) {
             try {

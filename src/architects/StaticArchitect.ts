@@ -46,7 +46,7 @@ export default class {
                 `mapRel:"${this.config.rel.mapRel}",` +
                 `pages:{404:"/${this.config.explicitPages["404"].substring(0, this.config.explicitPages["404"].lastIndexOf("."))}"}` +
                 `${param.ssr ? `,isHydrated:true` : ""},` +
-                `prefix:"${this.config.prefix}"` +
+                `prefix:"${this.config.prefix}",` +
                 `staticPrefix:"${this.config.staticPrefix}"` +
                 "}";
             this.config.template.window.document.head.appendChild(script);
