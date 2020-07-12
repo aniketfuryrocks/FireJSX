@@ -76,11 +76,11 @@ export default class {
                 })] : [
                     new webpack.HotModuleReplacementPlugin({
                         multiStep: true
+                    }),
+                    new CleanObsoleteChunks({
+                        verbose: this.$.config.verbose
                     })
                 ]),
-                new CleanObsoleteChunks({
-                    verbose: this.$.config.verbose
-                })
             ]
         }
     }
@@ -105,8 +105,8 @@ export default class {
     forPage(page: Page): WebpackConfig {
         const mergedConfig = cloneDeep(this.defaultConfig);
         mergedConfig.name = page.toString()
-        //we are unshifting to enable plugins to directly edit webpack from $
-        if(this.$.config.pro)
+        //we are doing a unshift to enable plugins to directly edit webpack from $
+        if (this.$.config.pro)
             // @ts-ignore
             mergedConfig.entry.unshift(join(__dirname, "../web/wrapper_pro.js"))
         else
