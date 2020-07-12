@@ -10,7 +10,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="fix Plugin.d.ts ts" />
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="workspace.xml">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/architects/WebpackArchitect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/architects/WebpackArchitect.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -222,13 +225,7 @@
       <workItem from="1594288270750" duration="685000" />
       <workItem from="1594296309736" duration="130000" />
       <workItem from="1594398547201" duration="25000" />
-    </task>
-    <task id="LOCAL-00051" summary="dist">
-      <created>1594004617875</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1594004617876</updated>
+      <workItem from="1594524133491" duration="1152000" />
     </task>
     <task id="LOCAL-00052" summary="dist">
       <created>1594008864020</created>
@@ -566,7 +563,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594296397138</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="workspace.xml">
+      <created>1594524230607</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1594524230607</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -596,7 +600,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="basics set" />
     <MESSAGE value="done" />
     <MESSAGE value="FlySSR free from plugins" />
     <MESSAGE value="hooks" />
@@ -621,7 +624,8 @@
     <MESSAGE value="hooks error logging" />
     <MESSAGE value="v0.7.7" />
     <MESSAGE value="fix Plugin.d.ts ts" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix Plugin.d.ts ts" />
+    <MESSAGE value="workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="workspace.xml" />
   </component>
   <component name="WindowStateProjectService">
     <state x="502" y="23" key="#autopublish" timestamp="1593598756287">
@@ -686,11 +690,11 @@
     </state>
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1035@0.0.1920.1035" timestamp="1593598521864" />
     <state x="207" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594010859017" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1594296400096">
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2" timestamp="1594524233142">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="356" y="114" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1593599721937" />
-    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594296400096" />
+    <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594524233142" />
     <state x="610" y="299" width="638" height="371" key="cloudConfig.PluginsDialog" timestamp="1594398563649">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

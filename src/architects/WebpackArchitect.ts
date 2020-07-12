@@ -105,9 +105,16 @@ export default class {
     forPage(page: Page): WebpackConfig {
         const mergedConfig = cloneDeep(this.defaultConfig);
         mergedConfig.name = page.toString()
-        mergedConfig.entry = [
-            ...(this.$.config.pro ? [join(__dirname, "../web/wrapper_pro.js")] : [`webpack-hot-middleware/client?path=/__webpack_hmr_/${mergedConfig.name}&reload=true&quiet=true&name=${mergedConfig.name}`, join(__dirname, "../web/wrapper.js")]),
-        ];
+        //we are unshifting to enable plugins to directly edit webpack from $
+        if(this.$.config.pro)
+            // @ts-ignore
+            mergedConfig.entry.unshift(join(__dirname, "../web/wrapper_pro.js"))
+        else
+            // @ts-ignore
+            mergedConfig.entry.unshift(
+                `webpack-hot-middleware/client?path=/__webpack_hmr_/${mergedConfig.name}&reload=true&quiet=true&name=${mergedConfig.name}`,
+                join(__dirname, "../web/wrapper.js")
+            )
         mergedConfig.plugins.push(new webpack.ProvidePlugin({
             __FIREJSX_APP__: join(this.$.config.paths.pages, mergedConfig.name)
         }))
