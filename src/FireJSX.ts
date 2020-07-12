@@ -82,6 +82,10 @@ export default class {
         //log
         this.$.cli.ok("NODE_ENV :", process.env.NODE_ENV)
         this.$.cli.ok("SSR :", this.$.config.ssr)
+        if(this.$.config.verbose) {
+            this.$.cli.log("config\n", this.$.config)
+            this.$.cli.log("args\n", this.$.args)
+        }
         //pageMap
         this.$.pageMap = createMap(this.$.config.paths.pages, this.$.inputFileSystem);
         //rel
@@ -94,9 +98,6 @@ export default class {
     }
 
     async init() {
-        //Verbose
-        if (this.$.config.verbose)
-            this.$.cli.log(`${this.$.config.plugins.length} Plugin(s) :  ${this.$.config.plugins}`)
         //build externals
         this.$.cli.log("Building Externals");
         this.$.renderer = new StaticArchitect({
@@ -169,11 +170,11 @@ export default class {
 
     async export() {
         const promises = [];
-        this.$.pageMap.forEach((page) =>
-            promises.push(this.buildPage(page, undefined))
-        )
+        this.$.pageMap.forEach((page) => promises.push(this.buildPage(page, undefined)))
         //wait for all export promises to resolve
         await Promise.all(promises)
+        if(this.$.config.verbose)
+            this.$.cli.ok("Calling postExport Hooks")
         //call postExport Hooks
         await Promise.all(this.$.hooks.postExport.map(postExport => postExport()))
     }

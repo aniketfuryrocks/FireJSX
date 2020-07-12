@@ -82,6 +82,7 @@ export default class {
         config.custom = config.custom || {};
         //server
         config.devServer = config.devServer || {};
+        config.devServer.gzip = config.devServer.gzip === undefined ? true : config.devServer.gzip
         //prefix
         config.prefix = config.prefix || "/";
 

@@ -10,9 +10,9 @@ function initConfig(args: Args): [boolean, Config] {
     let userConfig = new ConfigMapper().getUserConfig(args["--conf"])
     const customConfig = !!userConfig;
     userConfig = userConfig || {};
-    userConfig.disablePlugins = args["--disable-plugins"] || userConfig.disablePlugins;
-    userConfig.pro = args["--pro"] || userConfig.pro;
-    userConfig.verbose = args["--verbose"] || userConfig.verbose;
+    userConfig.disablePlugins = args["--disable-plugins"] || !!userConfig.disablePlugins;
+    userConfig.pro = args["--pro"] || !!userConfig.pro;
+    userConfig.verbose = args["--verbose"] || !!userConfig.verbose;
     userConfig.logMode = args["--log-mode"] || userConfig.logMode;
     userConfig.paths = userConfig.paths || {}
     userConfig.paths = {
