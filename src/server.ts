@@ -57,10 +57,9 @@ export default class {
                 this.$.pageMap.delete(path.replace(this.$.config.paths.pages + "/", ""));
             });
         //routing
-        {
+        if (this.$.config.paths.static) {
             const staticDirName = this.$.config.paths.static.substring(this.$.config.paths.static.lastIndexOf("/"))
-            if (this.$.config.paths.static)
-                server.use(`${this.$.config.staticPrefix}${staticDirName}`, express.static(this.$.config.paths.static));
+            server.use(`${this.$.config.staticPrefix === "/" ? "" : this.$.config.staticPrefix}${staticDirName}`, express.static(this.$.config.paths.static));
         }
 
         server.get(this.$.rel.mapRel + '/*', this.get.bind(this))
