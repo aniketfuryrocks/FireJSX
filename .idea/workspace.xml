@@ -10,11 +10,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="fix Plugin.d.ts ts">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GlobalsSetter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/GlobalsSetter.ts" afterDir="false" />
-    </list>
+    <list default="true" id="745e5779-7385-4832-8fef-2bd2788e1595" name="Default Changelist" comment="fix Plugin.d.ts ts" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,7 +47,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="javascript.nodejs.core.library.configured.version" value="10.19.0" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.5.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/test" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -225,6 +221,7 @@
       <workItem from="1594260699509" duration="40000" />
       <workItem from="1594288270750" duration="685000" />
       <workItem from="1594296309736" duration="130000" />
+      <workItem from="1594398547201" duration="25000" />
     </task>
     <task id="LOCAL-00051" summary="dist">
       <created>1594004617875</created>
@@ -694,14 +691,14 @@
     </state>
     <state x="356" y="114" key="Vcs.Push.Dialog.v2/0.0.1920.1035@0.0.1920.1035" timestamp="1593599721937" />
     <state x="356" y="115" width="1200" height="790" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594296400096" />
-    <state x="610" y="299" key="cloudConfig.PluginsDialog" timestamp="1593672925959">
+    <state x="610" y="299" width="638" height="371" key="cloudConfig.PluginsDialog" timestamp="1594398563649">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="610" y="299" key="cloudConfig.PluginsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593672925959" />
-    <state x="784" y="299" width="373" height="440" key="cloudConfig.SelfSettingsDialog" timestamp="1594055141630">
+    <state x="610" y="299" width="638" height="371" key="cloudConfig.PluginsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594398563649" />
+    <state x="784" y="299" width="373" height="440" key="cloudConfig.SelfSettingsDialog" timestamp="1594398553510">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="784" y="299" width="373" height="440" key="cloudConfig.SelfSettingsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594055141630" />
+    <state x="784" y="299" width="373" height="440" key="cloudConfig.SelfSettingsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594398553510" />
     <state x="420" y="0" width="1069" height="1040" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1594057135306">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
