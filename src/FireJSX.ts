@@ -82,7 +82,7 @@ export default class {
         //log
         this.$.cli.ok("NODE_ENV :", process.env.NODE_ENV)
         this.$.cli.ok("SSR :", this.$.config.ssr)
-        if(this.$.config.verbose) {
+        if (this.$.config.verbose) {
             this.$.cli.log("config\n", this.$.config)
             this.$.cli.log("args\n", this.$.args)
         }
@@ -107,7 +107,8 @@ export default class {
             explicitPages: this.$.config.pages,
             template: this.$.inputFileSystem.readFileSync(join(__dirname, "./web/template.html")).toString(),
             ssr: this.$.config.ssr,
-            prefix: this.$.config.prefix
+            prefix: this.$.config.prefix,
+            staticPrefix: this.$.config.staticPrefix
         });
         //mapPlugins after everything is initialized
         if (this.$.config.plugins.length > 0) {
@@ -173,7 +174,7 @@ export default class {
         this.$.pageMap.forEach((page) => promises.push(this.buildPage(page, undefined)))
         //wait for all export promises to resolve
         await Promise.all(promises)
-        if(this.$.config.verbose)
+        if (this.$.config.verbose)
             this.$.cli.ok("Calling postExport Hooks")
         //call postExport Hooks
         await Promise.all(this.$.hooks.postExport.map(postExport => postExport()))

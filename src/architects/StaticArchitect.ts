@@ -14,6 +14,7 @@ export interface StaticConfig {
     template: string | any,
     ssr: boolean,
     prefix: string,
+    staticPrefix: string
 }
 
 export interface StaticData extends StaticConfig {
@@ -38,6 +39,7 @@ export default class {
         //init template
         {
             const script = this.config.template.window.document.createElement("script");
+            script.id = "__FireJSX_INIT__"
             script.innerHTML =
                 `window.FireJSX={` +
                 `libRel:"${this.config.rel.libRel}",` +
@@ -45,6 +47,7 @@ export default class {
                 `pages:{404:"/${this.config.explicitPages["404"].substring(0, this.config.explicitPages["404"].lastIndexOf("."))}"}` +
                 `${param.ssr ? `,isHydrated:true` : ""},` +
                 `prefix:"${this.config.prefix}"` +
+                `staticPrefix:"${this.config.staticPrefix}"` +
                 "}";
             this.config.template.window.document.head.appendChild(script);
         }
