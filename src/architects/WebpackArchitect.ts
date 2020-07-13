@@ -56,12 +56,7 @@ export default class {
                     {
                         test: /\.css$/,
                         use: [
-                            {
-                                loader: MiniCssExtractPlugin.loader,
-                                options: {
-                                    hmr: !this.$.config.pro,
-                                },
-                            },
+                            ...(this.$.config.pro ? [MiniCssExtractPlugin.loader] : ['style-loader']),
                             {
                                 loader: 'css-loader',
                                 options: {
