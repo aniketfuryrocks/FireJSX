@@ -27,7 +27,7 @@ export default class {
             output: {
                 filename: `m[${this.$.config.pro ? "chunkhash" : "hash"}].js`,
                 chunkFilename: "c[contentHash].js",
-                publicPath: this.$.rel.libRel,
+                publicPath: this.$.rel.libRel + "/",
                 path: this.$.config.paths.lib,
                 hotUpdateMainFilename: 'hot/[hash].hot.json',
                 hotUpdateChunkFilename: 'hot/[hash].hot.js'
@@ -54,13 +54,14 @@ export default class {
                     ]
                 },
                     {
-                        test: /\.(sa|sc|c)ss$/,
+                        test: /\.css$/,
                         use: [
                             {
                                 loader: MiniCssExtractPlugin.loader,
                                 options: {
                                     hmr: !this.$.config.pro,
-                                    reloadAll: true
+                                    reloadAll: true,
+                                    publicPath: this.$.rel.libRel + "/"
                                 },
                             },
                             {
@@ -70,7 +71,7 @@ export default class {
                                         hashPrefix: 'hash',
                                     },
                                 },
-                            }
+                            },
                         ]
                     }]
             },
