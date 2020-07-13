@@ -1,3 +1,5 @@
+FireJSX.addStaticPrefix = (url) => FireJSX.staticPrefix + url
+
 FireJSX.linkApi = {
     getMapUrl: url => `${FireJSX.mapRel}${url === "/" ? "/index" : url}.map.js`,
     loadMap: function (url) {
