@@ -49,8 +49,7 @@ export default class {
                                 plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime",
                                     ...(this.$.config.pro ? [] : ["react-hot-loader/babel"])]
                             }
-                        },
-                        ...(this.$.config.pro ? [] : [{loader: 'react-hot-loader/webpack'}])
+                        }
                     ]
                 },
                     {
@@ -100,6 +99,10 @@ export default class {
             output: {
                 path: this.$.config.paths.lib,
                 filename: "[name][contentHash].js"
+            }, resolve: {
+                alias: {
+                    'react-dom': '@hot-loader/react-dom',
+                },
             }
         };
         conf.entry[join(relative(this.$.config.paths.lib, this.$.config.paths.cache), "f")] = join(__dirname, "../web/external_group_full.js");
