@@ -1,7 +1,7 @@
 import {PageHooks} from "../types/Plugin";
 
 export default class {
-    public chunks: string[] = []
+    public chunks: PageChunks;
     public hooks: PageHooks;
     private readonly name: string;
 
@@ -11,6 +11,12 @@ export default class {
             initWebpack: [],
             postRender: [],
             onBuild: []
+        }
+        this.chunks = {
+            main: '',
+            css: [],
+            lazy: [],
+            vendor: []
         }
     }
 

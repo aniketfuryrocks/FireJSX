@@ -46,7 +46,7 @@ export interface Params {
 export interface FIREJSX_MAP {
     staticConfig: StaticConfig,
     pageMap: {
-        [key: string]: string[]
+        [key: string]: PageChunks
     },
 }
 
@@ -196,16 +196,18 @@ export default class {
                     this.$.pageArchitect.buildPage(page, () => {
                         this.$.cli.ok(`Page : ${page.toString()}`)
                         map.pageMap[page.toString()] = page.chunks;
-                        page.chunks.forEach(chunk => {
-                            if (chunk.endsWith(".js")) {
+                        //copy each kind except css
+                        (<[keyof PageChunks]><unknown>['lazy', 'css', 'vendor']).forEach(kind =>
+                            // @ts-ignore
+                            page.chunks[kind].forEach(chunk => {
                                 const chunkPath = join(this.$.config.paths.lib, chunk);
                                 this.$.outputFileSystem.copyFile(chunkPath, join(this.$.config.paths.fly, chunk), err => {
                                     resolve();
                                     if (err)
                                         throw new Error(`Error moving ${chunkPath} to ${this.$.config.paths.fly}`);
                                 });
-                            }
-                        })
+                            })
+                        )
                     }, (e) => {
                         this.$.cli.error(`Error building page ${page}\n`, e);
                         throw "";

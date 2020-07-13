@@ -88,19 +88,16 @@ export default class {
             global.FireJSX.lazyPromises = <Promise<any>[]>[];
             //chunks
             {
-                let index;
+                //TODO : add only main css in the head
                 //css
-                for (index = 1; index < page.chunks.length; index++) {
-                    if (!page.chunks[index].endsWith(".js")) {
-                        const cssLink = document.createElement("link");
-                        cssLink.href = `${this.config.rel.libRel}/${page.chunks[index]}`;
-                        cssLink.rel = "stylesheet";
-                        cssLink.crossOrigin = "anonymous";
-                        document.head.prepend(cssLink);
-                    } else
-                        break;
-                }
-                //map preload and load
+                page.chunks.css.forEach(chunk => {
+                    const cssLink = document.createElement("link");
+                    cssLink.href = `${this.config.rel.libRel}/${chunk}`;
+                    cssLink.rel = "stylesheet";
+                    cssLink.crossOrigin = "anonymous";
+                    document.head.prepend(cssLink);
+                })
+                //preload and load page map
                 {
                     const link = document.createElement("link");
                     const script = document.createElement("script");
@@ -115,20 +112,19 @@ export default class {
                 global.FireJSX.linkApi.preloadChunks([this.config.externals[1]]);
                 global.FireJSX.linkApi.loadChunks([this.config.externals[1]]);
                 //Main Chunk
-                global.FireJSX.linkApi.preloadChunks([page.chunks[0]]);
-                global.FireJSX.linkApi.loadChunks([page.chunks[0]]);
-                if (this.config.ssr)
-                    requireUncached(join(this.config.pathToLib, page.chunks[0]));
+                global.FireJSX.linkApi.preloadChunks([page.chunks.main]);
+                global.FireJSX.linkApi.loadChunks([page.chunks.main]);
                 //Render Chunk
                 global.FireJSX.linkApi.preloadChunks([this.config.externals[2]]);
                 global.FireJSX.linkApi.loadChunks([this.config.externals[2]]);
-                //add rest of the chunks
-                for (; index < page.chunks.length; index++) {
-                    global.FireJSX.linkApi.preloadChunks([page.chunks[index]]);
-                    global.FireJSX.linkApi.loadChunks([page.chunks[index]]);
-                    if (this.config.ssr)
-                        requireUncached(join(this.config.pathToLib, page.chunks[index]));
-                }
+                //add lazy chunks
+                global.FireJSX.linkApi.preloadChunks(page.chunks.lazy);
+                global.FireJSX.linkApi.loadChunks(page.chunks.lazy);
+            }
+            //require
+            if (this.config.ssr) {
+                requireUncached(join(this.config.pathToLib, page.chunks.main));
+                page.chunks.lazy.forEach(chunk => requireUncached(join(this.config.pathToLib, chunk)))
             }
             //static render
             if (this.config.ssr) {

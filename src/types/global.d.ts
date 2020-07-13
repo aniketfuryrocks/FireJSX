@@ -10,7 +10,7 @@ declare module NodeJS {
             addStaticPrefix?: (url: string) => string,
             map?: {
                 content: any,
-                chunks: string[]
+                chunks: PageChunks
             },
             isSSR?: boolean,
             isHydrated?: boolean,
@@ -35,4 +35,10 @@ declare module NodeJS {
         ReactDOMServer?: any,
         __FIREJSX_VERSION__: string;
     }
+}
+interface PageChunks {
+    main: string,
+    css: string[],
+    lazy: string[],
+    vendor: string[],
 }

@@ -34,20 +34,23 @@ export default class {
             if (this.logStat(stat))//true if errors
                 reject(undefined);
             else {
-                page.chunks = [];//re-init chunks
-                const css = [];
-                let mainChunk;
-                stat.compilation.chunks.forEach(chunk =>
+                page.chunks = {//re-init chunks
+                    main: '',
+                    css: [],
+                    lazy: [],
+                    vendor: []
+                };
+                stat.compilation.chunks.forEach(chunk => {
+                    console.log(chunk.name)
                     chunk.files.forEach(file => {
-                        if (file.endsWith(".css"))//prevent FOUC
-                            css.push(file);
+                        if (file.endsWith(".css"))
+                            page.chunks.css.push(file);
                         else if (file.startsWith("m"))
-                            mainChunk = file;
+                            page.chunks.main = file;
                         else
-                            page.chunks.push(file)
+                            page.chunks.lazy.push(file)
                     })
-                );
-                page.chunks.unshift(mainChunk, ...css);
+                });
                 resolve();
             }
         }, reject);

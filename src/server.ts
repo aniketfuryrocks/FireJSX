@@ -51,9 +51,14 @@ export default class {
             })
             .on('unlink', path => {
                 const page = this.$.pageMap.get(path.replace(this.$.config.paths.pages + "/", ""));
-                page.chunks.forEach(chunk => {
-                    this.$.outputFileSystem.unlinkSync(join(this.$.config.paths.lib, chunk));
-                })
+                //unlink main
+                this.$.outputFileSystem.unlinkSync(join(this.$.config.paths.lib, page.chunks.main));
+                //delete others
+                (<[keyof PageChunks]><unknown>['lazy', 'css', 'vendor']).forEach(kind =>
+                    // @ts-ignore
+                    page.chunks[kind].forEach(chunk =>
+                        this.$.outputFileSystem.unlinkSync(join(this.$.config.paths.lib, chunk)))
+                )
                 this.$.pageMap.delete(path.replace(this.$.config.paths.pages + "/", ""));
             });
         //routing
