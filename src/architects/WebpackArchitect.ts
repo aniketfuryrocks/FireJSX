@@ -50,20 +50,29 @@ export default class {
                             }
                         },
                         ...(this.$.config.pro ? [] : [{loader: 'react-hot-loader/webpack'}])
-                    ],
-                }, {
-                    test: /\.css$/i,
-                    use: [
-                        ...(this.$.config.pro ? [MiniCssExtractPlugin.loader] : ['style-loader']),
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                modules: {
-                                    hashPrefix: 'hash',
+                    ]
+                },
+                    {
+                        test: /\.(sa|sc|c)ss$/,
+                        use: [
+                            {
+                                loader: MiniCssExtractPlugin.loader,
+                                options: {
+                                    hmr: !this.$.config.pro,
+                                    reloadAll: true
                                 },
                             },
-                        }]
-                }]
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    modules: {
+                                        hashPrefix: 'hash',
+                                    },
+                                },
+                            },
+                            'sass-loader',
+                        ]
+                    }]
             },
             externals: {
                 react: "React",
