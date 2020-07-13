@@ -70,8 +70,7 @@ export default class {
                                         hashPrefix: 'hash',
                                     },
                                 },
-                            },
-                            'sass-loader',
+                            }
                         ]
                     }]
             },
