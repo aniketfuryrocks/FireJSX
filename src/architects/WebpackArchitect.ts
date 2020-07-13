@@ -46,7 +46,8 @@ export default class {
                                         browsers: [`last 2 versions`, `not ie <= 11`, `not android 4.4.3`],
                                     },
                                 }], "@babel/preset-react"],
-                                plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime", "react-hot-loader/babel"]
+                                plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime",
+                                    ...(this.$.config.pro ? [] : ["react-hot-loader/babel"])]
                             }
                         },
                         ...(this.$.config.pro ? [] : [{loader: 'react-hot-loader/webpack'}])
@@ -79,9 +80,11 @@ export default class {
                 "react-dom": 'ReactDOM'
             },
             plugins: [
-                ...(this.$.config.pro ? [new MiniCssExtractPlugin({
-                    filename: "c[contentHash].css"
-                })] : [
+                new MiniCssExtractPlugin({
+                    filename: "c[contentHash].css",
+                    chunkFilename: "c[contentHash].css"
+                }),
+                ...(this.$.config.pro ? [] : [
                     new webpack.HotModuleReplacementPlugin({
                         multiStep: true
                     }),
