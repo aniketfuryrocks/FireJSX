@@ -3,3 +3,6 @@
 /test/out/
 /.idea/
 /dist/
+/test/components/
+/test/de_pages/
+/test/scripts/
