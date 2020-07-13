@@ -32,7 +32,8 @@ export default class {
         global.FireJSX = {
             isSSR: param.ssr,
             libRel: this.config.rel.libRel,
-            mapRel: this.config.rel.mapRel
+            mapRel: this.config.rel.mapRel,
+            staticPrefix: this.config.staticPrefix
         }
         //init JSDOM
         this.config.template = new JSDOM(param.template)
