@@ -1,7 +1,7 @@
 {
   "name": "firejsx",
   "main": "FireJSX.js",
-  "version": "0.8.0-beta.4",
+  "version": "0.8.0-beta.5",
   "license": "GPL-3.0-or-later",
   "description": "A zero-config, highly customizable, progressive react static site generator with blazingly fast SSR and on the fly builds",
   "keywords": [
@@ -43,7 +43,6 @@
     "babel-loader": "^8.1.0",
     "chokidar": "^3.4.0",
     "compression": "^1.7.4",
-    "css-hot-loader": "^1.4.4",
     "css-loader": "^3.5.3",
     "express": "^4.17.1",
     "fs-extra": "^9.0.0",

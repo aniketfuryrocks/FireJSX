@@ -60,8 +60,6 @@ export default class {
                                 loader: MiniCssExtractPlugin.loader,
                                 options: {
                                     hmr: !this.$.config.pro,
-                                    reloadAll: true,
-                                    publicPath: this.$.rel.libRel + "/"
                                 },
                             },
                             {
