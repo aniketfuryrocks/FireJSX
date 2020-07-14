@@ -40,17 +40,20 @@ export default class {
                     lazy: [],
                     vendor: []
                 };
-                stat.compilation.chunks.forEach(chunk => {
-                    console.log(chunk.name)
-                    chunk.files.forEach(file => {
-                        if (file.endsWith(".css"))
-                            page.chunks.css.push(file);
-                        else if (file.startsWith("m"))
-                            page.chunks.main = file;
-                        else
-                            page.chunks.lazy.push(file)
-                    })
+                stat.compilation.chunks.forEach(({name, files}) => {
+                    console.log(name, files)
+                    switch (name) {
+                        case 'runtime':
+                            page.chunks.main = files[0];
+                            break
+                        case 'main':
+                            page.chunks.lazy.push(...files)
+                            break
+                        default:
+                            page.chunks.vendor.push(...files)
+                    }
                 });
+                console.log(page.chunks)
                 resolve();
             }
         }, reject);
