@@ -1,6 +1,8 @@
 window.onpopstate = function () {
-    FireJSX.linkApi.preloadPage(location.pathname, function () {
-        FireJSX.linkApi.loadPage(location.pathname, false)
+    //remove prefix
+    const path = location.pathname.replace(FireJSX.prefix,"");
+    FireJSX.linkApi.preloadPage(path, function () {
+        FireJSX.linkApi.loadPage(path, false)
     })
 }
 
