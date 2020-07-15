@@ -5,6 +5,7 @@ import Page from "../classes/Page"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as CleanObsoleteChunks from 'webpack-clean-obsolete-chunks'
 import * as webpack from "webpack";
+import * as WebpackChunkHash from "webpack-chunk-hash"
 
 export default class {
     private readonly $: $;
@@ -19,15 +20,46 @@ export default class {
                 runtimeChunk: 'single',
                 splitChunks: {
                     chunks: 'all',
-                    minChunks: Infinity,
+                    minChunks: 1,
+                    name: true,
                     maxInitialRequests: Infinity,
                     minSize: 0,
                     cacheGroups: {
-                        styles: {
-                            name: 'styles',
-                            test: /\.css$/,
-                            chunks: 'all',
+                        vendors: {
+                            minSize: 20000,
+                            test: /[\\/]node_modules[\\/]/,
+                            chunks: 'initial',
+                            name(module) {
+                                // get the name. E.g. node_modules/packageName/not/this/part.js
+                                // or node_modules/packageName
+                                const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+
+                                // npm package names are URL-safe, but some servers don't like @ symbols
+                                return `npm.${packageName.replace('@', '')}`;
+                            },
+                            reuseExistingChunk: true,
                         },
+                        lazyVendors: {
+                            test: /[\\/]node_modules[\\/]/,
+                            chunks: 'async',
+                            name(module) {
+                                // get the name. E.g. node_modules/packageName/not/this/part.js
+                                // or node_modules/packageName
+                                const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+
+                                // npm package names are URL-safe, but some servers don't like @ symbols
+                                return `async.npm.${packageName.replace('@', '')}`;
+                            },
+                            reuseExistingChunk: true,
+                        },
+                        lazy: {
+                            chunks: 'async',
+                            name(module) {
+                                // npm package names are URL-safe, but some servers don't like @ symbols
+                                return `lazy.npm.${module}`;
+                            },
+                            reuseExistingChunk: true,
+                        }
                     },
                 },
                 usedExports: true,
@@ -35,8 +67,8 @@ export default class {
             },
             entry: [],
             output: {
-                filename: `m[${this.$.config.pro ? "chunkhash" : "hash"}].js`,
-                chunkFilename: "c[contentHash].js",
+                filename: `m[${this.$.config.pro ? "contenthash" : "hash"}].js`,
+                chunkFilename: "c[contenthash].js",
                 publicPath: this.$.rel.libRel + "/",
                 path: this.$.config.paths.lib,
                 hotUpdateMainFilename: 'hot/[hash].hot.json',
@@ -86,6 +118,7 @@ export default class {
                     filename: "c[contentHash].css",
                     chunkFilename: "c[contentHash].css"
                 }),
+                new WebpackChunkHash(),
                 ...(this.$.config.pro ? [] : [
                     new webpack.HotModuleReplacementPlugin({
                         multiStep: true

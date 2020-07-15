@@ -1,8 +1,8 @@
+import Link from "../../../src/components/Link.js";
 import Head from "../../../dist/Head.js";
 import LazyLoad from "../../../dist/LazyLoad.js";
 import LoadingCircle from "../components/LoadingCircle/LoadingCircle.js";
 import "../style/main.css"
-import Link from "../../../src/components/Link.js";
 import Loader from "../../../src/components/Loader.js";
 
 export default () => {

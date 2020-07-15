@@ -51,11 +51,13 @@
     "memory-fs": "^0.5.0",
     "mime": "^2.4.6",
     "mini-css-extract-plugin": "^0.9.0",
+    "react": "^16.13.1",
     "react-helmet": "^6.1.0",
     "react-hot-loader": "^4.12.21",
     "smartarg": "^1.0.0",
     "style-loader": "^1.2.1",
     "webpack": "^4.43.0",
+    "webpack-chunk-hash": "^0.6.0",
     "webpack-clean-obsolete-chunks": "^0.4.0",
     "webpack-hot-middleware": "^2.25.0",
     "yaml": "^1.10.0"

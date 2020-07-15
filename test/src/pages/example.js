@@ -1,7 +1,7 @@
-import LazyLoad from "../../../src/components/LazyLoad.js";
-import Head from "../../../src/components/Head.js";
-import Loader from "../../../src/components/Loader.js";
 import Link from "../../../src/components/Link.js";
+import Head from "../../../src/components/Head.js";
+import LazyLoad from "../../../src/components/LazyLoad.js";
+import Loader from "../../../src/components/Loader.js";
 
 
 export default () => {
