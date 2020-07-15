@@ -25,33 +25,6 @@ export default class {
                 reject(undefined);
             else {
                 this.$.outputFileSystem.writeFileSync(join(this.$.config.paths.cache, "hello.json"), JSON.stringify(stat.toJson()))
-                /*const chunkGroups = {};
-                chunks.forEach(chunk => {
-                    chunkGroups[chunk.id] = {
-                        files: chunk.files,
-                        initial: chunk.initial,
-                        entry: chunk.entry
-                    }
-                })
-                console.log(chunkGroups)
-                this.$.pageMap.forEach(page => {
-                    entrypoints[page.toString()].chunks.forEach(chunkGroup => {
-                        const {files, initial, entry} = chunkGroups[chunkGroup]
-                        console.log({
-                            chunkGroup,
-                            files,
-                            initial,
-                            entry
-                        })
-                        if (entry)//runtime chunks
-                            page.chunks.entry.push(...files)
-                        else if (initial)//sync chunks
-                            page.chunks.initial.push(...files)
-                        else//async chunks
-                            page.chunks.async.push(...files)
-                    })
-                    console.log(page.toString(),page.chunks)
-                })*/
                 stat.toJson().forEach(({files, entry, initial, origins}) => {
                     origins.forEach(({loc, moduleName}) => {
                         let page = this.$.pageMap.get(loc)
@@ -65,24 +38,6 @@ export default class {
                             page.chunks.async.push(...files)
                     })
                 })
-                this.$.pageMap.forEach(page => {
-                    console.log(page, page.chunks)
-                })
-
-                /*for (const entrypoint in entrypoints) {
-                    const page = this.$.pageMap.get(entrypoint);
-                    entrypoints[entrypoint].chunks.forEach(chunkId => {
-                        const chunk = chunks[chunkId]
-                        console.log(entrypoint, chunkId, chunk.entry, chunk.initial)
-                        if (chunk.entry)//runtime chunks
-                            page.chunks.entry.push(...chunk.files)
-                        else if (chunk.initial)//sync chunks
-                            page.chunks.initial.push(...chunk.files)
-                        else//async chunks
-                            page.chunks.async.push(...chunk.files)
-                    })
-                    console.log(page.chunks)
-                }*/
             }
         }, reject);
     }
