@@ -25,7 +25,10 @@ export default class {
             if (this.logStat(statJSON))//true if errors
                 reject(undefined);
             else {
-                this.$.outputFileSystem.writeFileSync(join(this.$.config.paths.cache, "hello.json"), statJSON)
+                //log stats when verbose
+                if (this.$.config.verbose)
+                    this.$.outputFileSystem.writeFileSync(join(this.$.config.paths.out, "stat.json"), statJSON)
+
                 statJSON.forEach(({files, entry, initial, origins}) => {
                     origins.forEach(({loc, moduleName}) => {
                         let page = this.$.pageMap.get(loc)
