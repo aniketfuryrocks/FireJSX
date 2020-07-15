@@ -27,9 +27,9 @@ export default class {
             else {
                 //log stats when verbose
                 if (this.$.config.verbose)
-                    this.$.outputFileSystem.writeFileSync(join(this.$.config.paths.out, "stat.json"), statJSON)
+                    this.$.outputFileSystem.writeFileSync(join(this.$.config.paths.out, "stat.json"), JSON.stringify(statJSON))
 
-                statJSON.forEach(({files, entry, initial, origins}) => {
+                statJSON.chunks.forEach(({files, entry, initial, origins}) => {
                     origins.forEach(({loc, moduleName}) => {
                         let page = this.$.pageMap.get(loc)
                         if (!page)
