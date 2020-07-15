@@ -56,7 +56,7 @@
     "react-hot-loader": "^4.12.21",
     "smartarg": "^1.0.0",
     "style-loader": "^1.2.1",
-    "webpack": "^4.43.0",
+    "webpack": "^5.0.0-beta.22",
     "webpack-chunk-hash": "^0.6.0",
     "webpack-clean-obsolete-chunks": "^0.4.0",
     "webpack-hot-middleware": "^2.25.0",
