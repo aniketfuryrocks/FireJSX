@@ -46,7 +46,7 @@ export default class {
                         }
                     },
                 },
-                concatenateModules: false, providedExports: false, usedExports: false,
+                usedExports: true,
                 minimize: true
             },
             entry: {},
