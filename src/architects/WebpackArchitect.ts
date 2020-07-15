@@ -26,7 +26,6 @@ export default class {
                             name: 'framework',
                             test: /(?<!node_modules.*)[\\/]node_modules[\\/](react|react-dom|scheduler|regenerator-runtime|react-fast-compare|webpack|babel|prop-types|css-loader|use-subscription|react-side-effect|react-helmet|style-loader|)[\\/]/,
                             priority: 40,
-                            enforce: true,
                         },
                         vendor: {
                             chunks: 'all',
@@ -35,7 +34,6 @@ export default class {
                                 const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
                                 return `npm.${packageName.replace('@', '')}`;
                             },
-                            enforce: true
                         },
                         lazy: {
                             chunks: 'async',
@@ -45,11 +43,10 @@ export default class {
                                 const packageName = module.context.match(/[\\/]test\/components[\\/](.*?)([\\/]|$)/)[1];
                                 return `async.${packageName.replace('@', '')}`;
                             },
-                            enforce: true
                         }
                     },
                 },
-                usedExports: true,
+                concatenateModules: false, providedExports: false, usedExports: false,
                 minimize: true
             },
             entry: {},
