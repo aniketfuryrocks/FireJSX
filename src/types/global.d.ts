@@ -36,9 +36,9 @@ declare module NodeJS {
         __FIREJSX_VERSION__: string;
     }
 }
+
 interface PageChunks {
-    main: string,
-    css: string[],
-    lazy: string[],
-    vendor: string[],
+    initial: string[],//then chunks
+    entry: string[],//then runtime
+    async: string[],//then async chunks
 }

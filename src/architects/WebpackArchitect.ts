@@ -21,7 +21,6 @@ export default class {
                     maxInitialRequests: Infinity,
                     minSize: 0,
                     cacheGroups: {
-                        default: false,
                         framework: {
                             chunks: 'all',
                             name: 'framework',
@@ -38,7 +37,7 @@ export default class {
                             },
                             enforce: true
                         },
-                        lazy:{
+                        lazy: {
                             chunks: 'async',
                             test: /[\\/]test\/components[\\/]/,
                             priority: 100,

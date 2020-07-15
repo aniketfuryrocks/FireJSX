@@ -13,10 +13,9 @@ export default class {
             onBuild: []
         }
         this.chunks = {
-            main: '',
-            css: [],
-            lazy: [],
-            vendor: []
+            initial: [],
+            entry: [],
+            async: []
         }
     }
 

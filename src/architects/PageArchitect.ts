@@ -3,6 +3,7 @@ import WebpackArchitect from "./WebpackArchitect";
 import {$, WebpackConfig, WebpackStat} from "../FireJSX";
 import Page from "../classes/Page";
 import {Compiler} from "webpack";
+import {join} from "path";
 
 export default class {
     private readonly $: $;
@@ -23,19 +24,63 @@ export default class {
             if (this.logStat(stat))//true if errors
                 reject(undefined);
             else {
+                const {entrypoints, chunks} = stat.toJson()
+                this.$.outputFileSystem.writeFileSync(join(this.$.config.paths.cache, "hello.json"), JSON.stringify(stat.toJson()))
 
-                stat.toJson().chunks.forEach(({names, files, initial}) => {
-                    console.log(names, files, initial)
-                });
-                /*page.chunks = {//re-init chunks
-                    main: '',
-                    css: [],
-                    lazy: [],
-                    vendor: []
-                };
+                const chunkGroups = {};
+                chunks.forEach(chunk => {
+                    chunkGroups[chunk.id] = {
+                        files: chunk.files,
+                        initial: chunk.initial,
+                        entry: chunk.entry
+                    }
+                })
+                console.log(chunkGroups)
+                this.$.pageMap.forEach(page => {
+                    entrypoints[page.toString()].chunks.forEach(chunkGroup => {
+                        const {files, initial, entry} = chunkGroups[chunkGroup]
+                        console.log({
+                            chunkGroup,
+                            files,
+                            initial,
+                            entry
+                        })
+                        if (entry)//runtime chunks
+                            page.chunks.entry.push(...files)
+                        else if (initial)//sync chunks
+                            page.chunks.initial.push(...files)
+                        else//async chunks
+                            page.chunks.async.push(...files)
+                    })
+                    console.log(page.toString(),page.chunks)
+                })
+                /*chunks.forEach(({files, entry, initial, origins}) => {
+                    origins.forEach(({loc}) => {
+                        console.log(loc)
+                        if(entry)//entry
+                            this.$.pageMap.get(loc).chunks.entry.push(...files)
+                        else if(initial)//sync
+                            this.$.pageMap.get(loc).chunks.initial.push(...files)
+                        else//async
+                            this.$.pageMap.get(loc).chunks.async.push(...files)
+                    })
+                })
+                console.log(this.$.pageMap)*/
 
-                console.log(page.chunks)
-                resolve();*/
+                /*for (const entrypoint in entrypoints) {
+                    const page = this.$.pageMap.get(entrypoint);
+                    entrypoints[entrypoint].chunks.forEach(chunkId => {
+                        const chunk = chunks[chunkId]
+                        console.log(entrypoint, chunkId, chunk.entry, chunk.initial)
+                        if (chunk.entry)//runtime chunks
+                            page.chunks.entry.push(...chunk.files)
+                        else if (chunk.initial)//sync chunks
+                            page.chunks.initial.push(...chunk.files)
+                        else//async chunks
+                            page.chunks.async.push(...chunk.files)
+                    })
+                    console.log(page.chunks)
+                }*/
             }
         }, reject);
     }
