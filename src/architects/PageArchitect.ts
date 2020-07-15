@@ -20,12 +20,13 @@ export default class {
 
 
     buildPages(pages: Page[], resolve: () => void, reject: (err: any | undefined) => void): Compiler {
-        return this.build(this.webpackArchitect.forPages(pages), (stat) => {
-            if (this.logStat(stat))//true if errors
+        return this.build(this.webpackArchitect.forPages(pages), stat => {
+            const statJSON = stat.toJson()
+            if (this.logStat(statJSON))//true if errors
                 reject(undefined);
             else {
-                this.$.outputFileSystem.writeFileSync(join(this.$.config.paths.cache, "hello.json"), JSON.stringify(stat.toJson()))
-                stat.toJson().forEach(({files, entry, initial, origins}) => {
+                this.$.outputFileSystem.writeFileSync(join(this.$.config.paths.cache, "hello.json"), statJSON)
+                statJSON.forEach(({files, entry, initial, origins}) => {
                     origins.forEach(({loc, moduleName}) => {
                         let page = this.$.pageMap.get(loc)
                         if (!page)
@@ -65,21 +66,16 @@ export default class {
         return compiler;
     }
 
-    logStat(stat: WebpackStat) {
-        if (stat.hasWarnings()) {
+    logStat({errors, warnings}) {
+        if (warnings.length > 0) {
+            this.$.cli.warn(...warnings)
             // @ts-ignore
-            this.$.cli.warn(`Warning in page ${stat.compilation.name}\n`, ...stat.compilation.warnings);
+            this.$.cli.warn(`${warnings.length} warning(s)`);
         }
-        if (stat.hasErrors()) {
-            if (stat.compilation.errors.length === 0) {
-                // @ts-ignore
-                this.$.cli.error(`Error in page ${stat.compilation.name}`)
-            } else {
-                // @ts-ignore
-                this.$.cli.error(`Error in page ${stat.compilation.name}\n`, ...stat.compilation.errors);
-            }
+        if (errors.length > 0) {
+            this.$.cli.error(...errors)
             // @ts-ignore
-            this.$.cli.error(`Unable to build page ${stat.compilation.name} with ${stat.compilation.errors.length} error(s)`)
+            this.$.cli.error(`${errors.length} warning(s)`);
             return true;
         }
     }
