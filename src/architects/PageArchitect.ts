@@ -24,10 +24,8 @@ export default class {
             if (this.logStat(stat))//true if errors
                 reject(undefined);
             else {
-                const {entrypoints, chunks} = stat.toJson()
                 this.$.outputFileSystem.writeFileSync(join(this.$.config.paths.cache, "hello.json"), JSON.stringify(stat.toJson()))
-
-                const chunkGroups = {};
+                /*const chunkGroups = {};
                 chunks.forEach(chunk => {
                     chunkGroups[chunk.id] = {
                         files: chunk.files,
@@ -53,19 +51,23 @@ export default class {
                             page.chunks.async.push(...files)
                     })
                     console.log(page.toString(),page.chunks)
-                })
-                /*chunks.forEach(({files, entry, initial, origins}) => {
-                    origins.forEach(({loc}) => {
-                        console.log(loc)
-                        if(entry)//entry
-                            this.$.pageMap.get(loc).chunks.entry.push(...files)
-                        else if(initial)//sync
-                            this.$.pageMap.get(loc).chunks.initial.push(...files)
+                })*/
+                stat.toJson().forEach(({files, entry, initial, origins}) => {
+                    origins.forEach(({loc, moduleName}) => {
+                        let page = this.$.pageMap.get(loc)
+                        if (!page)
+                            page = this.$.pageMap.get(moduleName.replace("./src/pages/", ""))
+                        if (entry)//entry
+                            page.chunks.entry.push(...files)
+                        else if (initial)//sync
+                            page.chunks.initial.push(...files)
                         else//async
-                            this.$.pageMap.get(loc).chunks.async.push(...files)
+                            page.chunks.async.push(...files)
                     })
                 })
-                console.log(this.$.pageMap)*/
+                this.$.pageMap.forEach(page => {
+                    console.log(page, page.chunks)
+                })
 
                 /*for (const entrypoint in entrypoints) {
                     const page = this.$.pageMap.get(entrypoint);
