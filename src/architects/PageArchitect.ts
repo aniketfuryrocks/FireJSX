@@ -19,10 +19,10 @@ export default class {
     }
 
 
-    buildPages(pages: Page[], resolve: () => void, reject: (err: any | undefined) => void): Compiler {
+    buildPages(resolve: () => void, reject: (err: any | undefined) => void): Compiler {
         // ./src/pages
         const pageRel = `.${this.$.config.paths.pages.replace(this.$.config.paths.root, "")}/`
-        return this.build(this.webpackArchitect.forPages(pages), stat => {
+        return this.build(this.webpackArchitect.forPages(), stat => {
             const statJSON = stat.toJson()
             if (this.logStat(statJSON))//true if errors
                 reject(undefined);
@@ -43,7 +43,7 @@ export default class {
                             page.chunks.async.push(...files)
                     })
                 })
-                // resolve()
+                resolve()
             }
         }, reject);
     }

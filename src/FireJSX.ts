@@ -2,7 +2,7 @@ import "./GlobalsSetter"
 import ConfigMapper, {Config} from "./mappers/ConfigMapper";
 import Cli from "./utils/Cli";
 import Page from "./classes/Page";
-import {Configuration, Stats} from "webpack";
+import {Configuration} from "webpack";
 import {join, relative} from "path";
 import {mapPlugin} from "./mappers/PluginMapper";
 import PageArchitect from "./architects/PageArchitect";
@@ -16,7 +16,6 @@ import {GlobalHooks} from "./types/Plugin";
 import {Args} from "./mappers/ArgsMapper";
 
 export type WebpackConfig = Configuration;
-export type WebpackStat = Stats;
 
 export interface PathRelatives {
     libRel: string,
@@ -120,17 +119,16 @@ export default class {
     buildPages(setCompiler: (Compiler) => void = () => {
     }) {
         return new Promise<any>((resolve, reject) => {
-            const pages = [...this.$.pageMap.values()]
-            setCompiler(this.$.pageArchitect.buildPages(pages, () => {
-                pages.forEach(page => {
-                    if (this.$.config.verbose)
-                        this.$.cli.ok(`Page : ${page.toString()}`)
+            setCompiler(this.$.pageArchitect.buildPages(() => {
+                this.$.cli.ok('Build Complete')
+                this.$.pageMap.forEach(page => {
                     const renderPromises = [];
                     //if there is not hook then build the default page
                     if (page.hooks.onBuild.length === 0)
                         page.hooks.onBuild.push(async ({renderPage}) => {
                             await renderPage("/" + page.toString().substring(0, page.toString().lastIndexOf(".")))
                         })
+                    //call hooks
                     Promise.all(page.hooks.onBuild.map(onBuild => onBuild({
                         renderPage: (path, content = {}) => {
                             if (!path) {
@@ -147,18 +145,21 @@ export default class {
                                 page.hooks.postRender.forEach(postRender => postRender(dom))
                                 //call global postRender hooks
                                 this.$.hooks.postRender.forEach(postRender => postRender(dom))
-                                //write html file
-                                await writeFileRecursively(join(this.$.config.paths.dist, `${path}.html`),
-                                    dom.serialize(),
-                                    this.$.outputFileSystem)
-                                //write map
-                                await writeFileRecursively(join(this.$.config.paths.map, `${path}.map.js`),
-                                    `FireJSX.map=${JSON.stringify({
-                                        content,
-                                        chunks: page.chunks
-                                    })}`,
-                                    this.$.outputFileSystem
-                                )
+                                //await promises
+                                await Promise.all([
+                                    //write html file
+                                    writeFileRecursively(join(this.$.config.paths.dist, `${path}.html`),
+                                        dom.serialize(),
+                                        this.$.outputFileSystem),
+                                    //write map
+                                    writeFileRecursively(join(this.$.config.paths.map, `${path}.map.js`),
+                                        `FireJSX.map=${JSON.stringify({
+                                            content,
+                                            chunks: page.chunks
+                                        })}`,
+                                        this.$.outputFileSystem
+                                    )
+                                ])
                             })())
                         }
                     }))).then(() =>

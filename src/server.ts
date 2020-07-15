@@ -36,17 +36,20 @@ export default class {
         this.$.hooks.initServer.forEach(initServer => initServer(server))
         //watch changes
         this.$.cli.ok("Watching for file changes")
-        await this.app.buildPages()
-        watch(this.$.config.paths.pages)
+        this.app.buildPages(compiler =>
+            server.use(webpackhot(compiler, {
+                log: false,
+                path: `/__webpack_hmr`
+            }))
+        ).catch(e => this.$.cli.error(e));
+
+       /* watch(this.$.config.paths.pages)
             .on('add', path => {
                 path = path.replace(this.$.config.paths.pages + "/", "");
                 const page = this.$.pageMap.get(path) || new Page(path);
                 this.$.pageMap.set(page.toString(), page);
                 this.app.buildPage(page, compiler => {
-                        server.use(webpackhot(compiler, {
-                            log: false,
-                            path: `/__webpack_hmr/${page.toString()}`
-                        }))
+
                     }
                 ).catch(e => this.$.cli.error(e));
             })
@@ -61,7 +64,8 @@ export default class {
                         this.$.outputFileSystem.unlinkSync(join(this.$.config.paths.lib, chunk)))
                 )
                 this.$.pageMap.delete(path.replace(this.$.config.paths.pages + "/", ""));
-            });
+            });*/
+
         //routing
         if (this.$.config.paths.static)
             server.use(this.$.config.staticPrefix, express.static(this.$.config.paths.static));

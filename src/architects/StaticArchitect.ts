@@ -57,6 +57,7 @@ export default class {
             meta.name = "generator";
             this.config.template.window.document.head.appendChild(meta);
         }
+        require("../web/LinkApi.js")
     }
 
     render(page: Page, path: string, content: any): Promise<JSDOM> {
@@ -81,15 +82,11 @@ export default class {
             global.FireJSX.lazyPromises = <Promise<any>[]>[];
             //chunks
             {
-                //TODO : add only main css in the head
-                //css
-                page.chunks.css.forEach(chunk => {
-                    const cssLink = document.createElement("link");
-                    cssLink.href = `${this.config.rel.libRel}/${chunk}`;
-                    cssLink.rel = "stylesheet";
-                    cssLink.crossOrigin = "anonymous";
-                    document.head.prepend(cssLink);
-                })
+                global.FireJSX.linkApi.preloadChunks(page.chunks.initial);
+                global.FireJSX.linkApi.loadChunks(page.chunks.initial);
+                //oad entry
+                global.FireJSX.linkApi.preloadChunks(page.chunks.entry);
+                global.FireJSX.linkApi.loadChunks(page.chunks.entry);
                 //preload and load page map
                 {
                     const link = document.createElement("link");
@@ -102,14 +99,14 @@ export default class {
                     document.body.appendChild(script);
                 }
                 //add lazy chunks
-                global.FireJSX.linkApi.preloadChunks(page.chunks.lazy);
-                global.FireJSX.linkApi.loadChunks(page.chunks.lazy);
+                global.FireJSX.linkApi.preloadChunks(page.chunks.async);
+                global.FireJSX.linkApi.loadChunks(page.chunks.async);
             }
-            //require
+            /*//require
             if (this.config.ssr) {
                 requireUncached(join(this.config.pathToLib, page.chunks.main));
                 page.chunks.lazy.forEach(chunk => requireUncached(join(this.config.pathToLib, chunk)))
-            }
+            }*/
             //static render
             if (this.config.ssr) {
                 document.getElementById("root").innerHTML = global.window.ReactDOMServer.renderToString(

@@ -1,6 +1,5 @@
 import {$, WebpackConfig} from "../FireJSX"
 import {join} from "path"
-import Page from "../classes/Page"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as CleanObsoleteChunks from 'webpack-clean-obsolete-chunks'
 import * as webpack from "webpack";
@@ -112,14 +111,14 @@ export default class {
         }
     }
 
-    forPages(pages: Page[]): WebpackConfig {
-        pages.forEach(page => {
+    forPages(): WebpackConfig {
+        this.$.pageMap.forEach(page => {
             const pagePath = join(this.$.config.paths.pages, page.toString())
             if (this.$.config.pro)
                 this.config.entry[page.toString()] = [pagePath]
             else
                 this.config.entry[page.toString()] = [pagePath,
-                    `webpack-hot-middleware/client?path=/__webpack_hmr/${page.toString()}&reload=true&quiet=true&name=${page.toString()}`]
+                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`]
             page.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config));
         })
         this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config))
