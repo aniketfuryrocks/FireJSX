@@ -74,12 +74,10 @@ export default class {
     logStat({errors, warnings}) {
         if (warnings.length > 0) {
             this.$.cli.warn(...warnings)
-            // @ts-ignore
             this.$.cli.warn(`${warnings.length} warning(s)`);
         }
         if (errors.length > 0) {
             this.$.cli.error(...errors)
-            // @ts-ignore
             this.$.cli.error(`${errors.length} warning(s)`);
             return true;
         }
