@@ -23,8 +23,9 @@ export default class {
             if (this.logStat(stat))//true if errors
                 reject(undefined);
             else {
-                stat.compilation.chunks.forEach(({name, files}) => {
-                    console.log(name, files)
+
+                stat.toJson().chunks.forEach(({names, files, initial}) => {
+                    console.log(names, files, initial)
                 });
                 /*page.chunks = {//re-init chunks
                     main: '',

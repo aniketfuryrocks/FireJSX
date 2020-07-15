@@ -1,2 +1,5 @@
+paths:
+  pages: ./de_pages
+
 pages:
   404: 404.jsx

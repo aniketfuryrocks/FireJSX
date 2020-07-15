@@ -18,9 +18,37 @@ export default class {
                 runtimeChunk: 'single',
                 splitChunks: {
                     chunks: 'all',
-                    minChunks: 1,
                     maxInitialRequests: Infinity,
                     minSize: 0,
+                    cacheGroups: {
+                        default: false,
+                        framework: {
+                            chunks: 'all',
+                            name: 'framework',
+                            test: /(?<!node_modules.*)[\\/]node_modules[\\/](react|react-dom|scheduler|regenerator-runtime|react-fast-compare|webpack|babel|prop-types|css-loader|use-subscription|react-side-effect|react-helmet|style-loader|)[\\/]/,
+                            priority: 40,
+                            enforce: true,
+                        },
+                        vendor: {
+                            chunks: 'all',
+                            test: /[\\/]node_modules[\\/]/,
+                            name(module) {
+                                const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+                                return `npm.${packageName.replace('@', '')}`;
+                            },
+                            enforce: true
+                        },
+                        lazy:{
+                            chunks: 'async',
+                            test: /[\\/]test\/components[\\/]/,
+                            priority: 100,
+                            name(module) {
+                                const packageName = module.context.match(/[\\/]test\/components[\\/](.*?)([\\/]|$)/)[1];
+                                return `async.${packageName.replace('@', '')}`;
+                            },
+                            enforce: true
+                        }
+                    },
                 },
                 usedExports: true,
                 minimize: true
