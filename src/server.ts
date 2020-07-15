@@ -14,7 +14,7 @@ export default class {
     constructor(app: FireJS) {
         this.app = app;
         this.$ = app.getContext();
-        this.$.pageArchitect.webpackArchitect.defaultConfig.watch = true;
+        this.$.pageArchitect.webpackArchitect.config.watch = true;
     }
 
     async init(port: number = 5000, addr: string = "localhost") {
@@ -36,6 +36,7 @@ export default class {
         this.$.hooks.initServer.forEach(initServer => initServer(server))
         //watch changes
         this.$.cli.ok("Watching for file changes")
+        await this.app.buildPages()
         watch(this.$.config.paths.pages)
             .on('add', path => {
                 path = path.replace(this.$.config.paths.pages + "/", "");

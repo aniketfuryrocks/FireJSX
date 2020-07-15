@@ -103,7 +103,6 @@ export default class {
         this.$.renderer = new StaticArchitect({
             rel: this.$.rel,
             pathToLib: this.$.config.paths.lib,
-            externals: await this.$.pageArchitect.buildExternals(),
             explicitPages: this.$.config.pages,
             template: this.$.inputFileSystem.readFileSync(join(__dirname, "./web/template.html")).toString(),
             ssr: this.$.config.ssr,
@@ -118,60 +117,65 @@ export default class {
         }
     }
 
-    buildPage(page: Page, setCompiler: (Compiler) => void = () => {
+    buildPages(setCompiler: (Compiler) => void = () => {
     }) {
         return new Promise<any>((resolve, reject) => {
-            setCompiler(this.$.pageArchitect.buildPage(page, () => {
-                if (this.$.config.verbose)
-                    this.$.cli.ok(`Page : ${page.toString()}`)
-                const renderPromises = [];
-                //if there is not hook then build the default page
-                if (page.hooks.onBuild.length === 0)
-                    page.hooks.onBuild.push(async ({renderPage}) => {
-                        await renderPage("/" + page.toString().substring(0, page.toString().lastIndexOf(".")))
-                    })
-                Promise.all(page.hooks.onBuild.map(onBuild => onBuild({
-                    renderPage: (path, content = {}) => {
-                        if (!path) {
-                            this.$.cli.warn(`Skipping render for page "${page.toString()}", since onBuild -> renderPage hook was called without a path`)
-                            return
+            const pages = [...this.$.pageMap.values()]
+            setCompiler(this.$.pageArchitect.buildPages(pages, () => {
+                pages.forEach(page => {
+                    if (this.$.config.verbose)
+                        this.$.cli.ok(`Page : ${page.toString()}`)
+                    const renderPromises = [];
+                    //if there is not hook then build the default page
+                    if (page.hooks.onBuild.length === 0)
+                        page.hooks.onBuild.push(async ({renderPage}) => {
+                            await renderPage("/" + page.toString().substring(0, page.toString().lastIndexOf(".")))
+                        })
+                    Promise.all(page.hooks.onBuild.map(onBuild => onBuild({
+                        renderPage: (path, content = {}) => {
+                            if (!path) {
+                                this.$.cli.warn(`Skipping render for page "${page.toString()}", since onBuild -> renderPage hook was called without a path`)
+                                return
+                            }
+                            if (this.$.config.verbose)
+                                this.$.cli.log(`Rendering Path : ${path}`);
+                            //push promise
+                            renderPromises.push((async () => {
+                                const dom = await this.$.renderer.render(page, path, content)
+                                this.$.cli.ok(`Rendered Path : ${path}`)
+                                //call page postRender hooks
+                                page.hooks.postRender.forEach(postRender => postRender(dom))
+                                //call global postRender hooks
+                                this.$.hooks.postRender.forEach(postRender => postRender(dom))
+                                //write html file
+                                await writeFileRecursively(join(this.$.config.paths.dist, `${path}.html`),
+                                    dom.serialize(),
+                                    this.$.outputFileSystem)
+                                //write map
+                                await writeFileRecursively(join(this.$.config.paths.map, `${path}.map.js`),
+                                    `FireJSX.map=${JSON.stringify({
+                                        content,
+                                        chunks: page.chunks
+                                    })}`,
+                                    this.$.outputFileSystem
+                                )
+                            })())
                         }
-                        if (this.$.config.verbose)
-                            this.$.cli.log(`Rendering Path : ${path}`);
-                        //push promise
-                        renderPromises.push((async () => {
-                            const dom = await this.$.renderer.render(page, path, content)
-                            this.$.cli.ok(`Rendered Path : ${path}`)
-                            //call page postRender hooks
-                            page.hooks.postRender.forEach(postRender => postRender(dom))
-                            //call global postRender hooks
-                            this.$.hooks.postRender.forEach(postRender => postRender(dom))
-                            //write html file
-                            await writeFileRecursively(join(this.$.config.paths.dist, `${path}.html`),
-                                dom.serialize(),
-                                this.$.outputFileSystem)
-                            //write map
-                            await writeFileRecursively(join(this.$.config.paths.map, `${path}.map.js`),
-                                `FireJSX.map=${JSON.stringify({
-                                    content,
-                                    chunks: page.chunks
-                                })}`,
-                                this.$.outputFileSystem
-                            )
-                        })())
-                    }
-                }))).then(() =>
-                    Promise.all(renderPromises)
-                        .then(resolve)
-                        .catch(reject))
-                    .catch(reject)
+                    }))).then(() =>
+                        Promise.all(renderPromises)
+                            .then(resolve)
+                            .catch(reject))
+                        .catch(reject)
+                })
             }, reject))
         })
     }
 
     async export() {
         const promises = [];
-        this.$.pageMap.forEach((page) => promises.push(this.buildPage(page, undefined)))
+        /*
+                this.$.pageMap.forEach((page) => promises.push(this.buildPage(page, undefined)))
+        */
         //wait for all export promises to resolve
         await Promise.all(promises)
         if (this.$.config.verbose)
@@ -182,7 +186,7 @@ export default class {
 
     exportFly() {
         return new Promise((resolve) => {
-            const map: FIREJSX_MAP = {
+            /*const map: FIREJSX_MAP = {
                 staticConfig: {
                     ...this.$.renderer.config,
                     template: this.$.inputFileSystem.readFileSync(join(__dirname, "./web/template.html")).toString(),
@@ -222,7 +226,7 @@ export default class {
                 Promise.all(promises).then(() =>
                     this.$.outputFileSystem.writeFile(join(this.$.config.paths.fly, "firejsx.map.json"),
                         JSON.stringify(map), resolve))
-            })
+            })*/
         })
     }
 

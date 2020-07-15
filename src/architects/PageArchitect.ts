@@ -17,44 +17,24 @@ export default class {
         this.isInputCustom = isInputCustom;
     }
 
-    buildExternals() {
-        return new Promise<string[]>((resolve, reject) => {
-            this.build(this.webpackArchitect.forExternals(), stat => {
-                const externals = [];
-                stat.compilation.chunks.forEach(chunk => {
-                    externals.push(...chunk.files);
-                })
-                resolve(externals);
-            }, reject)
-        })
-    }
 
-    buildPage(page: Page, resolve: () => void, reject: (err: any | undefined) => void): Compiler {
-        return this.build(this.webpackArchitect.forPage(page), (stat) => {
+    buildPages(pages: Page[], resolve: () => void, reject: (err: any | undefined) => void): Compiler {
+        return this.build(this.webpackArchitect.forPages(pages), (stat) => {
             if (this.logStat(stat))//true if errors
                 reject(undefined);
             else {
-                page.chunks = {//re-init chunks
+                stat.compilation.chunks.forEach(({name, files}) => {
+                    console.log(name, files)
+                });
+                /*page.chunks = {//re-init chunks
                     main: '',
                     css: [],
                     lazy: [],
                     vendor: []
                 };
-                stat.compilation.chunks.forEach(({name, files}) => {
-                    console.log(name, files)
-                    switch (name) {
-                        case 'runtime':
-                            page.chunks.main = files[0];
-                            break
-                        case 'main':
-                            page.chunks.lazy.push(...files)
-                            break
-                        default:
-                            page.chunks.vendor.push(...files)
-                    }
-                });
+
                 console.log(page.chunks)
-                resolve();
+                resolve();*/
             }
         }, reject);
     }

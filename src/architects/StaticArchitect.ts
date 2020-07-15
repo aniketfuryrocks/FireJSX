@@ -8,7 +8,6 @@ import {Helmet} from "react-helmet"
 
 export interface StaticConfig {
     rel: PathRelatives,
-    externals: string[],
     explicitPages: ExplicitPages,
     pathToLib: string,
     template: string | any,
@@ -58,12 +57,6 @@ export default class {
             meta.name = "generator";
             this.config.template.window.document.head.appendChild(meta);
         }
-        //require uncached to prevent bugs in lambda because node clears these 2 when a new request is assigned
-        //if ssr then load react,react dom,LinkApi,ReactDOMServer chunks
-        if (param.ssr)
-            requireUncached(join(this.config.pathToLib, this.config.externals[0]));
-        else //just load LinkApi
-            requireUncached("../web/LinkApi")
     }
 
     render(page: Page, path: string, content: any): Promise<JSDOM> {
@@ -108,15 +101,6 @@ export default class {
                     document.head.appendChild(link);
                     document.body.appendChild(script);
                 }
-                //React
-                global.FireJSX.linkApi.preloadChunks([this.config.externals[1]]);
-                global.FireJSX.linkApi.loadChunks([this.config.externals[1]]);
-                //Main Chunk
-                global.FireJSX.linkApi.preloadChunks([page.chunks.main]);
-                global.FireJSX.linkApi.loadChunks([page.chunks.main]);
-                //Render Chunk
-                global.FireJSX.linkApi.preloadChunks([this.config.externals[2]]);
-                global.FireJSX.linkApi.loadChunks([this.config.externals[2]]);
                 //add lazy chunks
                 global.FireJSX.linkApi.preloadChunks(page.chunks.lazy);
                 global.FireJSX.linkApi.loadChunks(page.chunks.lazy);

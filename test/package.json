@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "markdown-to-jsx": "^6.11.4",
+    "webpack": "^4.43.0",
     "webpack-chunk-hash": "^0.6.0"
   }
 }

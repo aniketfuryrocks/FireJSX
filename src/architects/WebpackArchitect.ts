@@ -1,19 +1,17 @@
-import {cloneDeep} from "lodash"
 import {$, WebpackConfig} from "../FireJSX"
-import {join, relative} from "path"
+import {join} from "path"
 import Page from "../classes/Page"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as CleanObsoleteChunks from 'webpack-clean-obsolete-chunks'
 import * as webpack from "webpack";
-import * as WebpackChunkHash from "webpack-chunk-hash"
 
 export default class {
     private readonly $: $;
-    public readonly defaultConfig: WebpackConfig;
+    public readonly config: WebpackConfig;
 
     constructor($: $) {
         this.$ = $;
-        this.defaultConfig = {
+        this.config = {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
             optimization: {
@@ -21,56 +19,22 @@ export default class {
                 splitChunks: {
                     chunks: 'all',
                     minChunks: 1,
-                    name: true,
                     maxInitialRequests: Infinity,
                     minSize: 0,
-                    cacheGroups: {
-                        vendors: {
-                            minSize: 20000,
-                            test: /[\\/]node_modules[\\/]/,
-                            chunks: 'initial',
-                            name(module) {
-                                // get the name. E.g. node_modules/packageName/not/this/part.js
-                                // or node_modules/packageName
-                                const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-
-                                // npm package names are URL-safe, but some servers don't like @ symbols
-                                return `npm.${packageName.replace('@', '')}`;
-                            },
-                            reuseExistingChunk: true,
-                        },
-                        lazyVendors: {
-                            test: /[\\/]node_modules[\\/]/,
-                            chunks: 'async',
-                            name(module) {
-                                // get the name. E.g. node_modules/packageName/not/this/part.js
-                                // or node_modules/packageName
-                                const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-
-                                // npm package names are URL-safe, but some servers don't like @ symbols
-                                return `async.npm.${packageName.replace('@', '')}`;
-                            },
-                            reuseExistingChunk: true,
-                        },
-                        lazy: {
-                            chunks: 'async',
-                            name(module) {
-                                // npm package names are URL-safe, but some servers don't like @ symbols
-                                return `lazy.npm.${module}`;
-                            },
-                            reuseExistingChunk: true,
-                        }
-                    },
                 },
                 usedExports: true,
                 minimize: true
             },
-            entry: [],
+            entry: {},
             output: {
                 filename: `m[${this.$.config.pro ? "contenthash" : "hash"}].js`,
                 chunkFilename: "c[contenthash].js",
                 publicPath: this.$.rel.libRel + "/",
                 path: this.$.config.paths.lib,
+                //lib
+                library: '__FIREJSX_APP__',
+                libraryTarget: 'window',
+                //hot
                 hotUpdateMainFilename: 'hot/[hash].hot.json',
                 hotUpdateChunkFilename: 'hot/[hash].hot.js'
             },
@@ -109,20 +73,13 @@ export default class {
                         ]
                     }]
             },
-            externals: {
-                react: "React",
-                "react-dom": 'ReactDOM'
-            },
             plugins: [
                 new MiniCssExtractPlugin({
                     filename: "c[contentHash].css",
                     chunkFilename: "c[contentHash].css"
                 }),
-                new WebpackChunkHash(),
                 ...(this.$.config.pro ? [] : [
-                    new webpack.HotModuleReplacementPlugin({
-                        multiStep: true
-                    }),
+                    new webpack.HotModuleReplacementPlugin(),
                     new CleanObsoleteChunks({
                         verbose: this.$.config.verbose
                     })
@@ -131,45 +88,18 @@ export default class {
         }
     }
 
-    forExternals(): WebpackConfig {
-        const conf: WebpackConfig = {
-            target: 'web',
-            mode: process.env.NODE_ENV as "development" | "production" | "none",
-            entry: {
-                "e": [...(this.$.config.pro ? [] : ['react-hot-loader/patch']), join(__dirname, "../web/external_group_semi.js")],
-                "r": join(__dirname, "../web/renderer.js"),
-            },
-            output: {
-                path: this.$.config.paths.lib,
-                filename: "[name][contentHash].js"
-            }, resolve: {
-                alias: {
-                    'react-dom': '@hot-loader/react-dom',
-                },
-            }
-        };
-        conf.entry[join(relative(this.$.config.paths.lib, this.$.config.paths.cache), "f")] = join(__dirname, "../web/external_group_full.js");
-        return conf;
-    }
-
-    forPage(page: Page): WebpackConfig {
-        const mergedConfig = cloneDeep(this.defaultConfig);
-        mergedConfig.name = page.toString()
-        //we are doing a unshift to enable plugins to directly edit webpack from $
-        if (this.$.config.pro)
-            // @ts-ignore
-            mergedConfig.entry.unshift(join(__dirname, "../web/wrapper_pro.js"))
-        else
-            // @ts-ignore
-            mergedConfig.entry.unshift(
-                `webpack-hot-middleware/client?path=/__webpack_hmr/${mergedConfig.name}&reload=true&quiet=true&name=${mergedConfig.name}`,
-                join(__dirname, "../web/wrapper.js")
-            )
-        mergedConfig.plugins.push(new webpack.ProvidePlugin({
-            __FIREJSX_APP__: join(this.$.config.paths.pages, mergedConfig.name)
-        }))
-        this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(mergedConfig))
-        page.hooks.initWebpack.forEach(initWebpack => initWebpack(mergedConfig));
-        return mergedConfig;
+    forPages(pages: Page[]): WebpackConfig {
+        pages.forEach(page => {
+            const pagePath = join(this.$.config.paths.pages, page.toString())
+            if (this.$.config.pro)
+                this.config.entry[page.toString()] = [pagePath]
+            else
+                this.config.entry[page.toString()] = [pagePath,
+                    `webpack-hot-middleware/client?path=/__webpack_hmr/${page.toString()}&reload=true&quiet=true&name=${page.toString()}`]
+            page.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config));
+        })
+        this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config))
+        console.log(this.config)
+        return this.config;
     }
 }
