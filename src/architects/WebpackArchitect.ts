@@ -13,11 +13,9 @@ export default class {
         this.config = {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
-            /*optimization: {
-/!*
-                runtimeChunk: 'multiple',
-*!/
-                /!*splitChunks: {
+            optimization: {
+//                runtimeChunk: 'single',
+                splitChunks: {
                     chunks: 'all',
                     maxInitialRequests: Infinity,
                     minSize: 0,
@@ -46,10 +44,9 @@ export default class {
                             },
                         }
                     },
-                },*!/
-                usedExports: true,
+                },
                 minimize: true
-            },*/
+            },
             entry: {},
             output: {
                 filename: `m[${this.$.config.pro ? "contenthash" : "hash"}].js`,
@@ -58,6 +55,7 @@ export default class {
                 path: this.$.config.paths.lib,
                 //lib
                 library: '__FIREJSX_APP__',
+                libraryTarget: 'window',
                 //hot
                 hotUpdateMainFilename: 'hot/[hash].hot.json',
                 hotUpdateChunkFilename: 'hot/[hash].hot.js'
