@@ -14,7 +14,6 @@ export default class {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
             optimization: {
-//                runtimeChunk: 'single',
                 splitChunks: {
                     chunks: 'all',
                     maxInitialRequests: Infinity,
