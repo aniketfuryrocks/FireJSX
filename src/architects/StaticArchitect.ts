@@ -138,6 +138,9 @@ export default class {
         global.FireJSX.linkApi.loadChunks(chunks);
         if (_require)
             if (this.config.ssr)
-                chunks.forEach(chunk => requireUncached(join(this.config.pathToLib, chunk)))
+                chunks.forEach(chunk => {
+                    if (chunk.endsWith(".js"))//only require javascript
+                        requireUncached(join(this.config.pathToLib, chunk))
+                })
     }
 }
