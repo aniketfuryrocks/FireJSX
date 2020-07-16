@@ -112,13 +112,16 @@ export default class {
     }
 
     forPages(): WebpackConfig {
+        const renderChunk = join(__dirname, "../web/renderer.js")
+        const externalGroupSemi = join(__dirname, "../web/external_group_semi.js")
         this.$.pageMap.forEach(page => {
             const pagePath = join(this.$.config.paths.pages, page.toString())
             if (this.$.config.pro)
-                this.config.entry[page.toString()] = [pagePath]
+                this.config.entry[page.toString()] = [externalGroupSemi, pagePath, renderChunk]
             else
-                this.config.entry[page.toString()] = [pagePath,
-                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`]
+                this.config.entry[page.toString()] = [externalGroupSemi, pagePath,
+                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`,
+                    renderChunk]
             page.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config));
         })
         this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config))

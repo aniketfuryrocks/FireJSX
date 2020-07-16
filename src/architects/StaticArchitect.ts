@@ -84,9 +84,6 @@ export default class {
             {
                 global.FireJSX.linkApi.preloadChunks(page.chunks.initial);
                 global.FireJSX.linkApi.loadChunks(page.chunks.initial);
-                //oad entry
-                global.FireJSX.linkApi.preloadChunks(page.chunks.entry);
-                global.FireJSX.linkApi.loadChunks(page.chunks.entry);
                 //preload and load page map
                 {
                     const link = document.createElement("link");
@@ -98,6 +95,9 @@ export default class {
                     document.head.appendChild(link);
                     document.body.appendChild(script);
                 }
+                //oad entry
+                global.FireJSX.linkApi.preloadChunks(page.chunks.entry);
+                global.FireJSX.linkApi.loadChunks(page.chunks.entry);
                 //add lazy chunks
                 global.FireJSX.linkApi.preloadChunks(page.chunks.async);
                 global.FireJSX.linkApi.loadChunks(page.chunks.async);
