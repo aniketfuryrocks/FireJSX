@@ -3,8 +3,10 @@ import Head from "../../../src/components/Head.js"
 import "../style/main.css"
 import Loader from "../../../src/components/Loader.js";
 import LoadingBar from "../components/LoadingBar/LoadingBar.js";
+import React from "react";
+import Wrapper from "../../../src/components/Wrapper.js"
 
-FireJSX.app = () => {
+Wrapper(() => {
     return (
         <div>
             <Head>
@@ -18,4 +20,4 @@ FireJSX.app = () => {
             <Link href={"/"}> 👻 Click Here To Go Home. Ha ha </Link>
         </div>
     )
-}
+})

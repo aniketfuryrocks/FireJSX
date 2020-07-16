@@ -67,7 +67,7 @@ export default class {
 
     constructor(params: Params = {}) {
         this.constructParams(params);
-        process.env.NODE_ENV = params.config.pro ? 'production' : 'development';
+        process.env.BABEL_ENV = process.env.NODE_ENV = params.config.pro ? 'production' : 'development';
         // @ts-ignore
         fs.mkdirp = mkdirp;
         this.$.inputFileSystem = params.inputFileSystem || fs

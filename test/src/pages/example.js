@@ -2,8 +2,10 @@ import Link from "../../../src/components/Link.js";
 import Head from "../../../src/components/Head.js";
 import LazyLoad from "../../../src/components/LazyLoad.js";
 import Loader from "../../../src/components/Loader.js";
+import React from "react";
+import Wrapper from "../../../src/components/Wrapper.js"
 
-FireJSX.app = () => {
+Wrapper(() => {
     const Markdown = LazyLoad(()=> import("markdown-to-jsx"));
     return (
         <div>
@@ -21,4 +23,4 @@ FireJSX.app = () => {
             </Markdown>
         </div>
     )
-}
+})

@@ -59,7 +59,7 @@ export default class {
             },
             externals: {
                 react: "React",
-                "react-dom": 'ReactDOM'
+                "react-dom": 'ReactDOM',
             },
             module: {
                 rules: [{
@@ -116,30 +116,32 @@ export default class {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
             entry: {
-                "externalSemi": [
-                    join(__dirname, "../web/externalGroupSemi.js"),
-                    ...(this.$.config.pro ? [] : [
-                        'react-hot-loader/patch',
-                        `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`])
+                "e": [
+                    ...(this.$.config.pro ? [] : ['react-hot-loader/patch']),
+                    join(__dirname, "../web/externalGroupSemi.js")
                 ],
-                "renderer": join(__dirname, "../web/renderer.js"),
+                "r": join(__dirname, "../web/renderer.js"),
             },
             output: {
                 path: this.$.config.paths.lib,
                 filename: "[name][contentHash].js"
-            }, resolve: {
+            },
+            resolve: {
                 alias: {
                     'react-dom': '@hot-loader/react-dom',
-                },
+                }
             }
         };
-        conf.entry[join(relative(this.$.config.paths.lib, this.$.config.paths.cache), "externalFull")] = join(__dirname, "../web/externalGroupFull.js")
+        conf.entry[join(relative(this.$.config.paths.lib, this.$.config.paths.cache), "f")] = join(__dirname, "../web/externalGroupFull.js")
         return conf;
     }
 
     forPages(): WebpackConfig {
         this.$.pageMap.forEach(page => {
-            this.config.entry[page.toString()] = join(this.$.config.paths.pages, page.toString())
+            this.config.entry[page.toString()] = [
+                ...(this.$.config.pro ? [] : [
+                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`]),
+                join(this.$.config.paths.pages, page.toString())]
         })
         this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config))
         console.log(this.config)

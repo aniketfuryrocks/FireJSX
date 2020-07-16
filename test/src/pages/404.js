@@ -4,8 +4,10 @@ import LazyLoad from "../../../dist/LazyLoad.js";
 import LoadingCircle from "../components/LoadingCircle/LoadingCircle.js";
 import "../style/main.css"
 import Loader from "../../../src/components/Loader.js";
+import React from "react";
+import Wrapper from "../../../src/components/Wrapper.js"
 
-FireJSX.app = () => {
+Wrapper(() => {
     const Markdown = LazyLoad(() => import("markdown-to-jsx"));
     const Markdown2 = LazyLoad(() => import("markdown-to-jsx"));
     return (
@@ -30,4 +32,4 @@ FireJSX.app = () => {
             <Link href={"/"}> 👻 Click Here To Go Home</Link>
         </div>
     )
-}
+})

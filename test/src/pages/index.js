@@ -3,8 +3,10 @@ import Head from "../../../src/components/Head.js";
 import "../style/main.css"
 import Loader from "../../../src/components/Loader.js";
 import LoadingBar from "../components/LoadingBar/LoadingBar.js";
+import React from "react";
+import Wrapper from "../../../src/components/Wrapper.js"
 
-FireJSX.app = ({content: {emoji}}) => {
+Wrapper(({content: {emoji}}) => {
     const [s, setS] = React.useState(0)
     React.useEffect(() => {
         let t = 0;
@@ -33,4 +35,4 @@ FireJSX.app = ({content: {emoji}}) => {
             <Link href={"/this page does not exist"}>🤔 Click Here To Go Mock 404</Link>
         </div>
     )
-}
+})
