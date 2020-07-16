@@ -50,12 +50,7 @@ export default class {
                         if (entry)//entry
                             page.chunks.entry.push(...files)
                         else if (initial) {//sync
-                            files.forEach(file => {
-                                if(file.endsWith(".css"))
-                                    page.chunks.initial.unshift(file)
-                                else
-                                    page.chunks.initial.push(file)
-                            })
+                            page.chunks.initial.push(...files)
                         } else//async
                             page.chunks.async.push(...files)
                     })
