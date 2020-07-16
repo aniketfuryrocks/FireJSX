@@ -37,10 +37,10 @@ export default class {
                         },
                         lazy: {
                             chunks: 'async',
-                            test: /[\\/]test\/components[\\/]/,
+                            test: new RegExp(this.$.config.paths.src),
                             priority: 100,
                             name(module) {
-                                const packageName = module.context.match(/[\\/]test\/components[\\/](.*?)([\\/]|$)/)[1];
+                                const packageName = module.context.match(new RegExp(this.$.config.paths.src + "(.*?)([\\/]|$)"))[1];
                                 return `async.${packageName.replace('@', '')}`;
                             },
                         }
