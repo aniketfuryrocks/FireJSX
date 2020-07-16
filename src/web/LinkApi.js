@@ -22,7 +22,7 @@ FireJSX.linkApi = {
     loadPage: function (url, pushState = true) {
         window.webpackJsonp = undefined
         const script = document.createElement("script");
-        script.src = `${FirKeJSX.libRel}/${FireJSX.map.chunks.shift()}`
+        script.src = `${FireJSX.libRel}/${FireJSX.map.chunks.shift()}`
         this.loadChunks(FireJSX.map.chunks);
         script.onload = () => this.runApp()
         document.body.appendChild(script);
