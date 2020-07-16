@@ -49,9 +49,14 @@ export default class {
                             page = this.$.pageMap.get(moduleName.replace(pageRel, ""))
                         if (entry)//entry
                             page.chunks.entry.push(...files)
-                        else if (initial)//sync
-                            page.chunks.initial.push(...files)
-                        else//async
+                        else if (initial) {//sync
+                            files.forEach(file => {
+                                if(file.endsWith(".css"))
+                                    page.chunks.initial.unshift(file)
+                                else
+                                    page.chunks.initial.push(file)
+                            })
+                        } else//async
                             page.chunks.async.push(...files)
                     })
                 })

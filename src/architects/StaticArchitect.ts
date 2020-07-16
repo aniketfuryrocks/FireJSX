@@ -1,4 +1,4 @@
-import {PathRelatives} from "../FireJSX";
+import FireJSX, {PathRelatives} from "../FireJSX";
 import {join} from "path"
 import {ExplicitPages} from "../mappers/ConfigMapper";
 import Page from "../classes/Page";
@@ -134,13 +134,19 @@ export default class {
     }
 
     private loadChunks(chunks: string[], _require = true) {
-        global.FireJSX.linkApi.preloadChunks(chunks);
-        global.FireJSX.linkApi.loadChunks(chunks);
-        if (_require)
-            if (this.config.ssr)
-                chunks.forEach(chunk => {
-                    if (chunk.endsWith(".js"))//only require javascript
-                        requireUncached(join(this.config.pathToLib, chunk))
-                })
+        chunks.forEach(chunk => {
+            if (chunk.endsWith(".css")) {
+                const link = document.createElement("link");
+                link.href = `${this.config.rel.libRel}/${chunk}`
+                link.rel = "stylesheet";
+                link.crossOrigin = "anonymous";
+                document.head.insertBefore(link, document.head.firstChild);
+            } else {
+                if (this.config.ssr && _require && chunk.endsWith(".js"))//only require javascript
+                    requireUncached(join(this.config.pathToLib, chunk))
+                global.FireJSX.linkApi.preloadChunks([chunk]);
+                global.FireJSX.linkApi.loadChunks([chunk]);
+            }
+        })
     }
 }
