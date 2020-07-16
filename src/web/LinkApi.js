@@ -1,3 +1,9 @@
+window.onpopstate = function () {
+    //remove prefix
+    const path = location.pathname.replace(FireJSX.prefix, "");
+    FireJSX.linkApi.preloadPage(path, () => FireJSX.linkApi.loadPage(path, false))
+}
+
 FireJSX.addStaticPrefix = (url) => FireJSX.staticPrefix + url
 
 FireJSX.linkApi = {
@@ -13,7 +19,6 @@ FireJSX.linkApi = {
         map_script.onload = () => {
             this.preloadChunks(FireJSX.map.chunks.initial, "prefetch");
             this.preloadChunks(FireJSX.map.chunks.entry, "prefetch");
-            this.preloadChunks(FireJSX.map.chunks.async, "prefetch");
             callback();
         };
         map_script.onerror = () => {
@@ -26,20 +31,9 @@ FireJSX.linkApi = {
         const script = document.createElement("script");
         script.src = `${FireJSX.libRel}/${FireJSX.map.chunks.entry[0]}`
         this.loadChunks(FireJSX.map.chunks.initial);
-        script.onload = () => {
-            this.runApp()
-            this.loadChunks(FireJSX.map.chunks.async);
-        }
         document.body.appendChild(script);
-        if (pushState) {
+        if (pushState)
             window.history.pushState(undefined, undefined, FireJSX.prefix + url);
-        }
-    },
-    runApp: function (func = ReactDOM.render) {
-        func(React.createElement(FireJSX.app, {content: FireJSX.map.content}),
-            document.getElementById("root")
-        );
-        FireJSX.isHydrated = false;
     },
     preloadChunks: function (chunks, rel = "preload") {
         chunks.forEach(chunk => {

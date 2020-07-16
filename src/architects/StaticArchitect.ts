@@ -108,12 +108,6 @@ export default class {
                 //oad entry
                 global.FireJSX.linkApi.preloadChunks(page.chunks.entry);
                 global.FireJSX.linkApi.loadChunks(page.chunks.entry);
-                //renderer
-                global.FireJSX.linkApi.preloadChunks([this.config.externals[2]]);
-                global.FireJSX.linkApi.loadChunks([this.config.externals[2]]);
-                //add lazy chunks
-                global.FireJSX.linkApi.preloadChunks(page.chunks.async);
-                global.FireJSX.linkApi.loadChunks(page.chunks.async);
             }
             /*//require
             if (this.config.ssr) {

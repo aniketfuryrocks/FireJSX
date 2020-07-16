@@ -119,8 +119,7 @@ export default class {
                 "e": [
                     ...(this.$.config.pro ? [] : ['react-hot-loader/patch']),
                     join(__dirname, "../web/externalGroupSemi.js")
-                ],
-                "r": join(__dirname, "../web/renderer.js"),
+                ]
             },
             output: {
                 path: this.$.config.paths.lib,
@@ -131,7 +130,7 @@ export default class {
                     'react-dom': '@hot-loader/react-dom',
                 }
             }
-        };
+        }
         conf.entry[join(relative(this.$.config.paths.lib, this.$.config.paths.cache), "f")] = join(__dirname, "../web/externalGroupFull.js")
         return conf;
     }
@@ -144,7 +143,6 @@ export default class {
                 join(this.$.config.paths.pages, page.toString())]
         })
         this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config))
-        console.log(this.config)
         return this.config;
     }
 }
