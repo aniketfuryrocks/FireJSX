@@ -1,4 +1,8 @@
 export default function (app) {
+    if (FireJSX.isSSR) {
+        global.__FIREJSX_APP__ = app
+        return
+    }
     const func = FireJSX.isHydrated ? ReactDOM.hydrate : ReactDOM.render
     const App = FireJSX.isSSR ?
         app :

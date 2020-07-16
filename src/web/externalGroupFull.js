@@ -1,2 +1,2 @@
-require("./external_group_semi.js");
+require("./externalGroupSemi.js");
 window.ReactDOMServer = require("react-dom/server")

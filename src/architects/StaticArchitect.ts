@@ -100,25 +100,20 @@ export default class {
                     document.body.appendChild(script);
                 }
                 //external group semi
-                global.FireJSX.linkApi.preloadChunks([this.config.externals[1]]);
-                global.FireJSX.linkApi.loadChunks([this.config.externals[1]]);
+                this.loadChunks([this.config.externals[1]], false)
                 //initial
-                global.FireJSX.linkApi.preloadChunks(page.chunks.initial);
-                global.FireJSX.linkApi.loadChunks(page.chunks.initial);
-                //oad entry
-                global.FireJSX.linkApi.preloadChunks(page.chunks.entry);
-                global.FireJSX.linkApi.loadChunks(page.chunks.entry);
+                this.loadChunks(page.chunks.initial)
+                //entry
+                this.loadChunks(page.chunks.entry)
             }
-            /*//require
-            if (this.config.ssr) {
-                requireUncached(join(this.config.pathToLib, page.chunks.main));
-                page.chunks.lazy.forEach(chunk => requireUncached(join(this.config.pathToLib, chunk)))
-            }*/
+            //require
+            if (this.config.ssr)
+                page.chunks.async.forEach(chunk => requireUncached(join(this.config.pathToLib, chunk)))
             //static render
             if (this.config.ssr) {
                 document.getElementById("root").innerHTML = global.window.ReactDOMServer.renderToString(
                     global.React.createElement(
-                        global.FireJSX.app,
+                        global.__FIREJSX_APP__,
                         {content: global.FireJSX.map.content}
                     )
                 )
@@ -136,5 +131,13 @@ export default class {
                 resolve(dom);//resolve DOM
             })()
         });
+    }
+
+    private loadChunks(chunks: string[], _require = true) {
+        global.FireJSX.linkApi.preloadChunks(chunks);
+        global.FireJSX.linkApi.loadChunks(chunks);
+        if (_require)
+            if (this.config.ssr)
+                chunks.forEach(chunk => requireUncached(join(this.config.pathToLib, chunk)))
     }
 }

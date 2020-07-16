@@ -132,6 +132,7 @@ export default class {
             }
         }
         conf.entry[join(relative(this.$.config.paths.lib, this.$.config.paths.cache), "f")] = join(__dirname, "../web/externalGroupFull.js")
+        console.log(conf)
         return conf;
     }
 

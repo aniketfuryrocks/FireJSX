@@ -29,7 +29,8 @@ declare module NodeJS {
             lazyPromises?: Promise<any>[],
             showLoader?: () => void,
         },
-        webpackJsonp?: any
+        __FIREJSX_APP__:any,//for ssr
+        webpackJsonp?: any,
         React?: any,
         ReactDOM?: any,
         ReactDOMServer?: any,
