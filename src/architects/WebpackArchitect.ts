@@ -1,5 +1,5 @@
 import {$, WebpackConfig} from "../FireJSX"
-import {join} from "path"
+import {join, relative} from "path"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as CleanObsoleteChunks from 'webpack-clean-obsolete-chunks'
 import * as webpack from "webpack";
@@ -61,6 +61,10 @@ export default class {
                 hotUpdateMainFilename: 'hot/[hash].hot.json',
                 hotUpdateChunkFilename: 'hot/[hash].hot.js'
             },
+            externals: {
+                react: "React",
+                "react-dom": 'ReactDOM'
+            },
             module: {
                 rules: [{
                     test: /\.(js|jsx)$/,
@@ -111,18 +115,39 @@ export default class {
         }
     }
 
+    forExternals(): WebpackConfig {
+        const conf: WebpackConfig = {
+            target: 'web',
+            mode: process.env.NODE_ENV as "development" | "production" | "none",
+            entry: {
+                "externalSemi": [
+                    ...(this.$.config.pro ? [] : [
+                        'react-hot-loader/patch',
+                        `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`]),
+                    'react',
+                    'react-dom'],
+                "renderer": join(__dirname, "../web/renderer.js"),
+            },
+            output: {
+                path: this.$.config.paths.lib,
+                filename: "[name][contentHash].js"
+            }, resolve: {
+                alias: {
+                    'react-dom': '@hot-loader/react-dom',
+                },
+            }
+        };
+        conf.entry[join(relative(this.$.config.paths.lib, this.$.config.paths.cache), "externalFull")] = [
+            'react',
+            'react-dom',
+            'react-dom/server'
+        ]
+        return conf;
+    }
+
     forPages(): WebpackConfig {
-        const renderChunk = join(__dirname, "../web/renderer.js")
-        const externalGroupSemi = join(__dirname, "../web/external_group_semi.js")
         this.$.pageMap.forEach(page => {
-            const pagePath = join(this.$.config.paths.pages, page.toString())
-            if (this.$.config.pro)
-                this.config.entry[page.toString()] = [externalGroupSemi, pagePath, renderChunk]
-            else
-                this.config.entry[page.toString()] = [externalGroupSemi, pagePath,
-                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`,
-                    renderChunk]
-            page.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config));
+            this.config.entry[page.toString()] = join(this.$.config.paths.pages, page.toString())
         })
         this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config))
         console.log(this.config)
