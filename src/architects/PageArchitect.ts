@@ -1,7 +1,6 @@
 import * as webpack from "webpack"
 import WebpackArchitect from "./WebpackArchitect";
 import {$, WebpackConfig} from "../FireJSX";
-import Page from "../classes/Page";
 import {Compiler} from "webpack";
 import {join} from "path";
 
@@ -18,6 +17,16 @@ export default class {
         this.isInputCustom = isInputCustom;
     }
 
+    buildExternals() {
+        return new Promise<string[]>((resolve, reject) => {
+            this.build(this.webpackArchitect.forExternals(), stat => {
+                const externals = [];
+                //external Full,external Semi, Renderer
+                stat.compilation.chunks.forEach(chunk => externals.push(...chunk.files))
+                resolve(externals)
+            }, reject)
+        })
+    }
 
     buildPages(resolve: () => void, reject: (err: any | undefined) => void): Compiler {
         // ./src/pages

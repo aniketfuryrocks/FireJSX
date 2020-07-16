@@ -104,6 +104,7 @@ export default class {
             pathToLib: this.$.config.paths.lib,
             explicitPages: this.$.config.pages,
             template: this.$.inputFileSystem.readFileSync(join(__dirname, "./web/template.html")).toString(),
+            externals: await this.$.pageArchitect.buildExternals(),
             ssr: this.$.config.ssr,
             prefix: this.$.config.prefix,
             staticPrefix: this.$.config.staticPrefix

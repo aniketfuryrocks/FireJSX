@@ -11,6 +11,7 @@ export interface StaticConfig {
     explicitPages: ExplicitPages,
     pathToLib: string,
     template: string | any,
+    externals: string[],
     ssr: boolean,
     prefix: string,
     staticPrefix: string
@@ -57,7 +58,12 @@ export default class {
             meta.name = "generator";
             this.config.template.window.document.head.appendChild(meta);
         }
-        require("../web/LinkApi.js")
+        //require uncached to prevent bugs in lambda because node clears these 2 when a new request is assigned
+        //if ssr then load react,react dom,LinkApi,ReactDOMServer chunks
+        if (param.ssr)
+            requireUncached(join(this.config.pathToLib, this.config.externals[0]));
+        else //just load LinkApi
+            requireUncached("../web/LinkApi")
     }
 
     render(page: Page, path: string, content: any): Promise<JSDOM> {
@@ -82,8 +88,6 @@ export default class {
             global.FireJSX.lazyPromises = <Promise<any>[]>[];
             //chunks
             {
-                global.FireJSX.linkApi.preloadChunks(page.chunks.initial);
-                global.FireJSX.linkApi.loadChunks(page.chunks.initial);
                 //preload and load page map
                 {
                     const link = document.createElement("link");
@@ -95,9 +99,18 @@ export default class {
                     document.head.appendChild(link);
                     document.body.appendChild(script);
                 }
+                //external group semi
+                global.FireJSX.linkApi.preloadChunks([this.config.externals[1]]);
+                global.FireJSX.linkApi.loadChunks([this.config.externals[1]]);
+                //initial
+                global.FireJSX.linkApi.preloadChunks(page.chunks.initial);
+                global.FireJSX.linkApi.loadChunks(page.chunks.initial);
                 //oad entry
                 global.FireJSX.linkApi.preloadChunks(page.chunks.entry);
                 global.FireJSX.linkApi.loadChunks(page.chunks.entry);
+                //renderer
+                global.FireJSX.linkApi.preloadChunks([this.config.externals[2]]);
+                global.FireJSX.linkApi.loadChunks([this.config.externals[2]]);
                 //add lazy chunks
                 global.FireJSX.linkApi.preloadChunks(page.chunks.async);
                 global.FireJSX.linkApi.loadChunks(page.chunks.async);

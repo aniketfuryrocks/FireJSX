@@ -31,7 +31,7 @@ FireJSX.linkApi = {
         }
     },
     runApp: function (func = ReactDOM.render) {
-        func(React.createElement(__FIREJSX_APP__, {content: FireJSX.map.content}),
+        func(React.createElement(__FIREJSX_APP__.default, {content: FireJSX.map.content}),
             document.getElementById("root")
         );
         FireJSX.isHydrated = false;

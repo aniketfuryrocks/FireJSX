@@ -13,9 +13,11 @@ export default class {
         this.config = {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
-            optimization: {
-                runtimeChunk: 'single',
-                splitChunks: {
+            /*optimization: {
+/!*
+                runtimeChunk: 'multiple',
+*!/
+                /!*splitChunks: {
                     chunks: 'all',
                     maxInitialRequests: Infinity,
                     minSize: 0,
@@ -44,10 +46,10 @@ export default class {
                             },
                         }
                     },
-                },
+                },*!/
                 usedExports: true,
                 minimize: true
-            },
+            },*/
             entry: {},
             output: {
                 filename: `m[${this.$.config.pro ? "contenthash" : "hash"}].js`,
@@ -56,7 +58,6 @@ export default class {
                 path: this.$.config.paths.lib,
                 //lib
                 library: '__FIREJSX_APP__',
-                libraryTarget: 'window',
                 //hot
                 hotUpdateMainFilename: 'hot/[hash].hot.json',
                 hotUpdateChunkFilename: 'hot/[hash].hot.js'
@@ -121,11 +122,11 @@ export default class {
             mode: process.env.NODE_ENV as "development" | "production" | "none",
             entry: {
                 "externalSemi": [
+                    join(__dirname, "../web/externalGroupSemi.js"),
                     ...(this.$.config.pro ? [] : [
                         'react-hot-loader/patch',
-                        `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`]),
-                    'react',
-                    'react-dom'],
+                        `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`])
+                ],
                 "renderer": join(__dirname, "../web/renderer.js"),
             },
             output: {
@@ -137,11 +138,7 @@ export default class {
                 },
             }
         };
-        conf.entry[join(relative(this.$.config.paths.lib, this.$.config.paths.cache), "externalFull")] = [
-            'react',
-            'react-dom',
-            'react-dom/server'
-        ]
+        conf.entry[join(relative(this.$.config.paths.lib, this.$.config.paths.cache), "externalFull")] = join(__dirname, "../web/externalGroupFull.js")
         return conf;
     }
 
