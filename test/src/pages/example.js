@@ -3,8 +3,7 @@ import Head from "../../../src/components/Head.js";
 import LazyLoad from "../../../src/components/LazyLoad.js";
 import Loader from "../../../src/components/Loader.js";
 
-
-export default () => {
+FireJSX.app = () => {
     const Markdown = LazyLoad(()=> import("markdown-to-jsx"));
     return (
         <div>

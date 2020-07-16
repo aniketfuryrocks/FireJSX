@@ -4,7 +4,7 @@ import "../style/main.css"
 import Loader from "../../../src/components/Loader.js";
 import LoadingBar from "../components/LoadingBar/LoadingBar.js";
 
-export default () => {
+FireJSX.app = () => {
     return (
         <div>
             <Head>

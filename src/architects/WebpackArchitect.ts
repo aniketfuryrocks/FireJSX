@@ -14,6 +14,8 @@ export default class {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
             optimization: {
+                minimize: true,
+                runtimeChunk: "single",
                 splitChunks: {
                     chunks: 'all',
                     maxInitialRequests: Infinity,
@@ -43,8 +45,7 @@ export default class {
                             },
                         }
                     },
-                },
-                minimize: true
+                }
             },
             entry: {},
             output: {
@@ -52,9 +53,6 @@ export default class {
                 chunkFilename: "c[contenthash].js",
                 publicPath: this.$.rel.libRel + "/",
                 path: this.$.config.paths.lib,
-                //lib
-                library: '__FIREJSX_APP__',
-                libraryTarget: 'window',
                 //hot
                 hotUpdateMainFilename: 'hot/[hash].hot.json',
                 hotUpdateChunkFilename: 'hot/[hash].hot.js'

@@ -5,7 +5,7 @@ import LoadingCircle from "../components/LoadingCircle/LoadingCircle.js";
 import "../style/main.css"
 import Loader from "../../../src/components/Loader.js";
 
-export default () => {
+FireJSX.app = () => {
     const Markdown = LazyLoad(() => import("markdown-to-jsx"));
     const Markdown2 = LazyLoad(() => import("markdown-to-jsx"));
     return (
