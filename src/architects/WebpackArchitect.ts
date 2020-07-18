@@ -14,6 +14,14 @@ export default class {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
             optimization: {
+                splitChunks: {
+                    chunks: 'all',
+                    minChunks: Infinity
+                },
+                usedExports: true,
+                minimize: true
+            },
+            /*optimization: {
                 minimize: true,
                 runtimeChunk: "single",
                 splitChunks: {
@@ -46,7 +54,8 @@ export default class {
                         }
                     },
                 }
-            },
+            },*/
+            devtool: 'inline-source-map',
             entry: {},
             output: {
                 filename: `m[${this.$.config.pro ? "contenthash" : "hash"}].js`,
@@ -102,11 +111,13 @@ export default class {
                     chunkFilename: "c[contentHash].css"
                 }),
                 ...(this.$.config.pro ? [] : [
-                    new webpack.HotModuleReplacementPlugin(),
-                    new CleanObsoleteChunks({
+                    new webpack.HotModuleReplacementPlugin({
+                        multiStep: true
+                    }),
+                    /*new CleanObsoleteChunks({
                         verbose: this.$.config.verbose
-                    })
-                ]),
+                    })*/
+                ])
             ]
         }
     }
@@ -139,9 +150,10 @@ export default class {
     forPages(): WebpackConfig {
         this.$.pageMap.forEach(page => {
             this.config.entry[page.toString()] = [
+                join(this.$.config.paths.pages, page.toString()),
                 ...(this.$.config.pro ? [] : [
-                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`]),
-                join(this.$.config.paths.pages, page.toString())]
+                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=false`]),
+            ]
         })
         this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config))
         return this.config;

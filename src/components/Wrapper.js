@@ -1,3 +1,5 @@
+import {hot} from 'react-hot-loader/root'
+
 export default function (app) {
     if (FireJSX.isSSR) {
         global.__FIREJSX_APP__ = app
@@ -5,9 +7,7 @@ export default function (app) {
     }
     const func = FireJSX.isHydrated ? ReactDOM.hydrate : ReactDOM.render
     const App = FireJSX.isSSR ?
-        app :
-        require('react-hot-loader/root').hot(
-            props => React.createElement(app, props))
+        app : hot(props => React.createElement(app, props))
 
     func(React.createElement(App, {content: FireJSX.map.content}), document.getElementById("root"))
     //load async chunks

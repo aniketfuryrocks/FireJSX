@@ -23,7 +23,6 @@ export default class {
                 const externals = [];
                 //external Full,external Semi, Renderer
                 stat.compilation.chunks.forEach(chunk => {
-                    console.log(chunk)
                     externals.push(...chunk.files)
                 })
                 resolve(externals)
@@ -42,6 +41,13 @@ export default class {
                 //log stats when verbose
                 if (this.$.config.verbose)
                     this.$.outputFileSystem.writeFileSync(join(this.$.config.paths.out, "stat.json"), JSON.stringify(statJSON))
+                this.$.pageMap.forEach(page => {
+                    page.chunks = {
+                        async: [],
+                        entry: [],
+                        initial: []
+                    }
+                })
                 statJSON.chunks.forEach(({files, entry, initial, origins}) => {
                     origins.forEach(({loc, moduleName}) => {
                         let page = this.$.pageMap.get(loc)
