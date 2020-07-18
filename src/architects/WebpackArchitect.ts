@@ -14,14 +14,6 @@ export default class {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
             optimization: {
-                splitChunks: {
-                    chunks: 'all',
-                    minChunks: Infinity
-                },
-                usedExports: true,
-                minimize: true
-            },
-            /*optimization: {
                 minimize: true,
                 runtimeChunk: "single",
                 splitChunks: {
@@ -54,8 +46,7 @@ export default class {
                         }
                     },
                 }
-            },*/
-            devtool: 'inline-source-map',
+            },
             entry: {},
             output: {
                 filename: `m[${this.$.config.pro ? "contenthash" : "hash"}].js`,
@@ -87,7 +78,10 @@ export default class {
                                 plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime",
                                     ...(this.$.config.pro ? [] : ["react-hot-loader/babel"])]
                             }
-                        }
+                        },
+/*
+                        'react-hot-loader/webpack'
+*/
                     ]
                 },
                     {

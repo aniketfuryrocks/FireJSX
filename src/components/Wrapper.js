@@ -1,6 +1,4 @@
-import {hot} from 'react-hot-loader/root'
-
-export default function (app) {
+export default function (app, hot) {
     if (FireJSX.isSSR) {
         global.__FIREJSX_APP__ = app
         return
@@ -9,7 +7,7 @@ export default function (app) {
     const App = FireJSX.isSSR ?
         app : hot(props => React.createElement(app, props))
 
-    func(React.createElement(App, {content: FireJSX.map.content}), document.getElementById("root"))
+    func(<App content={FireJSX.map.content}/>, document.getElementById("root"))
     //load async chunks
     FireJSX.linkApi.preloadChunks(FireJSX.map.chunks.async)
     FireJSX.linkApi.loadChunks(FireJSX.map.chunks.async)
