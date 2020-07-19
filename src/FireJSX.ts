@@ -12,7 +12,7 @@ import StaticArchitect, {StaticConfig} from "./architects/StaticArchitect";
 import {createMap} from "./mappers/PathMapper";
 import WebpackArchitect from "./architects/WebpackArchitect";
 import {GlobalHooks} from "./types/Plugin";
-import {Args} from "./mappers/ArgsMapper";
+import {Args} from "./bin/ArgsMapper";
 
 export type WebpackConfig = Configuration;
 
