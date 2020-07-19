@@ -10,7 +10,6 @@ import {JSDOM} from "jsdom";
 export default class {
     readonly pageMap: Map<string, Page> = new Map()
     readonly renderer: StaticArchitect;
-    readonly rel: PathRelatives;
     readonly rootDir: string;
 
     constructor(pathToLibDir: string, rootDir: string = process.cwd()) {

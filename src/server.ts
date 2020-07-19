@@ -15,12 +15,12 @@ export default class {
         this.$.pageArchitect.webpackArchitect.config.watch = true;
     }
 
-    async init(port: number = 5000, addr: string = "localhost") {
+    async init(port: number = 5000, addr: string = "localhost", gzip, staticDir) {
         //init server
         const server: express.Application = express();
         //gzip
-        this.$.cli.ok("GZIP :", !!this.$.config.devServer.gzip)
-        if (this.$.config.devServer.gzip)
+        this.$.cli.ok("GZIP :", gzip)
+        if (gzip)
             server.use(compression())
         //turn off caching
         server.use((req, res, next) => {
@@ -43,16 +43,16 @@ export default class {
         }))
 
         //routing
-        if (this.$.config.paths.static)
-            server.use(this.$.config.staticPrefix, express.static(this.$.config.paths.static));
-        server.get(this.$.rel.mapRel + '/*', this.get.bind(this))
-        server.get(this.$.rel.libRel + '/*', this.get.bind(this))
+        if (this.$.staticPrefix)
+            server.use(this.$.staticPrefix, express.static(staticDir));
+        server.get(`${this.$.lib}/*`, this.get.bind(this))
+        server.get(`${this.$.lib}/map/*`, this.get.bind(this))
         server.use('*', this.getPage.bind(this));
         //listen
         const listener = server.listen(port, addr, () => {
             // @ts-ignore
             let {port, address} = listener.address();
-            if (this.$.config.logMode === "plain")
+            if (this.$.cli.mode === "plain")
                 this.$.cli.normal(`Listening at http://${address}:${port}`);
             else
                 this.$.cli.normal(
@@ -66,7 +66,7 @@ export default class {
     }
 
     private get(req: express.Request, res: express.Response) {
-        if (this.$.config.verbose)
+        if (this.$.verbose)
             this.$.cli.log("Request :", req.url)
         // @ts-ignore
         const pathname = join(this.$.config.paths.dist, decodeURI(req._parsedUrl.pathname).replace(this.$.config.prefix, ""))
@@ -80,7 +80,7 @@ export default class {
     }
 
     private getPage(req: express.Request, res: express.Response, next) {
-        if (this.$.config.verbose)
+        if (this.$.verbose)
             this.$.cli.log("HTML Request :", req.url)
         // @ts-ignore
         const pathname = decodeURI(req._parsedUrl.pathname).replace(this.$.config.prefix, "")
@@ -88,14 +88,14 @@ export default class {
         if (req.method === "GET" && !req._parsedUrl.pathname.startsWith("/__webpack_hmr/")) {
             try {
                 res.contentType("text/html")
-                let path = join(this.$.config.paths.dist, pathname);
+                let path = `${this.$.outDir}/${pathname}`;
                 if (this.$.outputFileSystem.existsSync(join(path, "index.html")))
                     res.end(this.$.outputFileSystem.readFileSync(join(path, "index.html")));
                 else if (this.$.outputFileSystem.existsSync(path + ".html"))
                     res.end(this.$.outputFileSystem.readFileSync(path + ".html"))
                 else {
-                    const _404 = this.$.pageMap.get(this.$.config.pages["404"]).toString();
-                    res.end(this.$.outputFileSystem.readFileSync(join(this.$.config.paths.dist, _404.substring(0, _404.lastIndexOf(".")) + ".html")));
+                    const _404 = this.$.pageMap.get("404.jsx").toString();
+                    res.end(this.$.outputFileSystem.readFileSync(join(this.$.outDir, _404.substring(0, _404.lastIndexOf(".")) + ".html")));
                 }
             } catch (e) {
                 this.$.cli.error("Error serving HTML", pathname, e);

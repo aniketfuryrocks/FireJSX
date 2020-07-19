@@ -5,9 +5,10 @@ export default class {
     ok;
     warn;
     log;
+    mode: "silent" | "plain";
 
     constructor(mode: "silent" | "plain" = undefined) {
-        switch (mode) {
+        switch (this.mode = mode) {
             case "silent":
                 this.normal = this.ok = this.warn = () => {
                 }

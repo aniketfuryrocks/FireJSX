@@ -33,7 +33,7 @@ export default class {
 
     buildPages(resolve: () => void, reject: (err: any | undefined) => void) {
         // ./src/pages
-        const pageRel = `.${this.$.config.paths.pages.replace(this.$.config.paths.root, "")}/`
+        const pageRel = `.${this.$.pages.replace(process.cwd(), "")}/`
         this.build(this.webpackArchitect.forPages(), stat => {
             const statJSON = stat.toJson()
             if (this.logStat(statJSON))//true if errors
@@ -41,7 +41,7 @@ export default class {
             else {
                 //log stats when verbose
                 if (this.$.verbose)
-                    this.$.outputFileSystem.writeFileSync(join(this.$.config.paths.out, "stat.json"), JSON.stringify(statJSON))
+                    this.$.outputFileSystem.writeFileSync(join(this.$.outDir, "stat.json"), JSON.stringify(statJSON))
                 this.$.pageMap.forEach(page => {
                     page.chunks = {
                         async: [],
