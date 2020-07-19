@@ -96,7 +96,7 @@ export default class {
         }
         if (errors.length > 0) {
             this.$.cli.error(...errors)
-            this.$.cli.error(`${errors.length} warning(s)`);
+            this.$.cli.error(`${errors.length} error(s)`);
             return true;
         }
     }

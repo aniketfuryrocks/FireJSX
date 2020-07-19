@@ -3,7 +3,7 @@ import {hot} from "firejsx/Hot"
 import Link from "../../../src/components/Link.js";
 import Head from "../../../dist/Head.js";
 import LazyLoad from "../../../dist/LazyLoad.js";
-import LoadingCircle from "../components/LoadingCircle/LoadingCircle.js";
+import LoadingCircle from "../components/LoadingCircle/LoadingCircle.jsx";
 import "../style/main.css"
 import Loader from "../../../src/components/Loader.js";
 

@@ -69,7 +69,7 @@ export default class {
         if (this.$.verbose)
             this.$.cli.log("Request :", req.url)
         // @ts-ignore
-        const pathname = join(this.$.config.paths.dist, decodeURI(req._parsedUrl.pathname).replace(this.$.config.prefix, ""))
+        const pathname = join(this.$.config.paths.dist, decodeURI(req._parsedUrl.pathname).replace(this.$.prefix, ""))
 
         res.contentType(mime.getType(pathname.substr(pathname.lastIndexOf("."))))
         if (this.$.outputFileSystem.existsSync(pathname))
@@ -83,7 +83,7 @@ export default class {
         if (this.$.verbose)
             this.$.cli.log("HTML Request :", req.url)
         // @ts-ignore
-        const pathname = decodeURI(req._parsedUrl.pathname).replace(this.$.config.prefix, "")
+        const pathname = decodeURI(req._parsedUrl.pathname).replace(this.$.prefix, "")
         // @ts-ignore
         if (req.method === "GET" && !req._parsedUrl.pathname.startsWith("/__webpack_hmr/")) {
             try {

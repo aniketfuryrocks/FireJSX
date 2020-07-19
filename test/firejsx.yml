@@ -1,5 +1,4 @@
 plugins:
-  - ./plugin/hello.js
   - ./plugin/alias.js
 
 custom:

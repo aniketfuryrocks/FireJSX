@@ -4,7 +4,7 @@ import "../style/main.css"
 import Link from "../../../src/components/Link.js";
 import Head from "../../../src/components/Head.js";
 import Loader from "../../../src/components/Loader.js";
-import LoadingBar from "../components/LoadingBar/LoadingBar.js";
+import LoadingBar from "../components/LoadingBar/LoadingBar.jsx";
 import React from "react";
 
 Wrap(({content: {emoji}}) => {

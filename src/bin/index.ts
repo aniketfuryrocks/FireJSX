@@ -4,6 +4,7 @@ import * as MemoryFS from "memory-fs";
 import FireJSX from "../FireJSX";
 import Cli from "../utils/Cli";
 import {resolve} from "path";
+import Server from "../Server";
 
 const args = parseArgs(getArgs())
 const cli = new Cli(args["--log-mode"]);
@@ -35,4 +36,6 @@ const cli = new Cli(args["--log-mode"]);
     })
     await app.init()
     cli.ok("Initialized")
+    const server = new Server(app)
+    await server.init(args["--port"], args["--addr"], config.devServer.gzip, config.paths.static)
 })().catch(cli.error)
