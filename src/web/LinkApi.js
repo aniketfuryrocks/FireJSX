@@ -1,10 +1,7 @@
 window.onpopstate = function () {
-    //remove prefix
-    const path = location.pathname.replace(FireJSX.prefix, "");
+    const path = location.pathname.replace(FireJSX.prefix, "");//remove prefix
     FireJSX.linkApi.preloadPage(path, () => FireJSX.linkApi.loadPage(path, false))
 }
-
-FireJSX.addStaticPrefix = (url) => FireJSX.staticPrefix + url
 
 FireJSX.linkApi = {
     getMapUrl: url => `${FireJSX.mapRel}${url === "/" ? "/index" : url}.map.js`,
@@ -23,13 +20,13 @@ FireJSX.linkApi = {
         };
         map_script.onerror = () => {
             document.head.removeChild(map_script);
-            this.loadMap(FireJSX.pages["404"]).onload = map_script.onload;
+            this.loadMap("404.jsx").onload = map_script.onload;
         };
     },
     loadPage: function (url, pushState = true) {
         window.webpackJsonp = undefined
         const script = document.createElement("script");
-        script.src = `${FireJSX.libRel}/${FireJSX.map.chunks.entry[0]}`
+        script.src = `${FireJSX.prefix}/${FireJSX.lib}/${FireJSX.map.chunks.entry[0]}`
         this.loadChunks(FireJSX.map.chunks.initial);
         document.body.appendChild(script);
         if (pushState)
@@ -39,7 +36,7 @@ FireJSX.linkApi = {
         chunks.forEach(chunk => {
             const ele = document.createElement("link");
             ele.rel = rel;
-            ele.href = `${FireJSX.libRel}/${chunk}`;
+            ele.href = `${FireJSX.prefix}/${FireJSX.libRel}/${chunk}`;
             ele.crossOrigin = "anonymous";
             if (chunk.endsWith(".js"))
                 ele.setAttribute("as", "script");
@@ -53,10 +50,10 @@ FireJSX.linkApi = {
             let ele;
             if (chunk.endsWith(".js")) {
                 ele = document.createElement("script");
-                ele.src = `${FireJSX.libRel}/${chunk}`
+                ele.src = `${FireJSX.prefix}/${FireJSX.libRel}/${chunk}`
             } else {
                 ele = document.createElement("link");
-                ele.href = `${FireJSX.libRel}/${chunk}`
+                ele.href = `${FireJSX.prefix}/${FireJSX.libRel}/${chunk}`
                 if (chunk.endsWith(".css"))
                     ele.rel = "stylesheet";
             }

@@ -37,7 +37,7 @@ export default class {
                         },
                         lazy: {
                             chunks: 'async',
-                            test: new RegExp(this.$.config.paths.src),
+                            test: new RegExp(this.$.pages),
                             priority: 100,
                             name(module) {
                                 const packageName = module.context.match(new RegExp(this.$.config.paths.src + "(.*?)([\\/]|$)"))[1];
@@ -51,8 +51,8 @@ export default class {
             output: {
                 filename: `m[${this.$.pro ? "contenthash" : "hash"}].js`,
                 chunkFilename: "c[contenthash].js",
-                publicPath: this.$.config.lib + "/",
-                path: this.$.config.dist,
+                publicPath: this.$.prefix + this.$.lib + "/",
+                path: this.$.outDir,
                 //hot
                 hotUpdateMainFilename: 'hot/[hash].hot.json',
                 hotUpdateChunkFilename: 'hot/[hash].hot.js'
@@ -68,7 +68,10 @@ export default class {
                         {
                             loader: 'babel-loader',
                             options: {
+                                //TODO: cache dir
+/*
                                 cacheDirectory: join(this.$.config.paths.cache, ".babelCache"),
+*/
                                 presets: [["@babel/preset-env", {
                                     loose: true,
                                     targets: {
@@ -76,7 +79,7 @@ export default class {
                                     },
                                 }], "@babel/preset-react"],
                                 plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime",
-                                    ...(this.$.config.pro ? [] : ["react-hot-loader/babel"])]
+                                    ...(this.$.pro ? [] : ["react-hot-loader/babel"])]
                             }
                         }
                     ]
@@ -84,7 +87,7 @@ export default class {
                     {
                         test: /\.css$/,
                         use: [
-                            ...(this.$.config.pro ? [MiniCssExtractPlugin.loader] : ['style-loader']),
+                            ...(this.$.pro ? [MiniCssExtractPlugin.loader] : ['style-loader']),
                             {
                                 loader: 'css-loader',
                                 options: {
@@ -101,17 +104,17 @@ export default class {
                     filename: "c[contentHash].css",
                     chunkFilename: "c[contentHash].css"
                 }),
-                ...(this.$.config.pro ? [] : [
+                ...(this.$.pro ? [] : [
                     new webpack.HotModuleReplacementPlugin({
                         multiStep: true
                     }),
                     new CleanObsoleteChunks({
-                        verbose: this.$.config.verbose
+                        verbose: this.$.verbose
                     })
                 ])
             ],
             resolve: {
-                alias: (this.$.config.pro ? {} : {'firejsx/Hot': 'react-hot-loader/root'}),
+                alias: (this.$.pro ? {} : {'firejsx/Hot': 'react-hot-loader/root'}),
             }
         }
     }
@@ -122,16 +125,16 @@ export default class {
             mode: process.env.NODE_ENV as "development" | "production" | "none",
             entry: {
                 "e": [
-                    ...(this.$.config.pro ? [] : ['react-hot-loader/patch']),
+                    ...(this.$.pro ? [] : ['react-hot-loader/patch']),
                     join(__dirname, "../web/externalGroupSemi.js")
                 ]
             },
             output: {
-                path: this.$.config.paths.lib,
+                path: this.$.outDir,
                 filename: "[name][contentHash].js"
             },
             resolve: {
-                alias: (this.$.config.pro ? {} : {
+                alias: (this.$.pro ? {} : {
                     'react-dom': '@hot-loader/react-dom',
                 })
             }
@@ -143,8 +146,8 @@ export default class {
     forPages(): WebpackConfig {
         this.$.pageMap.forEach(page => {
             this.config.entry[page.toString()] = [
-                join(this.$.config.paths.pages, page.toString()),
-                ...(this.$.config.pro ? [] : [
+                join(this.$.pages, page.toString()),
+                ...(this.$.pro ? [] : [
                     `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`]),
             ]
         })
