@@ -5,15 +5,18 @@ import FireJSX from "../FireJSX";
 import Cli from "../utils/Cli";
 import {resolve} from "path";
 
-(async () => {
-    const args = parseArgs(getArgs())
-    const cli = new Cli(args["--log-mode"])
+const args = parseArgs(getArgs())
+const cli = new Cli(args["--log-mode"]);
 
+(async () => {
     const config = parseConfig((() => {
         const config = getUserConfig(args["--conf"] || 'firejsx.yml')
         cli.ok(`Using ${config ? args["--conf"] || resolve('firejsx.yml') : "default"} config`)
         return config || {}
     })(), args)
+
+    if (args["--disable-plugins"])
+        config.plugins = []
 
     const app = new FireJSX({
         outDir: config.paths.out,
@@ -32,4 +35,4 @@ import {resolve} from "path";
     })
     await app.init()
     cli.ok("Initialized")
-})()
+})().catch(cli.error)
