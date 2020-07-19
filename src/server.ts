@@ -43,28 +43,17 @@ export default class {
             }))
         ).catch(e => this.$.cli.error(e));
 
-       /* watch(this.$.config.paths.pages)
+        watch(this.$.config.paths.pages)
             .on('add', path => {
                 path = path.replace(this.$.config.paths.pages + "/", "");
-                const page = this.$.pageMap.get(path) || new Page(path);
-                this.$.pageMap.set(page.toString(), page);
-                this.app.buildPage(page, compiler => {
-
-                    }
-                ).catch(e => this.$.cli.error(e));
+                if (!this.$.pageMap.has(path)) {
+                    this.$.pageMap.set(path, new Page(path));
+                }
             })
             .on('unlink', path => {
-                const page = this.$.pageMap.get(path.replace(this.$.config.paths.pages + "/", ""));
-                //unlink main
-                this.$.outputFileSystem.unlinkSync(join(this.$.config.paths.lib, page.chunks.main));
-                //delete others
-                (<[keyof PageChunks]><unknown>['lazy', 'css', 'vendor']).forEach(kind =>
-                    // @ts-ignore
-                    page.chunks[kind].forEach(chunk =>
-                        this.$.outputFileSystem.unlinkSync(join(this.$.config.paths.lib, chunk)))
-                )
-                this.$.pageMap.delete(path.replace(this.$.config.paths.pages + "/", ""));
-            });*/
+                path = path.replace(this.$.config.paths.pages + "/", "");
+                this.$.pageMap.delete(path)
+            });
 
         //routing
         if (this.$.config.paths.static)
