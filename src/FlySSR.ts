@@ -1,8 +1,6 @@
 import "./GlobalsSetter"
-
 import Page from "./classes/Page";
 import StaticArchitect from "./architects/StaticArchitect";
-import {join} from "path";
 import {FIREJSX_MAP} from "./FireJSX";
 import * as fs from "fs"
 import {JSDOM} from "jsdom";
