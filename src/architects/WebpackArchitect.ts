@@ -24,7 +24,7 @@ export default class {
                         framework: {
                             chunks: 'all',
                             name: 'framework',
-                            test: /(?<!node_modules.*)[\\/]node_modules[\\/](react|react-dom|scheduler|regenerator-runtime|react-fast-compare|webpack|babel|prop-types|css-loader|use-subscription|react-side-effect|react-helmet|style-loader|)[\\/]/,
+                            test: /(?<!node_modules.*)[\\/]node_modules[\\/](|webpack|babel|prop-types|css-loader|use-subscription|react-side-effect|react-helmet|style-loader|)[\\/]/,
                             priority: 40,
                         },
                         vendor: {
