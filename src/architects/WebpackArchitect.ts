@@ -136,7 +136,7 @@ export default class {
                 })
             }
         }
-        conf.entry[join(relative(this.$.outDir, this.$.cacheDir), "f")] = join(__dirname, "../web/externalGroupFull.js")
+        conf.entry[join(relative(`${this.$.outDir}/${this.$.lib}/`, this.$.cacheDir), "f")] = join(__dirname, "../web/externalGroupFull.js")
         return conf;
     }
 
