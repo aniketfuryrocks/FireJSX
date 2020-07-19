@@ -20,10 +20,10 @@ const cli = new Cli(args["--log-mode"]);
         config.plugins = []
 
     const app = new FireJSX({
-        outDir: config.paths.out,
-        cacheDir: config.paths.cache,
+        outDir: config.outDir,
+        cacheDir: config.cacheDir,
         prefix: config.prefix,
-        pages: config.paths.pages,
+        pages: config.pages,
         plugins: config.plugins,
         lib: config.lib,
         cli,
@@ -37,5 +37,5 @@ const cli = new Cli(args["--log-mode"]);
     await app.init()
     cli.ok("Initialized")
     const server = new Server(app)
-    await server.init(args["--port"], args["--addr"], config.devServer.gzip, config.paths.static)
+    await server.init(args["--port"], args["--addr"], config.devServer.gzip, config.staticDir)
 })().catch(cli.error)
