@@ -1,5 +1,5 @@
-import Wrapper from "../../../src/components/Wrapper.js"
-import {hot} from "react-hot-loader/root"
+import Wrap from "../../../src/components/Wrap.js";
+import {hot} from "firejsx/Hot"
 import Link from "../../../src/components/Link.js";
 import Head from "../../../dist/Head.js";
 import LazyLoad from "../../../dist/LazyLoad.js";
@@ -7,7 +7,7 @@ import LoadingCircle from "../components/LoadingCircle/LoadingCircle.js";
 import "../style/main.css"
 import Loader from "../../../src/components/Loader.js";
 
-Wrapper(() => {
+Wrap(() => {
     const Markdown = LazyLoad(() => import("markdown-to-jsx"));
     const Markdown2 = LazyLoad(() => import("markdown-to-jsx"));
     return (

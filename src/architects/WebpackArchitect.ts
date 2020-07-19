@@ -111,9 +111,7 @@ export default class {
                 ])
             ],
             resolve: {
-                alias: (this.$.config.pro ? {
-                    'react-hot-loader/root': join(__dirname, "../web/HotDummy.js"),
-                } : {})
+                alias: (this.$.config.pro ? {} : {'firejsx/Hot': 'react-hot-loader/root'}),
             }
         }
     }

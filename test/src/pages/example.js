@@ -1,12 +1,12 @@
-import Wrapper from "../../../src/components/Wrapper.js"
-import {hot} from "react-hot-loader/root"
+import Wrap from "../../../src/components/Wrap.js";
+import {hot} from "firejsx/Hot"
 import Link from "../../../src/components/Link.js";
 import Head from "../../../src/components/Head.js";
 import LazyLoad from "../../../src/components/LazyLoad.js";
 import Loader from "../../../src/components/Loader.js";
 import React from "react";
 
-Wrapper(() => {
+Wrap(() => {
     const Markdown = LazyLoad(()=> import("markdown-to-jsx"));
     return (
         <div>
@@ -24,4 +24,4 @@ Wrapper(() => {
             </Markdown>
         </div>
     )
-},hot)
+}, hot)

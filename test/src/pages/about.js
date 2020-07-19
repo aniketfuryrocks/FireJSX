@@ -1,5 +1,5 @@
-import Wrapper from "../../../src/components/Wrapper.js"
-import {hot} from "react-hot-loader/root"
+import Wrap from "../../../src/components/Wrap.js";
+import {hot} from "firejsx/Hot"
 import Link from "../../../src/components/Link.js";
 import Head from "../../../src/components/Head.js"
 import "../style/main.css"
@@ -7,7 +7,7 @@ import Loader from "../../../src/components/Loader.js";
 import LoadingBar from "../components/LoadingBar/LoadingBar.js";
 import React from "react";
 
-Wrapper(() => {
+Wrap(() => {
     return (
         <div>
             <Head>
