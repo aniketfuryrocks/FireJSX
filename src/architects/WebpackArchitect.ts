@@ -78,10 +78,7 @@ export default class {
                                 plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime",
                                     ...(this.$.config.pro ? [] : ["react-hot-loader/babel"])]
                             }
-                        },
-/*
-                        'react-hot-loader/webpack'
-*/
+                        }
                     ]
                 },
                     {
@@ -108,9 +105,9 @@ export default class {
                     new webpack.HotModuleReplacementPlugin({
                         multiStep: true
                     }),
-                    /*new CleanObsoleteChunks({
+                    new CleanObsoleteChunks({
                         verbose: this.$.config.verbose
-                    })*/
+                    })
                 ])
             ]
         }
@@ -137,7 +134,6 @@ export default class {
             }
         }
         conf.entry[join(relative(this.$.config.paths.lib, this.$.config.paths.cache), "f")] = join(__dirname, "../web/externalGroupFull.js")
-        console.log(conf)
         return conf;
     }
 
@@ -146,7 +142,7 @@ export default class {
             this.config.entry[page.toString()] = [
                 join(this.$.config.paths.pages, page.toString()),
                 ...(this.$.config.pro ? [] : [
-                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=false`]),
+                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`]),
             ]
         })
         this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config))

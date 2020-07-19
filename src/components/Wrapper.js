@@ -1,13 +1,12 @@
 export default function (app, hot) {
-    if(!hot)
+    if (!hot)
         throw new Error("You forgot to pass hot from react-hot-loader/root to wrapper")
     if (FireJSX.isSSR) {
         global.__FIREJSX_APP__ = app
         return
     }
     const func = FireJSX.isHydrated ? ReactDOM.hydrate : ReactDOM.render
-    const App = FireJSX.isSSR ?
-        app : hot(props => React.createElement(app, props))
+    const App = FireJSX.isSSR ? app : hot(app)
 
     func(<App content={FireJSX.map.content}/>, document.getElementById("root"))
     //load async chunks

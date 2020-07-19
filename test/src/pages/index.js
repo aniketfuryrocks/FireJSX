@@ -1,10 +1,11 @@
+import Wrapper from "../../../src/components/Wrapper.js"
+import {hot} from "react-hot-loader/root"
 import Link from "../../../src/components/Link.js";
 import Head from "../../../src/components/Head.js";
 import "../style/main.css"
 import Loader from "../../../src/components/Loader.js";
 import LoadingBar from "../components/LoadingBar/LoadingBar.js";
 import React from "react";
-import Wrapper from "../../../src/components/Wrapper.js"
 
 Wrapper(({content: {emoji}}) => {
     const [s, setS] = React.useState(0)
@@ -35,4 +36,4 @@ Wrapper(({content: {emoji}}) => {
             <Link href={"/this page does not exist"}>🤔 Click Here To Go Mock 404</Link>
         </div>
     )
-})
+}, hot)
