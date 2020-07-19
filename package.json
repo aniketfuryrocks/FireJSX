@@ -66,8 +66,7 @@
     "@types/jsdom": "^16.2.3",
     "@types/lodash": "^4.14.151",
     "@types/node": "^14.0.1",
-    "@types/webpack": "^4.41.13",
-    "react": "^16.13.1"
+    "@types/webpack": "^4.41.13"
   },
   "bin": {
     "firejsx": "bin.js"
@@ -86,6 +85,6 @@
   },
   "peerDependencies": {
     "react": "^16.13.1",
-    "react-dom": "npm:@hot-loader/react-dom"
+    "react-dom": "^16.13.1"
   }
 }

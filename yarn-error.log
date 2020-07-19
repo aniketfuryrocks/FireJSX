@@ -14,12 +14,17 @@ Platform:
   linux x64
 
 Trace: 
-  SyntaxError: /media/dedsec/Projects/FireJSX/package.json: Unexpected token } in JSON at position 1811
-      at JSON.parse (<anonymous>)
-      at /usr/share/yarn/lib/cli.js:1625:59
-      at Generator.next (<anonymous>)
-      at step (/usr/share/yarn/lib/cli.js:310:30)
-      at /usr/share/yarn/lib/cli.js:321:13
+  Error: https://registry.yarnpkg.com/hot-loader%2freact-dom: Request "https://registry.yarnpkg.com/hot-loader%2freact-dom" returned a 405
+      at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66996:18)
+      at Request.self.callback (/usr/share/yarn/lib/cli.js:140748:22)
+      at Request.emit (events.js:314:20)
+      at Request.<anonymous> (/usr/share/yarn/lib/cli.js:141720:10)
+      at Request.emit (events.js:314:20)
+      at IncomingMessage.<anonymous> (/usr/share/yarn/lib/cli.js:141642:12)
+      at Object.onceWrapper (events.js:420:28)
+      at IncomingMessage.emit (events.js:326:22)
+      at endReadableNT (_stream_readable.js:1226:12)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21)
 
 npm manifest: 
   {
@@ -91,6 +96,14 @@ npm manifest:
       "@types/lodash": "^4.14.151",
       "@types/node": "^14.0.1",
       "@types/webpack": "^4.41.13",
+      "hot-loader/react-dom": "^16.13.1",
+      "react": "^16.13.1",
+      "react-dom": "^16.13.1"
+    },
+    "peerDependencies": {
+      "hot-loader/react-dom": "^16.13.1",
+      "react": "^16.13.1",
+      "react-dom": "^16.13.1"
     },
     "bin": {
       "firejsx": "bin.js"
@@ -106,10 +119,6 @@ npm manifest:
       "autopublish": "sh scripts/autopublish.sh",
       "publishNitely": "yarn autopublish nitely",
       "publishDev": "yarn autopublish dev"
-    },
-    "peerDependencies": {
-      "react": "^16.13.1",
-      "react-dom": "npm:@hot-loader/react-dom"
     }
   }
 
@@ -1142,7 +1151,7 @@ Lockfile:
       "@types/source-list-map" "*"
       source-map "^0.7.3"
   
-  "@types/webpack@^3.0.0 || ^4.0.0", "@types/webpack@^4.41.13":
+  "@types/webpack@^4.41.13":
     version "4.41.21"
     resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.41.21.tgz#cc685b332c33f153bb2f5fc1fa3ac8adeb592dee"
     integrity sha512-2j9WVnNrr/8PLAB5csW44xzQSJwS26aOnICsP3pSGCEdsu6KYtfQ6QJsVUKHWRnm1bL7HziJsfh5fHqth87yKA==
@@ -5047,13 +5056,6 @@ Lockfile:
     version "6.1.0"
     resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-6.1.0.tgz#9111b4d7ea80acd40f5270d666621afa78b69514"
     integrity sha512-qBIvFLGiBpLjfwmYAaHPXsn+ho5xZnGvyGvsarywGNc8VyQJUMHJ8OBKGGrPER0okBeMDaan4mNBlgBROxuI8w==
-  
-  webpack-chunk-hash@^0.6.0:
-    version "0.6.0"
-    resolved "https://registry.yarnpkg.com/webpack-chunk-hash/-/webpack-chunk-hash-0.6.0.tgz#eca36aff76e327d08a18a3e7990eb46e68376818"
-    integrity sha512-FsOg1RpW2nf3nYpGTy/Qs59RZ7gYG+sI4VrCE8TIBQYh/Kogi04xD39Pj9zUEeUcNx9HeTVPGSO3mtmpLeX9eQ==
-    dependencies:
-      "@types/webpack" "^3.0.0 || ^4.0.0"
   
   webpack-clean-obsolete-chunks@^0.4.0:
     version "0.4.0"

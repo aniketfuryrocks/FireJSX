@@ -133,9 +133,9 @@ export default class {
                 filename: "[name][contentHash].js"
             },
             resolve: {
-                alias: {
+                alias: (this.$.config.pro ? {} : {
                     'react-dom': '@hot-loader/react-dom',
-                }
+                })
             }
         }
         conf.entry[join(relative(this.$.config.paths.lib, this.$.config.paths.cache), "f")] = join(__dirname, "../web/externalGroupFull.js")
