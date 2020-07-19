@@ -109,7 +109,12 @@ export default class {
                         verbose: this.$.config.verbose
                     })
                 ])
-            ]
+            ],
+            resolve: {
+                alias: (this.$.config.pro ? {
+                    'react-hot-loader/root': join(__dirname, "../web/HotDummy.js"),
+                } : {})
+            }
         }
     }
 
