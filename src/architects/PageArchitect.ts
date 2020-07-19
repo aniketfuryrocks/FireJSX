@@ -1,6 +1,7 @@
 import * as webpack from "webpack"
 import WebpackArchitect from "./WebpackArchitect";
 import {$, WebpackConfig} from "../FireJSX";
+import {Compiler} from "webpack";
 import {join} from "path";
 
 export default class {
@@ -8,6 +9,7 @@ export default class {
     public readonly webpackArchitect: WebpackArchitect
     public isOutputCustom: boolean
     public isInputCustom: boolean
+    public compiler: Compiler
 
     constructor(globalData: $, webpackArchitect, isOutputCustom: boolean, isInputCustom: boolean) {
         this.$ = globalData;
@@ -66,20 +68,20 @@ export default class {
     }
 
     build(config: WebpackConfig, resolve: (stat) => void, reject: (err) => void) {
-        const compiler = webpack(config);
+        this.compiler = webpack(config);
         if (this.isOutputCustom)
-            compiler.outputFileSystem = this.$.outputFileSystem;
+            this.compiler.outputFileSystem = this.$.outputFileSystem;
         if (this.isInputCustom)
-            compiler.inputFileSystem = this.$.inputFileSystem;
+            this.compiler.inputFileSystem = this.$.inputFileSystem;
         if (config.watch)
-            compiler.watch(config.watchOptions, (err, stat) => {
+            this.watcher = this.compiler.watch(config.watchOptions, (err, stat) => {
                 if (err)
                     reject(err);
                 else
                     resolve(stat);
             });
         else
-            compiler.run((err, stat) => {
+            this.compiler.run((err, stat) => {
                 if (err)
                     reject(err);
                 else
@@ -98,4 +100,5 @@ export default class {
             return true;
         }
     }
+
 }
