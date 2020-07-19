@@ -9,6 +9,8 @@ export default class {
     public readonly webpackArchitect: WebpackArchitect
     public isOutputCustom: boolean
     public isInputCustom: boolean
+    public compiler: Compiler
+    public watcher: Compiler.Watching
 
     constructor(globalData: $, webpackArchitect, isOutputCustom: boolean, isInputCustom: boolean) {
         this.$ = globalData;
@@ -30,10 +32,10 @@ export default class {
         })
     }
 
-    buildPages(resolve: () => void, reject: (err: any | undefined) => void): Compiler {
+    buildPages(resolve: () => void, reject: (err: any | undefined) => void) {
         // ./src/pages
         const pageRel = `.${this.$.config.paths.pages.replace(this.$.config.paths.root, "")}/`
-        return this.build(this.webpackArchitect.forPages(), stat => {
+        this.build(this.webpackArchitect.forPages(), stat => {
             const statJSON = stat.toJson()
             if (this.logStat(statJSON))//true if errors
                 reject(undefined);
@@ -66,27 +68,26 @@ export default class {
         }, reject);
     }
 
-    build(config: WebpackConfig, resolve: (stat) => void, reject: (err) => void): Compiler {
-        const compiler = webpack(config);
+    build(config: WebpackConfig, resolve: (stat) => void, reject: (err) => void) {
+        this.compiler = webpack(config);
         if (this.isOutputCustom)
-            compiler.outputFileSystem = this.$.outputFileSystem;
+            this.compiler.outputFileSystem = this.$.outputFileSystem;
         if (this.isInputCustom)
-            compiler.inputFileSystem = this.$.inputFileSystem;
+            this.compiler.inputFileSystem = this.$.inputFileSystem;
         if (config.watch)
-            compiler.watch(config.watchOptions, (err, stat) => {
+            this.watcher = this.compiler.watch(config.watchOptions, (err, stat) => {
                 if (err)
                     reject(err);
                 else
                     resolve(stat);
             });
         else
-            compiler.run((err, stat) => {
+            this.compiler.run((err, stat) => {
                 if (err)
                     reject(err);
                 else
                     resolve(stat);
             });
-        return compiler;
     }
 
     logStat({errors, warnings}) {

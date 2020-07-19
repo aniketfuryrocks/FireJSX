@@ -1,7 +1,5 @@
 import {join} from "path"
-import {watch} from "chokidar"
 import FireJS, {$} from "./FireJSX"
-import Page from "./classes/Page";
 import * as express from "express";
 import * as webpackhot from "webpack-hot-middleware"
 import * as mime from "mime"
@@ -36,24 +34,13 @@ export default class {
         this.$.hooks.initServer.forEach(initServer => initServer(server))
         //watch changes
         this.$.cli.ok("Watching for file changes")
-        this.app.buildPages(compiler =>
-            server.use(webpackhot(compiler, {
-                log: false,
-                path: `/__webpack_hmr`
-            }))
-        ).catch(e => this.$.cli.error(e));
 
-        watch(this.$.config.paths.pages)
-            .on('add', path => {
-                path = path.replace(this.$.config.paths.pages + "/", "");
-                if (!this.$.pageMap.has(path)) {
-                    this.$.pageMap.set(path, new Page(path));
-                }
-            })
-            .on('unlink', path => {
-                path = path.replace(this.$.config.paths.pages + "/", "");
-                this.$.pageMap.delete(path)
-            });
+        this.app.buildPages().catch(e => this.$.cli.error(e))
+
+        server.use(webpackhot(this.$.pageArchitect.compiler, {
+            log: false,
+            path: `/__webpack_hmr`
+        }))
 
         //routing
         if (this.$.config.paths.static)

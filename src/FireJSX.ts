@@ -117,10 +117,9 @@ export default class {
         }
     }
 
-    buildPages(setCompiler: (Compiler) => void = () => {
-    }) {
+    buildPages() {
         return new Promise<any>((resolve, reject) => {
-            setCompiler(this.$.pageArchitect.buildPages(() => {
+            this.$.pageArchitect.buildPages(() => {
                 this.$.cli.ok('Build Complete')
                 this.$.pageMap.forEach(page => {
                     const renderPromises = [];
@@ -169,7 +168,7 @@ export default class {
                             .catch(reject))
                         .catch(reject)
                 })
-            }, reject))
+            }, reject)
         })
     }
 
