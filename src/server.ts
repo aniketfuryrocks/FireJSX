@@ -1,7 +1,7 @@
 import {join} from "path"
 import FireJS, {$} from "./FireJSX"
 import * as express from "express";
-import * as webpackhot from "webpack-hot-middleware"
+import * as webpackHot from "webpack-hot-middleware"
 import * as mime from "mime"
 import * as compression from "compression"
 
@@ -37,7 +37,7 @@ export default class {
 
         this.app.buildPages().catch(e => this.$.cli.error(e))
 
-        server.use(webpackhot(this.$.pageArchitect.compiler, {
+        server.use(webpackHot(this.$.pageArchitect.compiler, {
             log: false,
             path: `/__webpack_hmr`
         }))
