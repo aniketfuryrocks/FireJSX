@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "node --trace-warnings ../dist/bin.js"
+    "test": "node --trace-warnings ../dist/bin/index.js"
   },
   "dependencies": {
     "axios": "^0.19.2",

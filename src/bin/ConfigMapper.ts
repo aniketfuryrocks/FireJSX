@@ -1,6 +1,8 @@
 import {isAbsolute, resolve} from "path"
 import {Args} from "./ArgsMapper";
 import {parse as parseYaml} from "yaml";
+import {mkdirp} from "fs-extra";
+import {existsSync, readFileSync} from "fs";
 
 export interface Config {
     paths?: {                   //paths absolute or relative to root
@@ -29,8 +31,8 @@ export function getUserConfig(path: string): Config | undefined | never {
     } else
         path = resolve('firejsx.yml');
 
-    if (this.inputFileSystem.existsSync(path))
-        return parseYaml(this.inputFileSystem.readFileSync(path, "utf8").toString()) || {};
+    if (existsSync(path))
+        return parseYaml(readFileSync(path, "utf8").toString()) || {};
     else if (wasGiven)
         throw new Error(`Config not found at ${path}`)
 }
@@ -60,18 +62,18 @@ export function parseConfig(config: Config = {}, args: Args = {_: []}): Config {
 }
 
 function throwIfNotFound(name: string, pathTo: string, extra = ""): never | string {
-    if (!this.inputFileSystem.existsSync(pathTo))
+    if (!existsSync(pathTo))
         throw new Error(`${name} not found. ${pathTo}\n${extra}`);
     return pathTo
 }
 
 function undefinedIfNotFound(path): string | undefined {
-    return this.inputFileSystem.existsSync(path) ? path : undefined
+    return existsSync(path) ? path : undefined
 }
 
 function makeDirIfNotFound(path: string) {
-    if (!this.outputFileSystem.existsSync(path))
-        this.outputFileSystem.mkdirp(path, e => {
+    if (!existsSync(path))
+        mkdirp(path, e => {
             if (e)
                 throw e
         });
