@@ -3,7 +3,7 @@ import {$} from "../FireJSX";
 
 export async function mapPlugin(plugin: string, $: $) {
     //require default and call
-    const plug = <Plugin>require(require.resolve(plugin, {paths: [$.config.paths.root]})).default
+    const plug = <Plugin>require(plugin).default
     if (plug)
         await plug({
             initWebpack: (page, callback) => check('initWebpack', plugin, $, page, callback),
