@@ -66,6 +66,9 @@ export default class {
                 postExport: []
             }
         }
+        //log
+        this.$.cli.ok("PRO :", this.$.pro)
+        this.$.cli.ok("SSR :", this.$.ssr)
         //set env
         process.env.BABEL_ENV = process.env.NODE_ENV = params.pro ? 'production' : 'development';
         //pageMap
