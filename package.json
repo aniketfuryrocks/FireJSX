@@ -68,7 +68,7 @@
     "@types/webpack": "^4.41.13"
   },
   "bin": {
-    "firejsx": "bin.js"
+    "firejsx": "bin/index.js"
   },
   "bugs": {
     "url": "https://github.com/eAdded/firejsx/issues"
