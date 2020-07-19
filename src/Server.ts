@@ -45,8 +45,8 @@ export default class {
         //routing
         if (this.$.staticPrefix)
             server.use(this.$.staticPrefix, express.static(staticDir));
-        server.get(`${this.$.lib}/*`, this.get.bind(this))
-        server.get(`${this.$.lib}/map/*`, this.get.bind(this))
+        server.get(`/${this.$.lib}/*`, this.get.bind(this))
+        server.get(`/${this.$.lib}/map/*`, this.get.bind(this))
         server.use('*', this.getPage.bind(this));
         //listen
         const listener = server.listen(port, addr, () => {
@@ -69,7 +69,7 @@ export default class {
         if (this.$.verbose)
             this.$.cli.log("Request :", req.url)
         // @ts-ignore
-        const pathname = join(this.$.config.paths.dist, decodeURI(req._parsedUrl.pathname).replace(this.$.prefix, ""))
+        const pathname = join(this.$.outDir, decodeURI(req._parsedUrl.pathname).replace(this.$.prefix, ""))
 
         res.contentType(mime.getType(pathname.substr(pathname.lastIndexOf("."))))
         if (this.$.outputFileSystem.existsSync(pathname))

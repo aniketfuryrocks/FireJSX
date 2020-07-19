@@ -57,9 +57,9 @@ export default class {
         fs.mkdirp = mkdirp;
         //set $
         this.$ = {
-            inputFileSystem: fs,
-            outputFileSystem: fs,
             ...params,
+            inputFileSystem: params.inputFileSystem || fs,
+            outputFileSystem: params.outputFileSystem || fs,
             hooks: {
                 postRender: [],
                 initServer: [],
