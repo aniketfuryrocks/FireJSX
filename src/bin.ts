@@ -21,7 +21,6 @@ function initConfig(args: Args): [boolean, Config] {
         root: args["--root"] || userConfig.paths.root,
         cache: args["--cache"] || userConfig.paths.cache,
         dist: args["--dist"] || userConfig.paths.dist,
-        map: args["--map"] || userConfig.paths.map,
         pages: args["--pages"] || userConfig.paths.pages,
         src: args["--src"] || userConfig.paths.src,
         static: args["--static"] || userConfig.paths.static,
