@@ -74,7 +74,7 @@ export default class {
         if (this.isInputCustom)
             this.compiler.inputFileSystem = this.$.inputFileSystem;
         if (config.watch)
-            this.watcher = this.compiler.watch(config.watchOptions, (err, stat) => {
+            this.compiler.watch(config.watchOptions, (err, stat) => {
                 if (err)
                     reject(err);
                 else

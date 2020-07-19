@@ -190,8 +190,9 @@ export default class {
                 },
                 pageMap: {},
             }
-            this.$.config.paths.dist = this.$.config.paths.fly
-            await this.buildPages()
+            await this.buildPages().catch(err => {
+                throw err
+            })
             this.$.cli.ok("Build Complete")
             const promises = [];
             this.$.cli.ok("Removing Assets")
@@ -203,13 +204,12 @@ export default class {
                     page.chunks[chunkKey].forEach(chunk => {
                         //move only js
                         if (!chunk.endsWith(".js")) {
-                            const chunkPath = join(this.$.config.paths.lib, chunk);
                             if (this.$.config.verbose)
-                                this.$.cli.log(`Deleting file ${chunkPath}`)
+                                this.$.cli.log(`Deleting file ${chunk}`)
                             promises.push(new Promise(res => {
-                                this.$.outputFileSystem.unlink(chunkPath, join(this.$.config.paths.fly, chunk), err => {
+                                this.$.outputFileSystem.unlink(join(this.$.config.paths.lib, chunk), err => {
                                     if (err)
-                                        throw new Error(`Error moving ${chunkPath} to ${this.$.config.paths.fly}`);
+                                        throw err
                                     res();
                                 });
                             }))

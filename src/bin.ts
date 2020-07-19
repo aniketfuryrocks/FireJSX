@@ -49,12 +49,15 @@ function init(): { app: FireJS, args: Args, customConfig: boolean } {
             throw new Error("flag [-s, --ssr] are redundant when exporting for fly build. Rerun after removing this flag");
         args["--pro"] = true;
     }
+    //init config acc to args
+    const [customConfig, config] = initConfig(args);
+    if (args["--export-fly"])
+        config.paths.dist = config.paths.lib = config.paths.fly
     //check if log mode is valid
     if (args["--log-mode"])
         if (args["--log-mode"] !== "silent" && args["--log-mode"] !== "plain")
             throw new Error(`unknown log mode ${args["--log-mode"]}. Expected [ silent | plain ]`)
-    //init config acc to args
-    const [customConfig, config] = initConfig(args);
+
     //config disk
     if (args["--disk"]) {
         if (args["--export"] || args["--export-fly"])
