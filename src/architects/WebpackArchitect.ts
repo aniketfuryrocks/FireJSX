@@ -51,7 +51,7 @@ export default class {
             output: {
                 filename: `m[${this.$.pro ? "contenthash" : "hash"}].js`,
                 chunkFilename: "c[contenthash].js",
-                publicPath: this.$.prefix + this.$.lib + "/",
+                publicPath: `${this.$.prefix}/${this.$.lib}/`,
                 path: this.$.outDir,
                 //hot
                 hotUpdateMainFilename: 'hot/[hash].hot.json',
