@@ -51,8 +51,10 @@ function init(): { app: FireJS, args: Args, customConfig: boolean } {
     }
     //init config acc to args
     const [customConfig, config] = initConfig(args);
-    if (args["--export-fly"])
-        config.paths.dist = config.paths.lib = config.paths.fly
+    if (args["--export-fly"]) {
+        config.paths.dist = config.paths.out || "out"
+        config.paths.lib = config.paths.fly || "out/fly"
+    }
     //check if log mode is valid
     if (args["--log-mode"])
         if (args["--log-mode"] !== "silent" && args["--log-mode"] !== "plain")
@@ -62,7 +64,7 @@ function init(): { app: FireJS, args: Args, customConfig: boolean } {
     if (args["--disk"]) {
         if (args["--export"] || args["--export-fly"])
             throw new Error("flags [-d, --disk] are redundant when exporting")
-        config.paths.dist = join(config.paths.cache || "out/.cache", "disk");
+        config.paths.dist = join(config.paths.cache || `${config.paths.out || ""}/.cache`, "disk");
     }
 
     if (args["--ssr"])

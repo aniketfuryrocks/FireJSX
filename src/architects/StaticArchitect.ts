@@ -1,15 +1,12 @@
-import FireJSX, {PathRelatives} from "../FireJSX";
 import {join} from "path"
-import {ExplicitPages} from "../mappers/ConfigMapper";
 import Page from "../classes/Page";
 import {JSDOM} from "jsdom"
 import {requireUncached} from "../utils/Require";
 import {Helmet} from "react-helmet"
 
 export interface StaticConfig {
-    rel: PathRelatives,
-    explicitPages: ExplicitPages,
-    pathToLib: string,
+    lib: string,
+    outDir: string,
     template: string | any,
     externals: string[],
     ssr: boolean,
@@ -31,9 +28,8 @@ export default class {
         global.window = global;
         global.FireJSX = {
             isSSR: param.ssr,
-            libRel: this.config.rel.libRel,
-            mapRel: this.config.rel.mapRel,
-            staticPrefix: this.config.staticPrefix
+            staticPrefix: this.config.staticPrefix,
+            prefix: this.config.prefix
         }
         //init JSDOM
         this.config.template = new JSDOM(param.template)
@@ -43,9 +39,6 @@ export default class {
             script.id = "__FireJSX_INIT__"
             script.innerHTML =
                 `window.FireJSX={` +
-                `libRel:"${this.config.rel.libRel}",` +
-                `mapRel:"${this.config.rel.mapRel}",` +
-                `pages:{404:"/${this.config.explicitPages["404"].substring(0, this.config.explicitPages["404"].lastIndexOf("."))}"}` +
                 `${param.ssr ? `,isHydrated:true` : ""},` +
                 `prefix:"${this.config.prefix}",` +
                 `staticPrefix:"${this.config.staticPrefix}"` +
@@ -61,7 +54,7 @@ export default class {
         //require uncached to prevent bugs in lambda because node clears these 2 when a new request is assigned
         //if ssr then load react,react dom,LinkApi,ReactDOMServer chunks
         if (param.ssr)
-            requireUncached(join(this.config.pathToLib, this.config.externals[0]));
+            requireUncached(join(this.config.outDir, this.config.externals[0]));
         else //just load LinkApi
             requireUncached("../web/LinkApi")
     }
@@ -72,7 +65,7 @@ export default class {
             global.window.webpackJsonp = undefined
             //template serialize to prevent overwriting
             const dom = new JSDOM(this.config.template.serialize(), {
-                url: "https://localhost:5000" + path,
+                url: "http://localhost:5000" + this.config.prefix + path,
             });
             //load stuff from dom.window to global
             for (const domKey of ["document", "location", "history", "navigator", "screen", "matchMedia", "getComputedStyle"])
@@ -108,7 +101,7 @@ export default class {
             }
             //require
             if (this.config.ssr)
-                page.chunks.async.forEach(chunk => requireUncached(join(this.config.pathToLib, chunk)))
+                page.chunks.async.forEach(chunk => requireUncached(join(this.config.outDir, chunk)))
             //static render
             if (this.config.ssr) {
                 document.getElementById("root").innerHTML = global.window.ReactDOMServer.renderToString(
@@ -137,13 +130,13 @@ export default class {
         chunks.forEach(chunk => {
             if (chunk.endsWith(".css")) {
                 const link = document.createElement("link");
-                link.href = `${this.config.rel.libRel}/${chunk}`
+                link.href = `__LIBS__/${chunk}`
                 link.rel = "stylesheet";
                 link.crossOrigin = "anonymous";
                 document.head.insertBefore(link, document.head.firstChild);
             } else {
                 if (this.config.ssr && _require && chunk.endsWith(".js"))//only require javascript
-                    requireUncached(join(this.config.pathToLib, chunk))
+                    requireUncached(join(this.config.outDir, chunk))
                 global.FireJSX.linkApi.preloadChunks([chunk]);
                 global.FireJSX.linkApi.loadChunks([chunk]);
             }

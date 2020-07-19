@@ -49,10 +49,10 @@ export default class {
             },
             entry: {},
             output: {
-                filename: `m[${this.$.config.pro ? "contenthash" : "hash"}].js`,
+                filename: `m[${this.$.pro ? "contenthash" : "hash"}].js`,
                 chunkFilename: "c[contenthash].js",
-                publicPath: this.$.rel.libRel + "/",
-                path: this.$.config.paths.lib,
+                publicPath: this.$.config.lib + "/",
+                path: this.$.config.dist,
                 //hot
                 hotUpdateMainFilename: 'hot/[hash].hot.json',
                 hotUpdateChunkFilename: 'hot/[hash].hot.js'

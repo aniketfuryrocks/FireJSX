@@ -3,11 +3,6 @@ import {parse as parseYaml} from "yaml";
 import * as fs from "fs"
 
 export interface Config {
-    pro?: boolean,          //production mode when true, dev mode when false
-    verbose?: boolean,
-    logMode?: "plain" | "silent",
-    disablePlugins?: boolean,
-    ssr?: boolean,
     paths?: {                   //paths absolute or relative to root
         root?: string,          //project root, default : process.cwd()
         src?: string,           //src dir, default : root/src
@@ -16,14 +11,12 @@ export interface Config {
         dist?: string,          //production dist, default : root/out/dist
         cache?: string,         //cache dir, default : root/out/.cache
         fly?: string,           //cache dir, default : root/out/fly
-        lib?: string,           //dir where chunks are exported, default : root/out/dist/lib
-        map?: string,           //dir where chunk map and page data is exported, default : root/out/dist/lib/map
         static?: string,        //dir where page static elements are stored eg. images, default : root/src/static
     },
+    lib?: string,               //name of the lib folder, defaults to lib
     prefix?: string,
     staticPrefix?: string,
     plugins?: [],
-    pages?: ExplicitPages,
     custom?: { [key: string]: any },
     devServer?: {
         gzip?: boolean
@@ -68,16 +61,8 @@ export default class {
         this.makeDirIfNotFound(config.paths.cache = config.paths.cache ? this.makeAbsolute(config.paths.root, config.paths.cache) : join(config.paths.out, ".cache"));
         this.makeDirIfNotFound(config.paths.fly = config.paths.fly ? this.makeAbsolute(config.paths.root, config.paths.fly) : join(config.paths.out, "fly"));
         this.makeDirIfNotFound(config.paths.dist = config.paths.dist ? this.makeAbsolute(config.paths.root, config.paths.dist) : join(config.paths.out, "dist"));
-        this.makeDirIfNotFound(config.paths.lib = config.paths.lib ? this.makeAbsolute(config.paths.root, config.paths.lib) : join(config.paths.dist, "lib"));
-        this.makeDirIfNotFound(config.paths.map = config.paths.map ? this.makeAbsolute(config.paths.root, config.paths.map) : join(config.paths.lib, "map"));
         //static dir
         this.undefinedIfNotFound(config.paths, "static", config.paths.root, config.paths.src, "static dir");
-        //pages
-        config.pages = config.pages || {};
-        this.throwIfNotFound("404 page", join(config.paths.pages, config.pages["404"] = config.pages["404"] || "404.js"), "Make sure you have a 404 page");
-        //ssr convert to boolean
-        config.ssr = !!config.ssr;
-        config.plugins = config.disablePlugins ? [] : config.plugins || [];
         //custom
         config.custom = config.custom || {};
         //server
@@ -85,11 +70,13 @@ export default class {
         config.devServer.gzip = config.devServer.gzip === undefined ? true : config.devServer.gzip
         //prefix
         config.prefix = config.prefix || "";
-
+        //static prefix
         config.staticPrefix = config.staticPrefix || (() => {
             const dirName = config.paths.static.substring(config.paths.static.lastIndexOf("/"))
             return config.prefix === "" ? dirName : (config.prefix + dirName)
         })()
+        //lib
+        config.lib = config.prefix + (config.lib || "/lib")
         return config;
     }
 

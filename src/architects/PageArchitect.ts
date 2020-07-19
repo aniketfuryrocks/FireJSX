@@ -40,7 +40,7 @@ export default class {
                 reject(undefined);
             else {
                 //log stats when verbose
-                if (this.$.config.verbose)
+                if (this.$.verbose)
                     this.$.outputFileSystem.writeFileSync(join(this.$.config.paths.out, "stat.json"), JSON.stringify(statJSON))
                 this.$.pageMap.forEach(page => {
                     page.chunks = {
