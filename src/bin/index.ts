@@ -17,6 +17,7 @@ import {resolve} from "path";
 
     const app = new FireJSX({
         outDir: config.paths.out,
+        cacheDir: config.paths.cache,
         prefix: config.prefix,
         pages: config.paths.pages,
         plugins: config.plugins,
@@ -29,6 +30,6 @@ import {resolve} from "path";
         verbose: !!args["--verbose"],
         outputFileSystem: (args["--disk"] || args["--export-fly"] || args["--export"]) ? undefined : new MemoryFS(),
     })
-
-    console.log(config)
+    await app.init()
+    cli.ok("Initialized")
 })()

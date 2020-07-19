@@ -32,6 +32,7 @@ export interface Params {
     ssr: boolean,
     cli: Cli,
     outDir: string,
+    cacheDir: string,
     lib: string,
     pages: string,
     prefix: string,

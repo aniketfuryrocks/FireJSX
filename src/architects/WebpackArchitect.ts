@@ -68,10 +68,7 @@ export default class {
                         {
                             loader: 'babel-loader',
                             options: {
-                                //TODO: cache dir
-/*
-                                cacheDirectory: join(this.$.config.paths.cache, ".babelCache"),
-*/
+                                cacheDirectory: join(this.$.cacheDir, "babelCache"),
                                 presets: [["@babel/preset-env", {
                                     loose: true,
                                     targets: {
@@ -139,7 +136,7 @@ export default class {
                 })
             }
         }
-        conf.entry[join(relative(this.$.config.paths.lib, this.$.config.paths.cache), "f")] = join(__dirname, "../web/externalGroupFull.js")
+        conf.entry[join(relative(this.$.outDir, this.$.cacheDir), "f")] = join(__dirname, "../web/externalGroupFull.js")
         return conf;
     }
 
