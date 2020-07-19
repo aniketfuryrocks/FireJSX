@@ -173,12 +173,7 @@ export default class {
     }
 
     async export() {
-        const promises = [];
-        /*
-                this.$.pageMap.forEach((page) => promises.push(this.buildPage(page, undefined)))
-        */
-        //wait for all export promises to resolve
-        await Promise.all(promises)
+        await this.buildPages()
         if (this.$.config.verbose)
             this.$.cli.ok("Calling postExport Hooks")
         //call postExport Hooks
@@ -186,7 +181,7 @@ export default class {
     }
 
     exportFly() {
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
             /*const map: FIREJSX_MAP = {
                 staticConfig: {
                     ...this.$.renderer.config,
