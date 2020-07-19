@@ -1,4 +1,4 @@
-import {isAbsolute, resolve} from "path"
+import {resolve} from "path"
 import {Args} from "./ArgsMapper";
 import {parse as parseYaml} from "yaml";
 import {mkdirp} from "fs-extra";
@@ -23,17 +23,15 @@ export interface Config {
     }
 }
 
-export function getUserConfig(path: string): Config | undefined | never {
-    const wasGiven = !!path;
-    if (path) {//tweak conf path
-        if (!isAbsolute(path))
-            path = resolve(path);//create absolute path
-    } else
-        path = resolve('firejsx.yml');
-
-    if (existsSync(path))
-        return parseYaml(readFileSync(path, "utf8").toString()) || {};
-    else if (wasGiven)
+export function getUserConfig(path: string): Config | never {
+    if (existsSync(resolve(path))) {
+        if (path.endsWith(".yml"))
+            return parseYaml(readFileSync(path, "utf8").toString()) || {};
+        else if (path.endsWith(".js"))
+            return require(path) || {}
+        else
+            throw new Error("Unknown config file type. Expected [.js, .yml]")
+    } else if (path)
         throw new Error(`Config not found at ${path}`)
 }
 
