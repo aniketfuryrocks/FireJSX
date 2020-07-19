@@ -4,7 +4,7 @@ window.onpopstate = function () {
 }
 
 FireJSX.linkApi = {
-    getMapUrl: url => `${FireJSX.mapRel}${url === "/" ? "/index" : url}.map.js`,
+    getMapUrl: url => `${FireJSX.prefix}/${FireJSX.lib}/map${url === "/" ? "/index" : url}.map.js`,
     loadMap: function (url) {
         const map_script = document.createElement("script");
         map_script.src = this.getMapUrl(url);
@@ -36,7 +36,7 @@ FireJSX.linkApi = {
         chunks.forEach(chunk => {
             const ele = document.createElement("link");
             ele.rel = rel;
-            ele.href = `${FireJSX.prefix}/${FireJSX.libRel}/${chunk}`;
+            ele.href = `${FireJSX.prefix}/${FireJSX.lib}/${chunk}`;
             ele.crossOrigin = "anonymous";
             if (chunk.endsWith(".js"))
                 ele.setAttribute("as", "script");
@@ -50,10 +50,10 @@ FireJSX.linkApi = {
             let ele;
             if (chunk.endsWith(".js")) {
                 ele = document.createElement("script");
-                ele.src = `${FireJSX.prefix}/${FireJSX.libRel}/${chunk}`
+                ele.src = `${FireJSX.prefix}/${FireJSX.lib}/${chunk}`
             } else {
                 ele = document.createElement("link");
-                ele.href = `${FireJSX.prefix}/${FireJSX.libRel}/${chunk}`
+                ele.href = `${FireJSX.prefix}/${FireJSX.lib}/${chunk}`
                 if (chunk.endsWith(".css"))
                     ele.rel = "stylesheet";
             }

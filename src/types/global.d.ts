@@ -3,6 +3,7 @@ declare module NodeJS {
         window: Global,
         FireJSX: {
             app?: any,
+            lib?: string,
             prefix?: string,
             staticPrefix?: string,
             map?: {

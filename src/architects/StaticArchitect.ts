@@ -27,6 +27,7 @@ export default class {
         // @ts-ignore
         global.window = global;
         global.FireJSX = {
+            lib: param.lib,
             isSSR: param.ssr,
             staticPrefix: this.config.staticPrefix,
             prefix: this.config.prefix
@@ -37,12 +38,12 @@ export default class {
         {
             const script = this.config.template.window.document.createElement("script");
             script.id = "__FireJSX_INIT__"
-            script.innerHTML =
-                `window.FireJSX={` +
-                `${param.ssr ? `,isHydrated:true` : ""},` +
-                `prefix:"${this.config.prefix}",` +
-                `staticPrefix:"${this.config.staticPrefix}"` +
-                "}";
+            script.innerHTML = `window.FireJSX =` + JSON.stringify({
+                isHydrated: param.ssr,
+                lib: param.lib,
+                prefix: param.prefix,
+                staticPrefix: param.staticPrefix
+            })
             this.config.template.window.document.head.appendChild(script);
         }
         {
