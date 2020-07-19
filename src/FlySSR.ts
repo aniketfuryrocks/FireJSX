@@ -10,12 +10,10 @@ import {JSDOM} from "jsdom";
 export default class {
     readonly pageMap: Map<string, Page> = new Map()
     readonly renderer: StaticArchitect;
-    readonly rootDir: string;
 
-    constructor(pathToLibDir: string, rootDir: string = process.cwd()) {
-        const firejsx_map: FIREJSX_MAP = JSON.parse(fs.readFileSync(join(this.rootDir = rootDir, pathToLibDir, "firejsx.map.json")).toString());
-        firejsx_map.staticConfig.pathToLib = join(rootDir, pathToLibDir);
-        this.rel = firejsx_map.staticConfig.rel
+    constructor(pathToLibDir: string) {
+        const firejsx_map: FIREJSX_MAP = JSON.parse(fs.readFileSync(`${pathToLibDir}/firejsx.map.json`).toString());
+        firejsx_map.staticConfig.outDir = pathToLibDir;
         this.renderer = new StaticArchitect(firejsx_map.staticConfig);
         for (const __page in firejsx_map.pageMap) {
             const page = new Page(__page);
