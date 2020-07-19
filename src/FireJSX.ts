@@ -181,8 +181,8 @@ export default class {
     }
 
     exportFly() {
-        return new Promise(resolve => {
-            /*const map: FIREJSX_MAP = {
+        return new Promise(async (resolve, reject) => {
+            const map: FIREJSX_MAP = {
                 staticConfig: {
                     ...this.$.renderer.config,
                     template: this.$.inputFileSystem.readFileSync(join(__dirname, "./web/template.html")).toString(),
@@ -190,39 +190,46 @@ export default class {
                 },
                 pageMap: {},
             }
+            this.$.config.paths.dist = this.$.config.paths.fly
+            await this.buildPages()
+            this.$.cli.ok("Build Complete")
             const promises = [];
-            for (const page of this.$.pageMap.values()) {
-                promises.push(new Promise(resolve =>
-                    this.$.pageArchitect.buildPage(page, () => {
-                        this.$.cli.ok(`Page : ${page.toString()}`)
-                        map.pageMap[page.toString()] = page.chunks;
-                        //copy each kind except css
-                        (<[keyof PageChunks]><unknown>['lazy', 'css', 'vendor']).forEach(kind =>
-                            // @ts-ignore
-                            page.chunks[kind].forEach(chunk => {
-                                const chunkPath = join(this.$.config.paths.lib, chunk);
-                                this.$.outputFileSystem.copyFile(chunkPath, join(this.$.config.paths.fly, chunk), err => {
-                                    resolve();
+            this.$.cli.ok("Removing Assets")
+            this.$.pageMap.forEach(page => {
+                map.pageMap[page.toString()] = page.chunks;
+                //move files
+                for (const chunkKey in page.chunks) {
+                    //loop through each chunk type
+                    page.chunks[chunkKey].forEach(chunk => {
+                        //move only js
+                        if (!chunk.endsWith(".js")) {
+                            const chunkPath = join(this.$.config.paths.lib, chunk);
+                            if (this.$.config.verbose)
+                                this.$.cli.log(`Deleting file ${chunkPath}`)
+                            promises.push(new Promise(res => {
+                                this.$.outputFileSystem.unlink(chunkPath, join(this.$.config.paths.fly, chunk), err => {
                                     if (err)
                                         throw new Error(`Error moving ${chunkPath} to ${this.$.config.paths.fly}`);
+                                    res();
                                 });
-                            })
-                        )
-                    }, (e) => {
-                        this.$.cli.error(`Error building page ${page}\n`, e);
-                        throw "";
+                            }))
+                        }
                     })
-                ))
-            }
+                }
+            })
+
             const fullExternalName = map.staticConfig.externals[0].substr(map.staticConfig.externals[0].lastIndexOf("/") + 1);
             this.$.outputFileSystem.rename(join(this.$.config.paths.lib, map.staticConfig.externals[0]), join(this.$.config.paths.fly, fullExternalName), err => {
                 if (err)
-                    throw new Error(`Error moving ${fullExternalName} to ${this.$.config.paths.fly}`);
+                    throw new Error(`Error moving ${fullExternalName} to ${this.$.config.paths.fly}\n${err}`);
                 map.staticConfig.externals[0] = fullExternalName;
-                Promise.all(promises).then(() =>
-                    this.$.outputFileSystem.writeFile(join(this.$.config.paths.fly, "firejsx.map.json"),
-                        JSON.stringify(map), resolve))
-            })*/
+                this.$.outputFileSystem.writeFile(join(this.$.config.paths.fly, "firejsx.map.json"),
+                    JSON.stringify(map), err => {
+                        if (err)
+                            throw new Error(`Error writing firejsx.map.json to ${this.$.config.paths.fly}\n${err}`);
+                    })
+                Promise.all(promises).then(resolve).catch(reject)
+            })
         })
     }
 
