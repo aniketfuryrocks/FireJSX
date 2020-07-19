@@ -50,8 +50,8 @@ export default class {
     private readonly $: $
 
     constructor(params: Params) {
-        if (params)
-            throw new TypeError("expected constructor args, found undefined")
+        if (!params)
+            throw new TypeError("expected params, found undefined")
         // @ts-ignore
         fs.mkdirp = mkdirp;
         //set $
@@ -192,7 +192,7 @@ export default class {
                 }
             })
 
-            const fullExternalName = map.staticConfig.externals[0].substr(map.staticConfig.externals[0].lastIndexOf("/") + 1);
+            /*const fullExternalName = map.staticConfig.externals[0].substr(map.staticConfig.externals[0].lastIndexOf("/") + 1);
             this.$.outputFileSystem.rename(join(this.$.config.paths.lib, map.staticConfig.externals[0]), join(this.$.config.paths.fly, fullExternalName), err => {
                 if (err)
                     throw new Error(`Error moving ${fullExternalName} to ${this.$.config.paths.fly}\n${err}`);
@@ -204,7 +204,7 @@ export default class {
                         else
                             resolve()
                     })
-            })
+            })*/
         })
     }
 
