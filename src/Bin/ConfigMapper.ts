@@ -1,10 +1,9 @@
 import {isAbsolute, join, resolve} from "path"
 import {Args} from "./ArgsMapper";
+import {parse as parseYaml} from "yaml";
 
 export interface Config {
     paths?: {                   //paths absolute or relative to root
-        root?: string,          //project root, default : process.cwd()
-        src?: string,           //src dir, default : root/src
         pages?: string,         //pages dir, default : root/src/pages
         out?: string,           //production dist, default : root/out
         dist?: string,          //production dist, default : root/out/dist
@@ -22,10 +21,35 @@ export interface Config {
     }
 }
 
-function parseConfig(config: Config = {}, args: Args = {_: []}): Config {
+export function getUserConfig(path: string): Config | undefined | never {
+    const wasGiven = !!path;
+    if (path) {//tweak conf path
+        if (!isAbsolute(path))
+            path = resolve(path);//create absolute path
+    } else
+        path = resolve('firejsx.yml');
+
+    if (this.inputFileSystem.existsSync(path))
+        return parseYaml(this.inputFileSystem.readFileSync(path, "utf8").toString()) || {};
+    else if (wasGiven)
+        throw new Error(`Config not found at ${path}`)
+}
+
+export function parseConfig(config: Config = {}, args: Args = {_: []}): Config {
+    const out = makeDirIfNotFound(resolve(args["--out"] || config.paths.out || "out"))
+    return {
+        paths: {
+            pages: throwIfNotFound("pages dir", resolve(args["--pages"] || config.paths.pages || "src/pages")),
+            out,
+            dist: makeDirIfNotFound(resolve(args["--dist"] || config.paths.dist || `${out}/dist`)),
+            fly: makeDirIfNotFound(resolve(args["--fly"] || config.paths.fly || `${out}/fly`)),
+            cache: makeDirIfNotFound(resolve(args["--cache"] || config.paths.cache || `${out}/.cache`)),
+            static: makeDirIfNotFound(resolve(args["--static"] || config.paths.static || `src/static`)),
+        },
+        lib: config.lib || "lib"
+    }
     config.paths = config.paths || {};
-    this.throwIfNotFound("root dir", config.paths.root = config.paths.root ? this.makeAbsolute(process.cwd(), config.paths.root) : process.cwd());
-    this.throwIfNotFound("src dir", config.paths.src = config.paths.src ? this.makeAbsolute(config.paths.root, config.paths.src) : join(config.paths.root, "src"));
+
     this.throwIfNotFound("pages dir", config.paths.pages = config.paths.pages ? this.makeAbsolute(config.paths.root, config.paths.pages) : join(config.paths.src, "pages"));
     //out
     this.makeDirIfNotFound(config.paths.out = config.paths.out ? this.makeAbsolute(config.paths.root, config.paths.out) : join(config.paths.root, "out"));
@@ -51,13 +75,14 @@ function parseConfig(config: Config = {}, args: Args = {_: []}): Config {
     return config;
 }
 
-function makeAbsolute(root: string, pathTo: string) {
-    return isAbsolute(pathTo) ? pathTo : resolve(root, pathTo);
+function makeAbsolute(pathTo: string) {
+    return isAbsolute(pathTo) ? pathTo : resolve(pathTo);
 }
 
-function throwIfNotFound(name: string, pathTo: string, extra = "") {
+function throwIfNotFound(name: string, pathTo: string, extra = ""): never | string {
     if (!this.inputFileSystem.existsSync(pathTo))
         throw new Error(`${name} not found. ${pathTo}\n${extra}`);
+    return pathTo
 }
 
 function undefinedIfNotFound<T extends { [key: string]: string }, K extends keyof T>(object: T, property: K, pathRoot: string, defaultRoot: string, msg: string) {
@@ -70,6 +95,9 @@ function undefinedIfNotFound<T extends { [key: string]: string }, K extends keyo
 
 function makeDirIfNotFound(path: string) {
     if (!this.outputFileSystem.existsSync(path))
-        this.outputFileSystem.mkdirp(path, () => {
+        this.outputFileSystem.mkdirp(path, e => {
+            if (e)
+                throw e
         });
+    return path
 }

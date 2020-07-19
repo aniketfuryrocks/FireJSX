@@ -21,17 +21,12 @@ export interface Args {
     "--log-mode"?: "silent" | "plain",  //Log Mode. silent(log error only) | plain(Log without styling i.e colors and symbols)
     "--disable-plugins"?: boolean,      //Disable plugins
     //path
-    "--root"?: string,      //project root, default : process.cwd()
-    "--src"?: string,       //src dir, default : root/src
     "--pages"?: string,     //pages dir, default : root/src/pages
     "--out"?: string,       //production dist, default : root/out
     "--dist"?: string,      //production dist, default : root/out/dist
     "--cache"?: string,     //cache dir, default : root/out/.cache
     "--fly"?: string,       //cache dir, default : root/out/fly
-    "--lib"?: string,       //dir where chunks are exported, default : root/out/dist/lib
-    "--map"?: string,       //dir where chunk map and page data is exported, default : root/out/dist/lib/map
     "--static"?: string,    //dir where page static elements are stored eg. images, default : root/src/static
-    "--plugins"?: string,   //plugins dir, default : root/src/plugins,
     _?: string[]
 }
 
@@ -62,17 +57,12 @@ export function getArgs(): Args {
         //plugins
         .option(["--disable-plugins"], Boolean, "disable plugins")
         //paths
-        .option(["--root"], String, "path to project root, default : process.cwd()")
-        .option(["--src"], String, "path to src dir, default : root/src")
         .option(["--pages"], String, "path to pages dir, default : root/src/pages")
         .option(["--out"], String, "path to output dir, default : root/out")
         .option(["--dist"], String, "path to dir where build is exported, default : root/out/dist")
         .option(["--cache"], String, "path to cache dir, default : root/out/.cache")
         .option(["--fly"], String, "path to dir where fly build is exported, default : root/out/fly")
-        .option(["--lib"], String, "path to dir where chunks are exported, default : root/out/dist/lib")
-        .option(["--map"], String, "path to dir where chunk map and page data is exported, default : root/out/dist/lib/map")
         .option(["--static"], String, "path to dir where static assets are stored eg. images, default : root/src/static")
-        .option(["--plugins"], String, "path to plugins dir, default : root/src/plugins")
         .example("firejsx -esp", "export server side rendered production build")
         .example("firejsx -dsp", "write to disk when using dev server with server side rendered production build")
         .smartParse()
