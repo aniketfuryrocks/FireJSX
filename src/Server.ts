@@ -22,14 +22,6 @@ export default class {
         this.$.cli.ok("GZIP :", gzip)
         if (gzip)
             server.use(compression())
-        //turn off caching
-        server.use((req, res, next) => {
-            res.setHeader('Surrogate-Control', 'no-store');
-            res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-            res.setHeader('Pragma', 'no-cache');
-            res.setHeader('Expires', '0');
-            next();
-        })
         //init plugins
         this.$.hooks.initServer.forEach(initServer => initServer(server))
         //watch changes
