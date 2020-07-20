@@ -35,7 +35,7 @@ export default class {
         }))
 
         //routing
-        if (this.$.staticPrefix)
+        if (staticDir)
             server.use(this.$.staticPrefix, express.static(staticDir));
         server.get(`/${this.$.lib}/*`, this.get.bind(this))
         server.get(`/${this.$.lib}/map/*`, this.get.bind(this))

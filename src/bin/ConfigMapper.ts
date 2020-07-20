@@ -70,7 +70,7 @@ export function parseConfig(config: Config = {}, args: Args = {_: []}): TrimmedC
             gzip: args["--disable-gzip"] ? false : config.devServer.gzip === undefined ? true : config.devServer.gzip
         },
         custom: config.custom || {},
-        plugins: config.plugins
+        plugins: args["--disable-plugins"] ? [] : config.plugins || []
     }
 }
 

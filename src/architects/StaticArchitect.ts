@@ -103,7 +103,7 @@ export default class {
             }
             //require
             if (this.config.ssr)
-                page.chunks.async.forEach(chunk => requireUncached(join(`${this.config.outDir}/${this.config.lib}`, chunk)))
+                page.chunks.async.forEach(chunk => requireUncached(`${this.config.outDir}/${this.config.lib}/${chunk}`))
             //static render
             if (this.config.ssr) {
                 document.getElementById("root").innerHTML = global.window.ReactDOMServer.renderToString(

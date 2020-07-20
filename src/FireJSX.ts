@@ -133,11 +133,11 @@ export default class {
                                 //await promises
                                 await Promise.all([
                                     //write html file
-                                    writeFileRecursively(join(this.$.outDir, `${path}.html`),
+                                    writeFileRecursively(`${this.$.outDir}/${path}.html`,
                                         dom.serialize(),
                                         this.$.outputFileSystem),
                                     //write map
-                                    writeFileRecursively(join(this.$.outDir, this.$.lib, `/map/${path}.map.js`),
+                                    writeFileRecursively(`${this.$.outDir}/${this.$.lib}/map/${path}.map.js`,
                                         `FireJSX.map=${JSON.stringify({
                                             content,
                                             chunks: page.chunks
@@ -170,7 +170,7 @@ export default class {
             const map: FIREJSX_MAP = {
                 staticConfig: {
                     ...this.$.renderer.config,
-                    template: this.$.inputFileSystem.readFileSync(join(__dirname, "./web/template.html")).toString(),
+                    template: this.$.inputFileSystem.readFileSync(join(__dirname, "web/template.html")).toString(),
                     ssr: true
                 },
                 pageMap: {},

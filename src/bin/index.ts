@@ -12,7 +12,7 @@ const cli = new Cli(args["--log-mode"]);
 
 (async () => {
     const config = parseConfig((() => {
-        const config = getUserConfig(args["--conf"] || 'firejsx.yml')
+        const config = getUserConfig(args["--conf"] || resolve('firejsx.yml'))
         cli.ok(`Using config : ${config ? args["--conf"] || resolve('firejsx.yml') : "default"}`)
         return config || {}
     })(), args)
