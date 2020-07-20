@@ -132,7 +132,7 @@ export default class {
         chunks.forEach(chunk => {
             if (chunk.endsWith(".css")) {
                 const link = document.createElement("link");
-                link.href = `__LIBS__/${chunk}`
+                link.href = `${this.config.lib}/${chunk}`
                 link.rel = "stylesheet";
                 link.crossOrigin = "anonymous";
                 document.head.insertBefore(link, document.head.firstChild);
