@@ -6,25 +6,23 @@ export async function mapPlugin(plugin: string, $: $) {
     const plug = <Plugin>require(require.resolve(plugin, {paths: [process.cwd()]})).default
     if (plug)
         await plug({
-            initWebpack: (page, callback) => check('initWebpack', plugin, $, page, callback),
             onBuild: (page, callback) => check('onBuild', plugin, $, page, callback, false),
-            postRender: (page, callback) => check('postRender', plugin, $, page, callback),
-            initServer: (callback) => {
-                if (!callback)
-                    throw new Error(`Plugin ${plugin} provided not callback for initServer hook`)
-                $.hooks.initServer.push(callback)
-            },
-            postExport: (callback) => {
-                if (!callback)
-                    throw new Error(`Plugin ${plugin} provided not callback for postExport hook`)
-                $.hooks.postExport.push(callback)
-            }
+            postRender: (page, callback) => check('postRender', plugin, $, page, callback, true),
+            initWebpack: callback => checkCallback($, 'initWebpack', plugin, callback),
+            initServer: callback => checkCallback($, 'initServer', plugin, callback),
+            postExport: callback => checkCallback($, 'postExport', plugin, callback),
         }, $)
     else
         throw new Error(`Plugin ${plugin} has no default export`)
 }
 
-function check(action: keyof Actions, plugin, $, page: string, callback, wildcard = true): void {
+function checkCallback($, name, plugin, callback) {
+    if (!callback)
+        throw new Error(`Plugin ${plugin} provided not callback for ${name} hook`)
+    $.hooks[name].push(callback)
+}
+
+function check(action: keyof Actions, plugin, $, page: string, callback, wildcard: boolean): void {
     if (!page)
         throw new Error(`No page provided by ${action} method of plugin ${plugin}`)
     if (!callback)

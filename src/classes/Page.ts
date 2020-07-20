@@ -8,7 +8,6 @@ export default class {
     constructor(page: string) {
         this.name = page;
         this.hooks = {
-            initWebpack: [],
             postRender: [],
             onBuild: []
         }

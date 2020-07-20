@@ -19,7 +19,7 @@ interface Actions {
     //Globals and Page
     postRender: (page: string, callback: dom_Callback) => void
     //Page
-    initWebpack: (page: string, callback: initWebpack_Callback) => void,
+    initWebpack: (callback: initWebpack_Callback) => void,
     onBuild: (page: string, callback: onBuild_Callback) => void,
 }
 
@@ -27,7 +27,6 @@ interface Actions {
 type Plugin = (actions: Actions, $: $) => void
 
 interface PageHooks {
-    initWebpack: initWebpack_Callback[],
     postRender: dom_Callback[],
     onBuild: onBuild_Callback[]
 }
