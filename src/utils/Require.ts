@@ -1,4 +1,7 @@
+import {resolve} from "path";
+
 export function requireUncached(module) {
-    delete require.cache[require.resolve(module)];
+    module = resolve(module)
+    delete require.cache[module];
     return require(module);
 }

@@ -3,6 +3,7 @@ import Page from "../classes/Page";
 import {JSDOM} from "jsdom"
 import {requireUncached} from "../utils/Require";
 import {Helmet} from "react-helmet"
+import {resolve} from "path";
 
 export interface StaticConfig {
     lib: string,
@@ -138,7 +139,7 @@ export default class {
                 document.head.insertBefore(link, document.head.firstChild);
             } else {
                 if (this.config.ssr && _require && chunk.endsWith(".js"))//only require javascript
-                    requireUncached(join(`${this.config.outDir}/${this.config.lib}`, chunk))
+                    requireUncached(join(this.config.outDir, this.config.lib, chunk))
                 global.FireJSX.linkApi.preloadChunks([chunk]);
                 global.FireJSX.linkApi.loadChunks([chunk]);
             }

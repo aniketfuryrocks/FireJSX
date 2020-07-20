@@ -28,7 +28,7 @@ const cli = new Cli(args["--log-mode"]);
         lib: config.lib,
         cli,
         args,
-        pro: !!args["--pro"],
+        pro: args["--export-fly"] ? true : !!args["--pro"],
         ssr: !!args["--ssr"],
         staticPrefix: config.staticPrefix,
         verbose: !!args["--verbose"],

@@ -13,7 +13,6 @@ import {createMap} from "./mappers/PathMapper";
 import WebpackArchitect from "./architects/WebpackArchitect";
 import {GlobalHooks} from "./types/Plugin";
 import {Args} from "./bin/ArgsMapper";
-import {requireUncached} from "./utils/Require";
 
 export type WebpackConfig = Configuration;
 
@@ -94,7 +93,7 @@ export default class {
             ssr: this.$.ssr,
             prefix: this.$.prefix,
             staticPrefix: this.$.staticPrefix,
-            fullExternalPath: join(`${this.$.outDir}/${this.$.lib}`, externals[0])
+            fullExternalPath: join(this.$.outDir, this.$.lib, externals[0])
         });
         //mapPlugins after everything is initialized
         if (this.$.plugins.length > 0) {
@@ -138,7 +137,7 @@ export default class {
                                         dom.serialize(),
                                         this.$.outputFileSystem),
                                     //write map
-                                    writeFileRecursively(join(this.$.outDir, `${this.$.lib}/map/${path}.map.js`),
+                                    writeFileRecursively(join(this.$.outDir, this.$.lib, `/map/${path}.map.js`),
                                         `FireJSX.map=${JSON.stringify({
                                             content,
                                             chunks: page.chunks
@@ -176,45 +175,45 @@ export default class {
                 },
                 pageMap: {},
             }
-            await this.buildPages().catch(err => {
+            await this.$.pageArchitect.buildPages(() => {
+                this.$.cli.ok("Build Complete")
+                this.$.cli.ok("Removing Assets")
+                this.$.pageMap.forEach(page => {
+                    map.pageMap[page.toString()] = page.chunks;
+                    //move files
+                    for (const chunkKey in page.chunks) {
+                        //loop through each chunk type
+                        page.chunks[chunkKey].forEach(chunk => {
+                            //move only js
+                            if (!chunk.endsWith(".js")) {
+                                const chunkPath = join(this.$.outDir, this.$.lib, chunk)
+                                //pages share common chunks
+                                if (this.$.outputFileSystem.existsSync(chunkPath)) {
+                                    if (this.$.verbose)
+                                        this.$.cli.log(`Deleting file ${chunk}`)
+                                    //unlink sync to prevent deleting same file twice
+                                    this.$.outputFileSystem.unlinkSync(chunkPath);
+                                }
+                            }
+                        })
+                    }
+                })
+
+                map.staticConfig.externals[0] = map.staticConfig.externals[0].substr(map.staticConfig.externals[0].lastIndexOf("/") + 1);
+                this.$.outputFileSystem.rename(this.$.renderer.config.fullExternalPath, join(this.$.outDir, map.staticConfig.externals[0]), err => {
+                    if (err)
+                        throw new Error(`Error moving ${map.staticConfig.externals[0]} to ${this.$.outDir}\n${err}`);
+                    this.$.outputFileSystem.writeFile(join(this.$.outDir, "firejsx.map.json"),
+                        JSON.stringify(map), err => {
+                            if (err)
+                                reject(err)
+                            else
+                                resolve()
+                        })
+                })
+            }, err => {
                 throw err
             })
-            this.$.cli.ok("Build Complete")
-            this.$.cli.ok("Removing Assets")
-            this.$.pageMap.forEach(page => {
-                map.pageMap[page.toString()] = page.chunks;
-                //move files
-                for (const chunkKey in page.chunks) {
-                    //loop through each chunk type
-                    page.chunks[chunkKey].forEach(chunk => {
-                        //move only js
-                        if (!chunk.endsWith(".js")) {
-                            if (this.$.verbose)
-                                this.$.cli.log(`Deleting file ${chunk}`)
-
-                            const chunkPath = join(this.$.outDir, chunk)
-                            //pages share common chunks
-                            if (this.$.outputFileSystem.existsSync(chunkPath))
-                                //unlink sync to prevent deleting same file twice
-                                this.$.outputFileSystem.unlinkSync(chunkPath);
-                        }
-                    })
-                }
-            })
-
-            /*const fullExternalName = map.staticConfig.externals[0].substr(map.staticConfig.externals[0].lastIndexOf("/") + 1);
-            this.$.outputFileSystem.rename(join(this.$.config.paths.lib, map.staticConfig.externals[0]), join(this.$.config.paths.fly, fullExternalName), err => {
-                if (err)
-                    throw new Error(`Error moving ${fullExternalName} to ${this.$.config.paths.fly}\n${err}`);
-                map.staticConfig.externals[0] = fullExternalName;
-                this.$.outputFileSystem.writeFile(join(this.$.config.paths.fly, "firejsx.map.json"),
-                    JSON.stringify(map), err => {
-                        if (err)
-                            reject(err)
-                        else
-                            resolve()
-                    })
-            })*/
         })
     }
 
