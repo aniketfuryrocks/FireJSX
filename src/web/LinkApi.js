@@ -20,7 +20,7 @@ FireJSX.linkApi = {
         };
         map_script.onerror = () => {
             document.head.removeChild(map_script);
-            this.loadMap("404.jsx").onload = map_script.onload;
+            this.loadMap("/404").onload = map_script.onload;
         };
     },
     loadPage: function (url, pushState = true) {

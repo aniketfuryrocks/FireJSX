@@ -85,7 +85,7 @@ export default class {
         // @ts-ignore
         const pathname = decodeURI(req._parsedUrl.pathname).replace(this.$.prefix, "")
         // @ts-ignore
-        if (req.method === "GET" && !req._parsedUrl.pathname.startsWith("/__webpack_hmr/")) {
+        if (req.method === "GET" && !req._parsedUrl.pathname.startsWith("/__webpack_hmr/"))
             try {
                 res.contentType("text/html")
                 let path = `${this.$.outDir}/${pathname}`;
@@ -94,14 +94,23 @@ export default class {
                 else if (this.$.outputFileSystem.existsSync(path + ".html"))
                     res.end(this.$.outputFileSystem.readFileSync(path + ".html"))
                 else {
-                    const _404 = this.$.pageMap.get("404.jsx").toString();
-                    res.end(this.$.outputFileSystem.readFileSync(join(this.$.outDir, _404.substring(0, _404.lastIndexOf(".")) + ".html")));
+                    const page404 = this.$.pageMap.get("404.jsx")
+                    if (page404)
+                        this.$.outputFileSystem.readFile(join(this.$.outDir, "404.html"), (err, data) => {
+                            if (err)
+                                res.end(err)
+                            else
+                                res.end(data)
+                        })
+                    else
+                        res.end("<h1>404</h1><p>404.jsx page not found. Link fallback will be unsuccessful</p>")
                 }
             } catch (e) {
                 this.$.cli.error("Error serving HTML", pathname, e);
                 res.status(500);
+                res.end(`<h1>500</h1><p>${e}</p>`)
             }
-        } else
+        else
             next()
     }
 }
