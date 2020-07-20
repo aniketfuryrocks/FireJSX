@@ -96,10 +96,10 @@ export default class {
                 }
                 //external group semi
                 this.loadChunks([this.config.externals[1]], false)
-                //initial
-                this.loadChunks(page.chunks.initial)
                 //entry
                 this.loadChunks(page.chunks.entry)
+                //initial
+                this.loadChunks(page.chunks.initial)
             }
             //require
             if (this.config.ssr)

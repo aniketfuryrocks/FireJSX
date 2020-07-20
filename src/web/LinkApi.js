@@ -14,8 +14,8 @@ FireJSX.linkApi = {
     preloadPage: function (url, callback) {
         const map_script = this.loadMap(url);
         map_script.onload = () => {
-            this.preloadChunks(FireJSX.map.chunks.initial, "prefetch");
             this.preloadChunks(FireJSX.map.chunks.entry, "prefetch");
+            this.preloadChunks(FireJSX.map.chunks.initial, "prefetch");
             callback();
         };
         map_script.onerror = () => {
@@ -25,10 +25,8 @@ FireJSX.linkApi = {
     },
     loadPage: function (url, pushState = true) {
         window.webpackJsonp = undefined
-        const script = document.createElement("script");
-        script.src = `${FireJSX.prefix}/${FireJSX.lib}/${FireJSX.map.chunks.entry[0]}`
+        this.loadChunks(FireJSX.map.chunks.entry);
         this.loadChunks(FireJSX.map.chunks.initial);
-        document.body.appendChild(script);
         if (pushState)
             window.history.pushState(undefined, undefined, FireJSX.prefix + url);
     },
