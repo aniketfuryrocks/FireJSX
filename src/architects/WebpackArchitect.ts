@@ -7,9 +7,11 @@ import * as webpack from "webpack";
 export default class {
     private readonly $: $;
     public readonly config: WebpackConfig;
+    public readonly proOrSSR: boolean
 
     constructor($: $) {
         this.$ = $;
+        this.proOrSSR = $.ssr || $.pro
         this.config = {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
@@ -49,7 +51,7 @@ export default class {
             },
             entry: {},
             output: {
-                filename: `m[${this.$.pro ? "contenthash" : "hash"}].js`,
+                filename: `m[${this.proOrSSR ? "contenthash" : "hash"}].js`,
                 chunkFilename: "c[contenthash].js",
                 publicPath: `${this.$.prefix}/${this.$.lib}/`,
                 path: `${this.$.outDir}/${this.$.lib}/`,
@@ -76,7 +78,7 @@ export default class {
                                     },
                                 }], "@babel/preset-react"],
                                 plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime",
-                                    ...(this.$.pro ? [] : ["react-hot-loader/babel"])]
+                                    ...(this.proOrSSR ? [] : ["react-hot-loader/babel"])]
                             }
                         }
                     ]
@@ -84,7 +86,7 @@ export default class {
                     {
                         test: /\.css$/,
                         use: [
-                            ...(this.$.pro ? [MiniCssExtractPlugin.loader] : ['style-loader']),
+                            ...(this.proOrSSR ? [MiniCssExtractPlugin.loader] : ['style-loader']),
                             {
                                 loader: 'css-loader',
                                 options: {
@@ -101,7 +103,7 @@ export default class {
                     filename: "c[contentHash].css",
                     chunkFilename: "c[contentHash].css"
                 }),
-                ...(this.$.pro ? [] : [
+                ...(this.proOrSSR ? [] : [
                     new webpack.HotModuleReplacementPlugin({
                         multiStep: true
                     }),
@@ -111,7 +113,7 @@ export default class {
                 ])
             ],
             resolve: {
-                alias: (this.$.pro ? {} : {'firejsx/Hot': 'react-hot-loader/root'}),
+                alias: (this.proOrSSR ? {} : {'firejsx/Hot': 'react-hot-loader/root'}),
             }
         }
     }
@@ -122,7 +124,7 @@ export default class {
             mode: process.env.NODE_ENV as "development" | "production" | "none",
             entry: {
                 "e": [
-                    ...(this.$.pro ? [] : ['react-hot-loader/patch']),
+                    ...(this.proOrSSR ? [] : ['react-hot-loader/patch']),
                     join(__dirname, "../web/externalGroupSemi.js")
                 ]
             },
@@ -131,12 +133,14 @@ export default class {
                 filename: "[name][contentHash].js"
             },
             resolve: {
-                alias: (this.$.pro ? {} : {
+                alias: (this.proOrSSR ? {} : {
                     'react-dom': '@hot-loader/react-dom',
                 })
             }
         }
-        conf.entry[join(relative(`${this.$.outDir}/${this.$.lib}/`, this.$.cacheDir), "f")] = join(__dirname, "../web/externalGroupFull.js")
+        //only create full when ssr
+        if (this.$.ssr)
+            conf.entry[join(relative(`${this.$.outDir}/${this.$.lib}/`, this.$.cacheDir), "f")] = join(__dirname, "../web/externalGroupFull.js")
         return conf;
     }
 
@@ -144,7 +148,7 @@ export default class {
         this.$.pageMap.forEach(page => {
             this.config.entry[page.toString()] = [
                 join(this.$.pages, page.toString()),
-                ...(this.$.pro ? [] : [
+                ...(this.proOrSSR ? [] : [
                     `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`]),
             ]
         })

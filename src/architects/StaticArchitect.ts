@@ -3,7 +3,6 @@ import Page from "../classes/Page";
 import {JSDOM} from "jsdom"
 import {requireUncached} from "../utils/Require";
 import {Helmet} from "react-helmet"
-import {resolve} from "path";
 
 export interface StaticConfig {
     lib: string,
@@ -59,7 +58,7 @@ export default class {
         if (param.ssr)
             requireUncached(param.fullExternalPath)
         else //just load LinkApi
-            requireUncached("../web/LinkApi")
+            requireUncached(__dirname,"../web/LinkApi")
     }
 
     render(page: Page, path: string, content: any): Promise<JSDOM> {
@@ -96,7 +95,7 @@ export default class {
                     document.body.appendChild(script);
                 }
                 //external group semi
-                this.loadChunks([this.config.externals[1]], false)
+                this.loadChunks([this.config.externals[this.config.ssr ? 1 : 0]], false)
                 //entry
                 this.loadChunks(page.chunks.entry)
                 //initial

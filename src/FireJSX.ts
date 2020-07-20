@@ -86,7 +86,7 @@ export default class {
         this.$.cli.log("Building Externals");
         const externals = await this.$.pageArchitect.buildExternals()
         this.$.renderer = new StaticArchitect({
-            template: this.$.inputFileSystem.readFileSync(join(__dirname, "./web/template.html")).toString(),
+            template: this.$.inputFileSystem.readFileSync(join(__dirname, "web/template.html")).toString(),
             externals,
             lib: this.$.lib,
             outDir: this.$.outDir,

@@ -29,7 +29,7 @@ const cli = new Cli(args["--log-mode"]);
         cli,
         args,
         pro: args["--export-fly"] ? true : !!args["--pro"],
-        ssr: !!args["--ssr"],
+        ssr: args["--export-fly"] ? true : !!args["--ssr"],
         staticPrefix: config.staticPrefix,
         verbose: !!args["--verbose"],
         outputFileSystem: (args["--disk"] || args["--export-fly"] || args["--export"]) ? undefined : new MemoryFS(),
