@@ -74,6 +74,9 @@ export default class {
         process.env.BABEL_ENV = process.env.NODE_ENV = params.pro ? 'production' : 'development';
         //pageMap
         this.$.pageMap = createMap(this.$.pages, this.$.inputFileSystem);
+        //check 404.jsx
+        if(this.$.pageMap.has("404.jsx"))
+            this.$.cli.warn("404.jsx page not found. Route fallback will be unsuccessful")
         //pageArchitect
         this.$.pageArchitect = new PageArchitect(this.$, new WebpackArchitect(this.$), !!params.outputFileSystem, !!params.inputFileSystem);
     }
