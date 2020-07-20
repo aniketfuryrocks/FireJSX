@@ -11,7 +11,8 @@ export interface StaticConfig {
     externals: string[],
     ssr: boolean,
     prefix: string,
-    staticPrefix: string
+    staticPrefix: string,
+    fullExternalPath: string
 }
 
 export interface StaticData extends StaticConfig {
@@ -55,7 +56,7 @@ export default class {
         //require uncached to prevent bugs in lambda because node clears these 2 when a new request is assigned
         //if ssr then load react,react dom,LinkApi,ReactDOMServer chunks
         if (param.ssr)
-            requireUncached(join(this.config.outDir, this.config.externals[0]));
+            requireUncached(param.fullExternalPath)
         else //just load LinkApi
             requireUncached("../web/LinkApi")
     }
@@ -102,7 +103,7 @@ export default class {
             }
             //require
             if (this.config.ssr)
-                page.chunks.async.forEach(chunk => requireUncached(join(this.config.outDir, chunk)))
+                page.chunks.async.forEach(chunk => requireUncached(join(`${this.config.outDir}/${this.config.lib}`, chunk)))
             //static render
             if (this.config.ssr) {
                 document.getElementById("root").innerHTML = global.window.ReactDOMServer.renderToString(
@@ -137,7 +138,7 @@ export default class {
                 document.head.insertBefore(link, document.head.firstChild);
             } else {
                 if (this.config.ssr && _require && chunk.endsWith(".js"))//only require javascript
-                    requireUncached(join(this.config.outDir, chunk))
+                    requireUncached(join(`${this.config.outDir}/${this.config.lib}`, chunk))
                 global.FireJSX.linkApi.preloadChunks([chunk]);
                 global.FireJSX.linkApi.loadChunks([chunk]);
             }

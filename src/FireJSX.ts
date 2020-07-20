@@ -13,6 +13,7 @@ import {createMap} from "./mappers/PathMapper";
 import WebpackArchitect from "./architects/WebpackArchitect";
 import {GlobalHooks} from "./types/Plugin";
 import {Args} from "./bin/ArgsMapper";
+import {requireUncached} from "./utils/Require";
 
 export type WebpackConfig = Configuration;
 
@@ -75,7 +76,7 @@ export default class {
         //pageMap
         this.$.pageMap = createMap(this.$.pages, this.$.inputFileSystem);
         //check 404.jsx
-        if(!this.$.pageMap.has("404.jsx"))
+        if (!this.$.pageMap.has("404.jsx"))
             this.$.cli.warn("404.jsx page not found. Link fallback will be unsuccessful")
         //pageArchitect
         this.$.pageArchitect = new PageArchitect(this.$, new WebpackArchitect(this.$), !!params.outputFileSystem, !!params.inputFileSystem);
@@ -84,14 +85,16 @@ export default class {
     async init() {
         //build externals
         this.$.cli.log("Building Externals");
+        const externals = await this.$.pageArchitect.buildExternals()
         this.$.renderer = new StaticArchitect({
             template: this.$.inputFileSystem.readFileSync(join(__dirname, "./web/template.html")).toString(),
-            externals: await this.$.pageArchitect.buildExternals(),
+            externals,
             lib: this.$.lib,
             outDir: this.$.outDir,
             ssr: this.$.ssr,
             prefix: this.$.prefix,
-            staticPrefix: this.$.staticPrefix
+            staticPrefix: this.$.staticPrefix,
+            fullExternalPath: join(`${this.$.outDir}/${this.$.lib}`, externals[0])
         });
         //mapPlugins after everything is initialized
         if (this.$.plugins.length > 0) {
