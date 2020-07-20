@@ -137,13 +137,17 @@ export default class {
                                         dom.serialize(),
                                         this.$.outputFileSystem),
                                     //write map
-                                    writeFileRecursively(`${this.$.outDir}/${this.$.lib}/map/${path}.map.js`,
-                                        `FireJSX.map=${JSON.stringify({
-                                            content,
-                                            chunks: page.chunks
-                                        })}`,
-                                        this.$.outputFileSystem
-                                    )
+                                    (() => {
+                                        const li = path.lastIndexOf("/index")
+                                        const _path = li <= 0 ? path : path.substring(0, li)
+                                        writeFileRecursively(`${this.$.outDir}/${this.$.lib}/map${_path}.map.js`,
+                                            `FireJSX.map=${JSON.stringify({
+                                                content,
+                                                chunks: page.chunks
+                                            })}`,
+                                            this.$.outputFileSystem
+                                        )
+                                    })()
                                 ])
                             })())
                         }
