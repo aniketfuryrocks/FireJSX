@@ -3,6 +3,7 @@ import WebpackArchitect from "./WebpackArchitect";
 import {$, WebpackConfig} from "../FireJSX";
 import {Compiler} from "webpack";
 import {join} from "path";
+import {writeFileSync} from "fs";
 
 export default class {
     private readonly $: $;
@@ -41,7 +42,7 @@ export default class {
             else {
                 //log stats when verbose
                 if (this.$.verbose)
-                    this.$.outputFileSystem.writeFileSync(join(this.$.cacheDir, "stat.json"), JSON.stringify(statJSON))
+                    writeFileSync(join(this.$.cacheDir, "stat.json"), JSON.stringify(statJSON))
                 this.$.pageMap.forEach(page => {
                     page.chunks = {
                         async: [],
