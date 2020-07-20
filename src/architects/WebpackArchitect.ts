@@ -113,6 +113,7 @@ export default class {
                 ])
             ],
             resolve: {
+                extensions: ['.wasm', '.mjs', '.js', '.json', '.jsx'],
                 alias: (this.proOrSSR ? {} : {
                     'firejsx/Hot': 'react-hot-loader/root',
                     'firejsx/Hot.js': 'react-hot-loader/root'
