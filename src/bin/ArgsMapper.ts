@@ -22,11 +22,8 @@ export interface Args {
     "--disable-plugins"?: boolean,      //Disable plugins
     //path
     "--pages"?: string,     //pages dir, default : root/src/pages
-    "--out"?: string,       //production dist, default : root/out
     "--dist"?: string,      //production dist, default : root/out/dist
-    "--cache"?: string,     //cache dir, default : root/out/.cache
     "--fly"?: string,       //cache dir, default : root/out/fly
-    "--static"?: string,    //dir where page static elements are stored eg. images, default : root/src/static
     _?: string[]
 }
 
@@ -58,11 +55,8 @@ export function getArgs(): Args {
         .option(["--disable-plugins"], Boolean, "disable plugins")
         //paths
         .option(["--pages"], String, "path to pages dir, default : root/src/pages")
-        .option(["--out"], String, "path to output dir, default : root/out")
         .option(["--dist"], String, "path to dir where build is exported, default : root/out/dist")
-        .option(["--cache"], String, "path to cache dir, default : root/out/.cache")
         .option(["--fly"], String, "path to dir where fly build is exported, default : root/out/fly")
-        .option(["--static"], String, "path to dir where static assets are stored eg. images, default : root/src/static")
         .example("firejsx -esp", "export server side rendered production build")
         .example("firejsx -dsp", "write to disk when using dev server with server side rendered production build")
         .smartParse()

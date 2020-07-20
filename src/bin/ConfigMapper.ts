@@ -22,20 +22,20 @@ export interface TrimmedConfig {
 export interface Config {
     paths?: {                   //paths absolute or relative to root
         pages?: string,         //pages dir, default : root/src/pages
-        out?: string,           //production dist, default : root/out
+        out?: string,           //output dir, default : root/out
         dist?: string,          //production dist, default : root/out/dist
         cache?: string,         //cache dir, default : root/out/.cache
-        fly?: string,           //cache dir, default : root/out/fly
-        disk?: string,
+        fly?: string,           //fly export dir, default : root/out/fly
+        disk?: string,          //disk dit, default : root/out/disk
         static?: string,        //dir where page static elements are stored eg. images, default : root/src/static
     },
     lib?: string,               //name of the lib folder, defaults to lib
-    prefix?: string,
-    staticPrefix?: string,
-    plugins?: [],
-    custom?: { [key: string]: any },
-    devServer?: {
-        gzip?: boolean
+    prefix?: string,            //path prefix
+    staticPrefix?: string,      //static prefix
+    plugins?: [],               //plugin
+    custom?: { [key: string]: any }, //config fot plugins
+    devServer?: {               //dev server
+        gzip?: boolean          //compress gzip
     }
 }
 
