@@ -113,7 +113,10 @@ export default class {
                 ])
             ],
             resolve: {
-                alias: (this.proOrSSR ? {} : {'firejsx/Hot': 'react-hot-loader/root'}),
+                alias: (this.proOrSSR ? {} : {
+                    'firejsx/Hot': 'react-hot-loader/root',
+                    'firejsx/Hot.js': 'react-hot-loader/root'
+                }),
             }
         }
     }

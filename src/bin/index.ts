@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import {getUserConfig, parseConfig} from "./ConfigMapper"
 import {getArgs, parseArgs} from "./ArgsMapper";
 import * as MemoryFS from "memory-fs";
