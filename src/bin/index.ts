@@ -9,7 +9,7 @@ import Server from "../Server";
 const args = parseArgs(getArgs())
 const cli = new Cli(args["--log-mode"]);
 
-(async () => {
+async function main() {
     const config = parseConfig((() => {
         const [path, config] = getUserConfig(args["--conf"])
         cli.ok(`Using ${path} config`)
@@ -55,4 +55,12 @@ const cli = new Cli(args["--log-mode"]);
         cli.ok("Finished in", (new Date().getTime() - startTime) / 1000 + "s");
     } else
         await new Server(app).init(args["--port"], args["--addr"], config.devServer)
-})().catch(cli.error)
+}
+
+let doneOnce = false;
+const mainInterval = setInterval(() => {
+    if (!doneOnce) {
+        doneOnce = true;
+        main().finally(() => clearInterval(mainInterval)).catch(cli.error)
+    }
+}, 200)
