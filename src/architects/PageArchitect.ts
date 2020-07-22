@@ -33,8 +33,6 @@ export default class {
     }
 
     buildPages(resolve: () => void, reject: (err: any | undefined) => void) {
-        // ./src/pages
-        const pageRel = `.${this.$.pages.replace(process.cwd(), "")}/`
         this.build(this.webpackArchitect.forPages(), stat => {
             const statJSON = stat.toJson()
             if (this.logStat(statJSON))//true if errors
@@ -43,26 +41,28 @@ export default class {
                 //log stats when verbose
                 if (this.$.verbose)
                     writeFileSync(join(this.$.cacheDir, "stat.json"), JSON.stringify(statJSON))
-                this.$.pageMap.forEach(page => {
+
+                const chunksMap = {};
+                statJSON.chunks.forEach(chunk => chunksMap[chunk.id] = chunk)
+
+                statJSON.entrypoints = {}
+                for (const entrypoint in statJSON.entrypoints) {
+                    const page = this.$.pageMap.get(entrypoint)
                     page.chunks = {
                         async: [],
                         entry: [],
                         initial: []
                     }
-                })
-                statJSON.chunks.forEach(({files, entry, initial, origins}) => {
-                    origins.forEach(({loc, moduleName}) => {
-                        let page = this.$.pageMap.get(loc)
-                        if (!page)
-                            page = this.$.pageMap.get(moduleName.replace(pageRel, ""))
+                    statJSON.entrypoints[entrypoint].chunks.forEach(chunkID => {
+                        const {entry, files, initial} = chunksMap[chunkID]
                         if (entry)//entry
                             page.chunks.entry.push(...files)
-                        else if (initial) {//sync
+                        else if (initial)//sync
                             page.chunks.initial.push(...files)
-                        } else//async
+                        else//async
                             page.chunks.async.push(...files)
                     })
-                })
+                }
                 resolve()
             }
         }, reject);

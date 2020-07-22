@@ -4,10 +4,11 @@ import Link from "../../../src/components/Link.js";
 import Head from "../../../src/components/Head.js";
 import LazyLoad from "../../../src/components/LazyLoad.js";
 import Loader from "../../../src/components/Loader.js";
-import React from "react";
+/*
+import Markdown from "../components/Markdown/Markdown";
+*/
 
 Wrap(() => {
-    const Markdown = LazyLoad(()=> import("markdown-to-jsx"));
     return (
         <div>
             <Head>
@@ -19,9 +20,9 @@ Wrap(() => {
             </Loader>
             <br/><br/>
             <Link href="/about">Link to About Page</Link>
-            <Markdown>
+            {/*<Markdown>
                 # This is a lazy loaded component
-            </Markdown>
+            </Markdown>*/}
         </div>
     )
 }, hot)

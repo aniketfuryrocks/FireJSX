@@ -18,6 +18,7 @@ export default class {
             optimization: {
                 minimize: true,
                 runtimeChunk: "single",
+/*
                 splitChunks: {
                     chunks: 'all',
                     maxInitialRequests: Infinity,
@@ -48,6 +49,7 @@ export default class {
                         }
                     },
                 }
+*/
             },
             entry: {},
             output: {
