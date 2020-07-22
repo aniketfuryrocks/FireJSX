@@ -45,7 +45,6 @@ export default class {
                 const chunksMap = {};
                 statJSON.chunks.forEach(chunk => chunksMap[chunk.id] = chunk)
 
-                statJSON.entrypoints = {}
                 for (const entrypoint in statJSON.entrypoints) {
                     const page = this.$.pageMap.get(entrypoint)
                     page.chunks = {
