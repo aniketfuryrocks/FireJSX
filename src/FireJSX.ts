@@ -37,7 +37,8 @@ export interface Params {
     pages: string,
     prefix: string,
     staticPrefix: string,
-    plugins: string[]
+    plugins: string[],
+    custom: any
 }
 
 export interface FIREJSX_MAP {

@@ -26,6 +26,7 @@ const cli = new Cli(args["--log-mode"]);
         pages: config.pages,
         plugins: config.plugins,
         lib: config.lib,
+        custom: config.custom,
         cli,
         args,
         pro: args["--export-fly"] ? true : !!args["--pro"],
