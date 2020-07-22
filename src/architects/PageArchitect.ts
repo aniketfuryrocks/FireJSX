@@ -33,6 +33,7 @@ export default class {
     }
 
     buildPages(resolve: () => void, reject: (err: any | undefined) => void) {
+        const pageRel = `.${this.$.pages.replace(process.cwd(), "")}/`
         this.build(this.webpackArchitect.forPages(), stat => {
             const statJSON = stat.toJson()
             if (this.logStat(statJSON))//true if errors
@@ -42,7 +43,7 @@ export default class {
                 if (this.$.verbose)
                     writeFileSync(join(this.$.cacheDir, "stat.json"), JSON.stringify(statJSON))
 
-                const chunksMap = {};
+                /*const chunksMap = {};
                 statJSON.chunks.forEach(chunk => chunksMap[chunk.id] = chunk)
 
                 for (const entrypoint in statJSON.entrypoints) {
@@ -61,7 +62,27 @@ export default class {
                         else//async
                             page.chunks.async.push(...files)
                     })
-                }
+                }*/
+                this.$.pageMap.forEach(page => {
+                    page.chunks = {
+                        async: [],
+                        entry: [],
+                        initial: []
+                    }
+                })
+                statJSON.chunks.forEach(({files, entry, initial, origins}) => {
+                    origins.forEach(({loc, moduleName}) => {
+                        let page = this.$.pageMap.get(loc)
+                        if (!page)
+                            page = this.$.pageMap.get(moduleName.replace(pageRel, ""))
+                        if (entry)//entry
+                            page.chunks.entry.push(...files)
+                        else if (initial) {//sync
+                            page.chunks.initial.push(...files)
+                        } else//async
+                            page.chunks.async.push(...files)
+                    })
+                })
                 resolve()
             }
         }, reject);

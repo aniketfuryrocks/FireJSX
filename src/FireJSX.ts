@@ -107,8 +107,16 @@ export default class {
     buildPages() {
         return new Promise<any>((resolve, reject) => {
             this.$.pageArchitect.buildPages(() => {
-                this.$.cli.ok('Build Complete')
-                this.$.pageMap.forEach(page => {
+                this.$.cli.ok('Build')
+                const iter = this.$.pageMap.values()
+                const recur = () => {
+                    let iterEle = iter.next()
+                    let page: Page;
+                    if (iterEle.done)
+                        return
+                    else
+                        page = iterEle.value
+
                     const renderPromises = [];
                     //if there is not hook then build the default page
                     if (page.hooks.onBuild.length === 0)
@@ -153,12 +161,12 @@ export default class {
                                 ])
                             })())
                         }
-                    }))).then(() =>
-                        Promise.all(renderPromises)
-                            .then(resolve)
-                            .catch(reject))
+                    }))).then(() => Promise.all(renderPromises)
+                        .then(recur)
                         .catch(reject)
-                })
+                    )
+                }
+                recur()
             }, reject)
         })
     }

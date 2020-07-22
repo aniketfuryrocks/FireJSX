@@ -3,9 +3,10 @@ import {hot} from "firejsx/Hot"
 import Link from "../../../src/components/Link.js";
 import Head from "../../../src/components/Head.js";
 import Loader from "../../../src/components/Loader.js";
-import Markdown from "../components/Markdown/Markdown";
+import LazyLoad from "../../../src/components/LazyLoad";
 
 Wrap(() => {
+    const Markdown = LazyLoad(() => import(  /* webpackPrefetch: true */"../components/Markdown/Markdown.jsx"))
     return (
         <div>
             <Head>

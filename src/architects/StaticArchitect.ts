@@ -94,19 +94,15 @@ export default class {
                     document.head.appendChild(link);
                     document.body.appendChild(script);
                 }
+                //async
+                this.loadChunks(page.chunks.async)
                 //external group semi
                 this.loadChunks([this.config.externals[this.config.ssr ? 1 : 0]], false)
-                //entry
-                this.loadChunks(page.chunks.entry)
                 //initial
                 this.loadChunks(page.chunks.initial)
+                //entry
+                this.loadChunks(page.chunks.entry)
             }
-            //require
-            if (this.config.ssr)
-                page.chunks.async.forEach(chunk => {
-                    if (chunk.endsWith(".js"))
-                        requireUncached(`${this.config.outDir}/${this.config.lib}/${chunk}`)
-                })
             //static render
             if (this.config.ssr) {
                 document.getElementById("root").innerHTML = global.window.ReactDOMServer.renderToString(
@@ -118,6 +114,7 @@ export default class {
             }
             //resolve all promises
             (async () => {
+                console.log(document.head.innerHTML)
                 for await (const lazyPromise of global.FireJSX.lazyPromises) {
                     await lazyPromise()
                 }
@@ -133,6 +130,7 @@ export default class {
 
     private loadChunks(chunks: string[], _require = true) {
         chunks.forEach(chunk => {
+            console.log(`${this.config.prefix}/${this.config.lib}/${chunk}`)
             if (chunk.endsWith(".css")) {
                 const link = document.createElement("link");
                 link.href = `${this.config.prefix}/${this.config.lib}/${chunk}`

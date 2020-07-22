@@ -1,13 +1,14 @@
 import Wrap from "../../../src/components/Wrap.js";
 import {hot} from "firejsx/Hot"
-import Markdown from "../components/Markdown/Markdown.jsx";
 import Link from "../../../src/components/Link.js";
 import Head from "../../../dist/Head.js";
 import LoadingCircle from "../components/LoadingCircle/LoadingCircle.jsx";
 import "../style/main.css"
 import Loader from "../../../src/components/Loader.js";
+import LazyLoad from "../../../src/components/LazyLoad";
 
 Wrap(() => {
+    const Markdown = LazyLoad(() => import("../components/Markdown/Markdown.jsx"))
     return (
         <div>
             <Head>

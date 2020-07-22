@@ -18,38 +18,39 @@ export default class {
             optimization: {
                 minimize: true,
                 runtimeChunk: "single",
-/*
-                splitChunks: {
-                    chunks: 'all',
-                    maxInitialRequests: Infinity,
-                    minSize: 0,
-                    cacheGroups: {
-                        framework: {
-                            chunks: 'all',
-                            name: 'framework',
-                            test: /(?<!node_modules.*)[\\/]node_modules[\\/](|webpack|babel|prop-types|css-loader|use-subscription|react-side-effect|react-helmet|style-loader|)[\\/]/,
-                            priority: 40,
-                        },
-                        vendor: {
-                            chunks: 'all',
-                            test: /[\\/]node_modules[\\/]/,
-                            name(module) {
-                                const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-                                return `npm.${packageName.replace('@', '')}`;
-                            },
-                        },
-                        lazy: {
-                            chunks: 'async',
-                            test: new RegExp(this.$.pages),
-                            priority: 100,
-                            name(module) {
-                                const packageName = module.context.match(new RegExp(this.$.config.paths.src + "(.*?)([\\/]|$)"))[1];
-                                return `async.${packageName.replace('@', '')}`;
-                            },
-                        }
-                    },
-                }
-*/
+                usedExports: true,
+                /*
+                                splitChunks: {
+                                    chunks: 'all',
+                                    maxInitialRequests: Infinity,
+                                    minSize: 0,
+                                    cacheGroups: {
+                                        framework: {
+                                            chunks: 'all',
+                                            name: 'framework',
+                                            test: /(?<!node_modules.*)[\\/]node_modules[\\/](|webpack|babel|prop-types|css-loader|use-subscription|react-side-effect|react-helmet|style-loader|)[\\/]/,
+                                            priority: 40,
+                                        },
+                                        vendor: {
+                                            chunks: 'all',
+                                            test: /[\\/]node_modules[\\/]/,
+                                            name(module) {
+                                                const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+                                                return `npm.${packageName.replace('@', '')}`;
+                                            },
+                                        },
+                                        lazy: {
+                                            chunks: 'async',
+                                            test: new RegExp(this.$.pages),
+                                            priority: 100,
+                                            name(module) {
+                                                const packageName = module.context.match(new RegExp(this.$.config.paths.src + "(.*?)([\\/]|$)"))[1];
+                                                return `async.${packageName.replace('@', '')}`;
+                                            },
+                                        }
+                                    },
+                                }
+                */
             },
             entry: {},
             output: {
