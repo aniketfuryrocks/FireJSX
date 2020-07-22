@@ -114,7 +114,6 @@ export default class {
             }
             //resolve all promises
             (async () => {
-                console.log(document.head.innerHTML)
                 for await (const lazyPromise of global.FireJSX.lazyPromises) {
                     await lazyPromise()
                 }

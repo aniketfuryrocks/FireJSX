@@ -43,26 +43,6 @@ export default class {
                 if (this.$.verbose)
                     writeFileSync(join(this.$.cacheDir, "stat.json"), JSON.stringify(statJSON))
 
-                /*const chunksMap = {};
-                statJSON.chunks.forEach(chunk => chunksMap[chunk.id] = chunk)
-
-                for (const entrypoint in statJSON.entrypoints) {
-                    const page = this.$.pageMap.get(entrypoint)
-                    page.chunks = {
-                        async: [],
-                        entry: [],
-                        initial: []
-                    }
-                    statJSON.entrypoints[entrypoint].chunks.forEach(chunkID => {
-                        const {entry, files, initial} = chunksMap[chunkID]
-                        if (entry)//entry
-                            page.chunks.entry.push(...files)
-                        else if (initial)//sync
-                            page.chunks.initial.push(...files)
-                        else//async
-                            page.chunks.async.push(...files)
-                    })
-                }*/
                 this.$.pageMap.forEach(page => {
                     page.chunks = {
                         async: [],
@@ -72,15 +52,18 @@ export default class {
                 })
                 statJSON.chunks.forEach(({files, entry, initial, origins}) => {
                     origins.forEach(({loc, moduleName}) => {
-                        let page = this.$.pageMap.get(loc)
-                        if (!page)
-                            page = this.$.pageMap.get(moduleName.replace(pageRel, ""))
-                        if (entry)//entry
-                            page.chunks.entry.push(...files)
-                        else if (initial) {//sync
-                            page.chunks.initial.push(...files)
-                        } else//async
-                            page.chunks.async.push(...files)
+                        let _page = this.$.pageMap.get(loc);
+                        if (!_page)
+                            if (!(_page = this.$.pageMap.get(moduleName.replace(pageRel, ""))))
+                                this.$.cli.warn(`Lazy Chunks [${files.toString()}] have no entry point. Make sure you are loading a component instead of a node_module`);
+                        (_page ? [_page] : this.$.pageMap).forEach(page => {
+                            if (entry)//entry
+                                page.chunks.entry.push(...files)
+                            else if (initial) {//sync
+                                page.chunks.initial.push(...files)
+                            } else//async
+                                page.chunks.async.push(...files)
+                        });
                     })
                 })
                 resolve()
