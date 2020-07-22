@@ -58,7 +58,7 @@ export default class {
         if (param.ssr)
             requireUncached(param.fullExternalPath)
         else //just load LinkApi
-            requireUncached(__dirname,"../web/LinkApi")
+            requireUncached(__dirname, "../web/LinkApi")
     }
 
     render(page: Page, path: string, content: any): Promise<JSDOM> {
@@ -103,7 +103,10 @@ export default class {
             }
             //require
             if (this.config.ssr)
-                page.chunks.async.forEach(chunk => requireUncached(`${this.config.outDir}/${this.config.lib}/${chunk}`))
+                page.chunks.async.forEach(chunk => {
+                    if (chunk.endsWith(".js"))
+                        requireUncached(`${this.config.outDir}/${this.config.lib}/${chunk}`)
+                })
             //static render
             if (this.config.ssr) {
                 document.getElementById("root").innerHTML = global.window.ReactDOMServer.renderToString(
