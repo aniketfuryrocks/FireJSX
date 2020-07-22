@@ -2,11 +2,8 @@ import Wrap from "../../../src/components/Wrap.js";
 import {hot} from "firejsx/Hot"
 import Link from "../../../src/components/Link.js";
 import Head from "../../../src/components/Head.js";
-import LazyLoad from "../../../src/components/LazyLoad.js";
 import Loader from "../../../src/components/Loader.js";
-/*
 import Markdown from "../components/Markdown/Markdown";
-*/
 
 Wrap(() => {
     return (
@@ -20,9 +17,9 @@ Wrap(() => {
             </Loader>
             <br/><br/>
             <Link href="/about">Link to About Page</Link>
-            {/*<Markdown>
+            <Markdown>
                 # This is a lazy loaded component
-            </Markdown>*/}
+            </Markdown>
         </div>
     )
 }, hot)
