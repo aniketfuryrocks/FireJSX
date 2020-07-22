@@ -39,26 +39,25 @@ export interface Config {
     }
 }
 
-export function getUserConfig(path: string): Config | never {
+export function getUserConfig(path: string): [string, Config] | never {
     //check if path was given
-    if (path) {
-        if (existsSync(resolve(path))) {
+    if (path)
+        if (existsSync(path = resolve(path)))
             if (path.endsWith(".yml"))
-                return parseYaml(readFileSync(path, "utf8").toString()) || {};
+                return [path, parseYaml(readFileSync(path, "utf8").toString()) || {}]
             else if (path.endsWith(".js"))
-                return require(path).default || {}
+                return [path, require(path).default || {}]
             else
                 throw new Error("Unknown config file type. Expected [.js, .yml]")
-        } else
+        else
             throw new Error(`Config not found at ${path}`)
-    } else {
-        if (existsSync(resolve("firejsx.yml"))) {
-            return parseYaml(readFileSync(path, "utf8").toString()) || {};
-        } else if (existsSync(resolve("firejsx.js"))) {
-            return require(path).default || {}
-        } else
-            return undefined
-    }
+    //if not then check defaults
+    else if (existsSync(path = resolve("firejsx.yml")))
+        return [path, parseYaml(readFileSync(path, "utf8").toString()) || {}]
+    else if (existsSync(path = resolve("firejsx.js")))
+        return [path, require(path).default || {}]
+    else
+        return ["default", {}]
 }
 
 export function parseConfig(config: Config = {}, args: Args = {_: []}): TrimmedConfig {
