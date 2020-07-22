@@ -63,6 +63,8 @@ export function parseConfig(config: Config = {}, args: Args = {_: []}): TrimmedC
     config.paths = config.paths || {}
     config.devServer = config.devServer || {}
     const out = makeDirIfNotFound(resolve(args["--out"] || config.paths.out || "out"))
+    const staticDir = undefinedIfNotFound(args["--static"] || config.paths.static || "src/static")
+    const prefix = args["--prefix"] || config.prefix || ""
     return {
         outDir: makeDirIfNotFound(resolve(args["--disk"] ? config.paths.disk || `${out}/disk` :
             args["--export"] ? args["--dist"] || config.paths.dist || `${out}/dist` :
@@ -70,10 +72,13 @@ export function parseConfig(config: Config = {}, args: Args = {_: []}): TrimmedC
                     config.paths.disk || `${out}/disk`)),
         cacheDir: makeDirIfNotFound(resolve(args["--cache"] || config.paths.cache || `${out}/.cache`)),
         pages: throwIfNotFound("pages dir", resolve(args["--pages"] || config.paths.pages || "src/pages")),
-        staticDir: undefinedIfNotFound(args["--static"] || config.paths.static || "src/static"),
+        staticDir,
         lib: config.lib || "lib",
-        prefix: args["--prefix"] || config.prefix || "",
-        staticPrefix: args["--static-prefix"] || config.staticPrefix || "/static",
+        prefix,
+        staticPrefix: args["--static-prefix"] || config.staticPrefix || (() => {
+            const dirName = staticDir.substring(staticDir.lastIndexOf("/"))
+            return prefix === "" ? dirName : (prefix + dirName)
+        })(),
         devServer: {
             gzip: args["--disable-gzip"] ? false : config.devServer.gzip === undefined ? true : config.devServer.gzip
         },
