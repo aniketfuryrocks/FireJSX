@@ -29,6 +29,7 @@ const cli = new Cli(args["--log-mode"]);
         custom: config.custom,
         cli,
         args,
+        staticDir: config.staticDir,
         pro: args["--export-fly"] ? true : !!args["--pro"],
         ssr: args["--export-fly"] ? true : !!args["--ssr"],
         staticPrefix: config.staticPrefix,
@@ -53,5 +54,5 @@ const cli = new Cli(args["--log-mode"]);
         cli.ok("Exported to", config.outDir)
         cli.ok("Finished in", (new Date().getTime() - startTime) / 1000 + "s");
     } else
-        await new Server(app).init(args["--port"], args["--addr"], config.devServer.gzip, config.staticDir)
+        await new Server(app).init(args["--port"], args["--addr"], config.devServer)
 })().catch(cli.error)

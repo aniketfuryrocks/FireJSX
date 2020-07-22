@@ -33,6 +33,7 @@ export interface Params {
     cli: Cli,
     outDir: string,
     cacheDir: string,
+    staticDir: string,
     lib: string,
     pages: string,
     prefix: string,

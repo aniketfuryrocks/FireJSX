@@ -5,6 +5,10 @@ import * as webpackHot from "webpack-hot-middleware"
 import * as mime from "mime"
 import * as compression from "compression"
 
+export interface devServerConfig {
+    gzip?: boolean          //compress gzip
+}
+
 export default class {
     private readonly $: $
     private readonly app: FireJS;
@@ -15,12 +19,12 @@ export default class {
         this.$.pageArchitect.webpackArchitect.config.watch = true;
     }
 
-    async init(port: number = 5000, addr: string = "localhost", gzip, staticDir) {
+    async init(port: number = 5000, addr: string = "localhost", config: devServerConfig) {
         //init server
         const server: express.Application = express();
         //gzip
-        this.$.cli.ok("GZIP :", gzip)
-        if (gzip)
+        this.$.cli.ok("GZIP :", config.gzip)
+        if (config.gzip)
             server.use(compression())
         //init plugins
         this.$.hooks.initServer.forEach(initServer => initServer(server))
@@ -35,8 +39,8 @@ export default class {
         }))
 
         //routing
-        if (staticDir)
-            server.use(this.$.staticPrefix, express.static(staticDir));
+        if (this.$.staticDir)
+            server.use(this.$.staticPrefix, express.static(this.$.staticDir));
         server.get(`/${this.$.lib}/*`, this.get.bind(this))
         server.get(`/${this.$.lib}/map/*`, this.get.bind(this))
         server.use('*', this.getPage.bind(this));

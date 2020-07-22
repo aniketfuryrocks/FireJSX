@@ -3,6 +3,7 @@ import {Args} from "./ArgsMapper";
 import {parse as parseYaml} from "yaml";
 import {mkdirp} from "fs-extra";
 import {existsSync, readFileSync} from "fs";
+import {devServerConfig} from "../Server";
 
 export interface TrimmedConfig {
     outDir?: string,
@@ -34,9 +35,7 @@ export interface Config {
     staticPrefix?: string,      //static prefix
     plugins?: [],               //plugin
     custom?: { [key: string]: any }, //config fot plugins
-    devServer?: {               //dev server
-        gzip?: boolean          //compress gzip
-    }
+    devServer?: devServerConfig
 }
 
 export function getUserConfig(path: string): [string, Config] | never {
