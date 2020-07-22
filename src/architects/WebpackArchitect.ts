@@ -1,6 +1,6 @@
 import {$, WebpackConfig} from "../FireJSX"
 import {join, relative} from "path"
-import * as ExtractCssChunks from 'extract-css-chunks-webpack-plugin'
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as CleanObsoleteChunks from 'webpack-clean-obsolete-chunks'
 import * as webpack from "webpack";
 
@@ -86,7 +86,7 @@ export default class {
                     {
                         test: /\.css$/,
                         use: [
-                            ...(this.proOrSSR ? [ExtractCssChunks.loader] : ['style-loader']),
+                            ...(this.proOrSSR ? [MiniCssExtractPlugin.loader] : ['style-loader']),
                             {
                                 loader: 'css-loader',
                                 options: {
@@ -99,7 +99,7 @@ export default class {
                     }]
             },
             plugins: [
-                new ExtractCssChunks({
+                new MiniCssExtractPlugin({
                     filename: "c[contentHash].css",
                     chunkFilename: "c[contentHash].css"
                 }),
