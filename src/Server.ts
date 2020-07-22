@@ -41,9 +41,9 @@ export default class {
         //routing
         if (this.$.staticDir)
             server.use(this.$.staticPrefix, express.static(this.$.staticDir));
-        server.get(`/${this.$.lib}/*`, this.get.bind(this))
-        server.get(`/${this.$.lib}/map/*`, this.get.bind(this))
-        server.use('*', this.getPage.bind(this));
+        server.get(`${this.$.prefix}/${this.$.lib}/*`, this.get.bind(this));
+        server.get(`${this.$.prefix}/${this.$.lib}/map/*`, this.get.bind(this));
+        server.use(`${this.$.prefix}/*`, this.getPage.bind(this));
         //listen
         const listener = server.listen(port, addr, () => {
             // @ts-ignore
