@@ -112,9 +112,10 @@ export default class {
                 const recur = () => {
                     let iterEle = iter.next()
                     let page: Page;
-                    if (iterEle.done)
+                    if (iterEle.done) {
+                        resolve()
                         return
-                    else
+                    } else
                         page = iterEle.value
 
                     const renderPromises = [];

@@ -55,7 +55,7 @@ export default class {
                         let _page = this.$.pageMap.get(loc);
                         if (!_page)
                             if (!(_page = this.$.pageMap.get(moduleName.replace(pageRel, ""))))
-                                this.$.cli.warn(`Lazy Chunks [${files.toString()}] have no entry point. Make sure you are loading a component instead of a node_module`);
+                                this.$.cli.warn(`Lazy Chunks [${files.join(" ,")}] have no entry point.`);
                         (_page ? [_page] : this.$.pageMap).forEach(page => {
                             if (entry)//entry
                                 page.chunks.entry.push(...files)
