@@ -37,7 +37,6 @@ export default class {
         //init template
         {
             const script = this.config.template.window.document.createElement("script");
-            script.id = "__FireJSX_INIT__"
             script.innerHTML = `window.FireJSX =` + JSON.stringify({
                 isHydrated: param.ssr,
                 lib: param.lib,
