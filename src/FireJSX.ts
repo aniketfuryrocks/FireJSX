@@ -69,18 +69,19 @@ export default class {
                 postExport: []
             }
         }
-        //log
-        this.$.cli.ok("PRO :", this.$.pro)
-        this.$.cli.ok("SSR :", this.$.ssr)
         //set env
         process.env.BABEL_ENV = process.env.NODE_ENV = params.pro ? 'production' : 'development';
         //pageMap
         this.$.pageMap = createMap(this.$.pages, this.$.inputFileSystem);
+        //pageArchitect
+        this.$.pageArchitect = new PageArchitect(this.$, new WebpackArchitect(this.$), !!params.outputFileSystem, !!params.inputFileSystem);
+        //log
+        this.$.cli.ok("PRO :", this.$.pro)
+        this.$.cli.ok("SSR :", this.$.ssr)
+        this.$.cli.ok("HMR :", !this.$.pageArchitect.webpackArchitect.proOrSSR)
         //check 404.jsx
         if (!this.$.pageMap.has("404.jsx"))
             this.$.cli.warn("404.jsx page not found. Link fallback will be unsuccessful")
-        //pageArchitect
-        this.$.pageArchitect = new PageArchitect(this.$, new WebpackArchitect(this.$), !!params.outputFileSystem, !!params.inputFileSystem);
     }
 
     async init() {
