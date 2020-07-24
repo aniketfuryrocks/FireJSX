@@ -14,7 +14,7 @@ Wrap(() => {
             </Head>
             <Loader effect={React.useEffect} delay={800}>
                 This text will appear before full page load
-                //use Loader on page root, delay is optional
+                //use Loaderasd on page root, delay is optional
             </Loader>
             <br/><br/>
             <Link href="/about">Link to About Page</Link>
