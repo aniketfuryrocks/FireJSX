@@ -1,14 +1,15 @@
 export default (loadFunc,
                 resolveID, {
-                    ssr = true, placeHolder = <div suppressHydrationWarning={true}/>, onError = (e) => {
-            console.error("Error while lazy loading ");
-            throw new Error(e);
-        }
+                    placeHolder = <div suppressHydrationWarning={true}/>,
+                    onError = (e) => {
+                        console.error("Error while lazy loading ");
+                        throw new Error(e);
+                    }
                 } = {}) => {
     let props;
     let setChild;
 
-    if (FireJSX.isSSR && ssr)
+    if (FireJSX.isSSR && resolveID)
         return __webpack_require__(resolveID()).default
     else
         loadFunc().then(chunk => {
@@ -19,7 +20,7 @@ export default (loadFunc,
         }).catch(onError)
 
     return (_props) => {
-        const [child, _setChild] = React.useState(FireJSX.isSSR ? <div id={id}/> : placeHolder);
+        const [child, _setChild] = React.useState(placeHolder);
         setChild = _setChild;
         props = _props;
         return child
