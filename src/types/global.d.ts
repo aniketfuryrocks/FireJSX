@@ -20,7 +20,6 @@ declare module NodeJS {
                 preloadChunks: (chunks: string[]) => void,
                 loadChunks: (chunks: string[]) => void
             },
-            lazyPromises?: Promise<any>[],
             showLoader?: () => void,
         },
         __FIREJSX_APP__: any,//for ssr
