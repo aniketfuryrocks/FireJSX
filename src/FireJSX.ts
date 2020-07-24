@@ -108,24 +108,16 @@ export default class {
         return new Promise<any>((resolve, reject) => {
             this.$.pageArchitect.buildPages(() => {
                 this.$.cli.ok('Build')
-                const iter = this.$.pageMap.values()
-                const recur = () => {
-                    let iterEle = iter.next()
-                    let page: Page;
-                    if (iterEle.done) {
-                        resolve()
-                        return
-                    } else
-                        page = iterEle.value
+                const promises = [];
 
-                    const renderPromises = [];
+                this.$.pageMap.forEach(page => {
                     //if there is not hook then build the default page
                     if (page.hooks.onBuild.length === 0)
                         page.hooks.onBuild.push(async ({renderPage}) => {
                             await renderPage("/" + page.toString().substring(0, page.toString().lastIndexOf(".")))
                         })
                     //call hooks
-                    Promise.all(page.hooks.onBuild.map(onBuild => onBuild({
+                    page.hooks.onBuild.forEach(onBuild => promises.push(onBuild({
                         renderPage: (path, content = {}) => {
                             if (!path) {
                                 this.$.cli.warn(`Skipping render for page "${page.toString()}", since onBuild -> renderPage hook was called without a path`)
@@ -134,40 +126,34 @@ export default class {
                             if (this.$.verbose)
                                 this.$.cli.log(`Rendering Path : ${path}`);
                             //push promise
-                            renderPromises.push((async () => {
-                                const dom = this.$.renderer.render(page, path, content)
-                                this.$.cli.ok(`Rendered Path : ${path}`)
-                                //call page postRender hooks
-                                page.hooks.postRender.forEach(postRender => postRender(dom))
-                                //call global postRender hooks
-                                this.$.hooks.postRender.forEach(postRender => postRender(dom))
-                                //await promises
-                                await Promise.all([
-                                    //write html file
-                                    writeFileRecursively(`${this.$.outDir}/${path}.html`,
-                                        dom.serialize(),
-                                        this.$.outputFileSystem),
-                                    //write map
-                                    (() => {
-                                        const li = path.lastIndexOf("/index")
-                                        const _path = li <= 0 ? path : path.substring(0, li)
-                                        writeFileRecursively(`${this.$.outDir}/${this.$.lib}/map${_path}.map.js`,
-                                            `FireJSX.map=${JSON.stringify({
-                                                content,
-                                                chunks: page.chunks
-                                            })}`,
-                                            this.$.outputFileSystem
-                                        )
-                                    })()
-                                ])
-                            })())
+                            const dom = this.$.renderer.render(page, path, content)
+                            this.$.cli.ok(`Rendered Path : ${path}`)
+                            //call page postRender hooks
+                            page.hooks.postRender.forEach(postRender => postRender(dom))
+                            //call global postRender hooks
+                            this.$.hooks.postRender.forEach(postRender => postRender(dom))
+                            //await promises
+                            promises.push(
+                                //write html file
+                                writeFileRecursively(`${this.$.outDir}/${path}.html`,
+                                    dom.serialize(),
+                                    this.$.outputFileSystem),
+                                //write map
+                                (() => {
+                                    const li = path.lastIndexOf("/index")
+                                    const _path = li <= 0 ? path : path.substring(0, li)
+                                    return writeFileRecursively(`${this.$.outDir}/${this.$.lib}/map${_path}.map.js`,
+                                        `FireJSX.map=${JSON.stringify({
+                                            content,
+                                            chunks: page.chunks
+                                        })}`,
+                                        this.$.outputFileSystem
+                                    )
+                                })()
+                            )
                         }
-                    }))).then(() => Promise.all(renderPromises)
-                        .then(recur)
-                        .catch(reject)
-                    )
-                }
-                recur()
+                    })))
+                })
             }, reject)
         })
     }
