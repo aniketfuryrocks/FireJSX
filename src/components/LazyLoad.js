@@ -12,12 +12,9 @@ export default (loadFunc,
     if (FireJSX.isSSR && resolveID)
         return __webpack_require__(resolveID()).default
     else
-        loadFunc().then(chunk => {
-            setChild(React.createElement(chunk.default, {
-                ...props,
-                suppressHydrationWarning: true
-            }, props.children))
-        }).catch(onError)
+        loadFunc()
+            .then(Chunk => setChild(<Chunk.default {...props} suppressHydrationWarning={true}/>))
+            .catch(onError)
 
     return (_props) => {
         const [child, _setChild] = React.useState(placeHolder);
