@@ -125,9 +125,10 @@ export default class {
                             }
                             if (this.$.verbose)
                                 this.$.cli.log(`Rendering Path : ${path}`);
+                            const startTime = new Date().getTime();
                             //push promise
                             const dom = this.$.renderer.render(page, path, content)
-                            this.$.cli.ok(`Rendered Path : ${path}`)
+                            this.$.cli.ok(`Rendered Path ${path} in ${(new Date().getTime() - startTime)}ms`)
                             //call page postRender hooks
                             page.hooks.postRender.forEach(postRender => postRender(dom))
                             //call global postRender hooks
