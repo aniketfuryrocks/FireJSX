@@ -65,14 +65,10 @@ export default class {
         //webpack global variable reset
         global.window.webpackJsonp = undefined
         //template serialize to prevent overwriting
-        let startTime = new Date().getTime();
         const dom = new JSDOM(this.config.template.serialize(), {
             url: "http://localhost:5000" + this.config.prefix + path,
         });
-        console.log(`Init in ${(new Date().getTime() - startTime)}ms`)
         //load stuff from dom.window to global
-         startTime = new Date().getTime();
-
         for (const domKey of ["document", "location", "history", "navigator", "screen", "matchMedia", "getComputedStyle"])
             global[domKey] = dom.window[domKey];
         //globals
@@ -82,7 +78,6 @@ export default class {
         };
         //isSSR
         global.FireJSX.isSSR = this.config.ssr
-        console.log(`Init 2 in ${(new Date().getTime() - startTime)}ms`)
         //chunks
         {
             const startTime = new Date().getTime();
@@ -109,8 +104,6 @@ export default class {
             this.loadChunks(page.chunks.initial)
             //entry
             this.loadChunks(page.chunks.entry)
-            console.log(`Init in ${(new Date().getTime() - startTime)}ms`)
-
         }
         //static render
         if (this.config.ssr) {
@@ -121,7 +114,6 @@ export default class {
                 )
             )
         }
-        startTime = new Date().getTime();
         //head
         if (this.config.ssr) {
             const helmet = Helmet.renderStatic();
