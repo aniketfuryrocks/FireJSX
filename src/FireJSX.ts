@@ -40,7 +40,6 @@ export interface Params {
     staticPrefix: string,
     plugins: string[],
     custom: any,
-    cacheModules: boolean,
 }
 
 export interface FIREJSX_MAP {
@@ -68,8 +67,7 @@ export default class {
                 initServer: [],
                 initWebpack: [],
                 postExport: []
-            },
-            cacheModules: !!params.cacheModules
+            }
         }
         //log
         this.$.cli.ok("PRO :", this.$.pro)
@@ -98,7 +96,6 @@ export default class {
             prefix: this.$.prefix,
             staticPrefix: this.$.staticPrefix,
             fullExternalPath: join(this.$.outDir, this.$.lib, externals[0]),
-            cacheModules: this.$.cacheModules
         });
         //mapPlugins after everything is initialized
         if (this.$.plugins.length > 0) {
