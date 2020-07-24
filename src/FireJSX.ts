@@ -135,7 +135,7 @@ export default class {
                                 this.$.cli.log(`Rendering Path : ${path}`);
                             //push promise
                             renderPromises.push((async () => {
-                                const dom = await this.$.renderer.render(page, path, content)
+                                const dom = this.$.renderer.render(page, path, content)
                                 this.$.cli.ok(`Rendered Path : ${path}`)
                                 //call page postRender hooks
                                 page.hooks.postRender.forEach(postRender => postRender(dom))

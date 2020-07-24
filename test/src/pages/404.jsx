@@ -8,8 +8,7 @@ import Link from "../../../src/components/Link.js";
 import Loader from "../../../src/components/Loader.js";
 
 Wrap(() => {
-    const Markdown = LazyLoad(() => import("markdown-to-jsx"));
-    const Markdown2 = LazyLoad(() => import("markdown-to-jsx"));
+    const Markdown = LazyLoad(() => import("../components/Markdown/Markdown.jsx"), () => require.resolveWeak("../components/Markdown/Markdown.jsx"))
     return (
         <div>
             <Head>
@@ -23,10 +22,6 @@ Wrap(() => {
             <Markdown>
                 By the way, I am a lazy loaded component 😺
             </Markdown>
-            <br/>
-            <Markdown2>
-                And I am the second lazy loaded component
-            </Markdown2>
             <br/>
             <br/>
             <Link href={"/"}> 👻 Click Here To Go Home</Link>

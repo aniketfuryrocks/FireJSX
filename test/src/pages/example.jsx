@@ -6,7 +6,7 @@ import Loader from "../../../src/components/Loader.js";
 import LazyLoad from "../../../src/components/LazyLoad";
 
 Wrap(() => {
-    const Markdown = LazyLoad(() => import("../components/Markdown/Markdown.jsx"))
+    const Markdown = LazyLoad(() => import("../components/Markdown/Markdown.jsx"), () => require.resolveWeak("../components/Markdown/Markdown.jsx"))
     return (
         <div>
             <Head>

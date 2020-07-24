@@ -61,76 +61,65 @@ export default class {
             requireUncached(__dirname, "../web/LinkApi")
     }
 
-    render(page: Page, path: string, content: any): Promise<JSDOM> {
-        return new Promise(resolve => {
-            //webpack global variable reset
-            global.window.webpackJsonp = undefined
-            //template serialize to prevent overwriting
-            const dom = new JSDOM(this.config.template.serialize(), {
-                url: "http://localhost:5000" + this.config.prefix + path,
-            });
-            //load stuff from dom.window to global
-            for (const domKey of ["document", "location", "history", "navigator", "screen", "matchMedia", "getComputedStyle"])
-                global[domKey] = dom.window[domKey];
-            //globals
-            global.FireJSX.map = {
-                content,
-                chunks: page.chunks
-            };
-            //isSSR
-            global.FireJSX.isSSR = this.config.ssr
-            //reset lazy count
-            global.FireJSX.lazyPromises = <Promise<any>[]>[];
-            //chunks
-            {
-                //preload and load page map
-                {
-                    const link = document.createElement("link");
-                    const script = document.createElement("script");
-                    script.src = link.href = global.FireJSX.linkApi.getMapUrl(path);
-                    link.rel = "preload";
-                    script.crossOrigin = link.crossOrigin = "anonymous";
-                    link.setAttribute("as", "script");
-                    document.head.appendChild(link);
-                    document.body.appendChild(script);
-                }
-
-                //external group semi
-                this.loadChunks([this.config.externals[this.config.ssr ? 1 : 0]], false)
-                //initial
-                this.loadChunks(page.chunks.initial)
-                //async
-                this.loadChunks(page.chunks.async)
-                if (this.config.ssr)
-                    page.chunks.async.forEach(chunk => {
-                        if (chunk.endsWith(".js"))
-                            requireUncached(`${this.config.outDir}/${this.config.lib}/${chunk}`)
-                    })
-                //entry
-                this.loadChunks(page.chunks.entry)
-            }
-            //static render
-            if (this.config.ssr) {
-                document.getElementById("root").innerHTML = global.window.ReactDOMServer.renderToString(
-                    global.React.createElement(
-                        global.__FIREJSX_APP__,
-                        {content: global.FireJSX.map.content}
-                    )
-                )
-            }
-            //resolve all promises
-            (async () => {
-                for await (const lazyPromise of global.FireJSX.lazyPromises) {
-                    await lazyPromise()
-                }
-                if (this.config.ssr) {
-                    const helmet = Helmet.renderStatic();
-                    for (let helmetKey in helmet)
-                        document.head.innerHTML += helmet[helmetKey].toString()
-                }
-                resolve(dom);//resolve DOM
-            })()
+    render(page: Page, path: string, content: any): JSDOM {
+        //webpack global variable reset
+        global.window.webpackJsonp = undefined
+        //template serialize to prevent overwriting
+        const dom = new JSDOM(this.config.template.serialize(), {
+            url: "http://localhost:5000" + this.config.prefix + path,
         });
+        //load stuff from dom.window to global
+        for (const domKey of ["document", "location", "history", "navigator", "screen", "matchMedia", "getComputedStyle"])
+            global[domKey] = dom.window[domKey];
+        //globals
+        global.FireJSX.map = {
+            content,
+            chunks: page.chunks
+        };
+        //isSSR
+        global.FireJSX.isSSR = this.config.ssr
+        //chunks
+        {
+            //preload and load page map
+            {
+                const link = document.createElement("link");
+                const script = document.createElement("script");
+                script.src = link.href = global.FireJSX.linkApi.getMapUrl(path);
+                link.rel = "preload";
+                script.crossOrigin = link.crossOrigin = "anonymous";
+                link.setAttribute("as", "script");
+                document.head.appendChild(link);
+                document.body.appendChild(script);
+            }
+            //async
+            if (this.config.ssr)
+                page.chunks.async.forEach(chunk => {
+                    if (chunk.endsWith(".js"))
+                        requireUncached(`${this.config.outDir}/${this.config.lib}/${chunk}`)
+                })
+            //external group semi
+            this.loadChunks([this.config.externals[this.config.ssr ? 1 : 0]], false)
+            //initial
+            this.loadChunks(page.chunks.initial)
+            //entry
+            this.loadChunks(page.chunks.entry)
+        }
+        //static render
+        if (this.config.ssr) {
+            document.getElementById("root").innerHTML = global.window.ReactDOMServer.renderToString(
+                global.React.createElement(
+                    global.__FIREJSX_APP__,
+                    {content: global.FireJSX.map.content}
+                )
+            )
+        }
+        //head
+        if (this.config.ssr) {
+            const helmet = Helmet.renderStatic();
+            for (let helmetKey in helmet)
+                document.head.innerHTML += helmet[helmetKey].toString()
+        }
+        return dom
     }
 
     private loadChunks(chunks: string[], _require = true) {
