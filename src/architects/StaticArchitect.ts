@@ -1,7 +1,6 @@
-import {join} from "path"
+import {join, resolve} from "path"
 import Page from "../classes/Page";
 import {JSDOM} from "jsdom"
-import {requireUncached} from "../utils/Require";
 import {Helmet} from "react-helmet"
 
 export interface StaticConfig {
@@ -12,7 +11,8 @@ export interface StaticConfig {
     ssr: boolean,
     prefix: string,
     staticPrefix: string,
-    fullExternalPath: string
+    fullExternalPath: string,
+    cacheModules: boolean
 }
 
 export interface StaticData extends StaticConfig {
@@ -56,14 +56,14 @@ export default class {
         //require uncached to prevent bugs in lambda because node clears these 2 when a new request is assigned
         //if ssr then load react,react dom,LinkApi,ReactDOMServer chunks
         if (param.ssr)
-            requireUncached(param.fullExternalPath)
+            require(param.fullExternalPath)
         else //just load LinkApi
-            requireUncached(__dirname, "../web/LinkApi")
+            require(resolve(__dirname, "../web/LinkApi"))
     }
 
     render(page: Page, path: string, content: any): JSDOM {
-        //webpack global variable reset
-        global.window.webpackJsonp = undefined
+        if (!this.config.cacheModules)
+            global.webpackJsonp = undefined
         //template serialize to prevent overwriting
         const dom = new JSDOM(this.config.template.serialize(), {
             url: "http://localhost:5000" + this.config.prefix + path,
@@ -95,7 +95,7 @@ export default class {
             if (this.config.ssr)
                 page.chunks.async.forEach(chunk => {
                     if (chunk.endsWith(".js"))
-                        requireUncached(`${this.config.outDir}/${this.config.lib}/${chunk}`)
+                        this.conditionalRequire(`${this.config.outDir}/${this.config.lib}/${chunk}`)
                 })
             //external group semi
             this.loadChunks([this.config.externals[this.config.ssr ? 1 : 0]], false)
@@ -103,14 +103,14 @@ export default class {
             this.loadChunks(page.chunks.initial)
             //entry
             this.loadChunks(page.chunks.entry)
+            //check if cached
+            if (!this.config.cacheModules || !page.app)
+                page.app = global.__FIREJSX_APP__
         }
         //static render
         if (this.config.ssr) {
             document.getElementById("root").innerHTML = global.window.ReactDOMServer.renderToString(
-                global.React.createElement(
-                    global.__FIREJSX_APP__,
-                    {content: global.FireJSX.map.content}
-                )
+                global.React.createElement(page.app, {content: global.FireJSX.map.content})
             )
         }
         //head
@@ -134,10 +134,17 @@ export default class {
                 document.head.insertBefore(link, document.head.firstChild);
             } else {
                 if (this.config.ssr && _require && chunk.endsWith(".js"))//only require javascript
-                    requireUncached(join(this.config.outDir, this.config.lib, chunk))
+                    this.conditionalRequire(join(this.config.outDir, this.config.lib, chunk))
                 global.FireJSX.linkApi.preloadChunks([chunk]);
                 global.FireJSX.linkApi.loadChunks([chunk]);
             }
         })
+    }
+
+    private conditionalRequire(...paths) {
+        const module = resolve(...paths)
+        if (!this.config.cacheModules)
+            delete require.cache[module];
+        require(module);
     }
 }

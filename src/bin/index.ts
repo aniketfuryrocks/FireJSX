@@ -35,6 +35,7 @@ async function main() {
         staticPrefix: config.staticPrefix,
         verbose: !!args["--verbose"],
         outputFileSystem: (args["--disk"] || args["--export-fly"] || args["--export"]) ? undefined : new MemoryFS(),
+        cacheModules: true
     })
     //initialize
     await app.init()

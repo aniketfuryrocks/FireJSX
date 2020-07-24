@@ -39,7 +39,8 @@ export interface Params {
     prefix: string,
     staticPrefix: string,
     plugins: string[],
-    custom: any
+    custom: any,
+    cacheModules: boolean,
 }
 
 export interface FIREJSX_MAP {
@@ -67,7 +68,8 @@ export default class {
                 initServer: [],
                 initWebpack: [],
                 postExport: []
-            }
+            },
+            cacheModules: !!params.cacheModules
         }
         //log
         this.$.cli.ok("PRO :", this.$.pro)
@@ -95,7 +97,8 @@ export default class {
             ssr: this.$.ssr,
             prefix: this.$.prefix,
             staticPrefix: this.$.staticPrefix,
-            fullExternalPath: join(this.$.outDir, this.$.lib, externals[0])
+            fullExternalPath: join(this.$.outDir, this.$.lib, externals[0]),
+            cacheModules: this.$.cacheModules
         });
         //mapPlugins after everything is initialized
         if (this.$.plugins.length > 0) {
@@ -125,9 +128,9 @@ export default class {
                             }
                             if (this.$.verbose)
                                 this.$.cli.log(`Rendering Path : ${path}`);
-                            //push promise
+                            const startTime = new Date().getTime();//push promise
                             const dom = this.$.renderer.render(page, path, content)
-                            this.$.cli.ok(`Rendered Path ${path}`)
+                            this.$.cli.ok(`Rendered Path ${path} in`, new Date().getTime() - startTime, "ms")
                             //call page postRender hooks
                             page.hooks.postRender.forEach(postRender => postRender(dom))
                             //call global postRender hooks
