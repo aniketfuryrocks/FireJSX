@@ -80,7 +80,6 @@ export default class {
         global.FireJSX.isSSR = this.config.ssr
         //chunks
         {
-            const startTime = new Date().getTime();
             //preload and load page map
             {
                 const link = document.createElement("link");
