@@ -2,6 +2,7 @@ import {join, resolve} from "path"
 import Page from "../classes/Page";
 import {JSDOM} from "jsdom"
 import {Helmet} from "react-helmet"
+import FireJSX from "../FireJSX";
 
 export interface StaticConfig {
     lib: string,
@@ -60,7 +61,6 @@ export default class {
     }
 
     render(page: Page, path: string, content: any): JSDOM {
-        global.webpackJsonp = undefined
         //template serialize to prevent overwriting
         const dom = new JSDOM(this.config.template.serialize(), {
             url: "http://localhost:5000" + this.config.prefix + path,
@@ -88,23 +88,26 @@ export default class {
                 document.head.appendChild(link);
                 document.body.appendChild(script);
             }
+            //external group semi
+            this.loadChunks([this.config.externals[this.config.ssr ? 1 : 0]], false)
             //async
             if (this.config.ssr)
                 page.chunks.async.forEach(chunk => {
                     if (chunk.endsWith(".js"))
                         require(`${this.config.outDir}/${this.config.lib}/${chunk}`)
                 })
-            //external group semi
-            this.loadChunks([this.config.externals[this.config.ssr ? 1 : 0]], false)
             //initial
             this.loadChunks(page.chunks.initial)
             //entry
             this.loadChunks(page.chunks.entry)
+            //App
+            if (!page.app)
+                page.app = global.FireJSX.app
         }
         //static render
         if (this.config.ssr) {
             document.getElementById("root").innerHTML = global.window.ReactDOMServer.renderToString(
-                global.React.createElement(global.__FIREJSX_APP__, {content: global.FireJSX.map.content})
+                global.React.createElement(page.app, {content: global.FireJSX.map.content})
             )
         }
         //head

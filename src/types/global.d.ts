@@ -22,7 +22,6 @@ declare module NodeJS {
             },
             showLoader?: () => void,
         },
-        __FIREJSX_APP__: any,//for ssr
         __FIREJSX_VERSION__: string,
         webpackJsonp?: any,
         React?: any,

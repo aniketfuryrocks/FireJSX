@@ -4,6 +4,7 @@ export default class {
     public chunks: PageChunks;
     public hooks: PageHooks;
     private readonly name: string;
+    public app: any
 
     constructor(page: string) {
         this.name = page;
