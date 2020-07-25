@@ -124,9 +124,9 @@ export default class {
                             }
                             if (this.$.verbose)
                                 this.$.cli.log(`Rendering Path : ${path}`);
-                            const startTime = new Date().getTime();//push promise
+                            const startTime = process.hrtime()[1]  //push promise
                             const html = this.$.renderer.render(page, path, content)
-                            this.$.cli.ok(`Rendered Path ${path} in`, new Date().getTime() - startTime, "ms")
+                            this.$.cli.ok(`Rendered Path ${path} in`, (process.hrtime()[1] - startTime) / 1e6, "ms")
                             //await promises
                             promises.push(
                                 //write html file

@@ -13,7 +13,6 @@ export interface StaticConfig {
 }
 
 import {JSDOM} from "jsdom"
-import FireJSX from "../FireJSX";
 
 {
     // @ts-ignore
