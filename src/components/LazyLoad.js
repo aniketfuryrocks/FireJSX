@@ -9,7 +9,7 @@ export default (loadFunc,
     if (FireJSX.isSSR && resolveID)
         return __webpack_require__(resolveID()).default
 
-    return (_props) => {
+    return props => {
         const [child, setChild] = React.useState(placeHolder);
         React.useEffect(() => {
             loadFunc()
