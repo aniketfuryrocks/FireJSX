@@ -1,3 +1,3 @@
 global.FireJSX = {
-    version :"0.9.0-beta.21"
+    version :"0.9.0-beta.22"
 }
