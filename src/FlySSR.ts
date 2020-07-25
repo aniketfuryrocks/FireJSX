@@ -23,19 +23,16 @@ export default class {
         }
     }
 
-    render(page: string, path: string, content: any = {}): {
-        dom: string,
-        map: string
-    } {
+    render(page: string, path: string, content: any = {}): [string, string] {
         const _page = this.pageMap.get(page);
-        if (!page)
+        if (!_page)
             throw new Error(`Page ${page} does not exist`)
-        return {
-            dom: this.renderer.render(_page, path, content),
-            map: `FireJSX.map=${JSON.stringify({
+        return [
+            this.renderer.render(_page, path, content),
+            `FireJSX.map=${JSON.stringify({
                 content,
                 chunks: _page.chunks
             })}`
-        }
+        ]
     }
 }
