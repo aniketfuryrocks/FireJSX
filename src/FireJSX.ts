@@ -127,6 +127,10 @@ export default class {
                             const startTime = process.hrtime()[1]  //push promise
                             const html = this.$.renderer.render(page, path, content)
                             this.$.cli.ok(`Rendered Path ${path} in`, (process.hrtime()[1] - startTime) / 1e6, "ms")
+                            //call page postRender hooks
+                            page.hooks.postRender.forEach(postRender => postRender(html))
+                            //call global postRender hooks
+                            this.$.hooks.postRender.forEach(postRender => postRender(html))
                             //await promises
                             promises.push(
                                 //write html file

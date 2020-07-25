@@ -1,12 +1,11 @@
 import {WebpackConfig, $} from "../FireJSX";
-import {JSDOM} from "jsdom";
 import {Application} from "express"
 
 type initWebpack_Callback = (config: WebpackConfig) => void
 type initServer_Callback = (server: Application) => void
 type postExport_Callback = () => Promise<void>
 type onBuild_Callback = (actions: onBuild_Actions) => Promise<void>
-type dom_Callback = (dom: JSDOM) => void
+type dom_Callback = (html: string) => void
 
 interface onBuild_Actions {
     renderPage: (path: string, content?: any) => void
