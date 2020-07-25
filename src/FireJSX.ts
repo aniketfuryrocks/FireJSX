@@ -50,7 +50,7 @@ export interface FIREJSX_MAP {
 }
 
 export default class {
-    private readonly $: $
+    public readonly $: $
 
     constructor(params: Params) {
         if (!params)
@@ -217,9 +217,5 @@ export default class {
                 throw err
             })
         })
-    }
-
-    getContext(): $ {
-        return this.$;
     }
 }

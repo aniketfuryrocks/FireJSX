@@ -30,8 +30,8 @@ async function main() {
         cli,
         args,
         staticDir: config.staticDir,
-        pro: args["--export-fly"] ? true : !!args["--pro"],
-        ssr: args["--export-fly"] ? true : !!args["--ssr"],
+        pro: !!args["--pro"],
+        ssr: !!args["--ssr"],
         staticPrefix: config.staticPrefix,
         verbose: !!args["--verbose"],
         outputFileSystem: (args["--disk"] || args["--export-fly"] || args["--export"]) ? undefined : new MemoryFS()
@@ -53,8 +53,10 @@ async function main() {
         await app.exportFly()
         cli.ok("Exported to", config.outDir)
         cli.ok("Finished in", (new Date().getTime() - startTime) / 1000 + "s");
-    } else
+    } else {
+        cli.ok("Watch :", app.$.pageArchitect.webpackArchitect.config.watch = !args["--ssr"])
         await new Server(app).init(args["--port"], args["--addr"], config.devServer)
+    }
 }
 
 let doneOnce = false;
