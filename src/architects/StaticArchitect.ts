@@ -13,6 +13,7 @@ export interface StaticConfig {
 }
 
 import {JSDOM} from "jsdom"
+import FireJSX from "../FireJSX";
 
 {
     // @ts-ignore
@@ -90,6 +91,14 @@ export default class {
             "<meta charset=\"UTF-8\">" +
             "<meta name=\"viewport\" content=\"width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1\">" +
             "<meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">" +
+            `<meta name="generator" content="FireJSX v${global.FireJSX.version}"/>` +
+            `<script>window.FireJSX={
+                    isHydrated: "${this.config.ssr}",
+                    lib: "${this.config.lib}",
+                    prefix: "${this.config.prefix}",
+                    staticPrefix: "${this.config.staticPrefix}",
+                    version: "${global.FireJSX.version}"
+                }</script>` +
             head +
             "</head><body><div id=\"root\">" +
             rootDiv +
