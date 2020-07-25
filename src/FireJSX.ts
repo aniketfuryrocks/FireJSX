@@ -168,6 +168,8 @@ export default class {
     }
 
     exportFly() {
+        if (!this.$.pro)
+            this.$.cli.warn("Exporting a non-production build")
         return new Promise(async (resolve, reject) => {
             const map: FIREJSX_MAP = {
                 staticConfig: {

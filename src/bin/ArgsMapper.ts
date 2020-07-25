@@ -64,13 +64,8 @@ export function getArgs(): Args {
 
 export function parseArgs(args: Args): Args | never {
     //export fly
-    if (args["--export-fly"])
-        if (args["--export"])
-            throw new Error("flag [-e, --export] are redundant when exporting for fly build. Rerun after removing this flag");
-        else if (args["--pro"])
-            throw new Error("flag [-p, --pro] are redundant when exporting for fly build. Rerun after removing this flag");
-        else if (args["--ssr"])
-            throw new Error("flag [-s, --ssr] are redundant when exporting for fly build. Rerun after removing this flag");
+    if (args["--export-fly"] && args["--export"])
+        throw new Error("flag [-e, --export] are redundant when exporting for fly build. Rerun after removing this flag");
 
     //check if log mode is valid
     if (args["--log-mode"] && (args["--log-mode"] !== "silent" && args["--log-mode"] !== "plain"))
@@ -81,7 +76,7 @@ export function parseArgs(args: Args): Args | never {
         throw new Error("flags [-d, --disk] are redundant when exporting")
 
     //ssr only when exporting or disk
-    if (args["--ssr"] && !(args["--disk"] || args["--export"]))
+    if (args["--ssr"] && !(args["--disk"] || args["--export"] || args["--export-fly"]))
         throw new Error("flags [-s, --ssr] should be accompanied either by flags [-e,--export] or flags [-d, --disk]")
 
     return args
