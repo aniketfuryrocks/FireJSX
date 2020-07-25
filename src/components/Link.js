@@ -24,7 +24,7 @@ export default ({href, children, onClick, onMouseEnter, ...rest}) => {
     }
 
     return (
-        <a {...rest} href={href} onClick={apply.bind(this)} onMouseEnter={preLoad.bind(this)}>
+        <a {...rest} href={FireJSX.prefix + href} onClick={apply.bind(this)} onMouseEnter={preLoad.bind(this)}>
             {children}
         </a>
     )
