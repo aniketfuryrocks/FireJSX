@@ -110,7 +110,6 @@ export default class {
             this.$.pageArchitect.buildPages(() => {
                 this.$.cli.ok('Build')
                 const promises = [];
-
                 this.$.pageMap.forEach(page => {
                     //if there is not hook then build the default page
                     if (page.hooks.onBuild.length === 0)
@@ -155,6 +154,7 @@ export default class {
                         }
                     })))
                 })
+                Promise.all(promises).then(resolve).catch(reject)
             }, reject)
         })
     }
