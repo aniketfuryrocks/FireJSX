@@ -54,8 +54,7 @@ export default class {
                     origins.forEach(({loc, moduleName}) => {
                         let _page = this.$.pageMap.get(loc);
                         if (!_page)
-                            if (!(_page = this.$.pageMap.get(moduleName.replace(pageRel, ""))))
-                                this.$.cli.warn(`Lazy Chunks [${files.join(" ,")}] have no entry point.`);
+                            _page = this.$.pageMap.get(moduleName.replace(pageRel, ""));
                         (_page ? [_page] : this.$.pageMap).forEach(page => {
                             if (entry)//entry
                                 page.chunks.entry.push(...files)
