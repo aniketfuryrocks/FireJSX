@@ -25,15 +25,15 @@ export default class {
         }
     }
 
-    async render(page: string, path: string, content: any = {}): Promise<{
+    render(page: string, path: string, content: any = {}): {
         dom: JSDOM,
         map: string
-    }> {
+    } {
         const _page = this.pageMap.get(page);
         if (!page)
             throw new Error(`Page ${page} does not exist`)
         return {
-            dom: await this.renderer.render(_page, path, content),
+            dom: this.renderer.render(_page, path, content),
             map: `FireJSX.map=${JSON.stringify({
                 content,
                 chunks: _page.chunks
