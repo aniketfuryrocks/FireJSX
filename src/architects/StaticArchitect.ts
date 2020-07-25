@@ -12,14 +12,15 @@ export interface StaticConfig {
     fullExternalPath: string,
 }
 
-import {window} from 'ssr-window';
-// @ts-ignore   | Spread Copy all properties from window to global
-global = {
-    ...global,
-    ...window
+import {JSDOM} from "jsdom"
+
+{
+    // @ts-ignore
+    global.window = global
+    const dom = new JSDOM()
+    for (const domKey of ["document", "location", "history", "navigator", "screen", "matchMedia", "getComputedStyle"])
+        global[domKey] = dom.window[domKey];
 }
-// @ts-ignore   | Make window object circular
-global.window = global
 
 export default class {
     config: StaticConfig
@@ -73,15 +74,17 @@ export default class {
         }
         if (!page.app)
             page.app = global.FireJSX.app
+        //render
         const rootDiv = this.config.ssr ? global.window.ReactDOMServer.renderToString(
             global.React.createElement(page.app, {content: global.FireJSX.map.content})
         ) : ""
+        //helmet
         if (this.config.ssr) {
             const helmet = Helmet.renderStatic();
             for (let helmetKey in helmet)
                 head += helmet[helmetKey].toString()
         }
-
+        //concat every thing
         return "<!doctype html>" +
             "<html lang=\"en\"><head>" +
             "<meta charset=\"UTF-8\">" +

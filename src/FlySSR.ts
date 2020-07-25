@@ -3,7 +3,6 @@ import Page from "./classes/Page";
 import StaticArchitect from "./architects/StaticArchitect";
 import {FIREJSX_MAP} from "./FireJSX";
 import * as fs from "fs"
-import {JSDOM} from "jsdom";
 import {join, resolve} from "path";
 
 export default class {
@@ -25,7 +24,7 @@ export default class {
     }
 
     render(page: string, path: string, content: any = {}): {
-        dom: JSDOM,
+        dom: string,
         map: string
     } {
         const _page = this.pageMap.get(page);

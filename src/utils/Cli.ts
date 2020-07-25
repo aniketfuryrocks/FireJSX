@@ -27,7 +27,7 @@ export default class {
                 this.error = (...messages) => console.error(' \x1b[31mX', ...messages, '\x1b[0m');
                 this.warn = (...messages) => console.warn(' \x1b[33m!', ...messages, '\x1b[0m');
                 console.clear();
-                console.log(`\x1b[1mFireJSX v${global.__FIREJSX_VERSION__} Copyright (C) 2020 Aniket Prajapati\x1b[0m\n`)
+                console.log(`\x1b[1mFireJSX v${global.FireJSX.version} Copyright (C) 2020 Aniket Prajapati\x1b[0m\n`)
         }
     }
 }

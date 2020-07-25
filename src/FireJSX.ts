@@ -89,7 +89,6 @@ export default class {
         this.$.cli.log("Building Externals");
         const externals = await this.$.pageArchitect.buildExternals()
         this.$.renderer = new StaticArchitect({
-            template: this.$.inputFileSystem.readFileSync(join(__dirname, "web/template.html")).toString(),
             externals,
             lib: this.$.lib,
             outDir: this.$.outDir,
@@ -126,17 +125,13 @@ export default class {
                             if (this.$.verbose)
                                 this.$.cli.log(`Rendering Path : ${path}`);
                             const startTime = new Date().getTime();//push promise
-                            const dom = this.$.renderer.render(page, path, content)
+                            const html = this.$.renderer.render(page, path, content)
                             this.$.cli.ok(`Rendered Path ${path} in`, new Date().getTime() - startTime, "ms")
-                            //call page postRender hooks
-                            page.hooks.postRender.forEach(postRender => postRender(dom))
-                            //call global postRender hooks
-                            this.$.hooks.postRender.forEach(postRender => postRender(dom))
                             //await promises
                             promises.push(
                                 //write html file
                                 writeFileRecursively(`${this.$.outDir}/${path}.html`,
-                                    dom.serialize(),
+                                    html,
                                     this.$.outputFileSystem),
                                 //write map
                                 (() => {
@@ -174,7 +169,6 @@ export default class {
             const map: FIREJSX_MAP = {
                 staticConfig: {
                     ...this.$.renderer.config,
-                    template: this.$.inputFileSystem.readFileSync(join(__dirname, "web/template.html")).toString(),
                     ssr: true
                 },
                 pageMap: {},

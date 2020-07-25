@@ -2,6 +2,7 @@ declare module NodeJS {
     interface Global {
         window: Global,
         FireJSX: {
+            version?: string,
             app?: any,
             lib?: string,
             prefix?: string,
@@ -22,7 +23,6 @@ declare module NodeJS {
             },
             showLoader?: () => void,
         },
-        __FIREJSX_VERSION__: string,
         webpackJsonp?: any,
         React?: any,
         ReactDOM?: any,
