@@ -27,16 +27,13 @@ export default class {
             server.use(compression())
         //init plugins
         this.$.hooks.initServer.forEach(initServer => initServer(server))
-        //watch changes
-        this.$.cli.ok("Watching for file changes")
-
+        //build pages
         this.app.buildPages().catch(e => this.$.cli.error(e))
-
+        //hmr
         server.use(webpackHot(this.$.pageArchitect.compiler, {
             log: false,
             path: `/__webpack_hmr`
         }))
-
         //routing
         if (this.$.staticDir)
             server.use(this.$.staticPrefix, express.static(this.$.staticDir));
