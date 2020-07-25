@@ -31,7 +31,10 @@ export default class {
             this.renderer.render(_page, path, content),
             `FireJSX.map=${JSON.stringify({
                 content,
-                chunks: _page.chunks
+                chunks: {
+                    initial: _page.chunks.initial,
+                    entry: _page.chunks.entry
+                }
             })}`
         ]
     }

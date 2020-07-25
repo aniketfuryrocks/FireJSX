@@ -144,7 +144,10 @@ export default class {
                                     return writeFileRecursively(`${this.$.outDir}/${this.$.lib}/map${_path}.map.js`,
                                         `FireJSX.map=${JSON.stringify({
                                             content,
-                                            chunks: page.chunks
+                                            chunks: {
+                                                initial: page.chunks.initial,
+                                                entry: page.chunks.entry
+                                            }
                                         })}`,
                                         this.$.outputFileSystem
                                     )
