@@ -13,7 +13,6 @@ export interface StaticConfig {
 }
 
 import {window} from 'ssr-window';
-import {link} from "fs";
 // @ts-ignore   | Spread Copy all properties from window to global
 global = {
     ...global,
