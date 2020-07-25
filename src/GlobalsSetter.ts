@@ -1,1 +1,1 @@
-global.__FIREJSX_VERSION__ = "0.9.0-beta.13"
+global.__FIREJSX_VERSION__ = "0.9.0-bet0.9.0-beta.14a.14"
