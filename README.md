@@ -14,7 +14,7 @@ Visit the [quick start](https://github.com/eAdded/FireJSX/wiki/Quick-Start) guid
 
 ## How is it different ?
 
-**FireJSX = (([Gatsby](https://www.gatsbyjs.org/) + [Next.JS](https://nextjs.org/) - problems) + awesomeness**
+**FireJSX = [Gatsby](https://www.gatsbyjs.org/) + [Next.JS](https://nextjs.org/) - Problems + Awesomeness**
 
 + Pure react apps with a very-very small code footprint of its own, providing fast web-pages and reduced overhead.
 
