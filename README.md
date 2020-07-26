@@ -1,6 +1,6 @@
 # FireJSX 🔥
 
-**The react framework for SSB, SSR and Serverless technologies**
+**The React Framework for SSB, SSR and Serverless technologies**
 
 FireJSX is the framework required by modern react developers 😎 to build great sites with ease. 
 
