@@ -30,6 +30,20 @@ Visit the [quick start](https://github.com/eAdded/FireJSX/wiki/Quick-Start) guid
 
 Documentation is available at the official [FireJSX Github Wiki](https://github.com/eAdded/FireJSX/wiki)
 
+## Special Thanks 
+
+<p>
+
+<img align="left" height="100px" width="100px" src="jetbrains.svg"/>
+<br/>
+<p style="margin-top:20px" >
+We want to thank <a href="https://www.jetbrains.com/?from=FireJSX"><b>JetBrains</b></a> for providing us a free JetBrains Open Source license
+</p>
+
+</p>
+
+<br/>
+
 ## Code of conduct
 
 Code of conduct can be found at [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
@@ -43,17 +57,6 @@ Make sure to read **Contribution Guidelines** at [CONTRIBUTING.md](CONTRIBUTING.
 Copyright (C) 2020 Aniket Prajapati
 
 Licensed under the [GNU GENERAL PUBLIC LICENSE](LICENSE)
-
-## Special Thanks 
-
-<p>
-
-<img align="left" height="100px" width="100px" src="jetbrains.svg"/>
-We want to thank <a href="https://www.jetbrains.com/?from=FireJSX"><b>JetBrains</b></a> for providing us a free JetBrains Open Source license
-
-</p>
-
-<br/>
 
 ## Contributors
  + [Aniket Prajapati](https://github.com/aniketfuryrocks) @ prajapati.ani306@gmail.com , [eAdded](http://www.eadded.com)
