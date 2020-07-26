@@ -12,7 +12,7 @@ Excited to learn more?
 
 Visit the [quick start](https://github.com/eAdded/FireJSX/wiki/Quick-Start) guide to get your site spinning within a minute.
 
-## How is it different ?
+## How is it different ? 👽
 
 **FireJSX = [Gatsby](https://www.gatsbyjs.org/) + [Next.JS](https://nextjs.org/) - Problems + Awesomeness**
 
@@ -26,11 +26,11 @@ Visit the [quick start](https://github.com/eAdded/FireJSX/wiki/Quick-Start) guid
 
 + You are not bound by the CLI interface. FireJSX provides an easy to use node interface, allowing you to make extend your creativity and shape FireJSX according to your use-case
 
-## Documentation
+## Documentation 📚
 
 Documentation is available at the official [FireJSX Github Wiki](https://github.com/eAdded/FireJSX/wiki)
 
-## Special Thanks 
+## Special Thanks 🙏
 
 <p>
 <img align="left" height="150px" width="150px" src="jetbrains.svg"/>
