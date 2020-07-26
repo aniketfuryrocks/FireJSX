@@ -43,17 +43,17 @@ We want to thank <a href="https://www.jetbrains.com/?from=FireJSX"><b>JetBrains<
 
 ## Code of conduct
 
-Code of conduct can be found at [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+Code of conduct can be found at **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)**
 
 ## Contributing
 
-Make sure to read **Contribution Guidelines** at [CONTRIBUTING.md](CONTRIBUTING.md) before contributing.
+Make sure to read **[Contribution Guidelines](CONTRIBUTING.md)** before contributing.
 
 ## License & Copyright
 
 Copyright (C) 2020 Aniket Prajapati
 
-Licensed under the [GNU GENERAL PUBLIC LICENSE](LICENSE)
+Licensed under the **[GNU GENERAL PUBLIC LICENSE](LICENSE)**
 
 ## Contributors
- + [Aniket Prajapati](https://github.com/aniketfuryrocks) @ prajapati.ani306@gmail.com , [eAdded](http://www.eadded.com)
+ + [Aniket Prajapati](https://github.com/aniketfuryrocks) @prajapati.ani306@gmail.com , [eAdded](http://www.eadded.com)
