@@ -49,10 +49,11 @@ Licensed under the [GNU GENERAL PUBLIC LICENSE](LICENSE)
 <p>
 
 <img align="left" height="100px" width="100px" src="jetbrains.svg"/>
-We want to thank [JetBrains](https://www.jetbrains.com/?from=FireJSX) for providing us a free JetBrains Open Source license
+We want to thank <a href="https://www.jetbrains.com/?from=FireJSX"><b>JetBrains</b></a> for providing us a free JetBrains Open Source license
 
 </p>
 
+<br/>
 
 ## Contributors
  + [Aniket Prajapati](https://github.com/aniketfuryrocks) @ prajapati.ani306@gmail.com , [eAdded](http://www.eadded.com)
