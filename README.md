@@ -33,17 +33,12 @@ Documentation is available at the official [FireJSX Github Wiki](https://github.
 ## Special Thanks 
 
 <p>
-
-<img align="left" height="100px" width="100px" src="jetbrains.svg"/>
+<img align="left" height="150px" width="150px" src="jetbrains.svg"/>
+<p>
 <br/>
-
-<p style="margin-top:20px" >
-We want to thank <a href="https://www.jetbrains.com/?from=FireJSX"><b>JetBrains</b></a> for providing us a free JetBrains Open Source license
+We want to thank <a href="https://www.jetbrains.com/?from=FireJSX"><b>JetBrains</b></a><br/> for providing us a<br/><b>Free JetBrains Open Source license</b>
 </p>
-
 </p>
-
-<br/>
 
 ## Code of conduct
 
