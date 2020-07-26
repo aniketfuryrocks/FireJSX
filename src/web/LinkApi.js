@@ -30,10 +30,8 @@ FireJSX.linkApi = {
         if (map) {
             this.loadChunks(map.chunks.entry)
             this.loadChunks(map.chunks.initial)
-        } else if (url === "/404")
-            throw new Error("404 page not found")
-        else
-            await this.loadChunks("/404")
+        } else
+            await this.loadPage("/404")
     },
     preloadChunks: function (chunks, rel = "preload") {
         chunks.forEach(chunk => {
