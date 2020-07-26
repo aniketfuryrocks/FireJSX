@@ -37,9 +37,6 @@ rsync -vr src/components/*.js $FOLDER || error "Error syncing components/*.js fi
 clr_scr "Syncing web/*.js Files"
 rsync -vr src/web/*.js $FOLDER/web || error "Error syncing web/*.js files to $FOLDER/web"
 
-clr_scr "Syncing web/*.html Files"
-rsync -vr src/web/*.html $FOLDER/web || error "Error syncing web/*.html files to $FOLDER/web"
-
 clr_scr "Copying LICENSE"
 cp -v LICENSE $FOLDER/LICENSE || error "Error copying LICENSE to $FOLDER"
 
