@@ -1,6 +1,6 @@
 # FireJSX 🔥
 
-** The react framework for SSB, SSR and Serverless technologies**
+**The react framework for SSB, SSR and Serverless technologies**
 
 FireJSX is the framework required by modern react developers 😎 to build great sites with ease. 
 
@@ -14,9 +14,9 @@ Visit the [quick start](https://github.com/eAdded/FireJSX/wiki/Quick-Start) guid
 
 # How is it different 👽
 
-**FireJSX = ((** [Gatsby](https://www.gatsbyjs.org/) **+** [Next.JS](https://nextjs.org/) **- problems) + awesomeness**
+**FireJSX = (([Gatsby](https://www.gatsbyjs.org/) + [Next.JS](https://nextjs.org/) - problems) + awesomeness**
 
-+ Pure react apps with a very very small code footprint of its own, providing fast web-pages and reduced overhead.
++ Pure react apps with a very-very small code footprint of its own, providing fast web-pages and reduced overhead.
 + Easily pull in data from any data source and easily pass it to your site with no confusing and buggy `getInitialProps` or `getServerSideProps`. Moreover you don't need to learn any extra technology such as `GraphQL` or worry about efficiency and code spitting.
 + **Export Fly** mechanism exports your build to a single package allowing devs to SSR their site from any remote location, like a serverless lambda function or deep down from the ocean.
 + Extensible and easy to build plugins, similar to react-hooks.
