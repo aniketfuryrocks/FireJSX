@@ -1,28 +1,26 @@
 # FireJSX 🔥
 
-**A zero-config, highly customizable, progressive react static site generator with blazingly fast SSR and on the fly builds.**
+** The react framework for SSB, SSR and Serverless technologies**
 
-Build professional quality static websites with no limitations whatsoever. FireJSX sites are fully functional React apps, so you can create high-quality, dynamic web apps, from blogs to e-commerce sites to user dashboards.
+FireJSX is the framework required by modern react developers 😎 to build great sites with ease. 
 
-FireJSX handles page preloading, builds optimised chunks, grows with you using powerful plugin API, saves your sweet-sweet money because FireJSX sites are very very efficient and cheap to host. Go Serverless, SSR or just dump your export to an S3 bucket. There is no limit to what you can do with FireJSX. 
+FireJSX allow you to build professional static/dynamic websites with no limitations whatsoever. FireJSX sites are fully functional React apps, allowing you to create high-quality, dynamic/static web apps, from blogs to e-commerce sites to user dashboards.
+
+FireJSX handles page preloading, builds optimised chunks, grows with you using powerful plugin API, saves your sweet-sweet money💰 because FireJSX sites are very very efficient and cheap to host. Go Serverless, SSR or just dump your SSB to an S3 bucket. There is no limit with what you can do with FireJSX.
 
 Excited to learn more?
 
 Visit the [quick start](https://github.com/eAdded/FireJSX/wiki/Quick-Start) guide to get your site spinning within a minute.
 
-# Features
+# How is it different 👽
 
-+ **Fast WebPages** FireJSX preloads external chunks such as react, react-dom and provides a Link Component which helps preload in-project pages beforehand for faster and snappier websites.
+**FireJSX = ((** [Gatsby](https://www.gatsbyjs.org/) **+** [Next.JS](https://nextjs.org/) **- problems) + awesomeness**
 
-+ **Node interface for on the fly rendering (SSR)** FireJSX provides an `export-fly` mechanism which extracts the min chunks required for SSR and bundles it into a single unit, which when combined with the CustomRenderer helps render FireJSX pages on the fly. You can render them on a serverless function or on a full-fledged Server.
-
-+ **Dev friendly CLI interface** FireJSX provides a fast and dev friendly CLI interface.
-
-+ **Plugins** FireJSX provides a rich plugin API which helps users to develop or install required features as per their need. Customize webpack or your routes. Use plugins to load Data From Anywhere. FireJSX pulls in data from any data source, whether it’s Markdown files, a headless CMS like Contentful or WordPress, or a REST or GraphQL API. Use plugins to load and pass on data to your pages as props.
-
-+ **Routes** FireJSX allows any page to have multiple routes without rewriting the same code a thousand times. FireJSX routes are similar to file-system dirs, so you never get a page conflict when pushing the site to a static host.
-
-+ **Highly customizable project structure and webpack** FireJSX don't bind you to a fixed thought. If you don't like something, then just change it.
++ Pure react apps with a very very small code footprint of its own, providing fast web-pages and reduced overhead.
++ Easily pull in data from any data source and easily pass it to your site with no confusing and buggy `getInitialProps` or `getServerSideProps`. Moreover you don't need to learn any extra technology such as `GraphQL` or worry about efficiency and code spitting.
++ **Export Fly** mechanism exports your build to a single package allowing devs to SSR their site from any remote location, like a serverless lambda function or deep down from the ocean.
++ Extensible and easy to build plugins, similar to react-hooks.
++ You are not bound by the CLI interface. FireJSX provides a easy to use node interface, allowing you to make extend your creativity and shape FireJSX according to your use-case
 
 ## Documentation
 
