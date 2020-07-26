@@ -12,7 +12,7 @@ Excited to learn more?
 
 Visit the [quick start](https://github.com/eAdded/FireJSX/wiki/Quick-Start) guide to get your site spinning within a minute.
 
-# How is it different 👽
+## How is it different 👽
 
 **FireJSX = (([Gatsby](https://www.gatsbyjs.org/) + [Next.JS](https://nextjs.org/) - problems) + awesomeness**
 
