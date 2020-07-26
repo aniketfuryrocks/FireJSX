@@ -14,6 +14,7 @@ declare module NodeJS {
             isSSR?: boolean,
             isHydrated?: boolean,
             linkApi?: {
+                lock: boolean
                 getMapUrl: (url: string) => string,
                 loadMap: (url: string) => Element,
                 preloadPage: (url: string, callback: () => void) => void,
