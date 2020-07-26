@@ -4,9 +4,9 @@
 
 FireJSX is the framework required by modern react developers 😎 to build great sites with ease. 
 
-FireJSX allow you to build **professional** static/dynamic websites with no limitations whatsoever. FireJSX sites are fully functional React apps, allowing you to create high-quality, dynamic/static web apps, from blogs to e-commerce sites to user dashboards.
+FireJSX allows you to build **professional** static/dynamic websites with no limitations whatsoever. FireJSX sites are fully functional React apps, allowing you to create high-quality, dynamic/static web apps, from blogs to e-commerce sites to user dashboards.
 
-FireJSX handles page preloading, builds optimised chunks, grows with you using powerful plugin API, saves your sweet-sweet money💰 because FireJSX sites are very-very efficient and cheap to host. Go Serverless, SSR or just dump your SSB to an S3 bucket. There is no limit with what you can do with FireJSX.
+FireJSX handles page preloading, builds optimised chunks, grows with you using powerful plugin API, saves your sweet-sweet money💰 because FireJSX sites are very-very efficient and cheap to host. Go Serverless, SSR or just dump your SSB to an S3 bucket. There is no limit to what you can do with FireJSX.
 
 Excited to learn more?
 
@@ -24,7 +24,7 @@ Visit the [quick start](https://github.com/eAdded/FireJSX/wiki/Quick-Start) guid
 
 + Extensible and easy to build plugins, similar to react-hooks.
 
-+ You are not bound by the CLI interface. FireJSX provides a easy to use node interface, allowing you to make extend your creativity and shape FireJSX according to your use-case
++ You are not bound by the CLI interface. FireJSX provides an easy to use node interface, allowing you to make extend your creativity and shape FireJSX according to your use-case
 
 ## Documentation
 
