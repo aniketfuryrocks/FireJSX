@@ -1,32 +1,35 @@
 window.onpopstate = function () {
     const path = location.pathname.replace(FireJSX.prefix, "");//remove prefix
-    FireJSX.linkApi.preloadPage(path, () => FireJSX.linkApi.loadPage(path, false))
+    FireJSX.linkApi.loadPage(path, false)
 }
 
 FireJSX.linkApi = {
     getMapUrl: url => `${FireJSX.prefix}/${FireJSX.lib}/map${url === "/" ? "/index" : url}.map.js`,
-    loadMap: function (url) {
-        const map_script = document.createElement("script");
-        map_script.src = this.getMapUrl(url);
-        document.head.appendChild(map_script);
-        return map_script;
+    loadMap: async function (url) {
+        let text = await (await fetch(this.getMapUrl(url), {method: "GET"})).text()
+        if (text)
+            return JSON.parse(text.replace("FireJSX.map=", ""))
     },
-    preloadPage: function (url, callback) {
-        const map_script = this.loadMap(url);
-        map_script.onload = () => {
-            this.preloadChunks(FireJSX.map.chunks.entry, "prefetch");
-            this.preloadChunks(FireJSX.map.chunks.initial, "prefetch");
-            callback();
-        };
-        map_script.onerror = () => {
-            document.head.removeChild(map_script);
-            this.loadMap("/404").onload = map_script.onload;
-        };
+    preloadPage: async function (url) {
+        const map = await this.loadMap(url);
+        if (map) {
+            this.preloadChunks(map.chunks.entry, "prefetch")
+            this.preloadChunks(map.chunks.initial, "prefetch")
+        } else if (url === "/404")
+            throw new Error("404 page not found")
+        else
+            await this.preloadPage("/404")
     },
-    loadPage: function (url, pushState = true) {
+    loadPage: async function (url, pushState = true) {
         window.webpackJsonp = undefined
-        this.loadChunks(FireJSX.map.chunks.entry);
-        this.loadChunks(FireJSX.map.chunks.initial);
+        const map = await this.loadMap(url);
+        if (map) {
+            this.loadChunks(map.chunks.entry)
+            this.loadChunks(map.chunks.initial)
+        } else if (url === "/404")
+            throw new Error("404 page not found")
+        else
+            await this.loadChunks("/404")
         if (pushState)
             window.history.pushState(undefined, undefined, FireJSX.prefix + url);
     },

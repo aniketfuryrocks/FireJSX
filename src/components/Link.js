@@ -1,26 +1,21 @@
 export default ({href, children, onClick, onMouseEnter, ...rest}) => {
     const [preLoaded, setPreLoaded] = React.useState(false)
 
-    function preLoad(event, callback) {
+    function preLoad() {
         if (onMouseEnter)
             onMouseEnter()
         if (preLoaded)
             return;
-        FireJSX.linkApi.preloadPage(href, callback || function () {
-            setPreLoaded(true)
-        });
+        FireJSX.linkApi.preloadPage(href).then(() => setPreLoaded(true));
     }
 
     function apply(event) {
+        event.preventDefault();
         if (onClick)
-            onClick()
+            onClick(event)
         if (FireJSX.showLoader)
             FireJSX.showLoader();
-        event.preventDefault();
-        if (!preLoaded)//there is no muse enter in mobile devices
-            preLoad(undefined, () => FireJSX.linkApi.loadPage(href));
-        else
-            FireJSX.linkApi.loadPage(href);
+        FireJSX.linkApi.loadPage(href)
     }
 
     return (

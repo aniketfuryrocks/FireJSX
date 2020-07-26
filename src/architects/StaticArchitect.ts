@@ -50,7 +50,8 @@ export default class {
         let head, body;
         //map
         {
-            const mapPath = `${this.config.prefix}/${this.config.lib}/map${path === "/" ? "/index" : path}.map.js`
+            const li = path.lastIndexOf("/index")
+            const mapPath = `${this.config.prefix}/${this.config.lib}/map${li <= 0 ? path : path.substring(0, li)}.map.js`
             head = `<link href="${mapPath}" as="script" rel="preload" crossorigin="anonymous"/>`
             body = `<script src="${mapPath}" crossorigin="anonymous"></script>`
         }
@@ -60,15 +61,15 @@ export default class {
             head = arr[0]
             body = arr[1]
         }
-        //initial chunks
-        {
-            const arr = this.loadChunks(head, body, page.chunks.initial)
-            head = arr[0]
-            body = arr[1]
-        }
         //entry chunks
         {
             const arr = this.loadChunks(head, body, page.chunks.entry)
+            head = arr[0]
+            body = arr[1]
+        }
+        //initial chunks
+        {
+            const arr = this.loadChunks(head, body, page.chunks.initial)
             head = arr[0]
             body = arr[1]
         }
