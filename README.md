@@ -4,9 +4,9 @@
 
 FireJSX is the framework required by modern react developers 😎 to build great sites with ease. 
 
-FireJSX allow you to build professional static/dynamic websites with no limitations whatsoever. FireJSX sites are fully functional React apps, allowing you to create high-quality, dynamic/static web apps, from blogs to e-commerce sites to user dashboards.
+FireJSX allow you to build **professional** static/dynamic websites with no limitations whatsoever. FireJSX sites are fully functional React apps, allowing you to create high-quality, dynamic/static web apps, from blogs to e-commerce sites to user dashboards.
 
-FireJSX handles page preloading, builds optimised chunks, grows with you using powerful plugin API, saves your sweet-sweet money💰 because FireJSX sites are very very efficient and cheap to host. Go Serverless, SSR or just dump your SSB to an S3 bucket. There is no limit with what you can do with FireJSX.
+FireJSX handles page preloading, builds optimised chunks, grows with you using powerful plugin API, saves your sweet-sweet money💰 because FireJSX sites are very-very efficient and cheap to host. Go Serverless, SSR or just dump your SSB to an S3 bucket. There is no limit with what you can do with FireJSX.
 
 Excited to learn more?
 
@@ -18,7 +18,7 @@ Visit the [quick start](https://github.com/eAdded/FireJSX/wiki/Quick-Start) guid
 
 + Pure react apps with a very-very small code footprint of its own, providing fast web-pages and reduced overhead.
 
-+ Easily pull in data from any data source and easily pass it to your site with no confusing and buggy `getInitialProps` or `getServerSideProps`. Moreover you don't need to learn any extra technology such as `GraphQL` or worry about efficiency and code spitting.
++ Easily pull in data from any data source and pass it to your page with no confusing and buggy `getInitialProps` or `getServerSideProps`. Moreover, you don't need to learn any extra technology such as `GraphQL` or worry about efficiency and code spitting.
 
 + **Export Fly** mechanism exports your build to a single package allowing devs to SSR their site from any remote location, like a serverless lambda function or deep down from the ocean.
 
