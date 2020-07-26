@@ -30,8 +30,6 @@ Visit the [quick start](https://github.com/eAdded/FireJSX/wiki/Quick-Start) guid
 
 Documentation is available at the official [FireJSX Github Wiki](https://github.com/eAdded/FireJSX/wiki)
 
-**Note** Documentation is incomplete
-
 ## Code of conduct
 
 Code of conduct can be found at [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
