@@ -34,8 +34,8 @@ Documentation is available at the official [FireJSX Github Wiki](https://github.
 
 <p>
 <img align="left" height="150px" width="150px" src="jetbrains.svg"/>
-<p>
 <br/>
+<p>
 We want to thank <a href="https://www.jetbrains.com/?from=FireJSX"><b>JetBrains</b></a><br/> for providing us a<br/><b>Free JetBrains Open Source license</b>
 </p>
 </p>
