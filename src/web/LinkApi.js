@@ -4,6 +4,7 @@ window.onpopstate = function () {
 }
 
 FireJSX.linkApi = {
+    lock: false,
     getMapUrl: url => `${FireJSX.prefix}/${FireJSX.lib}/map${url === "/" ? "/index" : url}.map.js`,
     loadMap: async function (url) {
         const res = await fetch(this.getMapUrl(url), {method: "GET"})
@@ -21,17 +22,23 @@ FireJSX.linkApi = {
             await this.preloadPage("/404")
     },
     loadPage: async function (url, pushState = true) {
+        if (this.lock)
+            return
+        this.lock = true
         window.webpackJsonp = undefined
         //push state
         if (pushState)
             window.history.pushState(undefined, undefined, FireJSX.prefix + url);
         //map
         const map = await this.loadMap(url);
+        FireJSX.map = map
         if (map) {
             this.loadChunks(map.chunks.entry)
             this.loadChunks(map.chunks.initial)
-        } else
-            await this.loadPage("/404")
+        } else if (url !== "/404") {
+            this.lock = false
+            return void await this.loadPage("/404", false)
+        }
     },
     preloadChunks: function (chunks, rel = "preload") {
         chunks.forEach(chunk => {
