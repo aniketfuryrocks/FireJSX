@@ -44,5 +44,9 @@ Copyright (C) 2020 Aniket Prajapati
 
 Licensed under the [GNU GENERAL PUBLIC LICENSE](LICENSE)
 
+## Special Thanks 
+
+<img src="jetbrains.svg"/>
+
 ## Contributors
  + [Aniket Prajapati](https://github.com/aniketfuryrocks) @ prajapati.ani306@gmail.com , [eAdded](http://www.eadded.com)
