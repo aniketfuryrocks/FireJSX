@@ -75,10 +75,10 @@ export function parseConfig(config: Config = {}, args: Args = {_: []}): TrimmedC
         staticDir,
         lib: config.lib || "lib",
         prefix,
-        staticPrefix: args["--static-prefix"] || config.staticPrefix || (() => {
+        staticPrefix: args["--static-prefix"] || config.staticPrefix || staticDir ? (() => {
             const dirName = staticDir.substring(staticDir.lastIndexOf("/"))
             return prefix === "" ? dirName : (prefix + dirName)
-        })(),
+        })() : "",
         devServer: {
             gzip: args["--disable-gzip"] ? false : config.devServer.gzip === undefined ? true : config.devServer.gzip
         },
