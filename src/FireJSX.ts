@@ -2,7 +2,7 @@ import "./GlobalsSetter"
 import Cli from "./utils/Cli";
 import Page from "./classes/Page";
 import {Configuration} from "webpack";
-import {join} from "path";
+import {join, sep as PathSeparator} from "path";
 import {mapPlugin} from "./mappers/PluginMapper";
 import PageArchitect from "./architects/PageArchitect";
 import {writeFileRecursively} from "./utils/Fs";
@@ -204,7 +204,7 @@ export default class {
                     }
                 })
 
-                map.staticConfig.externals[0] = map.staticConfig.externals[0].substr(map.staticConfig.externals[0].lastIndexOf("/") + 1);
+                map.staticConfig.externals[0] = map.staticConfig.externals[0].substr(map.staticConfig.externals[0].lastIndexOf(PathSeparator) + 1);
                 this.$.outputFileSystem.rename(this.$.renderer.config.fullExternalPath, join(this.$.outDir, map.staticConfig.externals[0]), err => {
                     if (err)
                         throw new Error(`Error moving ${map.staticConfig.externals[0]} to ${this.$.outDir}\n${err}`);

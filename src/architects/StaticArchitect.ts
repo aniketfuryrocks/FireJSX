@@ -93,7 +93,7 @@ export default class {
             "<meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">" +
             `<meta name="generator" content="FireJSX v${global.FireJSX.version}"/>` +
             `<script>window.FireJSX={
-                    isHydrated: "${this.config.ssr}",
+                    isHydrated: ${this.config.ssr},
                     lib: "${this.config.lib}",
                     prefix: "${this.config.prefix}",
                     staticPrefix: "${this.config.staticPrefix}",
