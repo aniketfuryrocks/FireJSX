@@ -6,5 +6,5 @@
 /test/components/
 /test/de_pages/
 /test/scripts/
-/yarn.lock
-/yarn-error.log
+yarn.lock
+yarn-error.log
