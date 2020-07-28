@@ -1,6 +1,6 @@
 export default function (app, hot) {
     if (!hot)
-        throw new Error("You forgot to pass hot from react-hot-loader/root to wrapper")
+        throw new Error("You forgot to pass { hot } from firejsx/hot to Wrap")
     if (FireJSX.isSSR) {
         FireJSX.app = app
         return
