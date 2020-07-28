@@ -32,7 +32,7 @@ export function getArgs(): Args {
         .name("Fire JS")
         .description("A zero config, highly customizable, progressive react static site generator with blazingly fast SSR and on the fly builds.")
         // @ts-ignore
-        .version(global.__FIREJSX_VERSION__)
+        .version(global.FireJSX.version)
         //mode
         .option(["-p", "--pro"], Boolean, "use production chunks. NODE_ENV : production")
         .option(["-e", "--export"], Boolean, "export project for distribution")
