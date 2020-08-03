@@ -1,6 +1,5 @@
 import {join} from "path"
 import Page from "../classes/Page";
-import {Helmet} from "react-helmet"
 
 export interface StaticConfig {
     lib: string,
@@ -81,9 +80,10 @@ export default class {
         ) : ""
         //helmet
         if (this.config.ssr) {
-            const helmet = Helmet.renderStatic();
+            global.__FIREJSX_HELMET__.canUseDOM = false;
+            const helmet = global.__FIREJSX_HELMET__.renderStatic();
             for (let helmetKey in helmet)
-                head += helmet[helmetKey].toString()
+                head = helmet[helmetKey].toString() + head
         }
         //concat every thing
         return "<!doctype html>" +

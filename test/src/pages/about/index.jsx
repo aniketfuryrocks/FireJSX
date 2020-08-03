@@ -12,6 +12,7 @@ Wrap(() => {
         <div>
             <Head>
                 <title>About</title>
+                <meta name={"asd"}/>
             </Head>
             <Loader effect={React.useEffect}>
                 <LoadingBar/>

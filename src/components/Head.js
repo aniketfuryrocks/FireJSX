@@ -1,2 +1,1 @@
-import {Helmet} from "react-helmet"
-export default Helmet
+export default window.__FIREJSX_HELMET__

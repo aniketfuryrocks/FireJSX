@@ -28,6 +28,14 @@ declare module NodeJS {
         React?: any,
         ReactDOM?: any,
         ReactDOMServer?: any,
+        __FIREJSX_HELMET__: {
+            renderStatic: () => {
+                [Key: string]: {
+                    toString: () => string
+                }
+            },
+            canUseDOM: boolean
+        }
     }
 }
 
