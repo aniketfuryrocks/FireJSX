@@ -36,8 +36,8 @@ export default class {
                 publicPath: `${this.$.prefix}/${this.$.lib}/`,
                 path: `${this.$.outDir}/${this.$.lib}/`,
                 //hot
-                hotUpdateMainFilename: 'hot/[hash].hot.json',
-                hotUpdateChunkFilename: 'hot/[hash].hot.js'
+                hotUpdateMainFilename: `${this.$.lib}/[hash].hot.json`,
+                hotUpdateChunkFilename: `${this.$.lib}/[hash].hot.js`
             },
             externals: {
                 react: "React",
