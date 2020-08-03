@@ -80,7 +80,6 @@ export default class {
         ) : ""
         //helmet
         if (this.config.ssr) {
-            global.__FIREJSX_HELMET__.canUseDOM = false;
             const helmet = global.__FIREJSX_HELMET__.renderStatic();
             for (let helmetKey in helmet)
                 head = helmet[helmetKey].toString() + head
