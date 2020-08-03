@@ -1,7 +1,7 @@
 {
   "name": "firejsx",
   "main": "FireJSX.js",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "license": "GPL-3.0-or-later",
   "description": "The React Framework for SSB, SSR and Serverless technologies",
   "keywords": [
