@@ -29,8 +29,8 @@ export interface Args {
 
 export function getArgs(): Args {
     return <Args>new SmartArg<Args>()
-        .name("Fire JS")
-        .description("A zero config, highly customizable, progressive react static site generator with blazingly fast SSR and on the fly builds.")
+        .name("FireJSX")
+        .description("The React Framework for SSB, SSR and Serverless technologies")
         // @ts-ignore
         .version(global.FireJSX.version)
         //mode
