@@ -3,6 +3,10 @@ window.onpopstate = function () {
     FireJSX.linkApi.loadPage(path, false)
 }
 
+function getPathFromUrl(url) {
+    return url.split(/[?#]/)[0];
+}
+
 FireJSX.linkApi = {
     lock: false,
     getMapUrl: url => `${FireJSX.prefix}/${FireJSX.lib}/map${url === "/" ? "/index" : url}.map.js`,
@@ -12,6 +16,7 @@ FireJSX.linkApi = {
             return JSON.parse((await res.text()).replace("FireJSX.map=", ""))
     },
     preloadPage: async function (url) {
+        url = getPathFromUrl(url)
         const map = await this.loadMap(url);
         if (map) {
             this.preloadChunks(map.chunks.entry, "prefetch")
@@ -29,6 +34,8 @@ FireJSX.linkApi = {
         //push state
         if (pushState)
             window.history.pushState(undefined, undefined, FireJSX.prefix + url);
+        //url
+        url = getPathFromUrl(url)
         //map
         const map = await this.loadMap(url);
         FireJSX.map = map

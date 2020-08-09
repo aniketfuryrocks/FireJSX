@@ -30,7 +30,7 @@ Wrap(({content: {emoji}}) => {
             You haves been here for {s}s {emoji}
             <br/>
             <br/>
-            <Link href={"/about"}>🤠 Click Here To Go To About Page</Link>
+            <Link href={"/about?s=h"}>🤠 Click Here To Go To About Page</Link>
             <br/>
             <br/>
             <Link href={"/this page does not exist"}>🤔 Click Here To Go Mock 404</Link>
