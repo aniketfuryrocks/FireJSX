@@ -10,7 +10,7 @@ export default function (app, hot) {
     const App = FireJSX.isSSR ? app : hot(app)
     func(<App content={FireJSX.map.content}/>, document.getElementById("root"))
     if (location.hash) {
-        const el = document.getElementById(location.hash.substring(1))
+        const el = document.getElementById(decodeURI(location.hash.substring(1)))
         if (el)
             el.scrollIntoView()
     }
