@@ -16,7 +16,11 @@ Visit the [quick start](https://github.com/eAdded/FireJSX/wiki/Quick-Start) guid
 
 **FireJSX = [Gatsby](https://www.gatsbyjs.org/) + [Next.JS](https://nextjs.org/) - Problems + Awesomeness**
 
-+ Pure react apps with a very-very small code footprint of its own, providing fast web-pages and reduced overhead.
++ Long term caching for fast cdn delivery
+
++ Easily render pages on the fly with very-very low latency.
+
++ Pure react apps for fast web-pages and practically no overhead added by FireJSX.
 
 + Easily pull in data from any data source and pass it to your page with no confusing and buggy `getInitialProps` or `getServerSideProps`. Moreover, you don't need to learn any extra technology such as `GraphQL` or worry about efficiency and code spitting.
 
@@ -24,7 +28,14 @@ Visit the [quick start](https://github.com/eAdded/FireJSX/wiki/Quick-Start) guid
 
 + Extensible and easy to build plugins, similar to react-hooks.
 
-+ You are not bound by the CLI interface. FireJSX provides an easy to use node interface, allowing you to make extend your creativity and shape FireJSX according to your use-case
++ You are not bound by the CLI interface. FireJSX provides an easy to use node interface, allowing you to make extend your creativity and shape FireJSX according to your use-case.
+
+Read more [here](https://webbuddy360.com/AniketFuryRocks/The%202021%20web%20development%20stack)
+
+## Who is using FireJSX ? 🤩
+
++ [WB360](https://webbuddy360.com)
++ [AlokProducts.com](https://alokproducts.com)
 
 ## Documentation 📚
 
