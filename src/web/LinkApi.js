@@ -1,8 +1,10 @@
+//listens to next and prev page events
 window.onpopstate = function () {
     const path = location.pathname.replace(FireJSX.prefix, "");//remove prefix
     FireJSX.linkApi.loadPage(path, false)
 }
 
+//gets path from url by excluding ? and #
 function getPathFromUrl(url) {
     return url.split(/[?#]/)[0];
 }
