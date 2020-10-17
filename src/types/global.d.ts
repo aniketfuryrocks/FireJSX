@@ -8,8 +8,10 @@ declare module NodeJS {
             prefix?: string,
             staticPrefix?: string,
             map?: {
-                content: any,
-                chunks: PageChunks
+                [key: string]: {
+                    content: any,
+                    chunks: PageChunks
+                }
             },
             isSSR?: boolean,
             isHydrated?: boolean,

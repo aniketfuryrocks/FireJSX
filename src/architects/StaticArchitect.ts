@@ -35,7 +35,7 @@ export default class {
         global.FireJSX.isSSR = this.config.ssr
         global.FireJSX.staticPrefix = this.config.staticPrefix
         global.FireJSX.prefix = this.config.prefix
-        global.FireJSX.map = {
+        global.FireJSX.map[path] = {
             content,
             chunks: page.chunks
         };
@@ -75,7 +75,7 @@ export default class {
             page.app = global.FireJSX.app
         //render
         const rootDiv = this.config.ssr ? global.window.ReactDOMServer.renderToString(
-            global.React.createElement(page.app, {content: global.FireJSX.map.content})
+            global.React.createElement(page.app, {content})
         ) : ""
         //helmet
         if (this.config.ssr) {
