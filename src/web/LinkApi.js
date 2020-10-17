@@ -1,3 +1,7 @@
+/*
+* TODO: preload
+* TODO: load */
+//
 //listens to next and prev page events
 window.onpopstate = function () {
     const path = location.pathname.replace(FireJSX.prefix, "");//remove prefix
@@ -13,30 +17,27 @@ FireJSX.linkApi = {
     chunkCache: {},
     lock: false,
     loadMap: function (url) {
-        const foo = (resolve, reject) => {
-            //force reload to refresh FireJSX.map value
-            let ele = this.loadChunk(`map${url === "/" ? "/index" : url}.map.js`, true);
-            console.log(ele)
-            ele.onload = resolve;
-            ele.onerror = () => {
-                if (url === "/404")
-                    throw new Error("Error loading 404 map")
-                foo();
-            };
-        }
-        return new Promise()
+        return new Promise((resolve, reject) => {
+            const map = FireJSX.map[url];
+            if (map)//if already loaded then resolve
+                resolve(map)
+            else {
+                (function foo(url) {
+                    const ele = this.loadChunk(`map${url === "/" ? "/index" : url}.map.js`);
+                    ele.onload = () => resolve(FireJSX.map[url]);
+                    ele.onerror = () => {
+                        if (url === "/404")
+                            throw new Error("Error loading 404 map")
+                        foo("/404");
+                    }
+                }).bind(this)(url)
+            }
+        })
     },
     preloadPage: async function (url) {
-        url = getPathFromUrl(url);
-        try {
-            await this.loadMap(url);
-            FireJSX.chunks.entry.forEach(c => this.preloadChunk(c, "prefetch"));
-            FireJSX.chunks.initial.forEach(c => this.preloadChunk(c, "prefetch"));
-        } catch (_e) {
-            if (url === "/404")
-                throw new Error("404 page not found")
-            await this.preloadPage("/404")
-        }
+        const map = await this.loadMap(getPathFromUrl(url));
+        map.chunks.entry.forEach(c => this.preloadChunk(c, "prefetch"));
+        map.chunks.initial.forEach(c => this.preloadChunk(c, "prefetch"));
     },
     loadPage: async function (url, pushState = true) {
         if (this.lock)
@@ -60,14 +61,10 @@ FireJSX.linkApi = {
             }
         }
     },
-    preloadChunk: function (chunk, rel, force) {
+    preloadChunk: function (chunk, rel) {
         let ele = this.chunkCache[chunk];
-        if (ele) { //check has already been loaded
-            if (force)
-                ele.remove()
-            else
-                return ele;
-        }
+        if (ele)//check has already been loaded
+            return ele;
         ele = document.createElement("link");
         ele.rel = rel;
         ele.href = `${FireJSX.prefix}/${FireJSX.lib}/${chunk}`;

@@ -9,7 +9,7 @@ export default function (app, hot) {
     const func = FireJSX.isHydrated ? ReactDOM.hydrate : ReactDOM.render
     const App = FireJSX.isSSR ? app : hot(app)
     func(<App
-        content={FireJSX.map[location.pathname === "/" ? "/index" : location.pathname]}/>, document.getElementById("root"))
+        content={FireJSX.map[location.pathname]}/>, document.getElementById("root"))
     if (location.hash) {
         const el = document.getElementById(decodeURI(location.hash.substring(1)))
         if (el)

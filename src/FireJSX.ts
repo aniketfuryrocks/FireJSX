@@ -217,12 +217,16 @@ export default class {
     }
 }
 
-export function generateMapJS(path: any, content: any, page: Page): string {
-    return `FireJSX.map["${path}"]=${JSON.stringify({
+export function generateMapJS(path: string, content: any, page: Page): string {
+    return `FireJSX.map["${pathToUrlPath(path)}"]=${JSON.stringify({
         content,
         chunks: {
             initial: page.chunks.initial,
             entry: page.chunks.entry
         }
     })}`
+}
+
+export function pathToUrlPath(path): string {
+    return path === "/index" ? "/" : path.substring(0, path.lastIndexOf("/index"))
 }
