@@ -228,5 +228,8 @@ export function generateMapJS(path: string, content: any, page: Page): string {
 }
 
 export function pathToUrlPath(path): string {
-    return path === "/index" ? "/" : path.substring(0, path.lastIndexOf("/index"))
+    if (path === "/index")
+        return "/"
+    const li = path.lastIndexOf("/index");
+    return li === -1 ? path : path.substring(0, li);
 }

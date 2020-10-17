@@ -16,7 +16,6 @@ Wrap(({content: {emoji}}) => {
             clearInterval(interval);
         }
     }, []);
-
     return (
         <div>
             <Loader effect={React.useEffect}>
