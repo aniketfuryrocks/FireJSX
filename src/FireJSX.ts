@@ -142,13 +142,7 @@ export default class {
                                     const li = path.lastIndexOf("/index")
                                     const _path = li <= 0 ? path : path.substring(0, li)
                                     return writeFileRecursively(`${this.$.outDir}/${this.$.lib}/map${_path}.map.js`,
-                                        `FireJSX.map=${JSON.stringify({
-                                            content,
-                                            chunks: {
-                                                initial: page.chunks.initial,
-                                                entry: page.chunks.entry
-                                            }
-                                        })}`,
+                                        generateMapJS(path, content, page),
                                         this.$.outputFileSystem
                                     )
                                 })()
@@ -221,4 +215,14 @@ export default class {
             })
         })
     }
+}
+
+export function generateMapJS(path: any, content: any, page: Page): string {
+    return `FireJSX.map.${path}=${JSON.stringify({
+        content,
+        chunks: {
+            initial: page.chunks.initial,
+            entry: page.chunks.entry
+        }
+    })}`
 }

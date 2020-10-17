@@ -1,7 +1,7 @@
 import "./GlobalsSetter"
 import Page from "./classes/Page";
 import StaticArchitect from "./architects/StaticArchitect";
-import {FIREJSX_MAP} from "./FireJSX";
+import {FIREJSX_MAP, generateMapJS} from "./FireJSX";
 import * as fs from "fs"
 import {join, resolve} from "path";
 
@@ -29,13 +29,7 @@ export default class {
             throw new Error(`Page ${page} does not exist`)
         return [
             this.renderer.render(_page, path, content),
-            `FireJSX.map=${JSON.stringify({
-                content,
-                chunks: {
-                    initial: _page.chunks.initial,
-                    entry: _page.chunks.entry
-                }
-            })}`
+            generateMapJS(path, content, _page)
         ]
     }
 }
