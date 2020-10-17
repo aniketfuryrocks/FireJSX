@@ -1,5 +1,6 @@
 import {join} from "path"
 import Page from "../classes/Page";
+import {JSDOM} from "jsdom"
 
 export interface StaticConfig {
     lib: string,
@@ -10,8 +11,6 @@ export interface StaticConfig {
     staticPrefix: string,
     fullExternalPath: string,
 }
-
-import {JSDOM} from "jsdom"
 
 {
     // @ts-ignore
@@ -90,13 +89,12 @@ export default class {
             "<meta charset=\"UTF-8\">" +
             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
             `<meta name="generator" content="FireJSX v${global.FireJSX.version}"/>` +
-            `<script>window.FireJSX={
-                    isHydrated: ${this.config.ssr},
-                    lib: "${this.config.lib}",
-                    prefix: "${this.config.prefix}",
-                    staticPrefix: "${this.config.staticPrefix}",
-                    version: "${global.FireJSX.version}"
-                }</script>` +
+            `<script>window.FireJSX={map:{},` +
+            `isHydrated: ${this.config.ssr},` +
+            `lib: "${this.config.lib}",` +
+            `prefix: "${this.config.prefix}",` +
+            `staticPrefix: "${this.config.staticPrefix}",` +
+            `version: "${global.FireJSX.version}"}</script>` +
             head +
             "</head><body><div id=\"root\">" +
             rootDiv +
