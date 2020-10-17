@@ -18,15 +18,16 @@ FireJSX.linkApi = {
             if (map)//if already loaded then resolve
                 resolve(map)
             else {
-                (function foo(url) {
-                    const ele = this.loadChunk(`map${url === "/" ? "/index" : url}.map.js`);
-                    ele.onload = () => resolve(FireJSX.map[url]);
-                    ele.onerror = () => {
-                        if (url === "/404")
-                            reject(new Error("Error loading 404 map"))
-                        foo("/404");
-                    }
-                }).bind(this)(url)
+                const chunk_path = `map${url === "/" ? "/index" : url}.map.js`;
+                const ele = this.loadChunk(chunk_path);
+                ele.onload = () => resolve(FireJSX.map[url]);
+                ele.onerror = () => {
+                    //delete it because onError happens once
+                    delete this.chunkCache[`map${url === "/" ? "/index" : url}.map.js`];
+                    if (url === "/404")
+                        reject(new Error("Error loading 404 map"))
+                    this.loadMap("/404").then(() => resolve(FireJSX.map["/404"])).catch(reject);
+                }
             }
         })
     },
