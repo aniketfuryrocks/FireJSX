@@ -37,7 +37,7 @@ export default class {
         //routing
         if (this.$.staticDir)
             server.use(this.$.staticPrefix, express.static(this.$.staticDir));
-        server.get(`${this.$.prefix}/${this.$.lib}/*`, this.get.bind(this));
+        server.get(`${this.$.prefix}/${this.$.lib}/*`, (req, res) => this.get.bind(this)(req, res, true));
         server.get(`${this.$.prefix}/${this.$.lib}/map/*`, this.get.bind(this));
         server.use(`${this.$.prefix}/*`, this.getPage.bind(this));
         //listen
@@ -57,13 +57,15 @@ export default class {
         })
     }
 
-    private get(req: express.Request, res: express.Response) {
+    private get(req: express.Request, res: express.Response, cache) {
         if (this.$.verbose)
             this.$.cli.log("Request :", req.url)
         // @ts-ignore
         const pathname = join(this.$.outDir, decodeURI(req._parsedUrl.pathname).replace(this.$.prefix, ""))
 
         res.contentType(mime.getType(pathname.substr(pathname.lastIndexOf("."))))
+        //cache them
+        res.set('Cache-Control', `max-age=${cache ? "31557600" : "0"}`);
         if (this.$.outputFileSystem.existsSync(pathname))
             res.write(this.$.outputFileSystem.readFileSync(pathname));
         else
@@ -76,6 +78,7 @@ export default class {
             this.$.cli.log("HTML Request :", req.url)
         // @ts-ignore
         const pathname = decodeURI(req._parsedUrl.pathname).replace(this.$.prefix, "")
+        res.set('Cache-Control', `max-age=0`);
         // @ts-ignore
         if (req.method === "GET" && !req._parsedUrl.pathname.startsWith("/__webpack_hmr/"))
             try {
@@ -88,12 +91,8 @@ export default class {
                 else {
                     const page404 = this.$.pageMap.get("404.jsx")
                     if (page404)
-                        this.$.outputFileSystem.readFile(join(this.$.outDir, "404.html"), (err, data) => {
-                            if (err)
-                                res.end(err)
-                            else
-                                res.end(data)
-                        })
+                        this.$.outputFileSystem.readFile(join(this.$.outDir, "404.html"), (err, data) =>
+                            res.end(err ? err.toString() : data))
                     else
                         res.end("<h1>404</h1><p>404.jsx page not found. Link fallback will be unsuccessful</p>")
                 }
