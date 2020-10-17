@@ -1,8 +1,4 @@
-/*
-* TODO: preload
-* TODO: load */
-//
-//listens to next and prev page events
+//listens to next and prev page i.e navigation events
 window.onpopstate = function () {
     const path = location.pathname.replace(FireJSX.prefix, "");//remove prefix
     FireJSX.linkApi.loadPage(path, false)
@@ -27,7 +23,7 @@ FireJSX.linkApi = {
                     ele.onload = () => resolve(FireJSX.map[url]);
                     ele.onerror = () => {
                         if (url === "/404")
-                            throw new Error("Error loading 404 map")
+                            reject(new Error("Error loading 404 map"))
                         foo("/404");
                     }
                 }).bind(this)(url)
@@ -49,23 +45,16 @@ FireJSX.linkApi = {
             window.history.pushState(undefined, undefined, FireJSX.prefix + url);
         url = getPathFromUrl(url);//url
         //map
-        try {
-            await this.loadMap(url);
-            //force loading to run them
-            FireJSX.chunks.entry.forEach(c => this.loadChunk(c, true));
-            FireJSX.chunks.initial.forEach(c => this.loadChunk(c, true));
-        } catch (_e) {
-            if (url !== "/404") {
-                this.lock = false
-                await this.loadPage("/404", false)
-            }
-        }
+        const map = await this.loadMap(url);
+        //force loading to run them
+        map.chunks.entry.forEach(c => this.loadChunk(c, true));
+        map.chunks.initial.forEach(c => this.loadChunk(c, true));
     },
     preloadChunk: function (chunk, rel) {
         let ele = this.chunkCache[chunk];
         if (ele)//check has already been loaded
             return ele;
-        ele = document.createElement("link");
+        this.chunkCache[chunk] = ele = document.createElement("link");
         ele.rel = rel;
         ele.href = `${FireJSX.prefix}/${FireJSX.lib}/${chunk}`;
         ele.crossOrigin = "anonymous";
@@ -74,8 +63,6 @@ FireJSX.linkApi = {
         else if (chunk.endsWith(".css"))
             ele.setAttribute("as", "style");
         document.head.appendChild(ele);
-        this.chunkCache[chunk] = ele;
-        return ele;
     },
     //force: force rerun of chunk
     loadChunk: function (chunk, force) {
@@ -98,6 +85,5 @@ FireJSX.linkApi = {
         ele.crossOrigin = "anonymous";
         document.body.appendChild(ele);
         this.chunkCache[chunk] = ele;
-        return ele;
     }
 }
