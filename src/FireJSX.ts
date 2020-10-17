@@ -218,7 +218,7 @@ export default class {
 }
 
 export function generateMapJS(path: any, content: any, page: Page): string {
-    return `FireJSX.map.${path}=${JSON.stringify({
+    return `FireJSX.map["${path}"]=${JSON.stringify({
         content,
         chunks: {
             initial: page.chunks.initial,
