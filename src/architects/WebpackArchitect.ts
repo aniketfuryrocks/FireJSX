@@ -1,6 +1,8 @@
 import {$, WebpackConfig} from "../FireJSX"
 import {join, relative} from "path"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import * as webpack from "webpack";
+import {CleanWebpackPlugin} from "clean-webpack-plugin";
 
 export default class {
     private readonly $: $;
@@ -60,6 +62,11 @@ export default class {
                                 plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime",
                                     ...(this.proOrSSR ? [] : [])]
                             }
+                        }, {
+                            loader: join(__dirname, '../loader/wrapper.js'),
+                            options: {
+                                pages_path: this.$.pages
+                            }
                         }
                     ]
                 },
@@ -82,13 +89,13 @@ export default class {
                     chunkFilename: "cs.[contenthash].css"
                 }),
                 ...(this.proOrSSR ? [] : [
-                    /*new webpack.HotModuleReplacementPlugin({
+                    new webpack.HotModuleReplacementPlugin({
                         multiStep: true
                     }),
                     new CleanWebpackPlugin({
                         verbose: this.$.verbose,
-                        cleanOnceBeforeBuildPatterns: ['**!/!*', '!map/!*', '!e.*'],
-                    })*/
+                        cleanOnceBeforeBuildPatterns: ['**/*', '!map/!*', '!e.*'],
+                    })
                 ])
             ],
             resolve: {
@@ -102,7 +109,9 @@ export default class {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
             entry: {
-                e: join(__dirname, "../web/externalGroupSemi.js")
+                e: [
+                    join(__dirname, "../web/externalGroupSemi.js")
+                ]
             },
             output: {
                 path: `${this.$.outDir}/${this.$.lib}/`,
@@ -119,9 +128,8 @@ export default class {
         this.$.pageMap.forEach(page => {
             this.config.entry[page.toString()] = [
                 join(this.$.pages, page.toString()),
-                join(__dirname, "../web/Wrap.js")
-                /*...(this.proOrSSR ? [] : [
-                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`])*/
+                ...(this.proOrSSR ? [] : [
+                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`])
             ]
         })
         this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config))

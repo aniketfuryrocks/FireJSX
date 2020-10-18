@@ -39,7 +39,7 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
     "@babel/runtime": "^7.12.1",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.2",
+    "@webhotelier/webpack-fast-refresh": "^5.1.0",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "compression": "^1.7.4",
@@ -65,6 +65,7 @@
     "@types/jsdom": "^16.2.4",
     "@types/lodash": "^4.14.162",
     "@types/node": "^14.11.10",
+    "@types/webpack": "^4.41.22",
     "chokidar": "^3.4.3",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
