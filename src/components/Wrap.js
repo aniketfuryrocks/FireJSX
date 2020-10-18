@@ -1,15 +1,11 @@
-export default function (app, hot) {
-    if (!hot)
-        throw new Error("You forgot to pass { hot } from firejsx/hot to Wrap")
+export default function (App) {
     if (FireJSX.isSSR) {
-        FireJSX.app = app
+        FireJSX.app = App
         return
     }
-    FireJSX.linkApi.lock = false
-    const func = FireJSX.isHydrated ? ReactDOM.hydrate : ReactDOM.render
-    const App = FireJSX.isSSR ? app : hot(app)
-    func(<App
-        content={FireJSX.map[location.pathname]}/>, document.getElementById("root"))
+    FireJSX.linkApi.lock = false;
+    (FireJSX.isHydrated ? ReactDOM.hydrate : ReactDOM.render)
+    (<App content={FireJSX.map[location.pathname]}/>, document.getElementById("root"));
     if (location.hash) {
         const el = document.getElementById(decodeURI(location.hash.substring(1)))
         if (el)

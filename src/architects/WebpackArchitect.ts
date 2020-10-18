@@ -1,8 +1,6 @@
 import {$, WebpackConfig} from "../FireJSX"
 import {join, relative} from "path"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import * as webpack from "webpack";
-import {CleanWebpackPlugin} from "clean-webpack-plugin";
 
 export default class {
     private readonly $: $;
@@ -60,7 +58,7 @@ export default class {
                                     },
                                 }], "@babel/preset-react"],
                                 plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime",
-                                    ...(this.proOrSSR ? [] : ["react-hot-loader/babel"])]
+                                    ...(this.proOrSSR ? [] : [])]
                             }
                         }
                     ]
@@ -84,21 +82,17 @@ export default class {
                     chunkFilename: "cs.[contenthash].css"
                 }),
                 ...(this.proOrSSR ? [] : [
-                    new webpack.HotModuleReplacementPlugin({
+                    /*new webpack.HotModuleReplacementPlugin({
                         multiStep: true
                     }),
                     new CleanWebpackPlugin({
                         verbose: this.$.verbose,
-                        cleanOnceBeforeBuildPatterns: ['**/*', '!map/*', '!e.*'],
-                    })
+                        cleanOnceBeforeBuildPatterns: ['**!/!*', '!map/!*', '!e.*'],
+                    })*/
                 ])
             ],
             resolve: {
-                extensions: ['.wasm', '.mjs', '.js', '.json', '.jsx'],
-                alias: (this.proOrSSR ? {} : {
-                    'firejsx/Hot': 'react-hot-loader/root',
-                    'firejsx/Hot.js': 'react-hot-loader/root'
-                }),
+                extensions: ['.wasm', '.mjs', '.js', '.json', '.jsx']
             }
         }
     }
@@ -107,21 +101,12 @@ export default class {
         const conf: WebpackConfig = {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
-            // @ts-ignore
             entry: {
-                e: [
-                    ...(this.proOrSSR ? [] : ['react-hot-loader/patch']),
-                    join(__dirname, "../web/externalGroupSemi.js")
-                ]
+                e: join(__dirname, "../web/externalGroupSemi.js")
             },
             output: {
                 path: `${this.$.outDir}/${this.$.lib}/`,
                 filename: "[name].[contenthash].js"
-            },
-            resolve: {
-                alias: (this.proOrSSR ? {} : {
-                    'react-dom': '@hot-loader/react-dom',
-                })
             }
         }
         //only create full when ssr
@@ -134,8 +119,8 @@ export default class {
         this.$.pageMap.forEach(page => {
             this.config.entry[page.toString()] = [
                 join(this.$.pages, page.toString()),
-                ...(this.proOrSSR ? [] : [
-                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`]),
+                /*...(this.proOrSSR ? [] : [
+                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`])*/
             ]
         })
         this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config))
