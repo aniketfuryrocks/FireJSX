@@ -1,6 +1,4 @@
-import Wrap from "../../../src/components/Wrap.js";
-
-export default function Index() {
+function App() {
     return (
         <div>
             Hello
@@ -8,4 +6,4 @@ export default function Index() {
     )
 }
 
-Wrap(Index)
+FireJSX.app = App;

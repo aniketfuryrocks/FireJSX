@@ -1,4 +1,4 @@
-import Wrap from "../../../src/components/Wrap.js";
+import Wrap from "../../../src/web/Wrap.js";
 import {hot} from "firejsx/Hot"
 import Link from "../../../src/components/Link.js";
 import Head from "../../../src/components/Head.js";

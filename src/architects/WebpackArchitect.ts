@@ -119,6 +119,7 @@ export default class {
         this.$.pageMap.forEach(page => {
             this.config.entry[page.toString()] = [
                 join(this.$.pages, page.toString()),
+                join(__dirname, "../web/Wrap.js")
                 /*...(this.proOrSSR ? [] : [
                     `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`])*/
             ]
