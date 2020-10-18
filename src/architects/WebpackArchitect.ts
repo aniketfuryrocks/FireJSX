@@ -16,6 +16,7 @@ export default class {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
             optimization: {
+                sideEffects: false,
                 minimize: true,
                 runtimeChunk: "single",
                 usedExports: true,
@@ -31,13 +32,13 @@ export default class {
             },
             entry: {},
             output: {
-                filename: `m[${this.proOrSSR ? "contenthash" : "hash"}].js`,
+                filename: `m[name][${this.proOrSSR ? "contenthash" : "fullhash"}].js`,
                 chunkFilename: "c[contenthash].js",
                 publicPath: `${this.$.prefix}/${this.$.lib}/`,
                 path: `${this.$.outDir}/${this.$.lib}/`,
                 //hot
-                hotUpdateMainFilename: `${this.$.lib}/[hash].hot.json`,
-                hotUpdateChunkFilename: `${this.$.lib}/[hash].hot.js`
+                hotUpdateMainFilename: `${this.$.lib}/[fullhash].hot.json`,
+                hotUpdateChunkFilename: `${this.$.lib}/[fullhash].hot.js`
             },
             externals: {
                 react: "React",
@@ -70,9 +71,7 @@ export default class {
                             {
                                 loader: 'css-loader',
                                 options: {
-                                    modules: {
-                                        hashPrefix: 'hash',
-                                    },
+                                    modules: true
                                 },
                             },
                         ]
@@ -80,8 +79,8 @@ export default class {
             },
             plugins: [
                 new MiniCssExtractPlugin({
-                    filename: "c[contentHash].css",
-                    chunkFilename: "c[contentHash].css"
+                    filename: "c[contenthash].css",
+                    chunkFilename: "c[contenthash].css"
                 }),
                 ...(this.proOrSSR ? [] : [
                     new webpack.HotModuleReplacementPlugin({
@@ -114,7 +113,7 @@ export default class {
             },
             output: {
                 path: `${this.$.outDir}/${this.$.lib}/`,
-                filename: "[name][contentHash].js"
+                filename: "[name][contenthash].js"
             },
             resolve: {
                 alias: (this.proOrSSR ? {} : {

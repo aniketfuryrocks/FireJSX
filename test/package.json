@@ -7,10 +7,10 @@
     "test": "node --trace-warnings ../dist/bin/index.js"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.20.0",
     "cookie": "^0.4.1",
     "js-cookie": "^2.2.1",
-    "markdown-to-jsx": "^6.11.4",
+    "markdown-to-jsx": "^7.0.1",
     "mime": "^2.4.6",
     "react-animated-dots": "^1.1.0",
     "react-cookie": "^4.0.3",

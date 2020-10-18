@@ -1,7 +1,7 @@
 import * as webpack from "webpack"
+import {Compiler} from "webpack"
 import WebpackArchitect from "./WebpackArchitect";
 import {$, WebpackConfig} from "../FireJSX";
-import {Compiler} from "webpack";
 import {join} from "path";
 import {writeFileSync} from "fs";
 
@@ -71,12 +71,14 @@ export default class {
     }
 
     build(config: WebpackConfig, resolve: (stat) => void, reject: (err) => void) {
+        const watch = config.watch;
+        delete config.watch;
         this.compiler = webpack(config);
         if (this.isOutputCustom)
             this.compiler.outputFileSystem = this.$.outputFileSystem;
         if (this.isInputCustom)
             this.compiler.inputFileSystem = this.$.inputFileSystem;
-        if (config.watch)
+        if (watch)
             this.compiler.watch(config.watchOptions, (err, stat) => {
                 if (err)
                     reject(err);

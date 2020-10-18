@@ -65,7 +65,6 @@
     "@types/jsdom": "^16.2.4",
     "@types/lodash": "^4.14.162",
     "@types/node": "^14.11.10",
-    "@types/webpack": "^4.41.22",
     "chokidar": "^3.4.3",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
