@@ -86,6 +86,7 @@ export default class {
                     new webpack.HotModuleReplacementPlugin({
                         multiStep: true
                     }),
+                    //producing deprecated warnings
                     new CleanObsoleteChunks({
                         verbose: this.$.verbose
                     })
