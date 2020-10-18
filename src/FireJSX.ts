@@ -95,7 +95,7 @@ export default class {
             ssr: this.$.ssr,
             prefix: this.$.prefix,
             staticPrefix: this.$.staticPrefix,
-            fullExternalPath: join(this.$.outDir, this.$.lib, externals[0]),
+            fullExternalPath: join(this.$.outDir, this.$.lib, externals[1]),
         });
         //mapPlugins after everything is initialized
         if (this.$.plugins.length > 0) {
@@ -198,10 +198,10 @@ export default class {
                     }
                 })
 
-                map.staticConfig.externals[0] = map.staticConfig.externals[0].substr(map.staticConfig.externals[0].lastIndexOf(PathSeparator) + 1);
-                this.$.outputFileSystem.rename(this.$.renderer.config.fullExternalPath, join(this.$.outDir, map.staticConfig.externals[0]), err => {
+                map.staticConfig.externals[1] = map.staticConfig.externals[1].substr(map.staticConfig.externals[1].lastIndexOf(PathSeparator) + 1);
+                this.$.outputFileSystem.rename(this.$.renderer.config.fullExternalPath, join(this.$.outDir, map.staticConfig.externals[1]), err => {
                     if (err)
-                        throw new Error(`Error moving ${map.staticConfig.externals[0]} to ${this.$.outDir}\n${err}`);
+                        throw new Error(`Error moving ${map.staticConfig.externals[1]} to ${this.$.outDir}\n${err}`);
                     this.$.outputFileSystem.writeFile(join(this.$.outDir, "firejsx.map.json"),
                         JSON.stringify(map), err => {
                             if (err)
