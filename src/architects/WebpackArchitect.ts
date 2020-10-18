@@ -32,14 +32,14 @@ export default class {
             },
             entry: {},
             output: {
-                filename: `m${this.proOrSSR ? "[contenthash]" : "[id][fullhash]"}.js`,
-                chunkFilename: "c[contenthash].js",
+                filename: `m.${this.proOrSSR ? "[contenthash]" : "[id][fullhash]"}.js`,
+                chunkFilename: "c.[contenthash].js",
                 publicPath: `${this.$.prefix}/${this.$.lib}/`,
                 path: `${this.$.outDir}/${this.$.lib}/`,
                 globalObject: 'window',
                 //hot
-                hotUpdateMainFilename: `${this.$.lib}/[fullhash][id].hot.json`,
-                hotUpdateChunkFilename: `${this.$.lib}/[fullhash][id].hot.js`
+                hotUpdateMainFilename: `h.${this.$.lib}/[fullhash][id].hot.json`,
+                hotUpdateChunkFilename: `h.${this.$.lib}/[fullhash][id].hot.js`
             },
             externals: {
                 react: "React",
@@ -80,8 +80,8 @@ export default class {
             },
             plugins: [
                 new MiniCssExtractPlugin({
-                    filename: "c[contenthash].css",
-                    chunkFilename: "c[contenthash].css"
+                    filename: "cs.[contenthash].css",
+                    chunkFilename: "cs.[contenthash].css"
                 }),
                 ...(this.proOrSSR ? [] : [
                     new webpack.HotModuleReplacementPlugin({
@@ -89,7 +89,7 @@ export default class {
                     }),
                     new CleanWebpackPlugin({
                         verbose: this.$.verbose,
-                        cleanOnceBeforeBuildPatterns: ['**/*', '!map/*', '!e*'],
+                        cleanOnceBeforeBuildPatterns: ['**/*', '!map/*', '!e.*'],
                     })
                 ])
             ],
@@ -116,7 +116,7 @@ export default class {
             },
             output: {
                 path: `${this.$.outDir}/${this.$.lib}/`,
-                filename: "[name][contenthash].js"
+                filename: "[name].[contenthash].js"
             },
             resolve: {
                 alias: (this.proOrSSR ? {} : {
