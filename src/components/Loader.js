@@ -7,10 +7,12 @@ export default ({children, effect, delay}) => {
         setLoader(children)
     };
     effect(() => {
+        let timeout;
         if (delay)
-            setTimeout(() => setLoader(<></>), delay)
+            timeout = setTimeout(() => setLoader(<></>), delay)
         else
             setLoader(<></>)
+        return () => timeout ? clearTimeout(timeout) : {};
     }, [])
     return loader;
 }
