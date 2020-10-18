@@ -2,6 +2,7 @@ import {$, WebpackConfig} from "../FireJSX"
 import {join, relative} from "path"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as webpack from "webpack";
+import {CleanWebpackPlugin} from "clean-webpack-plugin";
 
 export default class {
     private readonly $: $;
@@ -37,8 +38,8 @@ export default class {
                 path: `${this.$.outDir}/${this.$.lib}/`,
                 globalObject: 'window',
                 //hot
-                hotUpdateMainFilename: `${this.$.lib}/[fullhash].hot.json`,
-                hotUpdateChunkFilename: `${this.$.lib}/[fullhash].hot.js`
+                hotUpdateMainFilename: `${this.$.lib}/[fullhash][id].hot.json`,
+                hotUpdateChunkFilename: `${this.$.lib}/[fullhash][id].hot.js`
             },
             externals: {
                 react: "React",
@@ -86,10 +87,10 @@ export default class {
                     new webpack.HotModuleReplacementPlugin({
                         multiStep: true
                     }),
-                    //producing deprecated warnings
-                    /*new CleanObsoleteChunks({
-                        verbose: this.$.verbose
-                    })*/
+                    new CleanWebpackPlugin({
+                        verbose: this.$.verbose,
+                        cleanOnceBeforeBuildPatterns: ['**/*', '!map/*', '!e*'],
+                    })
                 ])
             ],
             resolve: {
