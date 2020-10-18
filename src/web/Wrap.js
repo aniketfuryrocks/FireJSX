@@ -1,6 +1,9 @@
-export default function (App) {
+export default function (module_exports) {
+    if (!module_exports)
+        throw new Error("looks like you did not export any thing from page. Visit quick start guide to get started. https://github.com/eAdded/FireJSX/wiki/Quick-Start")
+    const App = module_exports.default;
     if (!App)
-        throw new Error(`export function as \nexports default function App(){\n//...code here\n}`);
+        throw new Error(`You forgot to export a default function. Visit quick start guide to get started. https://github.com/eAdded/FireJSX/wiki/Quick-Start"`);
     if (FireJSX.isSSR)
         FireJSX.app = App;
     FireJSX.linkApi.lock = false;
