@@ -1,6 +1,6 @@
 import LazyLoad from "../../../src/components/LazyLoad";
 
-export default function App() {
+export default function () {
     const Markdown = LazyLoad(() => import("../components/Markdown/Markdown.jsx"), () => require.resolveWeak("../components/Markdown/Markdown.jsx"))
     return (
         <div>
