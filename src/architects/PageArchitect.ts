@@ -60,12 +60,11 @@ export default class {
                                 page.chunks.entry.push(...files)
                             else if (initial) {//sync
                                 page.chunks.initial.push(...files)
-                            } else//async
-                                page.chunks.async.push(...files)
+                            } //else//async
+                            //page.chunks.async.push(...files)
                         });
                     })
                 })
-                console.log("not yet")
                 resolve()
             }
         }, reject);

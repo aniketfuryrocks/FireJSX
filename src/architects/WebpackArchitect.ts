@@ -36,6 +36,7 @@ export default class {
                 chunkFilename: "c[contenthash].js",
                 publicPath: `${this.$.prefix}/${this.$.lib}/`,
                 path: `${this.$.outDir}/${this.$.lib}/`,
+                globalObject: 'window',
                 //hot
                 hotUpdateMainFilename: `${this.$.lib}/[fullhash].hot.json`,
                 hotUpdateChunkFilename: `${this.$.lib}/[fullhash].hot.js`
