@@ -55,7 +55,7 @@ export default class {
         }
         //external mini
         {
-            const arr = this.loadChunks(head, body, [this.config.externals[this.config.ssr ? 1 : 0]], false)
+            const arr = this.loadChunks(head, body, [this.config.externals[0]], false)
             head = arr[0]
             body = arr[1]
         }

@@ -1,7 +1,6 @@
 import {$, WebpackConfig} from "../FireJSX"
 import {join, relative} from "path"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import * as CleanObsoleteChunks from 'webpack-clean-obsolete-chunks'
 import * as webpack from "webpack";
 
 export default class {
@@ -88,9 +87,9 @@ export default class {
                         multiStep: true
                     }),
                     //producing deprecated warnings
-                    new CleanObsoleteChunks({
+                    /*new CleanObsoleteChunks({
                         verbose: this.$.verbose
-                    })
+                    })*/
                 ])
             ],
             resolve: {
