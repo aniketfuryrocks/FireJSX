@@ -65,6 +65,7 @@ export default class {
                         });
                     })
                 })
+                console.log("not yet")
                 resolve()
             }
         }, reject);

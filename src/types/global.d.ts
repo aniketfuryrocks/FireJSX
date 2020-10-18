@@ -26,7 +26,7 @@ declare module NodeJS {
             },
             showLoader?: () => void,
         },
-        webpackJsonp?: any,
+        webpackChunktest?: any,
         React?: any,
         ReactDOM?: any,
         ReactDOMServer?: any,

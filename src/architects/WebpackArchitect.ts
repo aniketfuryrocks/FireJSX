@@ -32,7 +32,7 @@ export default class {
             },
             entry: {},
             output: {
-                filename: `m[name][${this.proOrSSR ? "contenthash" : "fullhash"}].js`,
+                filename: `m${this.proOrSSR ? "[contenthash]" : "[id][fullhash]"}.js`,
                 chunkFilename: "c[contenthash].js",
                 publicPath: `${this.$.prefix}/${this.$.lib}/`,
                 path: `${this.$.outDir}/${this.$.lib}/`,
@@ -105,8 +105,9 @@ export default class {
         const conf: WebpackConfig = {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
+            // @ts-ignore
             entry: {
-                "e": [
+                e: [
                     ...(this.proOrSSR ? [] : ['react-hot-loader/patch']),
                     join(__dirname, "../web/externalGroupSemi.js")
                 ]
