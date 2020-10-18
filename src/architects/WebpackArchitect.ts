@@ -62,7 +62,7 @@ export default class {
                                 plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime",
                                     ...(this.proOrSSR ? [] : [])]
                             }
-                        }, {
+                        }, {//adds wrapper to App function
                             loader: join(__dirname, '../loader/wrapper.js'),
                             options: {
                                 pages_path: this.$.pages
