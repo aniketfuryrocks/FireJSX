@@ -6,6 +6,8 @@ export default function (source, map) {
     if (!this.resourcePath.startsWith(this.query.pages_path))
         return void this.callback(null, source, map)
     //import Wrap.js and pass app
-    source += `require("${join(__dirname, "../web/Wrap.js")}").default(module.exports)`;
+    const require_wrap = `require("${join(__dirname, "../web/Wrap.js")}").default(module.exports.default`;
+    source += this.query.proOrSSR ? `${require_wrap});` : `import { hot } from 'react-hot-loader/root'; ${require_wrap},hot);`;
+    console.log(source)
     this.callback(null, source, map)
 }

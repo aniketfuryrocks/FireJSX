@@ -1,11 +1,7 @@
-export default function (module_exports) {
-    if (!module_exports)
-        throw new Error("looks like you did not export any thing from page. Visit quick start guide to get started. https://github.com/eAdded/FireJSX/wiki/Quick-Start")
-    const App = module_exports.default;
+export default function (App, hot) {
     if (!App)
         throw new Error(`You forgot to export a default function. Visit quick start guide to get started. https://github.com/eAdded/FireJSX/wiki/Quick-Start"`);
-    if (FireJSX.isSSR)
-        FireJSX.app = App;
+    App = FireJSX.isSSR ? FireJSX.app = App : hot ? hot(App) : {};
     FireJSX.linkApi.lock = false;
     (FireJSX.isHydrated ? ReactDOM.hydrate : ReactDOM.render)
     (React.createElement(App, {content: FireJSX.map[location.pathname]}), document.getElementById("root"));

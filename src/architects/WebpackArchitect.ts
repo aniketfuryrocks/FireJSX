@@ -2,7 +2,6 @@ import {$, WebpackConfig} from "../FireJSX"
 import {join, relative} from "path"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as webpack from "webpack";
-import {CleanWebpackPlugin} from "clean-webpack-plugin";
 
 export default class {
     private readonly $: $;
@@ -38,8 +37,8 @@ export default class {
                 path: `${this.$.outDir}/${this.$.lib}/`,
                 globalObject: 'window',
                 //hot
-                hotUpdateMainFilename: `h.${this.$.lib}/[fullhash][id].hot.json`,
-                hotUpdateChunkFilename: `h.${this.$.lib}/[fullhash][id].hot.js`
+                hotUpdateMainFilename: `h.[fullhash][id].hot.json`,
+                hotUpdateChunkFilename: `h.[fullhash][id].hot.js`
             },
             externals: {
                 react: "React",
@@ -62,12 +61,13 @@ export default class {
                                 }], "@babel/preset-react"],
                                 plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime",
                                     "@babel/plugin-transform-modules-commonjs",
-                                    ...(this.proOrSSR ? [] : [])]
+                                    ...(this.proOrSSR ? [] : ["react-hot-loader/babel"])]
                             }
                         }, {//adds wrapper to App function
                             loader: join(__dirname, '../loader/wrapper.js'),
                             options: {
-                                pages_path: this.$.pages
+                                pages_path: this.$.pages,
+                                proOrSSR: this.proOrSSR
                             }
                         }
                     ]
@@ -94,10 +94,10 @@ export default class {
                     new webpack.HotModuleReplacementPlugin({
                         multiStep: true
                     }),
-                    new CleanWebpackPlugin({
+                    /*new CleanWebpackPlugin({
                         verbose: this.$.verbose,
-                        cleanOnceBeforeBuildPatterns: ['**/*', '!map/!*', '!e.*'],
-                    })
+                        cleanOnceBeforeBuildPatterns: ['**!/!*', '!map/!*', '!e.*'],
+                    })*/
                 ])
             ],
             resolve: {
@@ -110,14 +110,21 @@ export default class {
         const conf: WebpackConfig = {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
+            // @ts-ignore
             entry: {
                 e: [
+                    ...(this.proOrSSR ? [] : ['react-hot-loader/patch']),
                     join(__dirname, "../web/externalGroupSemi.js")
                 ]
             },
             output: {
                 path: `${this.$.outDir}/${this.$.lib}/`,
                 filename: "[name].[contenthash].js"
+            },
+            resolve: {
+                alias: (this.proOrSSR ? {} : {
+                    'react-dom': '@hot-loader/react-dom',
+                })
             }
         }
         //only create full when ssr
