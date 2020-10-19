@@ -5,6 +5,5 @@ export default function (source, map) {
         return void this.callback(null, source, map)
     //import Wrap.js and pass app
     source += `window.ReactRefreshRuntime = require("react-refresh/runtime")`;
-    console.log(source)
     this.callback(null, source, map)
 }
