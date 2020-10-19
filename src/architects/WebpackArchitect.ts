@@ -31,14 +31,14 @@ export default class {
             },
             entry: {},
             output: {
-                filename: `m.${this.proOrSSR ? "[contenthash]" : "[id][fullhash]"}.js`,
+                filename: `m.${this.proOrSSR ? "[contenthash]" : "[id][hash]"}.js`,
                 chunkFilename: "c.[contenthash].js",
                 publicPath: `${this.$.prefix}/${this.$.lib}/`,
                 path: `${this.$.outDir}/${this.$.lib}/`,
                 globalObject: 'window',
                 //hot
-                hotUpdateMainFilename: `h.[fullhash][id].hot.json`,
-                hotUpdateChunkFilename: `h.[fullhash][id].hot.js`
+                hotUpdateMainFilename: `h.[hash].hot.json`,
+                hotUpdateChunkFilename: `h.[hash].hot.js`
             },
             externals: {
                 react: "React",

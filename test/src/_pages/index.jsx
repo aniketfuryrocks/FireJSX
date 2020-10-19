@@ -4,7 +4,7 @@ import Loader from "../../../src/components/Loader";
 export default function () {
     return (
         <div>
-            asdsdaasd
+            asdsdaasdsdfasdasd
             <Loader effect={React.useEffect} delay={800}>
                 <LoadingCircle/>
             </Loader>
