@@ -1,6 +1,8 @@
-export default function (App) {
-    if (!App)
-        throw new Error(`You forgot to export a default function. Visit quick start guide to get started. https://github.com/eAdded/FireJSX/wiki/Quick-Start"`);
+export default function (module_exports) {
+    const App = module_exports.default
+    //check if page exports a named function
+    if (!App || !App.name)
+        throw new Error(`You forgot to export a default named function. Visit quick start guide to get started. https://github.com/eAdded/FireJSX/wiki/Quick-Start"`);
     FireJSX.isSSR ? FireJSX.app = App : {};
     FireJSX.linkApi.lock = false;
     (FireJSX.isHydrated ? ReactDOM.hydrate : ReactDOM.render)
