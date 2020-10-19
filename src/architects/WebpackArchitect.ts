@@ -44,6 +44,7 @@ export default class {
             externals: {
                 react: "React",
                 "react-dom": 'ReactDOM',
+                'react-refresh/runtime': 'ReactRefreshRuntime'
             },
             module: {
                 rules: [{
@@ -72,19 +73,18 @@ export default class {
                             }
                         }
                     ]
-                },
-                    {
-                        test: /\.css$/,
-                        use: [
-                            ...(this.proOrSSR ? [MiniCssExtractPlugin.loader] : ['style-loader']),
-                            {
-                                loader: 'css-loader',
-                                options: {
-                                    modules: true
-                                },
+                }, {
+                    test: /\.css$/,
+                    use: [
+                        ...(this.proOrSSR ? [MiniCssExtractPlugin.loader] : ['style-loader']),
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: true
                             },
-                        ]
-                    }]
+                        },
+                    ]
+                }]
             },
             plugins: [
                 new MiniCssExtractPlugin({
@@ -113,15 +113,31 @@ export default class {
     }
 
     forExternals(): WebpackConfig {
+        const externalSemiPath = join(__dirname, "../web/externalGroupSemi.js")
         const conf: WebpackConfig = {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
             entry: {
-                e: join(__dirname, "../web/externalGroupSemi.js")
+                e: externalSemiPath
             },
             output: {
                 path: `${this.$.outDir}/${this.$.lib}/`,
                 filename: "[name].[contenthash].js"
+            },
+            module: {
+                rules: [
+                    {
+                        test: /\.(js|jsx)$/,
+                        use: [{
+                            //adds react-refresh to externalGroupSemi
+                            loader: join(__dirname, '../loader/react-refresh-loader.js'),
+                            options: {
+                                externalSemiPath,
+                                proOrSSR: this.proOrSSR
+                            }
+                        }]
+                    }
+                ]
             }
         }
         //only create full when ssr

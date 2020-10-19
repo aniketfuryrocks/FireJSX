@@ -1,16 +1,18 @@
-export default function App() {
+export default function IndexPage() {
     return (
         <div>
             asdsdaasdsdfasdasdsdfasdasasdasddasdasdasdasdasd
             asd
             asasd
-            das
+            dasasd
             d
-            asd
-            asdasd
-            as
-            dasd
-            asdasd
+            asdasdasd
+            asdasdasdasdas
+            dasdasd
+            asdasdasdasdasd
+            <div>
+                asdasd
+            </div>
             {/*<Loader effect={React.useEffect} delay={800}>
                 <LoadingCircle/>
             </Loader>*/}

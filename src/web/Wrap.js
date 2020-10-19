@@ -1,7 +1,8 @@
 export default function (module_exports) {
     const App = module_exports.default
-    //check if page exports a named function
-    if (!App || !App.name)
+    //check if page exports a named function only in development
+    console.log(App.name)
+    if (!App || (process.env.NODE_ENV === 'development' && (!App.name || App.name === "_default")))
         throw new Error(`You forgot to export a default named function. Visit quick start guide to get started. https://github.com/eAdded/FireJSX/wiki/Quick-Start"`);
     FireJSX.isSSR ? FireJSX.app = App : {};
     FireJSX.linkApi.lock = false;
