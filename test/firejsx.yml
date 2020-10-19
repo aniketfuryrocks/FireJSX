@@ -1,5 +1,2 @@
-plugins:
-  - ./plugin/alias.js
-
 custom:
   name: "aniket"

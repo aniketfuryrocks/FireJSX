@@ -44,7 +44,7 @@ export default class {
             externals: {
                 react: "React",
                 "react-dom": 'ReactDOM',
-                'react-refresh/runtime': 'ReactRefreshRuntime'
+                //react-refresh added below
             },
             module: {
                 rules: [{
@@ -108,7 +108,10 @@ export default class {
             resolve: {
                 extensions: ['.wasm', '.mjs', '.js', '.json', '.jsx']
             }
-        }
+        };
+        //only add react-refresh in development
+        if (!this.proOrSSR)
+            this.config.externals['react-refresh/runtime'] = 'ReactRefreshRuntime';
     }
 
     forExternals(): WebpackConfig {
@@ -125,17 +128,17 @@ export default class {
             },
             module: {
                 rules: [
-                    {
-                        test: /\.(js|jsx)$/,
-                        use: [{
-                            //adds react-refresh to externalGroupSemi
-                            loader: join(__dirname, '../loader/react-refresh-loader.js'),
-                            options: {
-                                externalSemiPath,
-                                proOrSSR: this.proOrSSR
-                            }
-                        }]
-                    }
+                    ...(this.proOrSSR ? [] : [
+                        {
+                            test: /\.(js|jsx)$/,
+                            use: [{//adds react-refresh to externalGroupSemi
+                                loader: join(__dirname, '../loader/react-refresh-loader.js'),
+                                options: {
+                                    externalSemiPath,
+                                }
+                            }]
+                        }
+                    ])
                 ]
             }
         }
@@ -154,6 +157,7 @@ export default class {
             ]
         })
         this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config))
+        console.log(this.config)
         return this.config;
     }
 }

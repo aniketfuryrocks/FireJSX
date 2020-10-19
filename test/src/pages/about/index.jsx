@@ -3,7 +3,6 @@ import Head from "../../../../src/components/Head.js"
 import "../../style/main.css"
 import Loader from "../../../../src/components/Loader.js";
 import LoadingBar from "../../components/LoadingBar/LoadingBar.jsx";
-import React from "react";
 
 export default function App() {
     return (
