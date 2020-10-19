@@ -137,7 +137,7 @@ export default class {
             this.config.entry[page.toString()] = [
                 join(this.$.pages, page.toString()),
                 ...(this.proOrSSR ? [] : [
-                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=${this.$.verbose}`])
+                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`])
             ]
         })
         this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config))
