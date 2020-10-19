@@ -78,11 +78,11 @@ export default class {
             this.$.cli.log("HTML Request :", req.url)
         // @ts-ignore
         const pathname = decodeURI(req._parsedUrl.pathname).replace(this.$.prefix, "")
-        res.set('Cache-Control', `max-age=0`);
         // @ts-ignore
         if (req.method === "GET" && !req._parsedUrl.pathname.startsWith("/__webpack_hmr/"))
             try {
-                res.contentType("text/html")
+                res.contentType("text/html");
+                res.set('Cache-Control', `max-age=0`);
                 let path = `${this.$.outDir}/${pathname}`;
                 if (this.$.outputFileSystem.existsSync(join(path, "index.html")))
                     res.end(this.$.outputFileSystem.readFileSync(join(path, "index.html")));

@@ -25,7 +25,7 @@ FireJSX.linkApi = {
                     //delete it because onError happens once
                     delete this.chunkCache[`map${url === "/" ? "/index" : url}.map.js`];
                     if (url === "/404")
-                        reject(new Error("Error loading 404 map"))
+                        reject(new Error("Error loading 404 map. Make sure 404 page exists."))
                     this.loadMap("/404").then(() => resolve(FireJSX.map["/404"])).catch(reject);
                 }
             }

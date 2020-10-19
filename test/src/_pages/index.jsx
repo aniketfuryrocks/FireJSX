@@ -1,3 +1,5 @@
+import Link from "../../../src/components/Link";
+
 export default function IndexPage() {
     return (
         <div>
@@ -13,6 +15,9 @@ export default function IndexPage() {
             <div>
                 asdasd
             </div>
+            <Link href={"/asd"}>
+                Whee lets go
+            </Link>
             {/*<Loader effect={React.useEffect} delay={800}>
                 <LoadingCircle/>
             </Loader>*/}

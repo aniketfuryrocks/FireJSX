@@ -157,7 +157,6 @@ export default class {
             ]
         })
         this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config))
-        console.log(this.config)
         return this.config;
     }
 }

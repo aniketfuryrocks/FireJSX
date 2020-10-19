@@ -1,2 +1,4 @@
 custom:
   name: "aniket"
+paths:
+  pages: src/_pages
