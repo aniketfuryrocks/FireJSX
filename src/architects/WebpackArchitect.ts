@@ -3,6 +3,7 @@ import {join, relative} from "path"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as webpack from "webpack";
 import * as ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+import {CleanWebpackPlugin} from "clean-webpack-plugin";
 
 export default class {
     private readonly $: $;
@@ -98,11 +99,11 @@ export default class {
                         overlay: {
                             sockIntegration: 'whm'
                         }
-                    })
-                    /*new CleanWebpackPlugin({
+                    }),
+                    new CleanWebpackPlugin({
                         verbose: this.$.verbose,
-                        cleanOnceBeforeBuildPatterns: ['**!/!*', '!map/!*', '!e.*'],
-                    })*/
+                        cleanOnceBeforeBuildPatterns: ['**/*', '!map/!*', '!e.*'],
+                    })
                 ])
             ],
             resolve: {
