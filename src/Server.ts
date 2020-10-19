@@ -37,7 +37,7 @@ export default class {
         //routing
         if (this.$.staticDir)
             server.use(this.$.staticPrefix, express.static(this.$.staticDir));
-        server.get(`${this.$.prefix}/${this.$.lib}/*`, (req, res) => this.get.bind(this)(req, res, true));
+        server.get(`${this.$.prefix}/${this.$.lib}/*`, this.get.bind(this));
         server.get(`${this.$.prefix}/${this.$.lib}/map/*`, this.get.bind(this));
         server.use(`${this.$.prefix}/*`, this.getPage.bind(this));
         //listen
@@ -57,7 +57,7 @@ export default class {
         })
     }
 
-    private get(req: express.Request, res: express.Response, cache) {
+    private get(req: express.Request, res: express.Response) {
         if (this.$.verbose)
             this.$.cli.log("Request :", req.url)
         // @ts-ignore
@@ -65,7 +65,6 @@ export default class {
 
         res.contentType(mime.getType(pathname.substr(pathname.lastIndexOf("."))))
         //cache them
-        res.set('Cache-Control', `max-age=${cache ? "31557600" : "0"}`);
         if (this.$.outputFileSystem.existsSync(pathname))
             res.write(this.$.outputFileSystem.readFileSync(pathname));
         else
@@ -82,7 +81,6 @@ export default class {
         if (req.method === "GET" && !req._parsedUrl.pathname.startsWith("/__webpack_hmr/"))
             try {
                 res.contentType("text/html");
-                res.set('Cache-Control', `max-age=0`);
                 let path = `${this.$.outDir}/${pathname}`;
                 if (this.$.outputFileSystem.existsSync(join(path, "index.html")))
                     res.end(this.$.outputFileSystem.readFileSync(join(path, "index.html")));
