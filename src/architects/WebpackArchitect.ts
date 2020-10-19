@@ -2,8 +2,6 @@ import {$, WebpackConfig} from "../FireJSX"
 import {join, relative} from "path"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as webpack from "webpack";
-import * as ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
-import {CleanWebpackPlugin} from "clean-webpack-plugin";
 
 export default class {
     private readonly $: $;
@@ -44,8 +42,7 @@ export default class {
             },
             externals: {
                 react: "React",
-                "react-dom": 'ReactDOM',
-                //react-refresh added below
+                "react-dom": 'ReactDOM'
             },
             module: {
                 rules: [{
@@ -64,12 +61,13 @@ export default class {
                                 }], "@babel/preset-react"],
                                 plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime",
                                     "@babel/plugin-transform-modules-commonjs",
-                                    ...(this.proOrSSR ? [] : ["react-refresh/babel"])]
+                                    ...(this.proOrSSR ? [] : ["react-hot-loader/babel"])]
                             }
                         }, {//adds wrapper to App function
                             loader: join(__dirname, '../loader/wrapper.js'),
                             options: {
-                                pages_path: this.$.pages
+                                pages_path: this.$.pages,
+                                proOrSSR: this.proOrSSR
                             }
                         }
                     ]
@@ -95,52 +93,36 @@ export default class {
                     new webpack.HotModuleReplacementPlugin({
                         multiStep: true
                     }),
-                    new ReactRefreshWebpackPlugin({
-                        overlay: {
-                            sockIntegration: 'whm'
-                        }
-                    }),
-                    new CleanWebpackPlugin({
+                    /*new CleanWebpackPlugin({
                         verbose: this.$.verbose,
-                        cleanOnceBeforeBuildPatterns: ['**/*', '!map/!*', '!e.*'],
-                    })
+                        cleanOnceBeforeBuildPatterns: ['**!/!*', '!map/!*', '!e.*'],
+                    })*/
                 ])
             ],
             resolve: {
                 extensions: ['.wasm', '.mjs', '.js', '.json', '.jsx']
             }
         };
-        //only add react-refresh in development
-        if (!this.proOrSSR)
-            this.config.externals['react-refresh/runtime'] = 'ReactRefreshRuntime';
     }
 
     forExternals(): WebpackConfig {
-        const externalSemiPath = join(__dirname, "../web/externalGroupSemi.js")
         const conf: WebpackConfig = {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
             entry: {
-                e: externalSemiPath
+                e: [
+                    ...(this.proOrSSR ? [] : ['react-hot-loader/patch']),
+                    join(__dirname, "../web/externalGroupSemi.js")
+                ]
             },
             output: {
                 path: `${this.$.outDir}/${this.$.lib}/`,
                 filename: "[name].[contenthash].js"
             },
-            module: {
-                rules: [
-                    ...(this.proOrSSR ? [] : [
-                        {
-                            test: /\.(js|jsx)$/,
-                            use: [{//adds react-refresh to externalGroupSemi
-                                loader: join(__dirname, '../loader/react-refresh-loader.js'),
-                                options: {
-                                    externalSemiPath,
-                                }
-                            }]
-                        }
-                    ])
-                ]
+            resolve: {
+                alias: (this.proOrSSR ? {} : {
+                    'react-dom': '@hot-loader/react-dom',
+                })
             }
         }
         //only create full when ssr
@@ -152,6 +134,7 @@ export default class {
     forPages(): WebpackConfig {
         this.$.pageMap.forEach(page => {
             this.config.entry[page.toString()] = [
+                'react-refresh/runtime',
                 join(this.$.pages, page.toString()),
                 ...(this.proOrSSR ? [] : [
                     `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`])
