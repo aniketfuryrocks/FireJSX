@@ -68,8 +68,7 @@ export default class {
                         }, {//adds wrapper to App function
                             loader: join(__dirname, '../loader/wrapper.js'),
                             options: {
-                                pages_path: this.$.pages,
-                                proOrSSR: this.proOrSSR
+                                pages_path: this.$.pages
                             }
                         }
                     ]
