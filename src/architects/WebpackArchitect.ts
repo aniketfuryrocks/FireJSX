@@ -3,6 +3,7 @@ import {join, relative} from "path"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as webpack from "webpack";
 
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 export default class {
     private readonly $: $;
     public readonly config: WebpackConfig;
@@ -61,7 +62,7 @@ export default class {
                                 }], "@babel/preset-react"],
                                 plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime",
                                     "@babel/plugin-transform-modules-commonjs",
-                                    ...(this.proOrSSR ? [] : ["react-hot-loader/babel"])]
+                                    ...(this.proOrSSR ? [] : ["react-refresh/babel"])]
                             }
                         }, {//adds wrapper to App function
                             loader: join(__dirname, '../loader/wrapper.js'),
@@ -94,6 +95,11 @@ export default class {
                     new webpack.HotModuleReplacementPlugin({
                         multiStep: true
                     }),
+                    new ReactRefreshWebpackPlugin({
+                        overlay: {
+                            sockIntegration: 'whm'
+                        }
+                    })
                     /*new CleanWebpackPlugin({
                         verbose: this.$.verbose,
                         cleanOnceBeforeBuildPatterns: ['**!/!*', '!map/!*', '!e.*'],
@@ -110,21 +116,12 @@ export default class {
         const conf: WebpackConfig = {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
-            // @ts-ignore
             entry: {
-                e: [
-                    ...(this.proOrSSR ? [] : ['react-hot-loader/patch']),
-                    join(__dirname, "../web/externalGroupSemi.js")
-                ]
+                e: join(__dirname, "../web/externalGroupSemi.js")
             },
             output: {
                 path: `${this.$.outDir}/${this.$.lib}/`,
                 filename: "[name].[contenthash].js"
-            },
-            resolve: {
-                alias: (this.proOrSSR ? {} : {
-                    'react-dom': '@hot-loader/react-dom',
-                })
             }
         }
         //only create full when ssr
