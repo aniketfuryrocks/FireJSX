@@ -1,11 +1,9 @@
-import Wrap from "../../../src/web/Wrap.js";
-import {hot} from "firejsx/Hot"
 import Link from "../../../src/components/Link.js";
 import Head from "../../../src/components/Head.js";
 import Loader from "../../../src/components/Loader.js";
 import LazyLoad from "../../../src/components/LazyLoad";
 
-Wrap(() => {
+export default function App() {
     const Markdown = LazyLoad(() => import("../components/Markdown/Markdown.jsx"), () => require.resolveWeak("../components/Markdown/Markdown.jsx"))
     return (
         <div>
@@ -23,4 +21,4 @@ Wrap(() => {
             </Markdown>
         </div>
     )
-}, hot)
+}

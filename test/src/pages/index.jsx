@@ -1,13 +1,10 @@
-import Wrap from "../../../src/web/Wrap.js";
-import {hot} from "firejsx/Hot"
 import "../style/main.css"
 import Link from "../../../src/components/Link.js";
 import Head from "../../../src/components/Head.js";
 import Loader from "../../../src/components/Loader.js";
 import LoadingBar from "../components/LoadingBar/LoadingBar.jsx";
-import React from "react";
 
-Wrap(({content: {emoji}}) => {
+export default function App({content: {emoji}}) {
     const [s, setS] = React.useState(0)
     React.useEffect(() => {
         let t = 0;
@@ -35,4 +32,4 @@ Wrap(({content: {emoji}}) => {
             <Link href={"/this page does not exist"}>🤔 Click Here To Go Mock 404</Link>
         </div>
     )
-}, hot)
+}

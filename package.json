@@ -40,7 +40,6 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
     "@babel/runtime": "^7.12.1",
-    "@hot-loader/react-dom": "^17.0.0-rc.2",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "compression": "^1.7.4",
@@ -53,15 +52,15 @@
     "mime": "^2.4.6",
     "mini-css-extract-plugin": "^1.0.0",
     "react-helmet": "^6.1.0",
-    "react-hot-loader": "^4.13.0",
     "smartarg": "^1.0.1",
     "style-loader": "^2.0.0",
     "webpack": "^4.44.2",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.2",
+    "react-refresh": "^0.8.3",
     "webpack-hot-middleware": "^2.25.0",
     "yaml": "^1.10.0"
   },
   "devDependencies": {
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.2",
     "@types/express": "^4.17.8",
     "@types/fs-extra": "^9.0.2",
     "@types/jsdom": "^16.2.4",
@@ -70,8 +69,7 @@
     "@types/webpack": "^4.41.22",
     "chokidar": "^3.4.3",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-refresh": "^0.8.3"
+    "react-dom": "^16.14.0"
   },
   "peerDependencies": {
     "react": "^16.14.0",

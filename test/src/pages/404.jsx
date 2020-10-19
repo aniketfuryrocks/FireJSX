@@ -1,5 +1,3 @@
-import Wrap from "../../../src/web/Wrap.js";
-import {hot} from "firejsx/Hot"
 import "../style/main.css"
 import Head from "../../../dist/Head.js";
 import LazyLoad from "../../../dist/LazyLoad.js";
@@ -7,7 +5,7 @@ import LoadingCircle from "../components/LoadingCircle/LoadingCircle";
 import Link from "../../../src/components/Link.js";
 import Loader from "../../../src/components/Loader.js";
 
-Wrap(() => {
+export default function App() {
     const Markdown = LazyLoad(() => import("../components/Markdown/Markdown.jsx"), () => require.resolveWeak("../components/Markdown/Markdown.jsx"))
     return (
         <div>
@@ -27,4 +25,4 @@ Wrap(() => {
             <Link href={"/"}> 👻 Click Here To Go Home</Link>
         </div>
     )
-}, hot)
+}

@@ -1,8 +1,5 @@
 plugins:
   - ./plugin/alias.js
 
-paths:
-  pages: src/_pages
-
 custom:
   name: "aniket"

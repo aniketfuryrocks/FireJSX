@@ -2,8 +2,8 @@ import {$, WebpackConfig} from "../FireJSX"
 import {join, relative} from "path"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as webpack from "webpack";
+import * as ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 export default class {
     private readonly $: $;
     public readonly config: WebpackConfig;

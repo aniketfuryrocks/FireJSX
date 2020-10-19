@@ -1,12 +1,10 @@
-import Wrap from "../../../src/web/Wrap.js";
-import {hot} from "firejsx/Hot"
 import "../style/main.css"
 import "../style/hash.css"
 import Link from "../../../src/components/Link";
 
 const colors = ["red", "yellow", "blue", "green"]
 
-Wrap(() => {
+export default function App() {
     return (
         <div>
             {
@@ -33,4 +31,4 @@ Wrap(() => {
             }
         </div>
     )
-}, hot)
+}
