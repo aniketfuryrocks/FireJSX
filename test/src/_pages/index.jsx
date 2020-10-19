@@ -9,8 +9,7 @@ export default //hello
     })
     return (
         <div>
-            {seconds} asdjs asdm, aasbdukasdb as bhdlash diu aasdasdasd
-            {seconds} asdjs asdm, aasbdukasdb as bhdlash diu aasdasdasd
+            {seconds} asd asdasdasdas dd
         </div>
     )
 }//hello comment

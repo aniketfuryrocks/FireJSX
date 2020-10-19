@@ -2,6 +2,7 @@ import {$, WebpackConfig} from "../FireJSX"
 import {join, relative} from "path"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as webpack from "webpack";
+import {CleanWebpackPlugin} from "clean-webpack-plugin";
 
 export default class {
     private readonly $: $;
@@ -93,10 +94,10 @@ export default class {
                     new webpack.HotModuleReplacementPlugin({
                         multiStep: true
                     }),
-                    /*new CleanWebpackPlugin({
+                    new CleanWebpackPlugin({
                         verbose: this.$.verbose,
-                        cleanOnceBeforeBuildPatterns: ['**!/!*', '!map/!*', '!e.*'],
-                    })*/
+                        cleanOnceBeforeBuildPatterns: ['**/*', '!map/!*', '!e.*'],
+                    })
                 ])
             ],
             resolve: {
