@@ -55,9 +55,9 @@
     "smartarg": "^1.0.1",
     "style-loader": "^2.0.0",
     "webpack": "^4.44.2",
-    "react-hot-loader": "^4.12.21",
+    "react-hot-loader": "^4.13.0",
     "webpack-hot-middleware": "^2.25.0",
-    "@hot-loader/react-dom": "^16.13.0",
+    "@hot-loader/react-dom": "^17.0.0-rc.2",
     "yaml": "^1.10.0"
   },
   "devDependencies": {
@@ -68,8 +68,8 @@
     "@types/node": "^14.11.10",
     "@types/webpack": "^4.41.22",
     "chokidar": "^3.4.3",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
   },
   "peerDependencies": {
     "react": "^16.13.1",
