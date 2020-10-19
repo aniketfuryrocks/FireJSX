@@ -1,15 +1,17 @@
 export default function (App, hot) {
-    //check if page exports a default function only in development
-    if (!App)
-        throw new Error(`You forgot to export a default named function. Visit quick start guide to get started. https://github.com/eAdded/FireJSX/wiki/Quick-Start"`);
-    App = FireJSX.isSSR ? FireJSX.app = App : hot ? hot(App) : App;
-    FireJSX.linkApi.lock = false;
-    (FireJSX.isHydrated ? ReactDOM.hydrate : ReactDOM.render)
-    (React.createElement(App, {content: FireJSX.map[location.pathname]}), document.getElementById("root"));
+    if (FireJSX.isSSR) {
+        FireJSX.app = App
+        return
+    }
+    FireJSX.linkApi.lock = false
+    const func = FireJSX.isHydrated ? ReactDOM.hydrate : ReactDOM.render
+    App = hot(App);
+    func(<App content={FireJSX.map.content}/>, document.getElementById("root"))
     if (location.hash) {
         const el = document.getElementById(decodeURI(location.hash.substring(1)))
         if (el)
             el.scrollIntoView()
     }
+    //after render it's no more hydrated
     FireJSX.isHydrated = false;
 }

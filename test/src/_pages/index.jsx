@@ -1,26 +1,14 @@
-import Link from "../../../src/components/Link";
-
-export default function IndexPage() {
+export default () => {
+    const [seconds, setSeconds] = React.useState(0);
+    React.useEffect(() => {
+        const interval = setInterval(() => {
+            setSeconds(seconds + 1)
+        }, 1000);
+        return () => clearInterval(interval)
+    })
     return (
         <div>
-            asdsdaasdsdfasdasdsdfasdasasdasddasdasdasdasdasd
-            asd
-            asasd
-            dasasd
-            d
-            asdasdasd
-            asdasdasdasdas
-            dasdasd
-            asdasdasdasdasd
-            <div>
-                asdasd
-            </div>
-            <Link href={"/asd"}>
-                Whee lets go
-            </Link>
-            {/*<Loader effect={React.useEffect} delay={800}>
-                <LoadingCircle/>
-            </Loader>*/}
+            {seconds} d asd asdsadsad asdbnn asd asd asdasd asdasdas
         </div>
     )
-}
+}//hello comment

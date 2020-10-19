@@ -21,9 +21,9 @@ export default function App({content: {emoji}}) {
             <Head>
                 <title>Index</title>
             </Head>
-            <h1>Weasdasdslcomeasd to FireJSX <img height={30} width={30} src={`${FireJSX.staticPrefix}/fire.svg`}/></h1>
+            <h1>Welcome to FireJSX <img height={30} width={30} src={`${FireJSX.staticPrefix}/fire.svg`}/></h1>
             <br/>
-            You have been here for {s}s {emoji}
+            You asd been adssdfasdsasdadasdasd for {s}s {emoji}
             <br/>
             <br/>
             <Link href={"/about?s=h"}>🤠 Click Here To Go To About Page</Link>

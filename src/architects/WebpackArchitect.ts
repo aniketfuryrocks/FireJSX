@@ -37,8 +37,8 @@ export default class {
                 path: `${this.$.outDir}/${this.$.lib}/`,
                 globalObject: 'window',
                 //hot
-                hotUpdateMainFilename: `h.[hash].hot.json`,
-                hotUpdateChunkFilename: `h.[hash].hot.js`
+                hotUpdateMainFilename: `h[hash].hot.json`,
+                hotUpdateChunkFilename: `h[hash].hot.js`
             },
             externals: {
                 react: "React",
@@ -134,10 +134,9 @@ export default class {
     forPages(): WebpackConfig {
         this.$.pageMap.forEach(page => {
             this.config.entry[page.toString()] = [
-                'react-refresh/runtime',
                 join(this.$.pages, page.toString()),
                 ...(this.proOrSSR ? [] : [
-                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`])
+                    `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=${this.$.verbose}`])
             ]
         })
         this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(this.config))
