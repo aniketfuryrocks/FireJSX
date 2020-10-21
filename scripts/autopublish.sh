@@ -48,7 +48,7 @@ clr_scr "Set ChangeLog"
 nano ../changelog.md
 #commit
 clr_scr "Committing"
-git add *
+git add ../*
 git commit -m $FIREJSX_VERSION
 #push
 clr_scr "Pushing to GitHub"
