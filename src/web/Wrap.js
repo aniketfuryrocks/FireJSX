@@ -6,7 +6,7 @@ export default function (App, hot) {
     FireJSX.linkApi.lock = false
     const func = FireJSX.isHydrated ? ReactDOM.hydrate : ReactDOM.render
     App = hot ? hot(App) : App;
-    let map = FireJSX.map[location.pathname];
+    let map = FireJSX.map[decodeURI(location.pathname)];
     if (!map)
         map = FireJSX.map["/404"]
     func(<App content={map.content}/>, document.getElementById("root"))
