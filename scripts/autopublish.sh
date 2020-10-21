@@ -48,13 +48,19 @@ clr_scr "Set ChangeLog"
 nano ../changelog.md
 #commit
 clr_scr "Committing"
+git add *
 git commit -m $FIREJSX_VERSION
 #push
 clr_scr "Pushing to GitHub"
 git push
 #github release
 clr_scr "Releasing to GitHub"
-gh release create $FIREJSX_VERSION -F changelog.md
+# if version contains a - then it is pre-release
+if [[ "$FIREJSX_VERSION" == *"-"* ]]; then
+  gh release create $FIREJSX_VERSION -F ../changelog.md -p
+else
+  gh release create $FIREJSX_VERSION -F ../changelog.md
+fi
 #remove package.json
 clr_scr "Removing package.json"
 rm package.json
