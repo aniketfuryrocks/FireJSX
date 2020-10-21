@@ -57,9 +57,9 @@ git push
 clr_scr "Releasing to GitHub"
 # if version contains a - then it is pre-release
 if [[ "$FIREJSX_VERSION" == *"-"* ]]; then
-  gh release create $FIREJSX_VERSION -F ../changelog.md -p
+  gh release create $FIREJSX_VERSION -F ../changelog.md -p --target $(git rev-parse --abbrev-ref HEAD)
 else
-  gh release create $FIREJSX_VERSION -F ../changelog.md
+  gh release create $FIREJSX_VERSION -F ../changelog.md --target $(git rev-parse --abbrev-ref HEAD)
 fi
 #remove package.json
 clr_scr "Removing package.json"
