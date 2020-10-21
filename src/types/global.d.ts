@@ -25,6 +25,7 @@ declare module NodeJS {
                 loadChunks: (chunks: string[]) => void
             },
             showLoader?: () => void,
+            hideLoader?: () => void
         },
         //webpack5 -> webpackChunktest?: any,
         webpackJsonp?: any,
