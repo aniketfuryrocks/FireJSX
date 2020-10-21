@@ -14,7 +14,7 @@ export default class {
         this.renderer = new StaticArchitect({
             ...firejsx_map.staticConfig,
             outDir: resolve(pathToLibDir),
-            fullExternalPath: resolve(join(pathToLibDir, firejsx_map.staticConfig.externals[0]))
+            fullExternalPath: resolve(join(pathToLibDir, firejsx_map.staticConfig.externals[1]))
         });
         for (const __page in firejsx_map.pageMap) {
             const page = new Page(__page);
