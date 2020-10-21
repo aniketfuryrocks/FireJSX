@@ -24,8 +24,11 @@ export default class {
             this.build(this.webpackArchitect.forExternals(), stat => {
                 const externals = [];
                 //external Full,external Semi, Renderer
-                stat.compilation.chunks.forEach(chunk => {
-                    externals.push(...chunk.files)
+                stat.compilation.chunks.forEach(({name, files}) => {
+                    if (name === 'e')//semi chunk at the top
+                        externals.unshift(...files)
+                    else
+                        externals.push(...files)
                 })
                 resolve(externals)
             }, reject)
