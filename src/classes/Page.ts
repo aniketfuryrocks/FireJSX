@@ -1,4 +1,5 @@
 import {PageHooks} from "../types/Plugin";
+import {PageChunks} from "../types/global";
 
 export default class {
     public chunks: PageChunks;

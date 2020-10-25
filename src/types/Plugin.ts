@@ -1,17 +1,17 @@
-import {WebpackConfig, $} from "../FireJSX";
+import {$, WebpackConfig} from "../FireJSX";
 import {Application} from "express"
 
-type initWebpack_Callback = (config: WebpackConfig) => void
-type initServer_Callback = (server: Application) => void
-type postExport_Callback = () => Promise<void>
-type onBuild_Callback = (actions: onBuild_Actions) => Promise<void>
-type dom_Callback = (html: string) => void
+export type initWebpack_Callback = (config: WebpackConfig) => void
+export type initServer_Callback = (server: Application) => void
+export type postExport_Callback = () => Promise<void>
+export type onBuild_Callback = (actions: onBuild_Actions) => Promise<void>
+export type dom_Callback = (html: string) => void
 
-interface onBuild_Actions {
+export interface onBuild_Actions {
     renderPage: (path: string, content?: any) => void
 }
 
-interface Actions {
+export interface Actions {
     //Globals
     initServer: (callback: initServer_Callback) => void,
     postExport: (callback: postExport_Callback) => void,
@@ -23,14 +23,14 @@ interface Actions {
 }
 
 
-type Plugin = (actions: Actions, $: $) => void
+export type Plugin = (actions: Actions, $: $) => void
 
-interface PageHooks {
+export interface PageHooks {
     postRender: dom_Callback[],
     onBuild: onBuild_Callback[]
 }
 
-interface GlobalHooks {
+export interface GlobalHooks {
     initWebpack: initWebpack_Callback[],
     postRender: dom_Callback[],
     initServer: initServer_Callback[],
