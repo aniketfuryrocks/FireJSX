@@ -13,7 +13,7 @@ export interface StaticConfig {
 }
 
 {
-    // @ts-ignore
+    //@ts-ignore
     global.window = global
     const dom = new JSDOM()
     for (const domKey of ["document", "location", "history", "navigator", "screen", "matchMedia", "getComputedStyle"])
@@ -31,11 +31,15 @@ export default class {
 
     render(page: Page, path: string, content: any): string {
         //globals
-        global.FireJSX.lib = this.config.lib
-        global.FireJSX.isSSR = this.config.ssr
-        global.FireJSX.staticPrefix = this.config.staticPrefix
-        global.FireJSX.prefix = this.config.prefix
-        global.FireJSX.map[path] = {
+        global.FireJSX.lib = this.config.lib;
+        global.FireJSX.isSSR = this.config.ssr;
+        global.FireJSX.staticPrefix = this.config.staticPrefix;
+        global.FireJSX.prefix = this.config.prefix;
+        let pageCache = global.FireJSX.cache[path];
+        if (!pageCache) {
+            pageCache = (global.FireJSX.cache[path] = {})
+        }
+        pageCache.map = {
             content,
             chunks: page.chunks
         };
@@ -71,11 +75,9 @@ export default class {
             head = arr[0]
             body = arr[1]
         }
-        if (!page.app)
-            page.app = global.FireJSX.app
         //render
         const rootDiv = this.config.ssr ? global.window.ReactDOMServer.renderToString(
-            global.React.createElement(page.app, {content})
+            global.React.createElement(pageCache.app, {content})
         ) : ""
         //helmet
         if (this.config.ssr) {

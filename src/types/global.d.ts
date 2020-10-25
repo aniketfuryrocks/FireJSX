@@ -3,14 +3,16 @@ declare module NodeJS {
         window: Global,
         FireJSX: {
             version?: string,
-            app?: any,
             lib?: string,
             prefix?: string,
             staticPrefix?: string,
-            map?: {
+            cache?: {
                 [key: string]: {
-                    content: any,
-                    chunks: PageChunks
+                    app?: React.Component
+                    map?: {
+                        content: any,
+                        chunks: PageChunks
+                    }
                 }
             },
             isSSR?: boolean,
