@@ -1,3 +1,6 @@
+import * as React from "react";
+import FireJSX from "./types/FireJSX";
+
 export default ({children, effect, delay}) => {
     if (!effect)
         throw new TypeError("You forgot to pass React.useEffect as effect to Loader");

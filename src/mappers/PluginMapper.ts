@@ -1,5 +1,5 @@
 import {Actions, Plugin} from "../types/Plugin";
-import {$} from "../FireJSX";
+import {$} from "../FireJSX_App";
 
 export async function mapPlugin(plugin: string, $: $) {
     //require default and call

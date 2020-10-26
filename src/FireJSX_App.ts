@@ -52,6 +52,7 @@ export interface FIREJSX_MAP {
 
 export default class {
     public readonly $: $
+    static linkApi: { chunkCache: {}; lock: boolean; loadMap: (url: any) => Promise<unknown>; preloadPage: (url: any) => Promise<void>; loadPage: (url: any, pushState?: boolean) => Promise<void>; preloadChunk: (chunk: any, rel: any) => any; loadChunk: (chunk: any, force: any) => any; };
 
     constructor(params: Params) {
         if (!params)

@@ -1,7 +1,7 @@
-import Link from "../../../src/components/Link.js";
-import Head from "../../../src/components/Head.js";
-import Loader from "../../../src/components/Loader.js";
-import LazyLoad from "../../../src/components/LazyLoad";
+import Link from "../../../src/Link.tsx";
+import Head from "../../../src/Head.ts";
+import Loader from "../../../src/components/Loader.ts";
+import LazyLoad from "../../../src/LazyLoad";
 
 export default function App() {
     const Markdown = LazyLoad(() => import("../components/Markdown/Markdown.jsx"), () => require.resolveWeak("../components/Markdown/Markdown.jsx"))

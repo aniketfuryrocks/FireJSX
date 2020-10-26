@@ -1,4 +1,4 @@
-import {$, WebpackConfig} from "../FireJSX";
+import {$, WebpackConfig} from "../FireJSX_App";
 import {Application} from "express"
 
 export type initWebpack_Callback = (config: WebpackConfig) => void

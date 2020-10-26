@@ -1,6 +1,7 @@
 import {join} from "path"
 import Page from "../classes/Page";
 import {JSDOM} from "jsdom"
+import FireJSX from "../types/FireJSX";
 
 export interface StaticConfig {
     lib: string,
@@ -31,18 +32,16 @@ export default class {
 
     render(page: Page, path: string, content: any): string {
         //globals
-        global.FireJSX.lib = this.config.lib;
-        global.FireJSX.isSSR = this.config.ssr;
-        global.FireJSX.staticPrefix = this.config.staticPrefix;
-        global.FireJSX.prefix = this.config.prefix;
-        let pageCache = global.FireJSX.cache[path];
+        FireJSX.lib = this.config.lib;
+        FireJSX.isSSR = this.config.ssr;
+        FireJSX.staticPrefix = this.config.staticPrefix;
+        FireJSX.prefix = this.config.prefix;
+        let pageCache = FireJSX.cache[path];
         if (!pageCache) {
-            pageCache = (global.FireJSX.cache[path] = {})
+            pageCache = (FireJSX.cache[path] = {})
         }
-        pageCache.map = {
-            content,
-            chunks: page.chunks
-        };
+        pageCache.content = content;
+        pageCache.content = page.chunks;
         //if ssr then require async chunks
         if (this.config.ssr)
             page.chunks.async.forEach(chunk => {
@@ -90,13 +89,13 @@ export default class {
             "<html lang=\"en\"><head>" +
             "<meta charset=\"UTF-8\">" +
             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
-            `<meta name="generator" content="FireJSX v${global.FireJSX.version}"/>` +
+            `<meta name="generator" content="FireJSX v${FireJSX.version}"/>` +
             `<script>window.FireJSX={map:{},` +
             `isHydrated: ${this.config.ssr},` +
             `lib: "${this.config.lib}",` +
             `prefix: "${this.config.prefix}",` +
             `staticPrefix: "${this.config.staticPrefix}",` +
-            `version: "${global.FireJSX.version}"}</script>` +
+            `version: "${FireJSX.version}"}</script>` +
             head +
             "</head><body><div id=\"root\">" +
             rootDiv +

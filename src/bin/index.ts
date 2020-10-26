@@ -2,7 +2,7 @@
 import {getUserConfig, parseConfig} from "./ConfigMapper"
 import {getArgs, parseArgs} from "./ArgsMapper";
 import * as MemoryFS from "memory-fs";
-import FireJSX from "../FireJSX";
+import FireJSX from "../FireJSX_App";
 import Cli from "../utils/Cli";
 import Server from "../Server";
 
