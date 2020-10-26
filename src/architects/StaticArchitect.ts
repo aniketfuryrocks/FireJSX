@@ -1,7 +1,6 @@
 import {join} from "path"
 import Page from "../classes/Page";
 import {JSDOM} from "jsdom"
-import FireJSX from "../types/FireJSX";
 
 export interface StaticConfig {
     lib: string,
@@ -14,7 +13,7 @@ export interface StaticConfig {
 }
 
 {
-    //@ts-ignore
+    // @ts-ignore
     global.window = global
     const dom = new JSDOM()
     for (const domKey of ["document", "location", "history", "navigator", "screen", "matchMedia", "getComputedStyle"])
@@ -75,7 +74,7 @@ export default class {
             body = arr[1]
         }
         //render
-        const rootDiv = this.config.ssr ? global.window.ReactDOMServer.renderToString(
+        const rootDiv = this.config.ssr ? window.ReactDOMServer.renderToString(
             global.React.createElement(pageCache.app, {content})
         ) : ""
         //helmet

@@ -1,6 +1,4 @@
 //tick ✓ log # warning ! error X
-import FireJSX from "../types/FireJSX";
-
 export default class {
     normal;
     error;

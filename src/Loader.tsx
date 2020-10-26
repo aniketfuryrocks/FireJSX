@@ -1,5 +1,4 @@
 import * as React from "react";
-import FireJSX from "./types/FireJSX";
 
 export default ({children, effect, delay}) => {
     if (!effect)
