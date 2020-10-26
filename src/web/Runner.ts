@@ -1,6 +1,6 @@
 import * as React from "react";
 
-FireJSX.run = function (path = decodeURI(location.pathname)) {
+FireJSX.run = function (path) {
     const {app, content} = FireJSX.cache[path];
     //update page if already rendered
     if (FireJSX.setApp)
