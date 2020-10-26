@@ -2,11 +2,12 @@ import "../style/main.css"
 import LoadingCircle from "../components/LoadingCircle/LoadingCircle";
 import Loader from "../../../dist/Loader";
 import Link from "../../../dist/Link";
-import LazyLoad from "../../../dist/LazyLoad";
 import Head from "../../../dist/Head";
 
 export default function App() {
+/*
     const Markdown = LazyLoad(() => import("../components/Markdown/Markdown.jsx"), () => require.resolveWeak("../components/Markdown/Markdown.jsx"))
+*/
     return (
         <div>
             <Head>
@@ -17,9 +18,9 @@ export default function App() {
             </Loader>
             <h1>😿 OH NO 404</h1>
             <br/>
-            <Markdown>
+            {/* <Markdown>
                 By the way, I am a lazy loaded component 😺
-            </Markdown>
+            </Markdown>*/}
             <br/>
             <br/>
             <Link href={"/"}> 👻 Click Here To Go Home</Link>
