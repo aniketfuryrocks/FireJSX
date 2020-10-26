@@ -8,6 +8,5 @@ export default function (source, map) {
     source = source.replace("export default ", `require("${join(__dirname, "../web/Wrap")}").default(`)
     const functionEnd = source.lastIndexOf("}");
     source = source.substring(0, functionEnd + 1) + ')' + source.substring(functionEnd + 1);
-    console.log(source)
     this.callback(null, source, map)
 }

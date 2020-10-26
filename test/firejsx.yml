@@ -3,4 +3,4 @@ plugins:
 custom:
   name: "aniket"
 paths:
-  pages: src/_pages
+  pages: src/pages

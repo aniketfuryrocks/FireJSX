@@ -13,6 +13,8 @@ FireJSX.app = hot((props: {
             setApp(App);
             setContent(Content);
         }
+        //make undefined to prevent illegal state access
+        return () => FireJSX.setApp = undefined
     }, [])
 
     // @ts-ignore
