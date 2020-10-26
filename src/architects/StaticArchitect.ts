@@ -65,8 +65,6 @@ export default class {
     render(page: Page, path: string, content: any): string {
         //globals
         location.assign("https://firejsx.com" + path);
-        console.log(location.pathname)
-        console.log(path)
         FireJSX.lib = this.config.lib;
         FireJSX.isSSR = this.config.ssr;
         FireJSX.staticPrefix = this.config.staticPrefix;
