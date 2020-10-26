@@ -18,7 +18,7 @@ async function main() {
 
     if (args["--disable-plugins"])
         config.plugins = []
-    console.log(config)
+
     const app = new FireJSX({
         outDir: config.outDir,
         cacheDir: config.cacheDir,
