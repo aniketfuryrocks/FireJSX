@@ -113,7 +113,7 @@ export default class {
             entry: {
                 e: [
                     ...(this.proOrSSR ? [] : ['react-hot-loader/patch']),
-                    join(__dirname, "../web/externalGroupSemi.ts")
+                    join(__dirname, "../web/externalGroupSemi")
                 ]
             },
             output: {
@@ -128,7 +128,7 @@ export default class {
         }
         //only create full when ssr
         if (this.$.ssr)
-            conf.entry[join(relative(`${this.$.outDir}/${this.$.lib}/`, this.$.cacheDir), "f")] = join(__dirname, "../web/externalGroupFull.ts")
+            conf.entry[join(relative(`${this.$.outDir}/${this.$.lib}/`, this.$.cacheDir), "f")] = join(__dirname, "../web/externalGroupFull")
         return conf;
     }
 

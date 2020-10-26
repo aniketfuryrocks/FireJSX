@@ -1,6 +1,6 @@
 import "../style/main.css"
 import "../style/hash.css"
-import Link from "../../../src/Link";
+import Link from "../../../dist/Link";
 
 const colors = ["red", "yellow", "blue", "green"]
 

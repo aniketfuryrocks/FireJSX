@@ -1,9 +1,9 @@
 import "../style/main.css"
-import Head from "../../../dist/Head.js";
-import LazyLoad from "../../../dist/LazyLoad.js";
 import LoadingCircle from "../components/LoadingCircle/LoadingCircle";
-import Link from "../../../src/Link.tsx";
-import Loader from "../../../src/components/Loader.ts";
+import Loader from "../../../dist/Loader";
+import Link from "../../../dist/Link";
+import LazyLoad from "../../../dist/LazyLoad";
+import Head from "../../../dist/Head";
 
 export default function App() {
     const Markdown = LazyLoad(() => import("../components/Markdown/Markdown.jsx"), () => require.resolveWeak("../components/Markdown/Markdown.jsx"))

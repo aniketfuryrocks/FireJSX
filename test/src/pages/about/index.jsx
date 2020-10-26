@@ -1,8 +1,8 @@
-import Link from "../../../../src/Link.tsx";
-import Head from "../../../../src/Head.ts"
 import "../../style/main.css"
-import Loader from "../../../../src/components/Loader.ts";
-import LoadingBar from "../../components/LoadingBar/LoadingBar.jsx";
+import Loader from "../../../../dist/Loader";
+import LoadingBar from "../../components/LoadingBar/LoadingBar";
+import Link from "../../../../dist/Link";
+import Head from "../../../../dist/Head";
 
 export default function App() {
     return (

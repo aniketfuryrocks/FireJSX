@@ -1,8 +1,8 @@
 import "../style/main.css"
-import Link from "../../../src/Link.tsx";
-import Head from "../../../src/Head.ts";
-import Loader from "../../../src/components/Loader.ts";
-import LoadingBar from "../components/LoadingBar/LoadingBar.jsx";
+import Link from "../../../dist/Link";
+import Head from "../../../dist/Head";
+import LoadingBar from "../components/LoadingBar/LoadingBar";
+import Loader from "../../../dist/Loader";
 
 export default function App({content: {emoji}}) {
     const [s, setS] = React.useState(0)
