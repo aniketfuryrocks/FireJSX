@@ -2,6 +2,7 @@ import * as React from "react";
 
 FireJSX.run = function (path) {
     const {app, content} = FireJSX.cache[path];
+    FireJSX.linkApi.lock = false;
     //update page if already rendered
     if (FireJSX.setApp)
         FireJSX.setApp(app, content);
@@ -18,5 +19,4 @@ FireJSX.run = function (path) {
     }
     //no more hydrated and locked
     FireJSX.isHydrated = false;
-    FireJSX.linkApi.lock = false
 }

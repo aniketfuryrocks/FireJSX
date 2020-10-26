@@ -39,6 +39,7 @@ FireJSX.linkApi = {
         if (this.lock)
             return;
         this.lock = true;
+        window.webpackJsonp = undefined
         //push state
         if (pushState)
             window.history.pushState(undefined, undefined, FireJSX.prefix + url);
@@ -48,6 +49,7 @@ FireJSX.linkApi = {
         if (!cacheMap)
             cacheMap = await this.loadMap(url);
         if (!cacheMap.app) {
+            console.log("loading chunks")
             cacheMap.chunks.entry.forEach(this.loadChunk);
             cacheMap.chunks.initial.forEach(this.loadChunk);
         } else
