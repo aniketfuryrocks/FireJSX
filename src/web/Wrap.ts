@@ -1,6 +1,7 @@
 import * as React from "react";
 
 export default function (App, hot) {
+    console.log(location.pathname)
     if (FireJSX.isSSR) {
         FireJSX.cache[location.pathname].app = App
         return
