@@ -1,3 +1,9 @@
+export default interface FireJSX_CacheMap {
+    app?: JSX.Element
+    content?: any
+    chunks?: PageChunks
+}
+
 declare global {
     namespace NodeJS {
         interface Global extends FireJSX_GLOBAL {
@@ -8,6 +14,28 @@ declare global {
 
     interface Window extends FireJSX_GLOBAL {
         FireJSX
+    }
+
+    namespace FireJSX {
+        let version: string
+        let lib: string
+        let prefix: string
+        let staticPrefix: string
+        let cache: {
+            [key: string]: FireJSX_CacheMap
+        }
+        let isSSR: boolean
+        let isHydrated: boolean
+        let linkApi: {
+            lock: boolean,
+            loadMap: (url: string) => Promise<FireJSX_CacheMap>
+            preloadPage: (url: string) => Promise<void>
+            loadPage: (url: string, pushState: boolean) => Promise<void>
+            preloadChunk: (chunk: string, rel: string) => void
+            loadChunk: (chunk: string, force: boolean) => Element
+        }
+        let showLoader: () => void
+        let hideLoader: () => void
     }
 }
 

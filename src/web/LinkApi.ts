@@ -1,6 +1,4 @@
 //listens to next and prev page i.e navigation events
-import FireJSX from "../types/FireJSX";
-
 window.onpopstate = function () {
     const path = location.pathname.replace(FireJSX.prefix, "");//remove prefix
     FireJSX.linkApi.loadPage(path, false)
