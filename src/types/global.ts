@@ -28,6 +28,7 @@ declare global {
         let isHydrated: boolean
         let linkApi: {
             lock: boolean,
+            run: (App, content: any) => void,
             loadMap: (url: string) => Promise<FireJSX_CacheMap>
             preloadPage: (url: string) => Promise<void>
             loadPage: (url: string, pushState: boolean) => Promise<void>

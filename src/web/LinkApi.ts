@@ -1,4 +1,6 @@
 //listens to next and prev page i.e navigation events
+import * as React from "react";
+
 window.onpopstate = function () {
     const path = location.pathname.replace(FireJSX.prefix, "");//remove prefix
     FireJSX.linkApi.loadPage(path, false)
@@ -11,6 +13,18 @@ function getPathFromUrl(url) {
 
 FireJSX.linkApi = {
     lock: false,
+    run(App, content) {
+        const func: any = FireJSX.isHydrated ? window.ReactDOM.hydrate : window.ReactDOM.render
+        func(React.createElement(App, {content}), document.getElementById("root"))
+        if (location.hash) {
+            const el = document.getElementById(decodeURI(location.hash.substring(1)))
+            if (el)
+                el.scrollIntoView()
+        }
+        FireJSX.isHydrated = false;
+        FireJSX.linkApi.lock = false
+        //after render it's no more hydrated
+    },
     loadMap(url) {
         return new Promise((resolve, reject) => {
             const cache_map = FireJSX.cache[url];
