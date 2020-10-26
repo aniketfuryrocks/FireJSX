@@ -1,7 +1,7 @@
 import {hot} from "react-hot-loader/root";
 import * as React from "react";
-import useAppHelper from "./helper";
+import Page from "./Page";
 
 FireJSX.app = hot(props => {
-    return useAppHelper(props)
+    return <Page {...props} />
 })
