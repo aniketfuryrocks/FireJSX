@@ -1,7 +1,7 @@
 import * as webpack from "webpack"
 import {Compiler} from "webpack"
 import WebpackArchitect from "./WebpackArchitect";
-import {$, WebpackConfig} from "../FireJSX_App";
+import {$, WebpackConfig} from "../Api";
 import {join} from "path";
 import {writeFileSync} from "fs";
 
