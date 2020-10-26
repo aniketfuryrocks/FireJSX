@@ -89,7 +89,7 @@ export default class {
             "<meta charset=\"UTF-8\">" +
             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
             `<meta name="generator" content="FireJSX v${FireJSX.version}"/>` +
-            `<script>window.FireJSX={map:{},` +
+            `<script>window.FireJSX={cache:{},` +
             `isHydrated: ${this.config.ssr},` +
             `lib: "${this.config.lib}",` +
             `prefix: "${this.config.prefix}",` +
