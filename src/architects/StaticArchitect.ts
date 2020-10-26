@@ -69,12 +69,11 @@ export default class {
         FireJSX.isSSR = this.config.ssr;
         FireJSX.staticPrefix = this.config.staticPrefix;
         FireJSX.prefix = this.config.prefix;
-        let pageCache = FireJSX.cache[path];
-        if (!pageCache) {
-            pageCache = (FireJSX.cache[path] = {})
-        }
-        pageCache.content = content;
-        pageCache.content = page.chunks;
+        let mapCache = FireJSX.cache[path];
+        if (!mapCache)
+            mapCache = (FireJSX.cache[path] = {})
+        mapCache.content = content;
+        mapCache.chunks = page.chunks;
         //if ssr then require async chunks
         if (this.config.ssr)
             page.chunks.async.forEach(chunk => {
@@ -107,9 +106,10 @@ export default class {
             head = arr[0]
             body = arr[1]
         }
+
         //render
         const rootDiv = this.config.ssr ? window.ReactDOMServer.renderToString(
-            global.React.createElement(pageCache.app, {content})
+            global.React.createElement(FireJSX.app, {app: mapCache.app, content})
         ) : ""
         //helmet
         if (this.config.ssr) {
