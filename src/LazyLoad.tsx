@@ -3,11 +3,12 @@ import * as React from "react";
 export default function (loadFunc: () => Promise<any>,
                          resolveID: () => string,
                          placeHolder: (any) => JSX.Element): any {
-    if (placeHolder)
+    if (!placeHolder)
         placeHolder = () => <></>
-    if (FireJSX.isSSR && resolveID) { // @ts-ignore
+
+    if (FireJSX.isSSR && resolveID)  // @ts-ignore
         return __webpack_require__(resolveID()).default
-    }
+
     let mounted = true;
     return props => {
         const [child, setChild] = React.useState(placeHolder(undefined));
