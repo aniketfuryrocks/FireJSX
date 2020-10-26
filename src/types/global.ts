@@ -33,9 +33,9 @@ declare global {
             lock: boolean,
             loadMap: (url: string) => Promise<FireJSX_CacheMap>
             preloadPage: (url: string) => Promise<void>
-            loadPage: (url: string, pushState: boolean) => Promise<void>
+            loadPage: (url: string, pushState?: boolean) => Promise<void>
             preloadChunk: (chunk: string, rel: string) => void
-            loadChunk: (chunk: string, force: boolean) => Element
+            loadChunk: (chunk: string) => Element
         }
         let showLoader: () => void
         let hideLoader: () => void

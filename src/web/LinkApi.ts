@@ -14,49 +14,46 @@ FireJSX.linkApi = {
     lock: false,
     loadMap(url) {
         return new Promise((resolve, reject) => {
-            const cache_map = FireJSX.cache[url];
-            if (cache_map)//if already loaded then resolve
-                resolve(cache_map)
-            else {
-                const chunk_path = `map${url === "/" ? "/index" : url}.map.js`;
-                const ele = this.loadChunk(chunk_path);
-                ele.onload = () => resolve(FireJSX.cache[url]);
-                ele.onerror = () => {
-                    //delete it because onError happens once
-                    delete this.chunkCache[chunk_path];
-                    if (url === "/404")
-                        reject(new Error("Error loading 404 map. Make sure 404 page exists."))
-                    this.loadMap("/404").then(() => resolve(FireJSX.cache["/404"])).catch(reject);
-                }
+            const chunk_path = `map${url === "/" ? "/index" : url}.map.js`;
+            const ele = this.loadChunk(chunk_path);
+            ele.onload = () => resolve(FireJSX.cache[url]);
+            ele.onerror = () => {
+                //delete it because onError happens once
+                delete FireJSX.cache[chunk_path];
+                if (url === "/404")
+                    reject(new Error("Error loading 404 map. Make sure 404 page exists."))
+                //load 404
+                this.loadMap("/404").then(() => resolve(FireJSX.cache["/404"])).catch(reject);
             }
         })
     },
     async preloadPage(url) {
-        const map = await this.loadMap(getPathFromUrl(url));
-        map.chunks.entry.forEach(c => this.preloadChunk(c, "prefetch"));
-        map.chunks.initial.forEach(c => this.preloadChunk(c, "prefetch"));
+        if (FireJSX.cache[url])
+            return;
+        const {chunks} = await this.loadMap(getPathFromUrl(url));
+        chunks.entry.forEach(c => this.preloadChunk(c, "prefetch"));
+        chunks.initial.forEach(c => this.preloadChunk(c, "prefetch"));
     },
     async loadPage(url, pushState = true) {
         if (this.lock)
             return;
-        this.lock = true
-        //webpack5 -> window.webpackChunktest = undefined
-        window.webpackJsonp = undefined;
+        this.lock = true;
         //push state
         if (pushState)
             window.history.pushState(undefined, undefined, FireJSX.prefix + url);
         url = getPathFromUrl(url);//url
         //map
-        const map = await this.loadMap(url);
-        //force loading to run them
-        map.chunks.entry.forEach(c => this.loadChunk(c, true));
-        map.chunks.initial.forEach(c => this.loadChunk(c, true));
+        let cacheMap = FireJSX.cache[url];
+        if (!cacheMap)
+            cacheMap = await this.loadMap(url);
+        if (!cacheMap.app) {
+            cacheMap.chunks.entry.forEach(this.loadChunk);
+            cacheMap.chunks.initial.forEach(this.loadChunk);
+        } else
+            FireJSX.run(url)
     },
     preloadChunk(chunk, rel) {
-        let ele = this.chunkCache[chunk];
-        if (ele)//check has already been loaded
-            return;
-        this.chunkCache[chunk] = ele = document.createElement("link");
+        const ele = document.createElement("link");
         ele.rel = rel;
         ele.href = `${FireJSX.prefix}/${FireJSX.lib}/${chunk}`;
         ele.crossOrigin = "anonymous";
@@ -67,14 +64,8 @@ FireJSX.linkApi = {
         document.head.appendChild(ele);
     },
     //force: force rerun of chunk
-    loadChunk(chunk, force) {
-        let ele = this.chunkCache[chunk];
-        if (ele) { //check has already been loaded
-            if (force)
-                ele.remove()
-            else
-                return ele;
-        }
+    loadChunk(chunk) {
+        let ele;
         if (chunk.endsWith(".js")) {
             ele = document.createElement("script");
             ele.src = `${FireJSX.prefix}/${FireJSX.lib}/${chunk}`
@@ -86,6 +77,6 @@ FireJSX.linkApi = {
         }
         ele.crossOrigin = "anonymous";
         document.body.appendChild(ele);
-        return this.chunkCache[chunk] = ele;
+        return ele;
     }
 }

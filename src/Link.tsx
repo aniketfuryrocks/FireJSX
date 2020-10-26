@@ -1,27 +1,25 @@
 import * as React from "react";
 
 export default ({href, children, onClick, onMouseEnter, ...rest}) => {
-    const [preLoaded, setPreLoaded] = React.useState(false)
 
-    function preLoad() {
+    const preLoad = (e) => {
+        e.preventDefault();
         if (onMouseEnter)
-            onMouseEnter()
-        if (preLoaded)
-            return;
-        FireJSX.linkApi.preloadPage(href).then(() => setPreLoaded(true));
+            onMouseEnter(e)
+        FireJSX.linkApi.preloadPage(href);
     }
 
-    function apply(event) {
-        event.preventDefault();
+    const apply = (e) => {
+        e.preventDefault();
         if (onClick)
-            onClick(event)
+            onClick(e)
         if (FireJSX.showLoader)
             FireJSX.showLoader();
-        FireJSX.linkApi.loadPage(href, false);
+        FireJSX.linkApi.loadPage(href);
     }
 
     return (
-        <a {...rest} href={FireJSX.prefix + href} onClick={apply.bind(this)} onMouseEnter={preLoad.bind(this)}>
+        <a {...rest} href={FireJSX.prefix + href} onClick={apply} onMouseEnter={preLoad}>
             {children}
         </a>
     )
