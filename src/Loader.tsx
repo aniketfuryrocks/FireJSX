@@ -1,12 +1,6 @@
 import * as React from "react";
 
-export default ({children, effect, delay}) => {
-    if (!effect)
-        throw new TypeError("You forgot to pass React.useEffect as effect to Loader");
-
-    if (typeof effect !== 'function')
-        throw new TypeError("effect prop passed to Loader must be a function i.e React.useEffect");
-
+export default ({children, delay}) => {
     const [loader, setLoader] = React.useState(children);
 
     React.useEffect(() => {
@@ -17,7 +11,7 @@ export default ({children, effect, delay}) => {
         return () => FireJSX.hideLoader = FireJSX.showLoader = undefined;
     }, [])
     //call effect
-    effect(() => {
+    React.useEffect(() => {
         //if delay then setTimeout else hide the loader right away
         const timeout = delay ?
             setTimeout(FireJSX.hideLoader, delay) :
