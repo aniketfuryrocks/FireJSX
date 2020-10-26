@@ -1,7 +1,6 @@
-import {hot} from "react-hot-loader/root";
 import * as React from "react";
 import Page from "./Page";
 
-FireJSX.app = hot(props => {
+FireJSX.app = props => {
     return <Page {...props} />
-})
+}

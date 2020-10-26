@@ -1,4 +1,4 @@
-export default function (app) {
+export default function (app, hot) {
     const path = FireJSX.isSSR ? location.pathname : (() => {
         let path = decodeURI(location.pathname);
         const li = path.lastIndexOf("/index")
@@ -9,7 +9,7 @@ export default function (app) {
             path = "/404";
         return path;
     })();
-    FireJSX.cache[path].app = app;
+    FireJSX.cache[path].app = hot ? hot(app) : app;
     if (!FireJSX.isSSR)
         FireJSX.run(path);
 }
