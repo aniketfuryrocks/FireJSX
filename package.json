@@ -85,8 +85,7 @@
   "homepage": "https://github.com/eAdded/firejsx#readme",
   "scripts": {
     "sync": "sh scripts/sync.sh",
-    "watch": "node scripts/watch.js",
-    "dev": "yarn sync && yarn watch",
+    "dev": "yarn sync",
     "autopublish": "sh scripts/autopublish.sh",
     "publishNitely": "yarn autopublish nitely",
     "publishDev": "yarn autopublish dev"

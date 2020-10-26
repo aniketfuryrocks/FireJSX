@@ -28,15 +28,6 @@ rm -rf $FOLDER/* || error "Error removing contents of $FOLDER"
 clr_scr "Running TypeScript Compiler"
 tsc || error "Error compiling ts to js"
 
-clr_scr "Syncing types/*.d.ts Files"
-rsync -vr src/types/*.d.ts $FOLDER/types || error "Error syncing types/*.d.ts files to $FOLDER/types"
-
-clr_scr "Syncing components/*.js Files"
-rsync -vr src/components/*.js $FOLDER || error "Error syncing components/*.js files to $FOLDER"
-
-clr_scr "Syncing web/*.js Files"
-rsync -vr src/web/*.js $FOLDER/web || error "Error syncing web/*.js files to $FOLDER/web"
-
 clr_scr "Copying LICENSE"
 cp -v LICENSE $FOLDER/LICENSE || error "Error copying LICENSE to $FOLDER"
 
