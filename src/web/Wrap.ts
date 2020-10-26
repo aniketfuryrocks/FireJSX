@@ -1,9 +1,7 @@
-export default function (App, hot) {
-    FireJSX.cache[location.pathname].app = App
-    if (FireJSX.isSSR)
-        return
-    FireJSX.linkApi.run(
-        hot ? hot(App) : App,
-        FireJSX.cache[decodeURI(location.pathname)].content
-    )
+export default function (app) {
+    const path = decodeURI(location.pathname);
+    FireJSX.cache[path].app = app;
+    console.log(FireJSX)
+    if (!FireJSX.isSSR)
+        FireJSX.run(path);
 }

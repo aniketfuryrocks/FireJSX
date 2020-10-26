@@ -17,6 +17,9 @@ declare global {
     }
 
     namespace FireJSX {
+        let app: any | JSX.Element
+        let setApp: (App: JSX.Element, Content: any) => void
+        let run: (path?: string) => void
         let version: string
         let lib: string
         let prefix: string
@@ -28,7 +31,6 @@ declare global {
         let isHydrated: boolean
         let linkApi: {
             lock: boolean,
-            run: (App, content: any) => void,
             loadMap: (url: string) => Promise<FireJSX_CacheMap>
             preloadPage: (url: string) => Promise<void>
             loadPage: (url: string, pushState: boolean) => Promise<void>

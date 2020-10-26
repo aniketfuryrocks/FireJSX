@@ -1,5 +1,4 @@
-export default //hello
-() => {
+export default () => {
     const [seconds, setSeconds] = React.useState(0);
     React.useEffect(() => {
         const interval = setInterval(() => {
@@ -9,7 +8,7 @@ export default //hello
     })
     return (
         <div>
-            {seconds} asd asdasdasdas dd
+            {seconds} seconds
         </div>
     )
-}//hello comment
+}
