@@ -21,7 +21,7 @@ FireJSX.linkApi = {
             ele.onerror = () => {
                 //delete it because onError happens once
                 if (url === "/404")
-                    reject(new Error("Error loading 404 map. Make sure 404 page exists."))
+                    throw new Error("Error loading 404 map. Make sure 404 page exists.");
                 //load 404
                 this.loadMap("/404")
                     .then(() => resolve(FireJSX.cache[url] = FireJSX.cache["/404"]))
