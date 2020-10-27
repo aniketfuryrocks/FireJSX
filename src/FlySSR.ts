@@ -9,12 +9,15 @@ export default class {
     readonly pageMap: Map<string, Page> = new Map()
     readonly renderer: StaticArchitect;
 
-    constructor(pathToLibDir: string) {
-        const firejsx_map: FIREJSX_MAP = JSON.parse(fs.readFileSync(`${pathToLibDir}/firejsx.map.json`).toString());
+    constructor(pathToFlyDir: string) {
+        const firejsx_map: FIREJSX_MAP = JSON.parse(fs.readFileSync(`${pathToFlyDir}/firejsx.map.json`).toString());
         this.renderer = new StaticArchitect({
             ...firejsx_map.staticConfig,
-            outDir: resolve(pathToLibDir),
-            fullExternalPath: resolve(join(pathToLibDir, firejsx_map.staticConfig.externals[1]))
+            outDir: resolve(pathToFlyDir),
+            fullPaths: [
+                resolve(join(pathToFlyDir, firejsx_map.staticConfig.externals.full)),
+                resolve(join(pathToFlyDir, firejsx_map.staticConfig.lib, firejsx_map.staticConfig.externals.app[0]))
+            ]
         });
         for (const __page in firejsx_map.pageMap) {
             const page = new Page(__page);
