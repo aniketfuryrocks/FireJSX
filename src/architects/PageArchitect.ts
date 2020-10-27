@@ -23,7 +23,7 @@ export default class {
     buildExternals() {
         return new Promise<Externals>((resolve, reject) => {
             const externals: Externals = {
-                app: "",
+                app: [],
                 full: "",
                 semi: ""
             };
@@ -43,7 +43,14 @@ export default class {
                 }),
                 new Promise((resolve, reject) => {
                     this.build(this.webpackArchitect.forApp(), stat => {
-                        externals.app = stat.compilation.chunks[0].files[0];
+                        stat.compilation.chunks.map(({files}) => {
+                            files.forEach(file => {
+                                if (file.startsWith("a."))
+                                    externals.app.unshift(file)
+                                else
+                                    externals.app.push(file)
+                            })
+                        })
                         resolve()
                     }, reject)
                 })

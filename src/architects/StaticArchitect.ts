@@ -2,7 +2,7 @@ import {join} from "path"
 import Page from "../classes/Page";
 
 export interface Externals {
-    app: string
+    app: string[]
     full: string
     semi: string
 }
@@ -106,7 +106,7 @@ export default class {
         }
         //App
         {
-            const arr = this.loadChunks(head, body, [this.config.externals.app], false)
+            const arr = this.loadChunks(head, body, this.config.externals.app, false)
             head = arr[0]
             body = arr[1]
         }
