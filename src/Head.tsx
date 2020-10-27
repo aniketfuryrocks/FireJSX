@@ -1,1 +1,1 @@
-export default __FIREJSX_HELMET__
+export default self.__FIREJSX_HELMET__
