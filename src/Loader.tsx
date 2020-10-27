@@ -4,14 +4,26 @@ export default ({children, delay}) => {
     const [loader, setLoader] = React.useState(children);
 
     React.useEffect(() => {
+        let timeout;
         //register the functions on mount
-        FireJSX.showLoader = () => void setLoader(children);
-        FireJSX.hideLoader = () => void setLoader(<></>);
-        //if delay then setTimeout else hide the loader right away
-        const timeout = delay ?
-            setTimeout(FireJSX.hideLoader, delay) :
-            void setLoader(FireJSX.hideLoader);
+        FireJSX.showLoader = () => {
+            console.log("showing loader")
+            //if delay then setTimeout else hide the loader right away
+            if (timeout)
+                clearTimeout(timeout)
+            setLoader(children);
+            timeout = delay ?
+                setTimeout(FireJSX.hideLoader, delay) :
+                void FireJSX.hideLoader();
+        }
 
+        FireJSX.hideLoader = () => {
+            console.log("hiding loader")
+            void setLoader(<></>);
+            clearTimeout(timeout)
+            timeout = undefined;
+        }
+        FireJSX.showLoader()
         //on unmount de register the showLoader and hideLoader function
         return () => {
             timeout ? clearTimeout(timeout) : null;

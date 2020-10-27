@@ -47,6 +47,8 @@ FireJSX.linkApi = {
         url = getPathFromUrl(url);//url
         //map
         let cacheMap = FireJSX.cache[url];
+        if (FireJSX.showLoader)
+            FireJSX.showLoader()
         if (!cacheMap)
             cacheMap = await this.loadMap(url);
         if (!cacheMap.app) {

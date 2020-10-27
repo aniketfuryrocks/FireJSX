@@ -4,8 +4,6 @@ export default function ({app, content}) {
         FireJSX.setApp = (app, content) => {
             // @ts-ignore
             setApp(React.createElement(app, {content}));
-            if (FireJSX.hideLoader)
-                FireJSX.hideLoader()
         }
         //make undefined to prevent illegal state access
         return () => FireJSX.setApp = undefined
