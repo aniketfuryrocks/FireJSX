@@ -9,7 +9,7 @@ import Server from "../Server";
 const args = parseArgs(getArgs())
 const cli = new Cli(args["--log-mode"]);
 
-async function main() {
+(async function main() {
     const config = parseConfig((() => {
         const [path, config] = getUserConfig(args["--conf"])
         cli.ok(`Using ${path} config`)
@@ -57,9 +57,7 @@ async function main() {
         cli.ok("Watch :", app.$.pageArchitect.webpackArchitect.config.watch = !args["--ssr"])
         await new Server(app).init(args["--port"], args["--addr"], config.devServer)
     }
-}
-main()
-
+})()
 /*
 let doneOnce = false;
 const mainInterval = setInterval(() => {
