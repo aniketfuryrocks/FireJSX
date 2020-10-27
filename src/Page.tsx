@@ -1,5 +1,10 @@
-export default function ({app, content}) {
-    const [App, setApp] = React.useState(React.createElement(app, {content}));
+import {FunctionComponent} from "react";
+
+export default function ({app, content}: {
+    app: FunctionComponent,
+    content: any
+}) {
+    const [App, setApp] = React.useState(React.createElement<any>(app, {content}));
     React.useEffect(() => {
         FireJSX.setApp = (app, content) => {
             // @ts-ignore

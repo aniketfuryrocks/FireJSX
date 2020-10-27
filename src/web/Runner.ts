@@ -8,7 +8,7 @@ FireJSX.run = function (path) {
         const func = FireJSX.isHydrated ? window.ReactDOM.hydrate : window.ReactDOM.render;
         if (!FireJSX.app)
             throw new Error("You likely forgot to set FireJSX.app in your custom _app.jsx file. Please follow the guide. If none apply then mark it as an issue to the official github repo")
-        func(React.createElement(FireJSX.app, {app, content}),
+        func(React.createElement<any>(FireJSX.app, {app, content}),
             document.getElementById("root"));
     }
     //scroll to hash

@@ -1,6 +1,11 @@
 import * as React from "react";
 
-export default ({href, children, onClick, onMouseEnter, ...rest}) => {
+export default ({href, children, onClick, onMouseEnter, ...rest}: {
+    href: string
+    children: JSX.Element
+    onClick?: (Event) => void
+    onMouseEnter?: (Event) => void
+}) => {
 
     const preLoad = (e) => {
         e.preventDefault();

@@ -1,6 +1,9 @@
 import * as React from "react";
 
-export default ({children, delay}) => {
+export default ({children, delay}: {
+    children: JSX.Element,
+    delay: number
+}) => {
     const [loader, setLoader] = React.useState(children);
 
     React.useEffect(() => {

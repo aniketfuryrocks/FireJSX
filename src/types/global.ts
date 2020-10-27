@@ -1,5 +1,7 @@
+import {FunctionComponent} from "react";
+
 export default interface FireJSX_CacheMap {
-    app?: JSX.Element
+    app?: FunctionComponent
     content?: any
     chunks?: PageChunks
 }
@@ -17,8 +19,8 @@ declare global {
     }
 
     namespace FireJSX {
-        let app: any | JSX.Element
-        let setApp: (App: JSX.Element, Content: any) => void
+        let app: FunctionComponent
+        let setApp: (App: FunctionComponent, Content: any) => void
         let run: (path: string) => void
         let version: string
         let lib: string
