@@ -14,7 +14,7 @@ export interface StaticConfig {
     ssr: boolean,
     prefix: string,
     staticPrefix: string,
-    fullExternalPath: string,
+    fullPaths: string[],
 }
 
 {
@@ -71,7 +71,7 @@ export default class {
         FireJSX.staticPrefix = this.config.staticPrefix;
         FireJSX.prefix = this.config.prefix;
         if (param.ssr)
-            require(param.fullExternalPath)
+            param.fullPaths.forEach(path => require(path))
         //require app here
     }
 

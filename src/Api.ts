@@ -2,7 +2,7 @@ import "./GlobalsSetter"
 import Cli from "./utils/Cli";
 import Page from "./classes/Page";
 import {Configuration} from "webpack";
-import {join, sep as PathSeparator} from "path";
+import {join} from "path";
 import {mapPlugin} from "./mappers/PluginMapper";
 import PageArchitect from "./architects/PageArchitect";
 import {writeFileRecursively} from "./utils/Fs";
@@ -97,7 +97,10 @@ export default class {
             ssr: this.$.ssr,
             prefix: this.$.prefix,
             staticPrefix: this.$.staticPrefix,
-            fullExternalPath: externals.full ? join(this.$.cacheDir, externals.full) : undefined//fullExternal not produced in non-static mode
+            fullPaths: this.$.ssr ? [
+                join(this.$.cacheDir, externals.full),
+                join(this.$.outDir, this.$.lib, externals.app[0])
+            ] : []
         });
         //mapPlugins after everything is initialized
         if (this.$.plugins.length > 0) {
@@ -200,8 +203,7 @@ export default class {
                     }
                 })
 
-                map.staticConfig.externals.full = map.staticConfig.externals.full.substr(map.staticConfig.externals.full.lastIndexOf(PathSeparator) + 1);
-                this.$.outputFileSystem.rename(this.$.renderer.config.fullExternalPath, join(this.$.outDir, map.staticConfig.externals.full), err => {
+                this.$.outputFileSystem.rename(this.$.renderer.config.fullPaths[0], join(this.$.outDir, map.staticConfig.externals.full), err => {
                     if (err)
                         throw new Error(`Error moving ${map.staticConfig.externals.full} to ${this.$.outDir}\n${err}`);
                     this.$.outputFileSystem.writeFile(join(this.$.outDir, "firejsx.map.json"),
