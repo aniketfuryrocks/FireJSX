@@ -1,1 +1,1 @@
-export default window.__FIREJSX_HELMET__
+export default __FIREJSX_HELMET__
