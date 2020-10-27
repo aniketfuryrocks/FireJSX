@@ -11,8 +11,8 @@ export default ({children, delay}) => {
                 clearTimeout(timeout)
             setLoader(children);
             timeout = delay ? setTimeout(() => {
-                if (!timeout)
-                    FireJSX.hideLoader()
+                if (!timeout && FireJSX.hideLoader)
+                    FireJSX.hideLoader();
                 timeout = undefined
             }, delay) : undefined
         }
