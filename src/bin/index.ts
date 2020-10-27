@@ -58,11 +58,14 @@ async function main() {
         await new Server(app).init(args["--port"], args["--addr"], config.devServer)
     }
 }
+main()
 
+/*
 let doneOnce = false;
 const mainInterval = setInterval(() => {
     if (!doneOnce) {
         doneOnce = true;
-        main().finally(() => clearInterval(mainInterval)).catch(cli.error)
+        .finally(() => clearInterval(mainInterval)).catch(cli.error)
     }
 }, 200)
+*/

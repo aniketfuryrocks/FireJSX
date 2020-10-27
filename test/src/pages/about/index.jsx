@@ -11,7 +11,7 @@ export default function App() {
                 <title>About</title>
                 <meta name={"asd"}/>
             </Head>
-            <Loader effect={React.useEffect}>
+            <Loader>
                 <LoadingBar/>
             </Loader>
             <h1>This is the about pages</h1>

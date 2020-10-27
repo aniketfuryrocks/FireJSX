@@ -1,9 +1,10 @@
 //listens to next and prev page i.e navigation events
-
-window.onpopstate = function () {
-    const path = location.pathname.replace(FireJSX.prefix, "");//remove prefix
-    FireJSX.linkApi.loadPage(path, false)
-}
+console.log(FireJSX)
+if (!FireJSX.isSSR)
+    window.onpopstate = function () {
+        const path = location.pathname.replace(FireJSX.prefix, "");//remove prefix
+        FireJSX.linkApi.loadPage(path, false)
+    }
 
 //gets path from url by excluding ? and #
 function getPathFromUrl(url) {

@@ -14,9 +14,9 @@ export interface StaticConfig {
 
 {
     // @ts-ignore
-    global.window = global
+    global.window = global;
     const dom = new JSDOM();
-    for (const domKey of ["document", "history", "navigator", "screen", "matchMedia", "getComputedStyle"])
+    for (const domKey of ["document"])
         global[domKey] = dom.window[domKey];
     window.location = {
         ancestorOrigins: undefined,
@@ -58,17 +58,21 @@ export default class {
 
     constructor(param: StaticConfig) {
         this.config = param;
-        if (param.ssr)
-            require(param.fullExternalPath)
-    }
-
-    render(page: Page, path: string, content: any): string {
-        //globals
-        location.assign("https://firejsx.com" + path);
         FireJSX.lib = this.config.lib;
         FireJSX.isSSR = this.config.ssr;
         FireJSX.staticPrefix = this.config.staticPrefix;
         FireJSX.prefix = this.config.prefix;
+        if (param.ssr)
+            require(param.fullExternalPath)
+        //window.webpackJsonp = undefined
+    }
+
+    render(page: Page, path: string, content: any): string {
+        return "";
+        //globals
+        location.assign("https://firejsx.com" + path);
+        console.log(path)
+
         let mapCache = FireJSX.cache[path];
         if (!mapCache)
             mapCache = (FireJSX.cache[path] = {})
