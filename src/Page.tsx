@@ -1,14 +1,15 @@
 import {FunctionComponent} from "react";
 
-export default function ({app, content}: {
+export default function ({app, content, ...extra}: {
     app: FunctionComponent,
-    content: any
+    content: any,
+    [key: string]: any
 }) {
-    const [App, setApp] = React.useState(React.createElement<any>(app, {content}));
+    const [App, setApp] = React.useState(React.createElement<any>(app, {content, ...extra}));
     React.useEffect(() => {
         FireJSX.setApp = (app, content) => {
             // @ts-ignore
-            setApp(React.createElement(app, {content}));
+            setApp(React.createElement(app, {content, ...extra}));
             if (FireJSX.hideLoader)
                 FireJSX.hideLoader();
         }
