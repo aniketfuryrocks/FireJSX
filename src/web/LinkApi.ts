@@ -30,9 +30,10 @@ FireJSX.linkApi = {
         })
     },
     async preloadPage(url) {
+        url = getPathFromUrl(url);
         if (FireJSX.cache[url])
             return;
-        const {chunks} = await this.loadMap(getPathFromUrl(url));
+        const {chunks} = await this.loadMap(url);
         chunks.entry.forEach(c => this.preloadChunk(c, "prefetch"));
         chunks.initial.forEach(c => this.preloadChunk(c, "prefetch"));
     },
@@ -47,8 +48,6 @@ FireJSX.linkApi = {
         url = getPathFromUrl(url);//url
         //map
         let cacheMap = FireJSX.cache[url];
-        if (FireJSX.showLoader)
-            FireJSX.showLoader()
         if (!cacheMap)
             cacheMap = await this.loadMap(url);
         if (!cacheMap.app) {

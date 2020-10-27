@@ -12,9 +12,9 @@ export default ({children, delay}) => {
             if (timeout)
                 clearTimeout(timeout)
             setLoader(children);
-            timeout = delay ?
-                setTimeout(FireJSX.hideLoader, delay) :
-                void FireJSX.hideLoader();
+            // timeout = delay ?
+            //     setTimeout(FireJSX.hideLoader, delay) :
+            //     void FireJSX.hideLoader();
         }
 
         FireJSX.hideLoader = () => {
@@ -23,9 +23,11 @@ export default ({children, delay}) => {
             clearTimeout(timeout)
             timeout = undefined;
         }
-        FireJSX.showLoader()
+
+        FireJSX.hideLoader()
         //on unmount de register the showLoader and hideLoader function
         return () => {
+            console.log("unmounting")
             timeout ? clearTimeout(timeout) : null;
             FireJSX.hideLoader = FireJSX.showLoader = undefined;
         }
