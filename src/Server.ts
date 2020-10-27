@@ -29,11 +29,12 @@ export default class {
         this.$.hooks.initServer.forEach(initServer => initServer(server))
         //build pages
         this.app.buildPages().catch(e => this.$.cli.error(e))
-        //hmr
-        server.use(webpackHot(this.$.pageArchitect.compiler, {
-            log: false,
-            path: `/__webpack_hmr`
-        }))
+        //no hmr in production or static rendering
+        if (!this.$.pageArchitect.webpackArchitect.proOrSSR)
+            server.use(webpackHot(this.$.pageArchitect.compiler, {
+                log: false,
+                path: `/__webpack_hmr`
+            }))
         //routing
         if (this.$.staticDir)
             server.use(this.$.staticPrefix, express.static(this.$.staticDir));
