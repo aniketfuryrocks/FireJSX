@@ -1,5 +1,3 @@
 Changes:
-1. Head fixed
-2. Custom App
-3. Loader fix
-4. LinkApi preload indexing fix
+1. Component types fixed
+2. Fixed 404 Error Propagation
