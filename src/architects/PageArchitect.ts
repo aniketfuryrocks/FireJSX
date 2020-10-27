@@ -4,6 +4,7 @@ import WebpackArchitect from "./WebpackArchitect";
 import {$, WebpackConfig} from "../Api";
 import {join} from "path";
 import {writeFileSync} from "fs";
+import {Externals} from "./StaticArchitect";
 
 export default class {
     private readonly $: $;
@@ -20,22 +21,29 @@ export default class {
     }
 
     buildExternals() {
-        return new Promise<string[]>((resolve, reject) => {
-            const externals = [];
+        return new Promise<Externals>((resolve, reject) => {
+            const externals: Externals = {
+                app: "",
+                full: "",
+                semi: ""
+            };
+            //path to app
             Promise.all([
                 new Promise((resolve, reject) => {
                     this.build(this.webpackArchitect.forSemiExternal(), stat => {
-                        stat.compilation.chunks.forEach(({files}) => {
-                            externals.unshift(...files)
-                        })
+                        externals.semi = stat.compilation.chunks[0].files[0];
                         resolve()
                     }, reject)
                 }),
                 new Promise((resolve, reject) => {
                     this.build(this.webpackArchitect.forFullExternal(), stat => {
-                        stat.compilation.chunks.forEach(({files}) => {
-                            externals.push(...files)
-                        })
+                        externals.full = stat.compilation.chunks[0].files[0];
+                        resolve()
+                    }, reject)
+                }),
+                new Promise((resolve, reject) => {
+                    this.build(this.webpackArchitect.forApp(), stat => {
+                        externals.app = stat.compilation.chunks[0].files[0];
                         resolve()
                     }, reject)
                 })

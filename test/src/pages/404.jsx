@@ -1,6 +1,4 @@
 import "../style/main.css"
-import LoadingCircle from "../components/LoadingCircle/LoadingCircle";
-import Loader from "../../../dist/Loader";
 import Link from "../../../dist/Link";
 import Head from "../../../dist/Head";
 import LazyLoad from "../../../dist/LazyLoad";
@@ -12,9 +10,6 @@ export default function App() {
             <Head>
                 <title>404</title>
             </Head>
-            <Loader effect={React.useEffect} delay={500}>
-                <LoadingCircle/>
-            </Loader>
             <h1>😿 OH NO 404</h1>
             <br/>
             <Markdown>

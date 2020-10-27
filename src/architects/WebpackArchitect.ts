@@ -3,6 +3,7 @@ import {join} from "path"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as webpack from "webpack";
 import {CleanWebpackPlugin} from "clean-webpack-plugin";
+import {existsSync} from "fs";
 
 export default class {
     private readonly $: $;
@@ -96,7 +97,7 @@ export default class {
                     }),
                     new CleanWebpackPlugin({
                         verbose: this.$.verbose,
-                        cleanOnceBeforeBuildPatterns: ['**/*', '!map/!*', '!e.*'],
+                        cleanOnceBeforeBuildPatterns: ['**/*', '!map/!*', '!e.*', '!a.*'],
                     })
                 ])
             ],
@@ -123,6 +124,73 @@ export default class {
                 alias: (this.proOrSSR ? {} : {
                     'react-dom': '@hot-loader/react-dom',
                 })
+            }
+        }
+    }
+
+    forApp(): WebpackConfig {
+        const _app = (() => {
+            const possible_app_path = join(this.$.pages, "../App.jsx");
+            if (existsSync(possible_app_path)) {
+                this.$.cli.warn("App.jsx found outside pages dir. It is a special file, make sure it is not a regular page");
+                return possible_app_path;
+            }
+            return join(__dirname, "../web/App.js")
+        })()
+
+        return {
+            target: 'web',
+            mode: process.env.NODE_ENV as "development" | "production" | "none",
+            entry: _app,
+            externals: {
+                react: "React",
+                "react-dom": 'ReactDOM'
+            },
+            output: {
+                path: `${this.$.outDir}/${this.$.lib}/`,
+                publicPath: `${this.$.prefix}/${this.$.lib}/`,
+                filename: "a.[contenthash].js",
+                globalObject: 'self'
+            },
+            plugins: [
+                new MiniCssExtractPlugin({
+                    filename: "cs.[contenthash].css",
+                    chunkFilename: "cs.[contenthash].css"
+                })
+            ],
+            module: {
+                rules: [{
+                    test: /\.(jsx)$/,
+                    use: [{
+                        loader: 'babel-loader',
+                        options: {
+                            sourceType: 'unambiguous',
+                            cacheDirectory: join(this.$.cacheDir, "babelCache"),
+                            presets: [["@babel/preset-env", {
+                                modules: false,
+                                targets: {
+                                    browsers: [`last 2 versions`, `not ie <= 11`, `not android 4.4.3`],
+                                },
+                            }], "@babel/preset-react"],
+                            plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime",
+                                "@babel/plugin-transform-modules-commonjs"]
+                        }
+                    }]
+                }, {
+                    test: /\.css$/,
+                    use: [
+                        ...(this.proOrSSR ? [MiniCssExtractPlugin.loader] : ['style-loader']),
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: true
+                            },
+                        },
+                    ]
+                }]
+            },
+            resolve: {
+                extensions: ['.wasm', '.mjs', '.js', '.json', '.jsx']
             }
         }
     }

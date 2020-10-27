@@ -1,10 +1,16 @@
 import {join} from "path"
 import Page from "../classes/Page";
 
+export interface Externals {
+    app: string
+    full: string
+    semi: string
+}
+
 export interface StaticConfig {
     lib: string,
     outDir: string,
-    externals: string[],
+    externals: Externals,
     ssr: boolean,
     prefix: string,
     staticPrefix: string,
@@ -66,6 +72,7 @@ export default class {
         FireJSX.prefix = this.config.prefix;
         if (param.ssr)
             require(param.fullExternalPath)
+        //require app here
     }
 
     render(page: Page, path: string, content: any): string {
@@ -93,7 +100,13 @@ export default class {
         }
         //external mini
         {
-            const arr = this.loadChunks(head, body, [this.config.externals[0]], false)
+            const arr = this.loadChunks(head, body, [this.config.externals.semi], false)
+            head = arr[0]
+            body = arr[1]
+        }
+        //App
+        {
+            const arr = this.loadChunks(head, body, [this.config.externals.app], false)
             head = arr[0]
             body = arr[1]
         }
@@ -109,7 +122,6 @@ export default class {
             head = arr[0]
             body = arr[1]
         }
-
         //render
         const rootDiv = this.config.ssr ? global.ReactDOMServer.renderToString(
             global.React.createElement(FireJSX.app, {app: mapCache.app, content})

@@ -1,7 +1,6 @@
 import Link from "../../../dist/Link";
 import Head from "../../../dist/Head";
 import LazyLoad from "../../../dist/LazyLoad";
-import Loader from "../../../dist/Loader";
 
 export default function App() {
     const Markdown = LazyLoad(() => import("../components/Markdown/Markdown.jsx"), () => require.resolveWeak("../components/Markdown/Markdown.jsx"))
@@ -10,10 +9,6 @@ export default function App() {
             <Head>
                 <title>Index Page</title>
             </Head>
-            <Loader effect={React.useEffect} delay={800}>
-                This text will appear before full page load
-                //use Loader on page root, delay is optional
-            </Loader>
             <br/><br/>
             <Link href="/about">Link to About Page</Link>
             <Markdown>

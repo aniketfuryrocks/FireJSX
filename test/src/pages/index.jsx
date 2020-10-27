@@ -1,8 +1,6 @@
 import "../style/main.css"
 import Link from "../../../dist/Link";
 import Head from "../../../dist/Head";
-import LoadingBar from "../components/LoadingBar/LoadingBar";
-import Loader from "../../../dist/Loader";
 
 export default function App({content: {emoji}}) {
     const [s, setS] = React.useState(0)
@@ -15,9 +13,6 @@ export default function App({content: {emoji}}) {
     }, []);
     return (
         <div>
-            <Loader effect={React.useEffect}>
-                <LoadingBar/>
-            </Loader>
             <Head>
                 <title>Index</title>
             </Head>
