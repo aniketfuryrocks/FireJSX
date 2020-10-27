@@ -19,7 +19,10 @@ declare global {
     }
 
     namespace FireJSX {
-        let app: FunctionComponent
+        let app: FunctionComponent<{
+            app: FunctionComponent,
+            content: any
+        }>
         let setApp: (App: FunctionComponent, Content: any) => void
         let run: (path: string) => void
         let version: string
