@@ -1,5 +1,3 @@
-import * as React from "react";
-
 FireJSX.run = function (path) {
     const {app, content} = FireJSX.cache[path];
     FireJSX.linkApi.lock = false;

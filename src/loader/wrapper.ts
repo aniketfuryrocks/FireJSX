@@ -10,6 +10,6 @@ export default function (source, map) {
     source = source.substring(0, functionEnd + 1) + (
             this.query.proOrSSR ? `)` : `,require("react-hot-loader/root").hot)`) +
         source.substring(functionEnd + 1);
-    console.log(source)
+    //callback with new src
     this.callback(null, source, map)
 }

@@ -21,17 +21,25 @@ export default class {
 
     buildExternals() {
         return new Promise<string[]>((resolve, reject) => {
-            this.build(this.webpackArchitect.forExternals(), stat => {
-                const externals = [];
-                //external Full,external Semi, Renderer
-                stat.compilation.chunks.forEach(({name, files}) => {
-                    if (name === 'e')//semi chunk at the top
-                        externals.unshift(...files)
-                    else
-                        externals.push(...files)
+            const externals = [];
+            Promise.all([
+                new Promise((resolve, reject) => {
+                    this.build(this.webpackArchitect.forSemiExternal(), stat => {
+                        stat.compilation.chunks.forEach(({files}) => {
+                            externals.unshift(...files)
+                        })
+                        resolve()
+                    }, reject)
+                }),
+                new Promise((resolve, reject) => {
+                    this.build(this.webpackArchitect.forFullExternal(), stat => {
+                        stat.compilation.chunks.forEach(({files}) => {
+                            externals.push(...files)
+                        })
+                        resolve()
+                    }, reject)
                 })
-                resolve(externals)
-            }, reject)
+            ]).then(() => resolve(externals)).catch(reject)
         })
     }
 

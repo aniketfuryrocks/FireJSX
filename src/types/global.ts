@@ -40,6 +40,9 @@ declare global {
         let showLoader: () => void
         let hideLoader: () => void
     }
+    namespace React {
+
+    }
 }
 
 export interface FireJSX_GLOBAL {

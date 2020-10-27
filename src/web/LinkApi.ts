@@ -1,5 +1,5 @@
 //listens to next and prev page i.e navigation events
-console.log(FireJSX)
+
 if (!FireJSX.isSSR)
     window.onpopstate = function () {
         const path = location.pathname.replace(FireJSX.prefix, "");//remove prefix

@@ -1,6 +1,5 @@
 import {join} from "path"
 import Page from "../classes/Page";
-import {JSDOM} from "jsdom"
 
 export interface StaticConfig {
     lib: string,
@@ -14,11 +13,14 @@ export interface StaticConfig {
 
 {
     // @ts-ignore
-    global.window = global;
-    const dom = new JSDOM();
-    for (const domKey of ["document"])
-        global[domKey] = dom.window[domKey];
-    window.location = {
+    global.self = global;
+    // @ts-ignore
+    const ssr_window = require("ssr-window").window;
+
+    for (const prop in ["document", "navigator", "history"])
+        global[prop] = ssr_window[prop]
+
+    global.location = {
         ancestorOrigins: undefined,
         assign(url: string): void {
             const parsed_url = new URL(url);
@@ -50,7 +52,7 @@ export interface StaticConfig {
         reload(forcedReload?: boolean): void {
         }
     }
-    window.location.assign("https://firejsx.com")
+    location.assign("https://firejsx.com")
 }
 
 export default class {
@@ -64,14 +66,11 @@ export default class {
         FireJSX.prefix = this.config.prefix;
         if (param.ssr)
             require(param.fullExternalPath)
-        //window.webpackJsonp = undefined
     }
 
     render(page: Page, path: string, content: any): string {
-        return "";
         //globals
         location.assign("https://firejsx.com" + path);
-        console.log(path)
 
         let mapCache = FireJSX.cache[path];
         if (!mapCache)
@@ -112,7 +111,7 @@ export default class {
         }
 
         //render
-        const rootDiv = this.config.ssr ? window.ReactDOMServer.renderToString(
+        const rootDiv = this.config.ssr ? global.ReactDOMServer.renderToString(
             global.React.createElement(FireJSX.app, {app: mapCache.app, content})
         ) : ""
         //helmet

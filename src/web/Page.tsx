@@ -1,5 +1,3 @@
-import * as React from "react";
-
 export default function ({app, content}) {
     const [App, setApp] = React.useState(React.createElement(app, {content}));
     React.useEffect(() => {

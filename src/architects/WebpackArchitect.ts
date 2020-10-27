@@ -1,5 +1,5 @@
 import {$, WebpackConfig} from "../Api"
-import {join, relative} from "path"
+import {join} from "path"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as webpack from "webpack";
 import {CleanWebpackPlugin} from "clean-webpack-plugin";
@@ -36,7 +36,7 @@ export default class {
                 chunkFilename: "c.[contenthash].js",
                 publicPath: `${this.$.prefix}/${this.$.lib}/`,
                 path: `${this.$.outDir}/${this.$.lib}/`,
-                globalObject: 'window',
+                globalObject: 'self',
                 //hot
                 hotUpdateMainFilename: `h[hash].hot.json`,
                 hotUpdateChunkFilename: `h[hash].hot.js`
@@ -106,19 +106,18 @@ export default class {
         };
     }
 
-    forExternals(): WebpackConfig {
-        const conf: WebpackConfig = {
+    forSemiExternal(): WebpackConfig {
+        return {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
-            entry: {
-                e: [
-                    ...(this.proOrSSR ? [] : ['react-hot-loader/patch']),
-                    join(__dirname, "../web/externalGroupSemi")
-                ]
-            },
+            entry: [
+                ...(this.proOrSSR ? [] : ['react-hot-loader/patch']),
+                join(__dirname, "../web/externalGroupSemi")
+            ],
             output: {
                 path: `${this.$.outDir}/${this.$.lib}/`,
-                filename: "[name].[contenthash].js"
+                filename: "[name].[contenthash].js",
+                globalObject: 'window'
             },
             resolve: {
                 alias: (this.proOrSSR ? {} : {
@@ -126,10 +125,19 @@ export default class {
                 })
             }
         }
-        //only create full when ssr
-        if (this.$.ssr)
-            conf.entry[join(relative(`${this.$.outDir}/${this.$.lib}/`, this.$.cacheDir), "f")] = join(__dirname, "../web/externalGroupFull")
-        return conf;
+    }
+
+    forFullExternal(): WebpackConfig {
+        return {
+            target: 'node',
+            mode: process.env.NODE_ENV as "development" | "production" | "none",
+            entry: join(__dirname, "../web/externalGroupFull"),
+            output: {
+                path: this.$.cacheDir,
+                filename: "f.[contenthash].js",
+                globalObject: 'global'
+            }
+        }
     }
 
     forPages(): WebpackConfig {

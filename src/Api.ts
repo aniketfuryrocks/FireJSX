@@ -97,7 +97,7 @@ export default class {
             ssr: this.$.ssr,
             prefix: this.$.prefix,
             staticPrefix: this.$.staticPrefix,
-            fullExternalPath: externals[1] ? join(this.$.outDir, this.$.lib, externals[1]) : undefined//fullExternal not produced in non-static mode
+            fullExternalPath: externals[1] ? join(this.$.cacheDir, externals[1]) : undefined//fullExternal not produced in non-static mode
         });
         //mapPlugins after everything is initialized
         if (this.$.plugins.length > 0) {

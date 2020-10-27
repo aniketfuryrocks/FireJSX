@@ -55,6 +55,7 @@
     "react-helmet": "^6.1.0",
     "react-hot-loader": "^4.13.0",
     "smartarg": "^1.0.1",
+    "ssr-window": "^2.0.0",
     "style-loader": "^2.0.0",
     "webpack": "^4.44.2",
     "webpack-hot-middleware": "^2.25.0",
