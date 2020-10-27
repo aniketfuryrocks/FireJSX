@@ -7,7 +7,6 @@ export default ({children, delay}) => {
         let timeout;
         //register the functions on mount
         FireJSX.showLoader = () => {
-            console.log("showing loader")
             if (timeout)
                 clearTimeout(timeout)
             setLoader(children);
@@ -23,14 +22,12 @@ export default ({children, delay}) => {
                 timeout = undefined;
                 return;
             }
-            console.log("hiding loader")
             void setLoader(<></>);
         }
 
         FireJSX.hideLoader();
         //on unmount de register the showLoader and hideLoader function
         return () => {
-            console.log("unmounting")
             timeout ? clearTimeout(timeout) : null;
             FireJSX.hideLoader = FireJSX.showLoader = undefined;
         }

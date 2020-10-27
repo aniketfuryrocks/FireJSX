@@ -51,7 +51,6 @@ FireJSX.linkApi = {
         if (!cacheMap)
             cacheMap = await this.loadMap(url);
         if (!cacheMap.app) {
-            console.log("loading chunks")
             cacheMap.chunks.entry.forEach(this.loadChunk);
             cacheMap.chunks.initial.forEach(this.loadChunk);
         } else
