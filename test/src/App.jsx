@@ -4,7 +4,7 @@ import Loader from "../../dist/Loader";
 
 FireJSX.app = props => {
     return <>
-        <Loader delay={200}>
+        <Loader delay={10}>
             <LoadingBar/>
         </Loader>
         <Page {...props} />
