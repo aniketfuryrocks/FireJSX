@@ -198,26 +198,30 @@ export default class {
             await this.$.pageArchitect.buildPages(() => {
                 this.$.cli.ok("Build Complete")
                 this.$.cli.ok("Removing Assets")
+
+                const filterChunk = (chunk: string) => {
+                    if (!chunk.endsWith(".js")) {
+                        const chunkPath = join(this.$.outDir, this.$.lib, chunk)
+                        //pages share common chunks
+                        if (this.$.outputFileSystem.existsSync(chunkPath)) {
+                            if (this.$.verbose)
+                                this.$.cli.log(`Deleting file ${chunk}`)
+                            //unlink sync to prevent deleting same file twice
+                            this.$.outputFileSystem.unlinkSync(chunkPath);
+                        }
+                    }
+                }
+
+                //set chunks and filter files
                 this.$.pageMap.forEach(page => {
                     map.pageMap[page.toString()] = page.chunks;
-                    //move files
-                    for (const chunkKey in page.chunks) {
-                        //loop through each chunk type
-                        page.chunks[chunkKey].forEach(chunk => {
-                            //move only js
-                            if (!chunk.endsWith(".js")) {
-                                const chunkPath = join(this.$.outDir, this.$.lib, chunk)
-                                //pages share common chunks
-                                if (this.$.outputFileSystem.existsSync(chunkPath)) {
-                                    if (this.$.verbose)
-                                        this.$.cli.log(`Deleting file ${chunk}`)
-                                    //unlink sync to prevent deleting same file twice
-                                    this.$.outputFileSystem.unlinkSync(chunkPath);
-                                }
-                            }
-                        })
-                    }
+                    //only keep je files
+                    for (const chunkKey in page.chunks)
+                        page.chunks[chunkKey].forEach(filterChunk)
                 })
+
+                //filter files from app.jsx
+                map.staticConfig.externals.app.forEach(filterChunk)
 
                 this.$.outputFileSystem.rename(this.$.renderer.config.fullPaths[0], join(this.$.outDir, map.staticConfig.externals.full), err => {
                     if (err)
