@@ -10,11 +10,13 @@ declare global {
     namespace NodeJS {
         interface Global extends FireJSX_GLOBAL {
             window: Window,
+            buildPageResolver: () => void | undefined
             FireJSX
         }
     }
 
     interface Window extends FireJSX_GLOBAL {
+        buildPageResolver: () => void | undefined
         FireJSX
     }
 
@@ -45,6 +47,7 @@ declare global {
         let showLoader: () => void
         let hideLoader: () => void
     }
+
     namespace React {
 
     }

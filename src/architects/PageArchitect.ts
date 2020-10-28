@@ -43,6 +43,7 @@ export default class {
                 }),
                 new Promise((resolve, reject) => {
                     this.build(this.webpackArchitect.forApp(), stat => {
+                        externals.app = [];//this function is called multiple type due to watch
                         stat.compilation.chunks.map(({files}) => {
                             files.forEach(file => {
                                 if (file.startsWith("a."))
@@ -51,7 +52,12 @@ export default class {
                                     externals.app.push(file)
                             })
                         })
-                        resolve()
+                        //if page build is in progress then trigger it to update externals
+                        if (global.buildPageResolver) {
+                            this.$.cli.ok("Main App changes. Refresh Browser to view changes")
+                            global.buildPageResolver()
+                        } else
+                            resolve()
                     }, reject)
                 })
             ]).then(() => resolve(externals)).catch(reject)
@@ -99,7 +105,6 @@ export default class {
     build(config: WebpackConfig, resolve: (stat) => void, reject: (err) => void) {
         const watch = config.watch;
         delete config.watch;
-        console.log(watch)
         this.compiler = webpack(config);
         if (this.isOutputCustom)
             this.compiler.outputFileSystem = this.$.outputFileSystem;

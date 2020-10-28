@@ -85,6 +85,7 @@ export default class {
         return {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
+            watch: !this.$.ssr, //no watch when ssr
             entry: this.$.app,
             externals,
             output: {

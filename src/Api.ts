@@ -111,8 +111,10 @@ export default class {
     }
 
     buildPages() {
+        if (global.buildPageResolver)
+            throw new Error("A build is already in progress, await it or run in a different global environment/node process.")
         return new Promise<any>((resolve, reject) => {
-            this.$.pageArchitect.buildPages(() => {
+            this.$.pageArchitect.buildPages(global.buildPageResolver = () => {
                 this.$.cli.ok('Build')
                 const promises = [];
                 this.$.pageMap.forEach(page => {
@@ -156,7 +158,14 @@ export default class {
                         }
                     })))
                 })
-                Promise.all(promises).then(resolve).catch(reject)
+                Promise.all(promises).then(() => {
+                    //when ssr watch is on, resolver never finishes.
+                    //Hence resolve only in ssr
+                    if (this.$.ssr) {
+                        global.buildPageResolver = undefined;
+                        resolve()
+                    }
+                }).catch(reject)
             }, reject)
         })
     }
