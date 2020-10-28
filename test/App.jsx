@@ -1,6 +1,6 @@
-import Page from "../../dist/Page";
-import LoadingBar from "./components/LoadingBar/LoadingBar";
-import Loader from "../../dist/Loader";
+import Page from "../dist/Page";
+import LoadingBar from "./src/components/LoadingBar/LoadingBar";
+import Loader from "../dist/Loader";
 
 FireJSX.app = props => {
     return <>

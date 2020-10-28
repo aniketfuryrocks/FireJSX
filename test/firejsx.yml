@@ -4,3 +4,4 @@ custom:
   name: "aniket"
 paths:
   pages: src/pages
+  app: App.jsx

@@ -1,9 +1,10 @@
-import {resolve} from "path"
+import {join, resolve} from "path"
 import {Args} from "./ArgsMapper";
 import {parse as parseYaml} from "yaml";
 import {mkdirp} from "fs-extra";
 import {existsSync, readFileSync} from "fs";
 import {devServerConfig} from "../Server";
+import Cli from "../utils/Cli";
 
 export interface TrimmedConfig {
     outDir?: string,
@@ -17,7 +18,8 @@ export interface TrimmedConfig {
     pages?: string
     devServer?: {
         gzip?: boolean
-    }
+    },
+    app?: string
 }
 
 export interface Config {
@@ -29,6 +31,7 @@ export interface Config {
         fly?: string,           //fly export dir, default : root/out/fly
         disk?: string,          //disk dit, default : root/out/disk
         static?: string,        //dir where page static elements are stored eg. images, default : root/src/static
+        app?: string            //path to app
     },
     lib?: string,               //name of the lib folder, defaults to lib
     prefix?: string,            //path prefix
@@ -59,19 +62,20 @@ export function getUserConfig(path: string): [string, Config] | never {
         return ["default", {}]
 }
 
-export function parseConfig(config: Config = {}, args: Args = {_: []}): TrimmedConfig {
+export function parseConfig(config: Config = {}, args: Args = {_: []}, cli: Cli): TrimmedConfig {
     config.paths = config.paths || {}
     config.devServer = config.devServer || {}
     const out = makeDirIfNotFound(resolve(args["--out"] || config.paths.out || "out"))
     const staticDir = undefinedIfNotFound(config.paths.static || "src/static")
     const prefix = args["--prefix"] || config.prefix || "";
+    const pages = throwIfNotFound("pages dir", resolve(args["--pages"] || config.paths.pages || "src/pages"), cli);
     return {
         outDir: makeDirIfNotFound(resolve(args["--disk"] ? config.paths.disk || `${out}/disk` :
             args["--export"] ? args["--dist"] || config.paths.dist || `${out}/dist` :
                 args["--export-fly"] ? args["--fly"] || config.paths.fly || `${out}/fly` :
                     config.paths.disk || `${out}/disk`)),
         cacheDir: makeDirIfNotFound(resolve(args["--cache"] || config.paths.cache || `${out}/.cache`)),
-        pages: throwIfNotFound("pages dir", resolve(args["--pages"] || config.paths.pages || "src/pages")),
+        pages,
         staticDir,
         lib: config.lib || "lib",
         prefix,
@@ -83,13 +87,26 @@ export function parseConfig(config: Config = {}, args: Args = {_: []}): TrimmedC
             gzip: args["--disable-gzip"] ? false : config.devServer.gzip === undefined ? true : config.devServer.gzip
         },
         custom: config.custom || {},
-        plugins: args["--disable-plugins"] ? [] : config.plugins || []
+        plugins: args["--disable-plugins"] ? [] : config.plugins || [],
+        app: (() => {
+            if (config.paths.app)
+                return throwIfNotFound("app file", resolve(config.paths.app), cli)
+
+            const possible_app_path = join(pages, "../App.jsx");
+            if (existsSync(possible_app_path)) {
+                cli.warn("App.jsx found outside pages dir. It is a special file, make sure it is not a regular file.\n   Rename it or set paths->app path in config file.");
+                return possible_app_path;
+            }
+            return join(__dirname, "../web/App.js")
+        })()
     }
 }
 
-function throwIfNotFound(name: string, pathTo: string, extra = ""): never | string {
-    if (!existsSync(pathTo))
-        throw new Error(`${name} not found. ${pathTo}\n${extra}`);
+function throwIfNotFound(name: string, pathTo: string, cli: Cli): never | string {
+    if (!existsSync(pathTo)) {
+        cli.error(new Error(`${name} not found. ${pathTo}`));
+        process.exit(1);
+    }
     return pathTo
 }
 

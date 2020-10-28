@@ -3,7 +3,6 @@ import {join} from "path"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as webpack from "webpack";
 import {CleanWebpackPlugin} from "clean-webpack-plugin";
-import {existsSync} from "fs";
 
 export default class {
     private readonly $: $;
@@ -129,19 +128,10 @@ export default class {
     }
 
     forApp(): WebpackConfig {
-        const _app = (() => {
-            const possible_app_path = join(this.$.pages, "../App.jsx");
-            if (existsSync(possible_app_path)) {
-                this.$.cli.warn("App.jsx found outside pages dir. It is a special file, make sure it is not a regular page");
-                return possible_app_path;
-            }
-            return join(__dirname, "../web/App.js")
-        })()
-
         return {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
-            entry: _app,
+            entry: this.$.app,
             externals: {
                 react: "React",
                 "react-dom": 'ReactDOM'

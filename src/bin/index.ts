@@ -14,7 +14,7 @@ const cli = new Cli(args["--log-mode"]);
         const [path, config] = getUserConfig(args["--conf"])
         cli.ok(`Using ${path} config`)
         return config || {}
-    })(), args)
+    })(), args, cli)
 
     if (args["--disable-plugins"])
         config.plugins = []
@@ -34,7 +34,8 @@ const cli = new Cli(args["--log-mode"]);
         ssr: !!args["--ssr"],
         staticPrefix: config.staticPrefix,
         verbose: !!args["--verbose"],
-        outputFileSystem: (args["--disk"] || args["--export-fly"] || args["--export"]) ? undefined : new MemoryFS()
+        outputFileSystem: (args["--disk"] || args["--export-fly"] || args["--export"]) ? undefined : new MemoryFS(),
+        app: config.app
     })
     //initialize
     await app.init()
