@@ -1,9 +1,15 @@
 {
   "name": "firejsx",
-  "main": "index.js",
   "version": "0.10.0-beta.5",
   "license": "GPL-3.0-or-later",
   "description": "The React Framework for SSB, SSR and Serverless technologies",
+  "bin": {
+    "firejsx": "bin/index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/eAdded/firejsx/issues"
+  },
+  "homepage": "https://github.com/eAdded/firejsx#readme",
   "keywords": [
     "react",
     "react-static",
@@ -77,13 +83,6 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
   },
-  "bin": {
-    "firejsx": "bin/index.js"
-  },
-  "bugs": {
-    "url": "https://github.com/eAdded/firejsx/issues"
-  },
-  "homepage": "https://github.com/eAdded/firejsx#readme",
   "scripts": {
     "sync": "sh scripts/sync.sh",
     "dev": "yarn sync",

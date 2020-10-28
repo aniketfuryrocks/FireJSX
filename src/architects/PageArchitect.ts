@@ -1,7 +1,7 @@
 import * as webpack from "webpack"
 import {Compiler} from "webpack"
 import WebpackArchitect from "./WebpackArchitect";
-import {$, WebpackConfig} from "../index";
+import {$, WebpackConfig} from "../SSB";
 import {join} from "path";
 import {writeFileSync} from "fs";
 import {Externals} from "./StaticArchitect";

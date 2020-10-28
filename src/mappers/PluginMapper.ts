@@ -1,5 +1,5 @@
 import {Actions, Plugin} from "../types/Plugin";
-import {$} from "../index";
+import {$} from "../SSB";
 
 export async function mapPlugin(plugin: string, $: $) {
     //require default and call

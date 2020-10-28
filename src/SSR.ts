@@ -1,6 +1,6 @@
 import Page from "./classes/Page";
 import StaticArchitect from "./architects/StaticArchitect";
-import {FIREJSX_MAP, generateMapJS} from "./index";
+import {FIREJSX_MAP, generateMapJS} from "./SSB";
 import * as fs from "fs"
 import {join, resolve} from "path";
 import {destructGlobals, initGlobals} from "./Globals";

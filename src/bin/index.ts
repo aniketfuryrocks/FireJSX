@@ -2,7 +2,7 @@
 import {getUserConfig, parseConfig} from "./ConfigMapper"
 import {getArgs, parseArgs} from "./ArgsMapper";
 import * as MemoryFS from "memory-fs";
-import App from "../index";
+import App from "../SSB";
 import Cli from "../utils/Cli";
 import Server from "../Server";
 
