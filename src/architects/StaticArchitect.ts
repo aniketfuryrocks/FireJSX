@@ -26,9 +26,9 @@ export default class {
         FireJSX.isSSR = this.config.ssr;
         FireJSX.staticPrefix = this.config.staticPrefix;
         FireJSX.prefix = this.config.prefix;
+        //require full external and app when in ssr
         if (param.ssr)
             param.fullPaths.forEach(path => require(path))
-        //require app here
     }
 
     render(page: Page, path: string, content: any): string {
