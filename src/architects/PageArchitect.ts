@@ -72,36 +72,35 @@ export default class {
         this.build(this.webpackArchitect.forPages(), stat => {
             const statJSON = stat.toJson()
             if (this.logStat(statJSON))//true if errors
-                reject(undefined);
-            else {
-                //log stats when verbose
-                if (this.$.verbose)
-                    writeFileSync(join(this.$.cacheDir, "stat.json"), JSON.stringify(statJSON))
+                return void reject(undefined);
+            //log stats when verbose
+            if (this.$.verbose)
+                writeFileSync(join(this.$.cacheDir, "stat.json"), JSON.stringify(statJSON))
 
-                this.$.pageMap.forEach(page => {
-                    page.chunks = {
-                        async: [],
-                        entry: [],
-                        initial: []
-                    }
+            this.$.pageMap.forEach(page => {
+                page.chunks = {
+                    async: [],
+                    entry: [],
+                    initial: []
+                }
+            })
+
+            statJSON.chunks.forEach(({files, entry, initial, origins}) => {
+                origins.forEach(({loc, moduleName}) => {
+                    let _page = this.$.pageMap.get(loc);
+                    if (!_page)
+                        _page = this.$.pageMap.get(moduleName.replace(pageRel, ""));
+                    (_page ? [_page] : this.$.pageMap).forEach(page => {
+                        if (entry)//entry
+                            page.chunks.entry.push(...files)
+                        else if (initial) {//sync
+                            page.chunks.initial.push(...files)
+                        } else//async
+                            page.chunks.async.push(...files)
+                    });
                 })
-                statJSON.chunks.forEach(({files, entry, initial, origins}) => {
-                    origins.forEach(({loc, moduleName}) => {
-                        let _page = this.$.pageMap.get(loc);
-                        if (!_page)
-                            _page = this.$.pageMap.get(moduleName.replace(pageRel, ""));
-                        (_page ? [_page] : this.$.pageMap).forEach(page => {
-                            if (entry)//entry
-                                page.chunks.entry.push(...files)
-                            else if (initial) {//sync
-                                page.chunks.initial.push(...files)
-                            } else//async
-                                page.chunks.async.push(...files)
-                        });
-                    })
-                })
-                resolve()
-            }
+            })
+            resolve()
         }, reject);
     }
 
