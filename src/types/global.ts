@@ -57,7 +57,8 @@ export interface FireJSX_GLOBAL {
     //webpack5 -> webpackChunktest?: any,
     __webpack_require__(resolveID1: any),
 
-    webpackJsonp?: any,
+    FireJSX_APP_JSONP?: any,
+    FireJSX_PAGES_JSONP?: any,
     React?: any,
     ReactDOM?: any,
     ReactDOMServer?: any,

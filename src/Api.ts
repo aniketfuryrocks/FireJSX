@@ -50,6 +50,7 @@ export interface FIREJSX_MAP {
         [key: string]: PageChunks
     },
 }
+//Todo: Destructor, WebpackJsonP
 
 export default class {
     public readonly $: $
