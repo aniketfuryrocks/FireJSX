@@ -37,10 +37,9 @@ const cli = new Cli(args["--log-mode"]);
         outputFileSystem: (args["--disk"] || args["--export-fly"] || args["--export"]) ? undefined : new MemoryFS(),
         app: config.app
     })
-    //initialize
+    // initialize
     await app.init()
-    cli.ok("Initialized")
-
+    // switch according tio modes
     if (args["--export"]) {
         const startTime = new Date().getTime();
         cli.ok("Exporting");
@@ -55,9 +54,8 @@ const cli = new Cli(args["--log-mode"]);
         await app.exportFly()
         cli.ok("Exported to", config.outDir)
         cli.ok("Finished in", (new Date().getTime() - startTime) / 1000 + "s");
-    } else {
-        cli.ok("Watch :", !args["--ssr"])
+    } else
         return void new Server(app).init(args["--port"], args["--addr"], config.devServer);
-    }
+
     app.destruct();
 })()

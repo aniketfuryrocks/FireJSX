@@ -96,7 +96,6 @@ export default class {
         if (this.$.renderer)
             throw new Error("FireJSX is already initialized");
         //build externals
-        this.$.cli.log("Building Externals");
         const externals = await this.$.pageArchitect.buildExternals()
         this.$.renderer = new StaticArchitect({
             externals,
@@ -112,7 +111,7 @@ export default class {
         });
         //mapPlugins after everything is initialized
         if (this.$.plugins.length > 0) {
-            this.$.cli.log("Mapping plugins");
+            this.$.cli.log(`Initializing ${this.$.plugins.length} plugin(s)`);
             await Promise.all(this.$.plugins.map(plugin => mapPlugin(plugin, this.$)))
         }
     }
