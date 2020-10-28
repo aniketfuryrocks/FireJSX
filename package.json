@@ -1,6 +1,6 @@
 {
   "name": "firejsx",
-  "main": "Api.js",
+  "main": "index.js",
   "version": "0.10.0-beta.5",
   "license": "GPL-3.0-or-later",
   "description": "The React Framework for SSB, SSR and Serverless technologies",

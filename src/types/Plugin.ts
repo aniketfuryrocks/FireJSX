@@ -1,4 +1,4 @@
-import {$, WebpackConfig} from "../Api";
+import {$, WebpackConfig} from "../index";
 import {Application} from "express"
 
 export type initWebpack_Callback = (config: WebpackConfig) => void

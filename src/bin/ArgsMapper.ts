@@ -1,5 +1,5 @@
 import SmartArg from "smartarg/SmartArg";
-import {FireJSX_Version} from "../GlobalsSetter";
+import {FireJSX_Version} from "../Globals";
 
 export interface Args {
     //mode

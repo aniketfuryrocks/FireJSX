@@ -13,7 +13,7 @@ import WebpackArchitect from "./architects/WebpackArchitect";
 import {GlobalHooks} from "./types/Plugin";
 import {Args} from "./bin/ArgsMapper";
 import {PageChunks} from "./types/global";
-import GlobalsSetter from "./GlobalsSetter";
+import * as Globals from "./Globals";
 
 export type WebpackConfig = Configuration;
 
@@ -50,17 +50,17 @@ export interface FIREJSX_MAP {
         [key: string]: PageChunks
     },
 }
+
 //Todo: Destructor, WebpackJsonP
 
 export default class {
     public readonly $: $
-    static linkApi: { chunkCache: {}; lock: boolean; loadMap: (url: any) => Promise<unknown>; preloadPage: (url: any) => Promise<void>; loadPage: (url: any, pushState?: boolean) => Promise<void>; preloadChunk: (chunk: any, rel: any) => any; loadChunk: (chunk: any, force: any) => any; };
 
     constructor(params: Params) {
         if (!params)
             throw new TypeError("expected params, found undefined")
         //set globals
-        GlobalsSetter()
+        Globals.init()
         // @ts-ignore
         fs.mkdirp = mkdirp;
         //set $
@@ -231,6 +231,12 @@ export default class {
                 throw err
             })
         })
+    }
+
+    destruct() {
+        // @ts-ignore
+        delete this.$;
+        Globals.destruct()
     }
 }
 

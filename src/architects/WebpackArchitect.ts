@@ -1,4 +1,4 @@
-import {$, WebpackConfig} from "../Api"
+import {$, WebpackConfig} from "../index"
 import {join} from "path"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as webpack from "webpack";

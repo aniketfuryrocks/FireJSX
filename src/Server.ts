@@ -1,5 +1,5 @@
 import {join} from "path"
-import FireJS, {$} from "./Api"
+import FireJS, {$} from "./index"
 import * as express from "express";
 import * as webpackHot from "webpack-hot-middleware"
 import * as mime from "mime"

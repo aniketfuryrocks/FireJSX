@@ -2,7 +2,7 @@ import {window as ssr_window} from "ssr-window";
 
 export const FireJSX_Version = "0.10.0-beta.5";
 
-export default function () {
+export function init() {
     if (global.FireJSX)
         throw new Error("FireJSX is already initialized. Call release function from the class object or if not so, then make sure global.FireJSX is undefined.")
 
@@ -49,4 +49,8 @@ export default function () {
         }
     }
     location.assign("https://firejsx.com")
+}
+
+export function destruct() {
+    global.FireJSX = undefined;
 }

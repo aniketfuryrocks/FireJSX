@@ -1,5 +1,5 @@
 //tick ✓ log # warning ! error X
-import {FireJSX_Version} from "../GlobalsSetter";
+import {FireJSX_Version} from "../Globals";
 
 export default class {
     normal;

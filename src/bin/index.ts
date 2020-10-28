@@ -2,7 +2,7 @@
 import {getUserConfig, parseConfig} from "./ConfigMapper"
 import {getArgs, parseArgs} from "./ArgsMapper";
 import * as MemoryFS from "memory-fs";
-import FireJSX from "../Api";
+import App from "../index";
 import Cli from "../utils/Cli";
 import Server from "../Server";
 
@@ -19,7 +19,7 @@ const cli = new Cli(args["--log-mode"]);
     if (args["--disable-plugins"])
         config.plugins = []
 
-    const app = new FireJSX({
+    const app = new App({
         outDir: config.outDir,
         cacheDir: config.cacheDir,
         prefix: config.prefix,
@@ -40,6 +40,7 @@ const cli = new Cli(args["--log-mode"]);
     //initialize
     await app.init()
     cli.ok("Initialized")
+
     if (args["--export"]) {
         const startTime = new Date().getTime();
         cli.ok("Exporting");
@@ -58,13 +59,5 @@ const cli = new Cli(args["--log-mode"]);
         cli.ok("Watch :", !args["--ssr"])
         await new Server(app).init(args["--port"], args["--addr"], config.devServer)
     }
+
 })()
-/*
-let doneOnce = false;
-const mainInterval = setInterval(() => {
-    if (!doneOnce) {
-        doneOnce = true;
-        .finally(() => clearInterval(mainInterval)).catch(cli.error)
-    }
-}, 200)
-*/
