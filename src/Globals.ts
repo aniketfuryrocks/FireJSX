@@ -3,8 +3,14 @@ import {window as ssr_window} from "ssr-window";
 export const FireJSX_Version = "0.10.0-beta.6";
 
 export function initGlobals() {
-    if (global.FireJSX)
-        throw new Error("FireJSX is already initialized. Call release function from the class object or if not so, then make sure global.FireJSX is undefined.")
+
+    //check if already initialized
+    {
+        for (const prop of ["FireJSX", "FireJSX_appJsonp", "FireJSX_pagesJsonp"])
+            if (global[prop])
+                throw new Error(`FireJSX is already initialized. Call release function from the class object or else make sure global.${prop} is undefined.`);
+    }
+    //initialize if not
 
     global.FireJSX = {
         version: FireJSX_Version,
@@ -53,4 +59,6 @@ export function initGlobals() {
 
 export function destructGlobals() {
     global.FireJSX = undefined;
+    global.FireJSX_appJsonp = undefined;
+    global.FireJSX_pagesJsonp = undefined;
 }
