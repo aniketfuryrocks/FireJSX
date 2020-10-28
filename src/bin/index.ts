@@ -55,7 +55,7 @@ const cli = new Cli(args["--log-mode"]);
         cli.ok("Exported to", config.outDir)
         cli.ok("Finished in", (new Date().getTime() - startTime) / 1000 + "s");
     } else {
-        cli.ok("Watch :", app.$.pageArchitect.webpackArchitect.config.watch = !args["--ssr"])
+        cli.ok("Watch :", !args["--ssr"])
         await new Server(app).init(args["--port"], args["--addr"], config.devServer)
     }
 })()

@@ -99,6 +99,7 @@ export default class {
     build(config: WebpackConfig, resolve: (stat) => void, reject: (err) => void) {
         const watch = config.watch;
         delete config.watch;
+        console.log(watch)
         this.compiler = webpack(config);
         if (this.isOutputCustom)
             this.compiler.outputFileSystem = this.$.outputFileSystem;
