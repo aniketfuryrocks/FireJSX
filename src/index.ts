@@ -14,6 +14,7 @@ import {GlobalHooks} from "./types/Plugin";
 import {Args} from "./bin/ArgsMapper";
 import {PageChunks} from "./types/global";
 import * as Globals from "./Globals";
+import {destructGlobals} from "./Globals";
 
 export type WebpackConfig = Configuration;
 
@@ -51,8 +52,6 @@ export interface FIREJSX_MAP {
     },
 }
 
-//Todo: Destructor, WebpackJsonP
-
 export default class {
     public readonly $: $
 
@@ -60,7 +59,7 @@ export default class {
         if (!params)
             throw new TypeError("expected params, found undefined")
         //set globals
-        Globals.init()
+        Globals.initGlobals()
         // @ts-ignore
         fs.mkdirp = mkdirp;
         //set $
@@ -91,6 +90,9 @@ export default class {
     }
 
     async init() {
+        // Prevent multiple initialisations because pageArchitect sets this.compiler pages is valid for last build call
+        if (this.$.pageArchitect)
+            throw new Error("FireJSX is already initialized");
         //build externals
         this.$.cli.log("Building Externals");
         const externals = await this.$.pageArchitect.buildExternals()
@@ -234,9 +236,7 @@ export default class {
     }
 
     destruct() {
-        // @ts-ignore
-        delete this.$;
-        Globals.destruct()
+        destructGlobals();
     }
 }
 

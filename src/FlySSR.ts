@@ -1,15 +1,16 @@
-import "./GlobalsSetter"
 import Page from "./classes/Page";
 import StaticArchitect from "./architects/StaticArchitect";
 import {FIREJSX_MAP, generateMapJS} from "./index";
 import * as fs from "fs"
 import {join, resolve} from "path";
+import {destructGlobals, initGlobals} from "./Globals";
 
 export default class {
     readonly pageMap: Map<string, Page> = new Map()
     readonly renderer: StaticArchitect;
 
     constructor(pathToFlyDir: string) {
+        initGlobals();
         const firejsx_map: FIREJSX_MAP = JSON.parse(fs.readFileSync(`${pathToFlyDir}/firejsx.map.json`).toString());
         this.renderer = new StaticArchitect({
             ...firejsx_map.staticConfig,
@@ -34,5 +35,9 @@ export default class {
             this.renderer.render(_page, path, content),
             generateMapJS(path, content, _page)
         ]
+    }
+
+    destruct() {
+        destructGlobals();
     }
 }
