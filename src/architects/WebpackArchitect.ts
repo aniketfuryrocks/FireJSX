@@ -60,27 +60,6 @@ export default class {
         }
     }
 
-    forSemiExternal(): WebpackConfig {
-        return {
-            target: 'web',
-            mode: process.env.NODE_ENV as "development" | "production" | "none",
-            entry: [
-                ...(this.proOrSSR ? [] : ['react-hot-loader/patch']),
-                join(__dirname, "../web/externalGroupSemi")
-            ],
-            output: {
-                path: `${this.$.outDir}/${this.$.lib}/`,
-                filename: "[name].[contenthash].js",
-                globalObject: 'window'
-            },
-            resolve: {
-                alias: (this.proOrSSR ? {} : {
-                    'react-dom': '@hot-loader/react-dom',
-                })
-            }
-        }
-    }
-
     forApp(): WebpackConfig {
         return {
             target: 'web',
@@ -109,19 +88,6 @@ export default class {
             },
             resolve: {
                 extensions: resolve_extensions
-            }
-        }
-    }
-
-    forFullExternal(): WebpackConfig {
-        return {
-            target: 'node',
-            mode: process.env.NODE_ENV as "development" | "production" | "none",
-            entry: join(__dirname, "../web/externalGroupFull"),
-            output: {
-                path: this.$.cacheDir,
-                filename: "f.[contenthash].js",
-                globalObject: 'global'
             }
         }
     }
@@ -203,5 +169,39 @@ export default class {
         })
         this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(config))
         return config;
+    }
+
+    forSemiExternal(): WebpackConfig {
+        return {
+            target: 'web',
+            mode: process.env.NODE_ENV as "development" | "production" | "none",
+            entry: [
+                ...(this.proOrSSR ? [] : ['react-hot-loader/patch']),
+                join(__dirname, "../web/externalGroupSemi")
+            ],
+            output: {
+                path: `${this.$.outDir}/${this.$.lib}/`,
+                filename: "e.[contenthash].js",
+                globalObject: 'window'
+            },
+            resolve: {
+                alias: (this.proOrSSR ? {} : {
+                    'react-dom': '@hot-loader/react-dom',
+                })
+            }
+        }
+    }
+
+    forFullExternal(): WebpackConfig {
+        return {
+            target: 'node',
+            mode: process.env.NODE_ENV as "development" | "production" | "none",
+            entry: join(__dirname, "../web/externalGroupFull"),
+            output: {
+                path: this.$.cacheDir,
+                filename: "f.[contenthash].js",
+                globalObject: 'global'
+            }
+        }
     }
 }
