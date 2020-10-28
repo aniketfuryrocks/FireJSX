@@ -18,7 +18,7 @@ export default class {
         this.$ = app.$;
     }
 
-    async init(port: number = 5000, addr: string = "localhost", config: devServerConfig) {
+    init(port: number = 5000, addr: string = "localhost", config: devServerConfig): express.Application {
         //init server
         const server: express.Application = express();
         //gzip
@@ -56,6 +56,8 @@ export default class {
                     " └─────────────────────────────────────────┘\x1b[0m\n")
             this.$.cli.ok("Building Pages")
         })
+
+        return server;
     }
 
     private get(req: express.Request, res: express.Response) {

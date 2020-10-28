@@ -57,7 +57,7 @@ const cli = new Cli(args["--log-mode"]);
         cli.ok("Finished in", (new Date().getTime() - startTime) / 1000 + "s");
     } else {
         cli.ok("Watch :", !args["--ssr"])
-        await new Server(app).init(args["--port"], args["--addr"], config.devServer)
+        return void new Server(app).init(args["--port"], args["--addr"], config.devServer);
     }
     app.destruct();
 })()
