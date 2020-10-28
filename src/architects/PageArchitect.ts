@@ -43,6 +43,9 @@ export default class {
                 }),
                 new Promise((resolve, reject) => {
                     this.build(this.webpackArchitect.forApp(), stat => {
+                        if (this.logStat(stat.toJson()))//true if errors
+                            return void reject(undefined);
+
                         externals.app = [];//this function is called multiple type due to watch
                         stat.compilation.chunks.map(({files}) => {
                             files.forEach(file => {
@@ -127,6 +130,7 @@ export default class {
     }
 
     logStat({errors, warnings}) {
+        console.log(errors, warnings)
         if (warnings.length > 0) {
             this.$.cli.warn(...warnings)
             this.$.cli.warn(`${warnings.length} warning(s)`);
