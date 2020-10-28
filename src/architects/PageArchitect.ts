@@ -43,7 +43,7 @@ export default class {
                 }),
                 new Promise((resolve, reject) => {
                     this.build(this.webpackArchitect.forApp(), stat => {
-                        if (this.logStat(stat.toJson()))//true if errors
+                        if (this.logStat(stat.compilation))//true if errors
                             return void reject(undefined);
 
                         externals.app = [];//this function is called multiple type due to watch
@@ -70,12 +70,13 @@ export default class {
     buildPages(resolve: () => void, reject: (err: any | undefined) => void) {
         const pageRel = `.${this.$.pages.replace(process.cwd(), "")}/`
         this.build(this.webpackArchitect.forPages(), stat => {
-            const statJSON = stat.toJson()
-            if (this.logStat(statJSON))//true if errors
-                return void reject(undefined);
+            const statJSON = stat.toJson();
             //log stats when verbose
             if (this.$.verbose)
                 writeFileSync(join(this.$.cacheDir, "stat.json"), JSON.stringify(statJSON))
+            //check for errors
+            if (this.logStat(stat.compilation))
+                return void reject(undefined);
 
             this.$.pageMap.forEach(page => {
                 page.chunks = {
@@ -129,7 +130,6 @@ export default class {
     }
 
     logStat({errors, warnings}) {
-        console.log(errors, warnings)
         if (warnings.length > 0) {
             this.$.cli.warn(...warnings)
             this.$.cli.warn(`${warnings.length} warning(s)`);
