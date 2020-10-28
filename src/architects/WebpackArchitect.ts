@@ -92,8 +92,8 @@ export default class {
                 path: `${this.$.outDir}/${this.$.lib}/`,
                 publicPath: `${this.$.prefix}/${this.$.lib}/`,
                 filename: "a.[contenthash].js",
-                globalObject: 'self',
-                jsonpFunction: 'FireJSX_APP_JSONP',
+                globalObject: 'FireJSX',
+                jsonpFunction: 'appJsonp',
             },
             plugins: [
                 generateMiniCssExtractPlugin()
@@ -152,8 +152,8 @@ export default class {
                 chunkFilename: "c.[contenthash].js",
                 publicPath: `${this.$.prefix}/${this.$.lib}/`,
                 path: `${this.$.outDir}/${this.$.lib}/`,
-                globalObject: 'self',
-                jsonpFunction: 'FireJSX_PAGES_JSONP',
+                globalObject: 'FireJSX',
+                jsonpFunction: 'pagesJsonp',
                 hotUpdateMainFilename: `h[hash].hot.json`,
                 hotUpdateChunkFilename: `h[hash].hot.js`
             },

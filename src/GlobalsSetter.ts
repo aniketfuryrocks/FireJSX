@@ -5,9 +5,6 @@ export const FireJSX_Version = "0.10.0-beta.5";
 export default function () {
     if (global.FireJSX)
         throw new Error("FireJSX is already initialized. Call release function from the class object or if not so, then make sure global.FireJSX is undefined.")
-    //change    jsonpFunction: 'wpJsonpFlightsWidget'
-    if (global.webpackJsonp)
-        throw new Error("Looks like a webpack bundle is running. This may cause unexpected and critical errors. Make sure global.webpackJsonp is undefined.")
 
     global.FireJSX = {
         version: FireJSX_Version,
