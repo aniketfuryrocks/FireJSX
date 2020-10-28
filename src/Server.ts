@@ -22,12 +22,12 @@ export default class {
         //init server
         const server: express.Application = express();
         //gzip
-        this.$.cli.ok("GZIP :", config.gzip)
         if (config.gzip)
             server.use(compression())
         //init plugins
         this.$.hooks.initServer.forEach(initServer => initServer(server))
         //build pages
+        this.$.cli.log("Building Pages...")
         this.app.buildPages().catch(e => this.$.cli.error(e))
         //no hmr in production or static rendering
         if (!this.$.pageArchitect.webpackArchitect.proOrSSR)
@@ -44,7 +44,7 @@ export default class {
         //listen
         const listener = server.listen(port, addr, () => {
             // @ts-ignore
-            let {port, address} = listener.address();
+            const {port, address} = listener.address();
             if (this.$.cli.mode === "plain")
                 this.$.cli.normal(`Listening at http://${address}:${port}`);
             else
@@ -52,9 +52,9 @@ export default class {
                     " \n \x1b[32m┌─────────────────────────────────────────┐\n" +
                     " │                                         │\n" +
                     ` │   Listening at http://${address}:${port}    │\n` +
+                    ` │   GZIP : ${config.gzip}                           │\n` +
                     " │                                         │\n" +
                     " └─────────────────────────────────────────┘\x1b[0m\n")
-            this.$.cli.ok("Building Pages")
         })
 
         return server;

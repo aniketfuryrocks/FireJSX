@@ -121,7 +121,7 @@ export default class {
             throw new Error("A build is already in progress, await it or run in a different global environment/node process.")
         return new Promise<any>((resolve, reject) => {
             this.$.pageArchitect.buildPages(global.buildPageResolver = () => {
-                this.$.cli.ok('Build')
+                this.$.cli.ok("Pages Built")
                 const promises = [];
                 this.$.pageMap.forEach(page => {
                     //if there is not hook then build the default page
