@@ -1,4 +1,3 @@
-import "./GlobalsSetter"
 import Cli from "./utils/Cli";
 import Page from "./classes/Page";
 import {Configuration} from "webpack";
@@ -14,6 +13,7 @@ import WebpackArchitect from "./architects/WebpackArchitect";
 import {GlobalHooks} from "./types/Plugin";
 import {Args} from "./bin/ArgsMapper";
 import {PageChunks} from "./types/global";
+import GlobalsSetter from "./GlobalsSetter";
 
 export type WebpackConfig = Configuration;
 
@@ -58,6 +58,8 @@ export default class {
     constructor(params: Params) {
         if (!params)
             throw new TypeError("expected params, found undefined")
+        //set globals
+        GlobalsSetter()
         // @ts-ignore
         fs.mkdirp = mkdirp;
         //set $

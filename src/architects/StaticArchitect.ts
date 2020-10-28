@@ -17,50 +17,6 @@ export interface StaticConfig {
     fullPaths: string[],
 }
 
-{
-    // @ts-ignore
-    global.self = global;
-    // @ts-ignore
-    const ssr_window = require("ssr-window").window;
-
-    for (const prop in ["document", "navigator", "history"])
-        global[prop] = ssr_window[prop]
-
-    global.location = {
-        ancestorOrigins: undefined,
-        assign(url: string): void {
-            const parsed_url = new URL(url);
-            this.hash = parsed_url.hash;
-            this.host = parsed_url.host;
-            this.hostname = parsed_url.hostname;
-            this.href = parsed_url.href;
-            this.origin = parsed_url.origin;
-            this.pathname = parsed_url.pathname;
-            this.port = parsed_url.port;
-            this.protocol = parsed_url.protocol;
-            this.search = parsed_url.search;
-        },
-        hash: "",
-        host: "",
-        hostname: "",
-        href: "",
-        origin: "",
-        pathname: "",
-        port: "",
-        protocol: "",
-        replace(url: string): void {
-            this.assign(url)
-        },
-        search: "",
-        toString(): string {
-            return "";
-        },
-        reload(forcedReload?: boolean): void {
-        }
-    }
-    location.assign("https://firejsx.com")
-}
-
 export default class {
     config: StaticConfig
 

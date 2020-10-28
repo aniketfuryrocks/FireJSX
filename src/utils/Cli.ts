@@ -1,4 +1,6 @@
 //tick ✓ log # warning ! error X
+import {FireJSX_Version} from "../GlobalsSetter";
+
 export default class {
     normal;
     error;
@@ -27,7 +29,7 @@ export default class {
                 this.error = (...messages) => console.error(' \x1b[31mX', ...messages, '\x1b[0m');
                 this.warn = (...messages) => console.warn(' \x1b[33m!', ...messages, '\x1b[0m');
                 console.clear();
-                console.log(`\x1b[1mFireJSX v${FireJSX.version} Copyright (C) 2020 Aniket Prajapati\x1b[0m\n`)
+                console.log(`\x1b[1mFireJSX v${FireJSX_Version} Copyright (C) 2020 Aniket Prajapati\x1b[0m\n`)
         }
     }
 }

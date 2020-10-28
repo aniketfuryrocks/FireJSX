@@ -1,4 +1,5 @@
 import SmartArg from "smartarg/SmartArg";
+import {FireJSX_Version} from "../GlobalsSetter";
 
 export interface Args {
     //mode
@@ -32,7 +33,7 @@ export function getArgs(): Args {
         .name("FireJSX")
         .description("The React Framework for SSB, SSR and Serverless technologies")
         // @ts-ignore
-        .version(global.FireJSX.version)
+        .version(FireJSX_Version)
         //mode
         .option(["-p", "--pro"], Boolean, "use production chunks. NODE_ENV : production")
         .option(["-e", "--export"], Boolean, "export project for distribution")
