@@ -21,8 +21,6 @@ declare global {
     }
 
     namespace FireJSX {
-        let pagesJsonp: any[]
-        let appJsonp: any[]
         let app: FunctionComponent<{
             app: FunctionComponent,
             content: any
@@ -56,7 +54,11 @@ declare global {
 }
 
 export interface FireJSX_GLOBAL {
-    __webpack_require__(resolveID1: any),
+    FireJSX_appJsonp: any[]
+    FireJSX_pagesJsonp: any[]
+
+    __webpack_require__(resolveID1: any)
+
     React?: any,
     ReactDOM?: any,
     ReactDOMServer?: any,
