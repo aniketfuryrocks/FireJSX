@@ -81,9 +81,11 @@ export default class {
         //pageArchitect
         this.$.pageArchitect = new PageArchitect(this.$, new WebpackArchitect(this.$), !!params.outputFileSystem, !!params.inputFileSystem);
         //log
-        this.$.cli.ok("PRO :", this.$.pro)
+        this.$.cli.ok("ENV :", process.env.NODE_ENV)
         this.$.cli.ok("SSR :", this.$.ssr)
         this.$.cli.ok("HMR :", !this.$.pageArchitect.webpackArchitect.proOrSSR)
+        this.$.cli.ok("Watch :", !this.$.ssr)
+
         //check 404.jsx
         if (!this.$.pageMap.has("404.jsx"))
             this.$.cli.warn("404.jsx page not found. Link fallback will be unsuccessful")
@@ -91,7 +93,7 @@ export default class {
 
     async init() {
         // Prevent multiple initialisations because pageArchitect sets this.compiler pages is valid for last build call
-        if (this.$.pageArchitect)
+        if (this.$.renderer)
             throw new Error("FireJSX is already initialized");
         //build externals
         this.$.cli.log("Building Externals");
