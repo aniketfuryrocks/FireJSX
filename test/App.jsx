@@ -7,6 +7,7 @@ FireJSX.app = props => {
         <Loader delay={10}>
             <LoadingBar/>
         </Loader>
+        hello
         <Page {...props} />
     </>
 }

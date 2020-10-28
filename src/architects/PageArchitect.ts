@@ -54,7 +54,7 @@ export default class {
                         })
                         //if page build is in progress then trigger it to update externals
                         if (global.buildPageResolver) {
-                            this.$.cli.ok("Main App changes. Refresh Browser to view changes")
+                            this.$.cli.ok("Main App changed. Refresh Browser to view changes")
                             global.buildPageResolver()
                         } else
                             resolve()
