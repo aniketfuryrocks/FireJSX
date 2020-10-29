@@ -1,2 +1,2 @@
 Changes :
-1. AppAsPage
+1. Don't load async chunks
