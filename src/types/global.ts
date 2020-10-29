@@ -71,8 +71,11 @@ export interface FireJSX_GLOBAL {
     }
 }
 
+export interface appPageChunks extends PageChunks {
+    runtime: string
+}
+
 export interface PageChunks {
-    initial: string[],//then chunks
-    entry: string[],//then runtime
-    async: string[],//then async chunks
+    initial: string[]
+    async: string[]
 }

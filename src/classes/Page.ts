@@ -1,18 +1,23 @@
 import {PageHooks} from "../types/Plugin";
-import AppPage from "./AppPage";
+import {PageChunks} from "../types/global";
 
-export default class extends AppPage {
+export default class {
     public hooks: PageHooks;
     private readonly name: string;
+    public chunks: PageChunks;
 
     constructor(page: string) {
-        super();
         this.name = page;
         this.hooks = {
             postRender: [],
             onBuild: []
         }
+        this.chunks = {
+            initial: [],
+            async: []
+        }
     }
+
     toString(): string {
         return this.name;
     }

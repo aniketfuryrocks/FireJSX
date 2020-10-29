@@ -34,15 +34,12 @@ FireJSX.linkApi = {
         if (FireJSX.cache[url])
             return;
         const {chunks} = await this.loadMap(url);
-        chunks.entry.forEach(c => this.preloadChunk(c, "prefetch"));
         chunks.initial.forEach(c => this.preloadChunk(c, "prefetch"));
     },
     async loadPage(url, pushState = true) {
         if (this.lock)
             return;
         this.lock = true;
-        //un-define JsonPs because they rerun on every chunk
-        window.FireJSX_jsonp = undefined;
         if (pushState)
             window.history.pushState(undefined, undefined, FireJSX.prefix + url);
         url = getPathFromUrl(url);//url
@@ -50,10 +47,9 @@ FireJSX.linkApi = {
         let cacheMap = FireJSX.cache[url];
         if (!cacheMap)
             cacheMap = await this.loadMap(url);
-        if (!cacheMap.app) {
-            cacheMap.chunks.entry.forEach(this.loadChunk);
+        if (!cacheMap.app)
             cacheMap.chunks.initial.forEach(this.loadChunk);
-        } else
+        else
             FireJSX.run(url)
     },
     preloadChunk(chunk, rel) {

@@ -256,8 +256,7 @@ export function generateMapJS(path: string, content: any, page: Page): string {
     return `FireJSX.cache["${pathToUrlPath(path)}"]=${JSON.stringify({
         content,
         chunks: {
-            initial: page.chunks.initial,
-            entry: page.chunks.entry
+            initial: page.chunks.initial
         }
     })}`
 }

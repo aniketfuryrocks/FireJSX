@@ -1,12 +1,12 @@
-import {PageChunks} from "../types/global";
+import {appPageChunks} from "../types/global";
 
 export default class {
-    public chunks: PageChunks;
+    public chunks: appPageChunks;
 
     constructor() {
         this.chunks = {
             initial: [],
-            entry: [],
+            runtime: "",
             async: []
         }
     }

@@ -5,7 +5,6 @@ import {$, WebpackConfig} from "../SSB";
 import {join} from "path";
 import {writeFileSync} from "fs";
 import {Externals} from "./StaticArchitect";
-import AppPage from "../classes/AppPage";
 
 export default class {
     private readonly $: $;
@@ -55,25 +54,32 @@ export default class {
             //check for errors
             if (this.logStat(stat.compilation))
                 return void reject(undefined);
-
+            //make everything empty to prevent re write
             this.$.pageMap.forEach(page => {
                 page.chunks = {
                     async: [],
-                    entry: [],
                     initial: []
                 }
             })
+            this.$.appPage.chunks = {
+                async: [],
+                initial: [],
+                runtime: ""
+            }
+            //put chunks against each page
             statJSON.chunks.forEach(({files, entry, initial, origins}) => {
                 origins.forEach(({loc, moduleName}) => {
-                    let page: AppPage = this.$.pageMap.get(loc);
+                    //app takes the entry i.e webpack runtime
+                    if (entry)
+                        return this.$.appPage.chunks.runtime = files[0];
+
+                    let page = this.$.pageMap.get(loc);
                     if (!page)
-                        page = this.$.pageMap.get(moduleName.replace(pageRel, ""));
-                    //if chunk (mostly async) belongs to no one then it goes to app
-                    if (!page)
-                        page = this.$.appPage;
-                    if (entry)//entry
-                        page.chunks.entry.push(...files)
-                    else if (initial) {//sync
+                        if (!(page = this.$.pageMap.get(moduleName.replace(pageRel, "")))) { // @ts-ignore
+                            page = this.$.appPage;
+                        }
+
+                    if (initial) {//sync
                         page.chunks.initial.push(...files)
                     } else//async
                         page.chunks.async.push(...files)

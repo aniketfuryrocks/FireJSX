@@ -38,22 +38,26 @@ export default class {
     }
 
     requireAppPage() {
-        for (const key of ["entry", "initial", "async"])
-            this.config.appPage.chunks[key].forEach(requireJs)
+        requireJs(this.config.appPage.chunks.runtime);
+        this.config.appPage.chunks.initial.forEach(requireJs);
+        this.config.appPage.chunks.async.forEach(requireJs)
     }
 
     render(page: Page, path: string, content: any): string {
         //globals
         location.assign("https://firejsx.com" + path);
-
-        let mapCache = FireJSX.cache[path];
-        if (!mapCache)
-            mapCache = (FireJSX.cache[path] = {})
-        mapCache.content = content;
-        mapCache.chunks = page.chunks;
-        //if ssr then require async chunks
-        if (this.config.ssr)
+        let mapCache;
+        if (this.config.ssr) {
+            if (!FireJSX.app)
+                throw new Error("FireJSX.app not defined. Did you run requireAppPage() on StaticArchitect ?")
+            mapCache = FireJSX.cache[path];
+            if (!mapCache)
+                mapCache = (FireJSX.cache[path] = {})
+            mapCache.content = content;
+            mapCache.chunks = page.chunks;
+            //if ssr then require async chunks
             page.chunks.async.forEach(requireJs);
+        }
 
         let head, body;
         //map
@@ -69,9 +73,9 @@ export default class {
             head = arr[0]
             body = arr[1]
         }
-        //app entry
+        //app runtime i.e webpack runtime
         {
-            const arr = this.loadChunks(head, body, this.config.appPage.chunks.entry, false)
+            const arr = this.loadChunks(head, body, [this.config.appPage.chunks.runtime], false)
             head = arr[0]
             body = arr[1]
         }
@@ -81,7 +85,7 @@ export default class {
             head = arr[0]
             body = arr[1]
         }
-        //no need to add entry of page because app has the same entry
+        //no need to add entry of page because app has the same entry i,e runtime
         //initial chunks
         {
             const arr = this.loadChunks(head, body, page.chunks.initial)
