@@ -191,14 +191,9 @@ export default class {
     }
 
     exportFly() {
-        if (!this.$.pro)
-            this.$.cli.warn("Exporting a non-production build")
         return new Promise(async (resolve, reject) => {
             const map: FIREJSX_MAP = {
-                staticConfig: {
-                    ...this.$.renderer.config,
-                    ssr: true
-                },
+                staticConfig: this.$.renderer.config,
                 pageMap: {},
             }
             await this.$.pageArchitect.buildPages(() => {
@@ -221,26 +216,28 @@ export default class {
                 //set chunks and filter files
                 this.$.pageMap.forEach(page => {
                     map.pageMap[page.toString()] = page.chunks;
-                    //only keep je files
-                    for (const chunkKey in page.chunks)
-                        page.chunks[chunkKey].forEach(filterChunk)
+                    page.chunks.initial.forEach(filterChunk)
+                    page.chunks.async.forEach(filterChunk)
                 })
+                //filter out chunks from app
+                this.$.appPage.chunks.initial.forEach(filterChunk)
+                this.$.appPage.chunks.async.forEach(filterChunk)
 
-                //TODO : filter files from app.jsx
-                //map.staticConfig.externals.app.forEach(filterChunk)
+                const writeFlyMap = () => {
+                    this.$.outputFileSystem.writeFile(join(this.$.outDir, "firejsx.map.json"), JSON.stringify(map), err => {
+                        err ? reject(err) : resolve()
+                    })
+                }
 
-                // @ts-ignore
-                this.$.outputFileSystem.rename(this.$.renderer.config.fullPaths[0], join(this.$.outDir, map.staticConfig.externals.full), err => {
-                    if (err)
-                        throw new Error(`Error moving ${map.staticConfig.externals.full} to ${this.$.outDir}\n${err}`);
-                    this.$.outputFileSystem.writeFile(join(this.$.outDir, "firejsx.map.json"),
-                        JSON.stringify(map), err => {
-                            if (err)
-                                reject(err)
-                            else
-                                resolve()
-                        })
-                })
+                if (this.$.ssr)
+                    this.$.outputFileSystem.rename(this.$.renderer.config.fullExternalPath, join(this.$.outDir, map.staticConfig.externals.full), err => {
+                        if (err)
+                            throw new Error(`Error moving ${map.staticConfig.externals.full} to ${this.$.outDir}\n${err}`);
+                        writeFlyMap()
+                    })
+                else
+                    writeFlyMap()
+
             }, err => {
                 throw err
             })

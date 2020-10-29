@@ -51,6 +51,12 @@ const cli = new Cli(args["--log-mode"]);
     } else if (args["--export-fly"]) {
         const startTime = new Date().getTime();
         cli.ok("Exporting for on the fly rendering");
+        //warn user
+        if (!app.$.pro)
+            cli.warn("Exporting a non-production build")
+        if (!app.$.ssr)
+            cli.warn("Exported build won't be able to render your app. Only a html skeleton will be produced.")
+        //export
         await app.exportFly()
         cli.ok("Exported to", config.outDir)
         cli.ok("Finished in", (new Date().getTime() - startTime) / 1000 + "s");

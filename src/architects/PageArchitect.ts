@@ -34,12 +34,12 @@ export default class {
                         resolve()
                     }, reject)
                 }),
-                new Promise((resolve, reject) => {
+                (this.$.ssr ? [new Promise((resolve, reject) => {
                     this.build(this.webpackArchitect.forFullExternal(), stat => {
                         externals.full = stat.compilation.chunks[0].files[0];
                         resolve()
                     }, reject)
-                }),
+                })] : [])
             ]).then(() => resolve(externals)).catch(reject)
         })
     }
