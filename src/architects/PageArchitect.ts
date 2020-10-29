@@ -61,6 +61,8 @@ export default class {
                     initial: []
                 }
             })
+            //TODO: make a set and keep unique values between app and per page
+            //TODO: implement a set in load Chunk, preload Chunk in LinkApi
             this.$.appPage.chunks = {
                 async: [],
                 initial: [],
