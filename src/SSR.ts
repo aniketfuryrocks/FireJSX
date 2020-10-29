@@ -17,6 +17,8 @@ export default class {
             outDir: resolve(pathToFlyDir),
             fullExternalPath: resolve(join(pathToFlyDir, firejsx_map.staticConfig.externals.full)),
         });
+        if (this.renderer.config.ssr)
+            this.renderer.requireAppPage();
         for (const __page in firejsx_map.pageMap) {
             const page = new Page(__page);
             page.chunks = firejsx_map.pageMap[__page];
