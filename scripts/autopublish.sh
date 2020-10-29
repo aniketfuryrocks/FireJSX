@@ -45,6 +45,7 @@ fi
 
 #set change log
 clr_scr "Set ChangeLog"
+echo "Changes :" > ../changelog.md
 nano ../changelog.md
 #commit
 clr_scr "Committing"

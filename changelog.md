@@ -1,4 +1,3 @@
-Changes : 
-1. Fixed HMR
-2. self is the new global
-3. filter out files other than .js during fly build
+Changes :
+1. renderPage Callback now returns a promise wich needs to be awaited to
+2. jsonPs are unlinked after page load to avoid reload of content
