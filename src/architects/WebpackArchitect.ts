@@ -2,21 +2,7 @@ import {$, WebpackConfig} from "../SSB"
 import {join} from "path"
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as webpack from "webpack";
-import {RuleSetRule, RuleSetUseItem} from "webpack";
 import {CleanWebpackPlugin} from "clean-webpack-plugin";
-
-const resolve_extensions = ['.wasm', '.mjs', '.js', '.json', '.jsx'];
-const externals = {
-    react: "React",
-    "react-dom": 'ReactDOM'
-}
-
-function generateMiniCssExtractPlugin() {
-    return new MiniCssExtractPlugin({
-        filename: "cs.[contenthash].css",
-        chunkFilename: "cs.[contenthash].css"
-    })
-}
 
 export default class {
     private readonly $: $;
@@ -27,72 +13,7 @@ export default class {
         this.proOrSSR = $.ssr || $.pro
     }
 
-    generateCssRule(): RuleSetRule {
-        return {
-            test: /\.css$/,
-            use: [
-                ...(this.proOrSSR ? [MiniCssExtractPlugin.loader] : ['style-loader']),
-                {
-                    loader: 'css-loader',
-                    options: {
-                        modules: true
-                    },
-                },
-            ]
-        }
-    }
-
-    generateBabelRuleSetUseItem(): RuleSetUseItem {
-        return {
-            loader: 'babel-loader',
-            options: {
-                sourceType: 'unambiguous',
-                cacheDirectory: join(this.$.cacheDir, "babelCache"),
-                presets: [["@babel/preset-env", {
-                    modules: false,
-                    targets: {
-                        browsers: [`last 2 versions`, `not ie <= 11`, `not android 4.4.3`],
-                    },
-                }], "@babel/preset-react"],
-                plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime",
-                    "@babel/plugin-transform-modules-commonjs"]
-            }
-        }
-    }
-
-    forApp(): WebpackConfig {
-        return {
-            target: 'web',
-            mode: process.env.NODE_ENV as "development" | "production" | "none",
-            watch: !this.$.ssr, //no watch when ssr
-            entry: this.$.app,
-            externals,
-            output: {
-                path: `${this.$.outDir}/${this.$.lib}/`,
-                publicPath: `${this.$.prefix}/${this.$.lib}/`,
-                filename: "a.[contenthash].js",
-                globalObject: 'self',
-                jsonpFunction: 'FireJSX_appJsonp',
-            },
-            plugins: [
-                generateMiniCssExtractPlugin()
-            ],
-            module: {
-                rules: [
-                    {
-                        test: /\.(jsx)$/,
-                        use: this.generateBabelRuleSetUseItem()
-                    },
-                    this.generateCssRule()
-                ]
-            },
-            resolve: {
-                extensions: resolve_extensions
-            }
-        }
-    }
-
-    forPages(): WebpackConfig {
+    forPagesAndApp(): WebpackConfig {
         const config: WebpackConfig = {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
@@ -119,21 +40,34 @@ export default class {
                 publicPath: `${this.$.prefix}/${this.$.lib}/`,
                 path: `${this.$.outDir}/${this.$.lib}/`,
                 globalObject: 'self',
-                jsonpFunction: 'FireJSX_pagesJsonp',
+                jsonpFunction: 'FireJSX_jsonp',
                 hotUpdateMainFilename: `h[hash].hot.json`,
                 hotUpdateChunkFilename: `h[hash].hot.js`
             },
-            externals,
+            externals: {
+                react: "React",
+                "react-dom": 'ReactDOM'
+            },
             module: {
                 rules: [{
                     test: /\.(js|jsx)$/,
                     use: [
-                        (() => {
-                            const babelLoader: any = this.generateBabelRuleSetUseItem();
-                            if (this.proOrSSR)
-                                babelLoader.options.plugins.push("react-hot-loader/babel")
-                            return babelLoader
-                        })(), {//adds wrapper to App function
+                        {
+                            loader: 'babel-loader',
+                            options: {
+                                sourceType: 'unambiguous',
+                                cacheDirectory: join(this.$.cacheDir, "babelCache"),
+                                presets: [["@babel/preset-env", {
+                                    modules: false,
+                                    targets: {
+                                        browsers: [`last 2 versions`, `not ie <= 11`, `not android 4.4.3`],
+                                    },
+                                }], "@babel/preset-react"],
+                                plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime",
+                                    "@babel/plugin-transform-modules-commonjs", ...(this.proOrSSR ? [] : ["react-hot-loader/babel"])
+                                ]
+                            }
+                        }, {//adds wrapper to App function
                             loader: join(__dirname, '../loader/wrapper.js'),
                             options: {
                                 pages_path: this.$.pages,
@@ -141,10 +75,24 @@ export default class {
                             }
                         }
                     ]
-                }, this.generateCssRule()]
+                }, {
+                    test: /\.css$/,
+                    use: [
+                        ...(this.proOrSSR ? [MiniCssExtractPlugin.loader] : ['style-loader']),
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: true
+                            },
+                        },
+                    ]
+                }]
             },
             plugins: [
-                generateMiniCssExtractPlugin(),
+                new MiniCssExtractPlugin({
+                    filename: "cs.[contenthash].css",
+                    chunkFilename: "cs.[contenthash].css"
+                }),
                 ...(this.proOrSSR ? [] : [
                     new webpack.HotModuleReplacementPlugin({
                         multiStep: true
@@ -156,10 +104,10 @@ export default class {
                 ])
             ],
             resolve: {
-                extensions: resolve_extensions
+                extensions: ['.wasm', '.mjs', '.js', '.json', '.jsx']
             }
         };
-
+        //pages
         this.$.pageMap.forEach(page => {
             config.entry[page.toString()] = [
                 join(this.$.pages, page.toString()),
@@ -167,6 +115,9 @@ export default class {
                     `webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&quiet=true`])
             ]
         })
+        //app
+        config.entry[this.$.appPath] = this.$.appPath;
+        //call initWebpackHook
         this.$.hooks.initWebpack.forEach(initWebpack => initWebpack(config))
         return config;
     }

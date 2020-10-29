@@ -6,7 +6,7 @@ export function initGlobals() {
 
     //check if already initialized
     {
-        for (const prop of ["FireJSX", "FireJSX_appJsonp", "FireJSX_pagesJsonp"])
+        for (const prop of ["FireJSX", "FireJSX_jsonp"])
             if (global[prop])
                 throw new Error(`FireJSX is already initialized. Call release function from the class object or else make sure global.${prop} is undefined.`);
     }
@@ -59,6 +59,5 @@ export function initGlobals() {
 
 export function destructGlobals() {
     global.FireJSX = undefined;
-    global.FireJSX_appJsonp = undefined;
-    global.FireJSX_pagesJsonp = undefined;
+    global.FireJSX_jsonp = undefined;
 }

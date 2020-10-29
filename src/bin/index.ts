@@ -35,7 +35,7 @@ const cli = new Cli(args["--log-mode"]);
         staticPrefix: config.staticPrefix,
         verbose: !!args["--verbose"],
         outputFileSystem: (args["--disk"] || args["--export-fly"] || args["--export"]) ? undefined : new MemoryFS(),
-        app: config.app
+        appPath: config.app
     })
     // initialize
     await app.init()

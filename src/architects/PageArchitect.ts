@@ -5,6 +5,7 @@ import {$, WebpackConfig} from "../SSB";
 import {join} from "path";
 import {writeFileSync} from "fs";
 import {Externals} from "./StaticArchitect";
+import AppPage from "../classes/AppPage";
 
 export default class {
     private readonly $: $;
@@ -23,7 +24,6 @@ export default class {
     buildExternals() {
         return new Promise<Externals>((resolve, reject) => {
             const externals: Externals = {
-                app: [],
                 full: "",
                 semi: ""
             };
@@ -41,35 +41,13 @@ export default class {
                         resolve()
                     }, reject)
                 }),
-                new Promise((resolve, reject) => {
-                    this.build(this.webpackArchitect.forApp(), stat => {
-                        if (this.logStat(stat.compilation))//true if errors
-                            return void reject(undefined);
-
-                        externals.app = [];//this function is called multiple type due to watch
-                        stat.compilation.chunks.map(({files}) => {
-                            files.forEach(file => {
-                                if (file.startsWith("a."))
-                                    externals.app.unshift(file)
-                                else
-                                    externals.app.push(file)
-                            })
-                        })
-                        //if page build is in progress then trigger it to update externals
-                        if (global.buildPageResolver) {
-                            this.$.cli.ok("Main App changed. Refresh Browser to view changes")
-                            global.buildPageResolver()
-                        } else
-                            resolve()
-                    }, reject)
-                })
             ]).then(() => resolve(externals)).catch(reject)
         })
     }
 
     buildPages(resolve: () => void, reject: (err: any | undefined) => void) {
-        const pageRel = `.${this.$.pages.replace(process.cwd(), "")}/`
-        this.build(this.webpackArchitect.forPages(), stat => {
+        const pageRel = `.${this.$.pages.replace(process.cwd(), "")}/`;
+        this.build(this.webpackArchitect.forPagesAndApp(), stat => {
             const statJSON = stat.toJson();
             //log stats when verbose
             if (this.$.verbose)
@@ -85,20 +63,20 @@ export default class {
                     initial: []
                 }
             })
-
             statJSON.chunks.forEach(({files, entry, initial, origins}) => {
                 origins.forEach(({loc, moduleName}) => {
-                    let _page = this.$.pageMap.get(loc);
-                    if (!_page)
-                        _page = this.$.pageMap.get(moduleName.replace(pageRel, ""));
-                    (_page ? [_page] : this.$.pageMap).forEach(page => {
-                        if (entry)//entry
-                            page.chunks.entry.push(...files)
-                        else if (initial) {//sync
-                            page.chunks.initial.push(...files)
-                        } else//async
-                            page.chunks.async.push(...files)
-                    });
+                    let page: AppPage = this.$.pageMap.get(loc);
+                    if (!page)
+                        page = this.$.pageMap.get(moduleName.replace(pageRel, ""));
+                    //if chunk (mostly async) belongs to no one then it goes to app
+                    if (!page)
+                        page = this.$.appPage;
+                    if (entry)//entry
+                        page.chunks.entry.push(...files)
+                    else if (initial) {//sync
+                        page.chunks.initial.push(...files)
+                    } else//async
+                        page.chunks.async.push(...files)
                 })
             })
             resolve()

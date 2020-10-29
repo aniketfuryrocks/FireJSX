@@ -1,8 +1,8 @@
 import {join} from "path"
 import Page from "../classes/Page";
+import AppPage from "../classes/AppPage";
 
 export interface Externals {
-    app: string[]
     full: string
     semi: string
 }
@@ -14,7 +14,13 @@ export interface StaticConfig {
     ssr: boolean,
     prefix: string,
     staticPrefix: string,
-    fullPaths: string[],
+    fullExternalPath: string | undefined,
+    appPage: AppPage
+}
+
+function requireJs(chunk: string) {
+    if (chunk.endsWith(".js"))
+        require(`${this.config.outDir}/${this.config.lib}/${chunk}`)
 }
 
 export default class {
@@ -28,7 +34,12 @@ export default class {
         FireJSX.prefix = this.config.prefix;
         //require full external and app when in ssr
         if (param.ssr)
-            param.fullPaths.forEach(path => require(path))
+            require(param.fullExternalPath)
+    }
+
+    requireAppPage() {
+        for (const key of ["entry", "initial", "async"])
+            this.config.appPage.chunks[key].forEach(requireJs)
     }
 
     render(page: Page, path: string, content: any): string {
@@ -42,10 +53,8 @@ export default class {
         mapCache.chunks = page.chunks;
         //if ssr then require async chunks
         if (this.config.ssr)
-            page.chunks.async.forEach(chunk => {
-                if (chunk.endsWith(".js"))
-                    require(`${this.config.outDir}/${this.config.lib}/${chunk}`)
-            })
+            page.chunks.async.forEach(requireJs);
+
         let head, body;
         //map
         {
@@ -60,18 +69,19 @@ export default class {
             head = arr[0]
             body = arr[1]
         }
-        //App
+        //app entry
         {
-            const arr = this.loadChunks(head, body, this.config.externals.app, false)
+            const arr = this.loadChunks(head, body, this.config.appPage.chunks.entry, false)
             head = arr[0]
             body = arr[1]
         }
-        //entry chunks
+        //app initial
         {
-            const arr = this.loadChunks(head, body, page.chunks.entry)
+            const arr = this.loadChunks(head, body, this.config.appPage.chunks.initial, false)
             head = arr[0]
             body = arr[1]
         }
+        //no need to add entry of page because app has the same entry
         //initial chunks
         {
             const arr = this.loadChunks(head, body, page.chunks.initial)

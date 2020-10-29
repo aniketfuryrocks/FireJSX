@@ -15,11 +15,13 @@ import {Args} from "./bin/ArgsMapper";
 import {PageChunks} from "./types/global";
 import * as Globals from "./Globals";
 import {destructGlobals} from "./Globals";
+import AppPage from "./classes/AppPage";
 
 export type WebpackConfig = Configuration;
 
 export interface $ extends Params {
     pageMap?: Map<string, Page>,
+    appPage?: AppPage
     renderer?: StaticArchitect,
     pageArchitect?: PageArchitect,
     hooks: GlobalHooks,
@@ -42,7 +44,7 @@ export interface Params {
     staticPrefix: string,
     plugins: string[],
     custom: any,
-    app: string
+    appPath: string
 }
 
 export interface FIREJSX_MAP {
@@ -78,6 +80,8 @@ export default class {
         process.env.BABEL_ENV = process.env.NODE_ENV = params.pro ? 'production' : 'development';
         //pageMap
         this.$.pageMap = createMap(this.$.pages, this.$.inputFileSystem);
+        //app Page
+        this.$.appPage = new AppPage()
         //pageArchitect
         this.$.pageArchitect = new PageArchitect(this.$, new WebpackArchitect(this.$), !!params.outputFileSystem, !!params.inputFileSystem);
         //log
@@ -104,10 +108,8 @@ export default class {
             ssr: this.$.ssr,
             prefix: this.$.prefix,
             staticPrefix: this.$.staticPrefix,
-            fullPaths: this.$.ssr ? [
-                join(this.$.cacheDir, externals.full),
-                join(this.$.outDir, this.$.lib, externals.app[0])
-            ] : []
+            fullExternalPath: this.$.ssr ? join(this.$.cacheDir, externals.full) : undefined,
+            appPage: this.$.appPage
         });
         //mapPlugins after everything is initialized
         if (this.$.plugins.length > 0) {
@@ -121,7 +123,11 @@ export default class {
             throw new Error("A build is already in progress, await it or run in a different global environment/node process.")
         return new Promise<any>((resolve, reject) => {
             this.$.pageArchitect.buildPages(global.buildPageResolver = () => {
-                this.$.cli.ok("Pages Built")
+                this.$.cli.ok("Pages Built");
+                //require app when ssr
+                if (this.$.ssr)
+                    this.$.renderer.requireAppPage();
+
                 const promises = [];
                 this.$.pageMap.forEach(page => {
                     //if there is not hook then build the default page
@@ -220,9 +226,10 @@ export default class {
                         page.chunks[chunkKey].forEach(filterChunk)
                 })
 
-                //filter files from app.jsx
-                map.staticConfig.externals.app.forEach(filterChunk)
+                //TODO : filter files from app.jsx
+                //map.staticConfig.externals.app.forEach(filterChunk)
 
+                // @ts-ignore
                 this.$.outputFileSystem.rename(this.$.renderer.config.fullPaths[0], join(this.$.outDir, map.staticConfig.externals.full), err => {
                     if (err)
                         throw new Error(`Error moving ${map.staticConfig.externals.full} to ${this.$.outDir}\n${err}`);

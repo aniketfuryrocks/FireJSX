@@ -54,8 +54,7 @@ declare global {
 }
 
 export interface FireJSX_GLOBAL {
-    FireJSX_appJsonp: any[]
-    FireJSX_pagesJsonp: any[]
+    FireJSX_jsonp: any[]
 
     __webpack_require__(resolveID1: any)
 

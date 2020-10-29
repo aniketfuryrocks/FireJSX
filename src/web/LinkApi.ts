@@ -42,8 +42,7 @@ FireJSX.linkApi = {
             return;
         this.lock = true;
         //un-define JsonPs because they rerun on every chunk
-        window.FireJSX_appJsonp = undefined;
-        window.FireJSX_pagesJsonp = undefined;
+        window.FireJSX_jsonp = undefined;
         if (pushState)
             window.history.pushState(undefined, undefined, FireJSX.prefix + url);
         url = getPathFromUrl(url);//url
