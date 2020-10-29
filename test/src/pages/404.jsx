@@ -1,10 +1,12 @@
 import "../style/main.css"
 import Link from "../../../dist/Link";
 import Head from "../../../dist/Head";
-import LazyLoad from "../../../dist/LazyLoad";
+
+/*
+const Markdown = LazyLoad(() => import("../components/Markdown/Markdown.jsx"))
+*/
 
 export default function App() {
-    const Markdown = LazyLoad(() => import("../components/Markdown/Markdown.jsx"), () => require.resolveWeak("../components/Markdown/Markdown.jsx"))
     return (
         <div>
             <Head>
@@ -12,9 +14,9 @@ export default function App() {
             </Head>
             <h1>😿 OH NO 404</h1>
             <br/>
-            <Markdown>
+            {/*<Markdown>
                 By the way, I am a lazy loaded component 😺
-            </Markdown>
+            </Markdown>*/}
             <br/>
             <br/>
             <Link href={"/"}> 👻 Click Here To Go Home</Link>

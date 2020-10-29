@@ -47,9 +47,10 @@ FireJSX.linkApi = {
         let cacheMap = FireJSX.cache[url];
         if (!cacheMap)
             cacheMap = await this.loadMap(url);
-        if (!cacheMap.app)
+        if (!cacheMap.app) {
+            console.log("making network request")
             cacheMap.chunks.initial.forEach(this.loadChunk);
-        else
+        } else
             FireJSX.run(url)
     },
     preloadChunk(chunk, rel) {

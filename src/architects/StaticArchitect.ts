@@ -18,11 +18,6 @@ export interface StaticConfig {
     appPage: AppPage
 }
 
-function requireJs(chunk: string) {
-    if (chunk.endsWith(".js"))
-        require(`${this.config.outDir}/${this.config.lib}/${chunk}`)
-}
-
 export default class {
     config: StaticConfig
 
@@ -37,10 +32,15 @@ export default class {
             require(param.fullExternalPath)
     }
 
+    requireJs(chunk: string) {
+        if (chunk.endsWith(".js"))
+            require(`${this.config.outDir}/${this.config.lib}/${chunk}`)
+    }
+
     requireAppPage() {
-        requireJs(this.config.appPage.chunks.runtime);
-        this.config.appPage.chunks.initial.forEach(requireJs);
-        this.config.appPage.chunks.async.forEach(requireJs)
+        this.requireJs(this.config.appPage.chunks.runtime);
+        this.config.appPage.chunks.initial.forEach(c => this.requireJs(c));
+        this.config.appPage.chunks.async.forEach(c => this.requireJs(c))
     }
 
     render(page: Page, path: string, content: any): string {
@@ -56,7 +56,7 @@ export default class {
             mapCache.content = content;
             mapCache.chunks = page.chunks;
             //if ssr then require async chunks
-            page.chunks.async.forEach(requireJs);
+            page.chunks.async.forEach(c => this.requireJs(c));
         }
 
         let head, body;
