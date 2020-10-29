@@ -19,14 +19,19 @@ FireJSX.linkApi = {
             const ele = this.loadChunk(chunk_path);
             ele.onload = () => resolve(FireJSX.cache[url]);
             ele.onerror = () => {
-                //delete it because onError happens once
                 if (url === "/404")
                     throw new Error("Error loading 404 map. Make sure 404 page exists.");
+                const mapCache404 = FireJSX.cache["/404"];
+                if (mapCache404)
+                    return resolve(FireJSX.cache[url] = mapCache404);
                 //load 404
                 this.loadMap("/404")
-                    .then(() => resolve(FireJSX.cache[url] = FireJSX.cache["/404"]))
+                    .then(() => {
+                        console.log(url)
+                        resolve(FireJSX.cache[url] = FireJSX.cache["/404"])
+                    })
                     .catch(reject);
-            }
+            };
         })
     },
     async preloadPage(url) {
