@@ -131,7 +131,7 @@ export default class {
                         })
                     //call hooks
                     page.hooks.onBuild.forEach(onBuild => promises.push(onBuild({
-                        renderPage: (path, content = {}) => {
+                        renderPage: async (path, content = {}) => {
                             if (!path) {
                                 this.$.cli.warn(`Skipping render for page "${page.toString()}", since onBuild -> renderPage hook was called without a path`)
                                 return
@@ -146,7 +146,7 @@ export default class {
                             //call global postRender hooks
                             this.$.hooks.postRender.forEach(postRender => postRender(html))
                             //await promises
-                            promises.push(
+                            await Promise.all([
                                 //write html file
                                 writeFileRecursively(`${this.$.outDir}/${path}.html`,
                                     html,
@@ -160,7 +160,7 @@ export default class {
                                         this.$.outputFileSystem
                                     )
                                 })()
-                            )
+                            ])
                         }
                     })))
                 })

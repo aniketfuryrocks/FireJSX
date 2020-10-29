@@ -8,7 +8,7 @@ export type onBuild_Callback = (actions: onBuild_Actions) => Promise<void>
 export type dom_Callback = (html: string) => void
 
 export interface onBuild_Actions {
-    renderPage: (path: string, content?: any) => void
+    renderPage: (path: string, content?: any) => Promise<void>
 }
 
 export interface Actions {
@@ -23,7 +23,7 @@ export interface Actions {
 }
 
 
-export type Plugin = (actions: Actions, $: $) => void
+export type Plugin = (actions: Actions, $: $) => Promise<void>
 
 export interface PageHooks {
     postRender: dom_Callback[],

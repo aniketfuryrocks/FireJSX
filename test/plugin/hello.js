@@ -1,6 +1,3 @@
-exports.default = function ({onBuild, initWebpack, postRender}, $) {
-    onBuild("index.jsx", ({renderPage}) => {
-            renderPage("/index", {emoji: "🔥"})
-        }
-    )
+exports.default = function ({onBuild}) {
+    onBuild("index.jsx", ({renderPage}) => renderPage("/index", {emoji: "🔥"}))
 }
