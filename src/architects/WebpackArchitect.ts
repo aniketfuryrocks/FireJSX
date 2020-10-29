@@ -17,7 +17,7 @@ export default class {
         const config: WebpackConfig = {
             target: 'web',
             mode: process.env.NODE_ENV as "development" | "production" | "none",
-            watch: !this.$.ssr, //no watch when ssr
+            watch: this.$.watch,
             optimization: {
                 sideEffects: false,
                 minimize: true,
@@ -92,16 +92,15 @@ export default class {
                 new MiniCssExtractPlugin({
                     filename: "cs.[contenthash].css",
                     chunkFilename: "cs.[contenthash].css"
+                }), new CleanWebpackPlugin({
+                    verbose: this.$.verbose,
+                    cleanOnceBeforeBuildPatterns: ['**/*', '!map/!*', '!e.*', '!a.*'],
                 }),
                 ...(this.proOrSSR ? [] : [
                     new webpack.HotModuleReplacementPlugin({
                         multiStep: true
-                    }),
-                    new CleanWebpackPlugin({
-                        verbose: this.$.verbose,
-                        cleanOnceBeforeBuildPatterns: ['**/*', '!map/!*', '!e.*', '!a.*'],
                     })
-                ])
+                ]),
             ],
             resolve: {
                 extensions: ['.wasm', '.mjs', '.js', '.json', '.jsx']

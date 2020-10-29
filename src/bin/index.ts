@@ -32,11 +32,17 @@ const cli = new Cli(args["--log-mode"]);
         staticDir: config.staticDir,
         pro: !!args["--pro"],
         ssr: !!args["--ssr"],
+        watch: !(args["--export"] || args["--export-fly"]),
         staticPrefix: config.staticPrefix,
         verbose: !!args["--verbose"],
         outputFileSystem: (args["--disk"] || args["--export-fly"] || args["--export"]) ? undefined : new MemoryFS(),
         appPath: config.app
     })
+    //log
+    cli.ok("ENV :", process.env.NODE_ENV)
+    cli.ok("SSR :", app.$.ssr)
+    cli.ok("HMR :", !app.$.pageArchitect.webpackArchitect.proOrSSR)
+    cli.ok("Watch :", app.$.watch)
     // initialize
     await app.init()
     // switch according tio modes
@@ -53,7 +59,7 @@ const cli = new Cli(args["--log-mode"]);
         cli.ok("Exporting for on the fly rendering");
         //warn user
         if (!app.$.pro)
-            cli.warn("Exporting a non-production build")
+            cli.warn("Exporting a development build")
         if (!app.$.ssr)
             cli.warn("Exported build won't be able to render your app. Only a html skeleton will be produced.")
         //export

@@ -28,6 +28,7 @@ export interface $ extends Params {
 }
 
 export interface Params {
+    watch: boolean,
     outputFileSystem?,
     inputFileSystem?,
     args: Args,
@@ -84,12 +85,6 @@ export default class {
         this.$.appPage = new AppPage()
         //pageArchitect
         this.$.pageArchitect = new PageArchitect(this.$, new WebpackArchitect(this.$), !!params.outputFileSystem, !!params.inputFileSystem);
-        //log
-        this.$.cli.ok("ENV :", process.env.NODE_ENV)
-        this.$.cli.ok("SSR :", this.$.ssr)
-        this.$.cli.ok("HMR :", !this.$.pageArchitect.webpackArchitect.proOrSSR)
-        this.$.cli.ok("Watch :", !this.$.ssr)
-
         //check 404.jsx
         if (!this.$.pageMap.has("404.jsx"))
             this.$.cli.warn("404.jsx page not found. Link fallback will be unsuccessful")
@@ -171,9 +166,8 @@ export default class {
                     })))
                 })
                 Promise.all(promises).then(() => {
-                    //when ssr watch is on, resolver never finishes.
-                    //Hence resolve only in ssr
-                    if (this.$.ssr) {
+                    //when watch is on, resolver never finishes.
+                    if (this.$.watch) {
                         global.buildPageResolver = undefined;
                         resolve()
                     }
