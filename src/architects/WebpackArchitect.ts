@@ -66,7 +66,7 @@ export default class {
                                 plugins: ["@babel/plugin-syntax-dynamic-import",
                                     "@babel/plugin-transform-runtime",
                                     "@babel/plugin-transform-modules-commonjs",
-                                    [require.resolve('../loader/wrapper.js'), {
+                                    [require.resolve('../babel_plugins/wrapper.js'), {
                                         pagesPath: this.$.pages,
                                         proOrSSR: this.proOrSSR
                                     }],
