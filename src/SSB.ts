@@ -167,7 +167,7 @@ export default class {
                 })
                 Promise.all(promises).then(() => {
                     //when watch is on, resolver never finishes.
-                    if (this.$.watch) {
+                    if (!this.$.watch) {
                         global.buildPageResolver = undefined;
                         resolve()
                     }
