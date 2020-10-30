@@ -1,7 +1,6 @@
 import Page from "./classes/Page";
 import StaticArchitect from "./architects/StaticArchitect";
 import {FIREJSX_MAP, generateMapJS} from "./SSB";
-import * as fs from "fs"
 import {join, resolve} from "path";
 import {destructGlobals, initGlobals} from "./Globals";
 
@@ -11,11 +10,12 @@ export default class {
 
     constructor(pathToFlyDir: string) {
         initGlobals();
-        const firejsx_map: FIREJSX_MAP = JSON.parse(fs.readFileSync(`${pathToFlyDir}/firejsx.map.json`).toString());
+        pathToFlyDir = resolve(pathToFlyDir);
+        const firejsx_map: FIREJSX_MAP = require(join(pathToFlyDir, 'firejsx.map.json'));
         this.renderer = new StaticArchitect({
             ...firejsx_map.staticConfig,
-            outDir: resolve(pathToFlyDir),
-            fullExternalPath: resolve(join(pathToFlyDir, firejsx_map.staticConfig.externals.full)),
+            outDir: pathToFlyDir,
+            fullExternalPath: join(pathToFlyDir, firejsx_map.staticConfig.externals.full),
         });
         if (this.renderer.config.ssr)
             this.renderer.requireAppPage();
