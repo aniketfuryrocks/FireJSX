@@ -38,6 +38,12 @@ declare global {
         let isHydrated: boolean
         let linkApi: {
             lock: boolean,
+            /**
+             * true if loaded, if false means preloaded but no loaded
+             */
+            chunksStatusMap: {
+                [key: string]: boolean
+            }
             loadMap: (url: string) => Promise<FireJSX_CacheMap>
             preloadPage: (url: string) => Promise<void>
             loadPage: (url: string, pushState?: boolean) => Promise<void>

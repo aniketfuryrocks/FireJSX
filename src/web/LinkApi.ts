@@ -13,6 +13,7 @@ function getPathFromUrl(url) {
 
 FireJSX.linkApi = {
     lock: false,
+    chunksStatusMap: {},
     loadMap(url) {
         return new Promise((resolve, reject) => {
             const chunk_path = `map${url === "/" ? "/index" : url}.map.js`;
@@ -52,13 +53,15 @@ FireJSX.linkApi = {
         let cacheMap = FireJSX.cache[url];
         if (!cacheMap)
             cacheMap = await this.loadMap(url);
-        if (!cacheMap.app) {
-            console.log("making network request")
-            cacheMap.chunks.initial.forEach(this.loadChunk);
-        } else
+        if (!cacheMap.app)
+            cacheMap.chunks.initial.forEach((c) => this.loadChunk(c));
+        else
             FireJSX.run(url)
     },
     preloadChunk(chunk, rel) {
+        //false when preloaded, undefined if neither loaded nor preloaded
+        if (this.chunksStatusMap[chunk] === false)
+            return;
         const ele = document.createElement("link");
         ele.rel = rel;
         ele.href = `${FireJSX.prefix}/${FireJSX.lib}/${chunk}`;
@@ -68,9 +71,12 @@ FireJSX.linkApi = {
         else if (chunk.endsWith(".css"))
             ele.setAttribute("as", "style");
         document.head.appendChild(ele);
+        this.chunksStatusMap[chunk] = false;
     },
-    //force: force rerun of chunk
     loadChunk(chunk) {
+        //if true, then already loaded
+        if (this.chunksStatusMap[chunk])
+            return;
         let ele;
         if (chunk.endsWith(".js")) {
             ele = document.createElement("script");
@@ -83,6 +89,7 @@ FireJSX.linkApi = {
         }
         ele.crossOrigin = "anonymous";
         document.body.appendChild(ele);
+        this.chunksStatusMap[chunk] = true;
         return ele;
     }
 }
