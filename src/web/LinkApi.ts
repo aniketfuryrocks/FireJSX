@@ -13,7 +13,15 @@ function getPathFromUrl(url) {
 
 FireJSX.linkApi = {
     lock: false,
-    chunksStatusMap: {},
+    chunksStatusMap: (() => {
+        const chunksStatusMap = {};
+        let possibleCacheMap = FireJSX.cache[location.pathname]
+        if (!possibleCacheMap)//if current location is not cached then page must be 404
+            possibleCacheMap = FireJSX.cache["/404"];
+        if (possibleCacheMap)// 404 page may not exist
+            possibleCacheMap.chunks.initial.forEach(c => chunksStatusMap[c] = true)
+        return chunksStatusMap;
+    })(),
     loadMap(url) {
         return new Promise((resolve, reject) => {
             const chunk_path = `map${url === "/" ? "/index" : url}.map.js`;
@@ -60,18 +68,18 @@ FireJSX.linkApi = {
     },
     preloadChunk(chunk, rel) {
         //false when preloaded, undefined if neither loaded nor preloaded
-        if (this.chunksStatusMap[chunk] === false)
-            return;
-        const ele = document.createElement("link");
-        ele.rel = rel;
-        ele.href = `${FireJSX.prefix}/${FireJSX.lib}/${chunk}`;
-        ele.crossOrigin = "anonymous";
-        if (chunk.endsWith(".js"))
-            ele.setAttribute("as", "script");
-        else if (chunk.endsWith(".css"))
-            ele.setAttribute("as", "style");
-        document.head.appendChild(ele);
-        this.chunksStatusMap[chunk] = false;
+        if (this.chunksStatusMap[chunk] === undefined) {
+            const ele = document.createElement("link");
+            ele.rel = rel;
+            ele.href = `${FireJSX.prefix}/${FireJSX.lib}/${chunk}`;
+            ele.crossOrigin = "anonymous";
+            if (chunk.endsWith(".js"))
+                ele.setAttribute("as", "script");
+            else if (chunk.endsWith(".css"))
+                ele.setAttribute("as", "style");
+            document.head.appendChild(ele);
+            this.chunksStatusMap[chunk] = false;
+        }
     },
     loadChunk(chunk) {
         //if true, then already loaded
