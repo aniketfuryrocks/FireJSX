@@ -1,8 +1,8 @@
 import * as React from "react";
 
 export default function (loadFunc: () => Promise<any>,
-                         resolveID: () => string,
-                         placeHolder: (any) => JSX.Element): any {
+                         resolveID?: () => string,
+                         placeHolder?: (any) => JSX.Element): any {
     if (!placeHolder)
         placeHolder = () => <></>
 
