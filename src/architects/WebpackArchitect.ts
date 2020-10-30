@@ -63,15 +63,15 @@ export default class {
                                         browsers: [`last 2 versions`, `not ie <= 11`, `not android 4.4.3`],
                                     },
                                 }], "@babel/preset-react"],
-                                plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-transform-runtime",
-                                    "@babel/plugin-transform-modules-commonjs", ...(this.proOrSSR ? [] : ["react-hot-loader/babel"])
+                                plugins: ["@babel/plugin-syntax-dynamic-import",
+                                    "@babel/plugin-transform-runtime",
+                                    "@babel/plugin-transform-modules-commonjs",
+                                    [require.resolve('../loader/wrapper.js'), {
+                                        pagesPath: this.$.pages,
+                                        proOrSSR: this.proOrSSR
+                                    }],
+                                    ...(this.proOrSSR ? [] : ["react-hot-loader/babel"]),
                                 ]
-                            }
-                        }, {//adds wrapper to App function
-                            loader: join(__dirname, '../loader/wrapper.js'),
-                            options: {
-                                pages_path: this.$.pages,
-                                proOrSSR: this.proOrSSR
                             }
                         }
                     ]

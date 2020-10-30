@@ -3,5 +3,5 @@ plugins:
 custom:
   name: "aniket"
 paths:
-  pages: src/pages
+  pages: src/_pages
   app: App.jsx
