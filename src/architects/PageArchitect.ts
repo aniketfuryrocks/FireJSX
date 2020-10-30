@@ -68,24 +68,32 @@ export default class {
                 initial: [],
                 runtime: ""
             }
+
+
             //put chunks against each page
             statJSON.chunks.forEach(({files, entry, initial, origins}) => {
-                origins.forEach(({loc, moduleName}) => {
+                for (const {loc, moduleName} of origins) {
                     //app takes the entry i.e webpack runtime
                     if (entry)
                         return this.$.appPage.chunks.runtime = files[0];
 
                     let page = this.$.pageMap.get(loc);
+                    //if a chunk is added to app then it is not necessary to add it to pages
+                    //hence skip the chunk
+                    let skipChunk = false;
                     if (!page)
                         if (!(page = this.$.pageMap.get(moduleName.replace(pageRel, "")))) { // @ts-ignore
                             page = this.$.appPage;
+                            skipChunk = true;
                         }
 
-                    if (initial) {//sync
+                    if (initial)
                         page.chunks.initial.push(...files)
-                    } else//async
+                    else
                         page.chunks.async.push(...files)
-                })
+                    if (skipChunk)
+                        break;
+                }
             })
             resolve()
         }, reject);
