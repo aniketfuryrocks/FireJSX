@@ -7,7 +7,7 @@ export default ({content: {total}}) => {
                 (() => {
                     const elements = [];
                     for (let i = 0; i < total; i++)
-                        elements.push(<><Link href={`/template-${i}`}>
+                        elements.push(<><Link href={`/template-${i}`} key={i}>
                             template {i}
                         </Link><br/></>)
                     return elements
