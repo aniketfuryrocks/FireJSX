@@ -2,7 +2,9 @@ import {FunctionComponent} from "react";
 import {convertPathToUrl} from "../utils/LinkTools";
 
 FireJSX.run = function (app: FunctionComponent) {
-    const {content} = FireJSX.pathsCache[convertPathToUrl(decodeURI(location.pathname))]
+    const possiblePathsCache = FireJSX.pathsCache[convertPathToUrl(decodeURI(location.pathname))]
+    const {content} = possiblePathsCache ? possiblePathsCache : FireJSX.pathsCache["/404"];
+
     FireJSX.linkApi.lock = false;
     //update page if already rendered
     if (FireJSX.setApp)
