@@ -6,6 +6,11 @@ export default interface FireJSX_CacheMap {
     chunks?: PageChunks
 }
 
+export interface pathsCacheElement {
+    content: any,
+    page: any
+}
+
 declare global {
     namespace NodeJS {
         interface Global extends FireJSX_GLOBAL {
@@ -46,10 +51,7 @@ declare global {
          * Content of every page and the original file it belongs to
          */
         let pathsCache: {
-            [key: string]: {
-                content: any,
-                page: any
-            }
+            [key: string]: pathsCacheElement
         }
         let isSSR: boolean
         let isHydrated: boolean
@@ -61,7 +63,7 @@ declare global {
             chunksStatusMap: {
                 [key: string]: boolean
             }
-            loadMap: (url: string) => Promise<FireJSX_CacheMap>
+            loadMap: (url: string) => Promise<pathsCacheElement>
             preloadPage: (url: string) => Promise<void>
             loadPage: (url: string, pushState?: boolean) => Promise<void>
             preloadChunk: (chunk: string, rel: string) => void

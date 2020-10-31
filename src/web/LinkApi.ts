@@ -1,4 +1,4 @@
-//listens to next and prev page i.e navigation events
+import {pathsCacheElement} from "../types/global";
 
 if (!FireJSX.isSSR)
     window.onpopstate = function () {
@@ -26,29 +26,27 @@ FireJSX.linkApi = {
         return new Promise((resolve, reject) => {
             const chunk_path = `map${url === "/" ? "/index" : url}.map.js`;
             const ele = this.loadChunk(chunk_path);
-            /*ele.onload = () => resolve(FireJSX.cache[url]);
+            ele.onload = () => resolve(FireJSX.pathsCache[url]);
             ele.onerror = () => {
                 if (url === "/404")
                     throw new Error("Error loading 404 map. Make sure 404 page exists.");
-                const mapCache404 = FireJSX.cache["/404"];
+                //if 404 is cached then return it right away
+                const mapCache404 = FireJSX.pathsCache["/404"];
                 if (mapCache404)
-                    return resolve(FireJSX.cache[url] = mapCache404);
-                //load 404
+                    return resolve(FireJSX.pathsCache[url] = mapCache404);
+                //else load 404 map
                 this.loadMap("/404")
-                    .then(() => {
-                        console.log(url)
-                        resolve(FireJSX.cache[url] = FireJSX.cache["/404"])
-                    })
+                    .then(() => resolve(FireJSX.pathsCache[url] = FireJSX.pathsCache["/404"]))
                     .catch(reject);
-            };*/
+            };
         })
     },
     async preloadPage(url) {
         url = getPathFromUrl(url);
         if (FireJSX.pathsCache[url])
             return;
-        const {chunks} = await this.loadMap(url);
-        chunks.initial.forEach(c => this.preloadChunk(c, "prefetch"));
+        const {page}: pathsCacheElement = await this.loadMap(url);
+        FireJSX.pagesCache[page].chunks.initial.forEach(c => this.preloadChunk(c, "prefetch"));
     },
     async loadPage(url, pushState = true) {
         if (this.lock)
