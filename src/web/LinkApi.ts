@@ -1,4 +1,5 @@
 import {pathsCacheElement} from "../types/global";
+import {convertPathToUrl} from "../utils/LinkTools";
 
 if (!FireJSX.isSSR)
     window.onpopstate = function () {
@@ -6,16 +7,11 @@ if (!FireJSX.isSSR)
         FireJSX.linkApi.loadPage(path, false)
     }
 
-//gets path from url by excluding ? and #
-function getPathFromUrl(url) {
-    return url.split(/[?#]/)[0];
-}
-
 FireJSX.linkApi = {
     lock: false,
     chunksStatusMap: (() => {
         const chunksStatusMap = {};
-        let possiblePathsCache = FireJSX.pathsCache[location.pathname];
+        let possiblePathsCache = FireJSX.pathsCache[convertPathToUrl(decodeURI(location.pathname))];
         //if path exists then use it's respective page, else use 404
         const pageCache = possiblePathsCache ? FireJSX.pagesCache[possiblePathsCache.page] : FireJSX.pagesCache["404.jsx"];
         //mark the chunks as loaded
@@ -42,7 +38,7 @@ FireJSX.linkApi = {
         })
     },
     async preloadPage(url) {
-        url = getPathFromUrl(url);
+        url = convertPathToUrl(url);
         if (FireJSX.pathsCache[url])
             return;
         const {page}: pathsCacheElement = await this.loadMap(url);
@@ -54,7 +50,7 @@ FireJSX.linkApi = {
         this.lock = true;
         if (pushState)
             window.history.pushState(undefined, undefined, FireJSX.prefix + url);
-        url = getPathFromUrl(url);//url
+        url = convertPathToUrl(url);//url
         //map
         let pathsCacheElement = FireJSX.pathsCache[url];
         if (!pathsCacheElement)

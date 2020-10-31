@@ -16,6 +16,7 @@ import {PageChunks} from "./types/global";
 import * as Globals from "./Globals";
 import {destructGlobals} from "./Globals";
 import AppPage from "./classes/AppPage";
+import {rmIndexSuffixFromPath} from "./utils/LinkTools";
 
 export type WebpackConfig = Configuration;
 
@@ -244,7 +245,7 @@ export default class {
 }
 
 export function generateMapJS(path: string, content: any, page: Page): string {
-    return `!function(){const e="${page.toString()}";FireJSX.pathsCache["${path}"]={page:e,content:${JSON.stringify(content)}},(FireJSX.pagesCache[e]=FireJSX.pagesCache[e]||{}).chunks=${JSON.stringify({
+    return `!function(){const e="${page.toString()}";FireJSX.pathsCache["${rmIndexSuffixFromPath(path)}"]={page:e,content:${JSON.stringify(content)}},(FireJSX.pagesCache[e]=FireJSX.pagesCache[e]||{}).chunks=${JSON.stringify({
         initial: page.chunks.initial
     })}}();`;
 }
