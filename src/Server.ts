@@ -1,5 +1,5 @@
 import {join} from "path"
-import FireJS, {$} from "./SSB"
+import FireJSX, {$} from "./SSB"
 import * as express from "express";
 import * as webpackHot from "webpack-hot-middleware"
 import * as mime from "mime"
@@ -11,9 +11,9 @@ export interface devServerConfig {
 
 export default class {
     private readonly $: $
-    private readonly app: FireJS;
+    private readonly app: FireJSX;
 
-    constructor(app: FireJS) {
+    constructor(app: FireJSX) {
         this.app = app;
         this.$ = app.$;
     }
