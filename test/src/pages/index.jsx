@@ -1,8 +1,7 @@
-import "../style/main.css"
 import Link from "../../../dist/Link";
 import Head from "../../../dist/Head";
 
-export default function App({content: {emoji}}) {
+export default ({content: {emoji}}) => {
     const [s, setS] = React.useState(0)
     React.useEffect(() => {
         let t = 0;
@@ -25,6 +24,9 @@ export default function App({content: {emoji}}) {
             <br/>
             <br/>
             <Link href={"/this page does not exist"}>🤔 Click Here To Go Mock 404</Link>
+            <br/>
+            <br/>
+            <Link href={"/template_index"}>🤔 Click Here see a list of dynamic/template pages</Link>
         </div>
     )
 }

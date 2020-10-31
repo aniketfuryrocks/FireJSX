@@ -1,10 +1,9 @@
-import "../../style/main.css";
 import Link from "../../../../dist/Link";
 import Head from "../../../../dist/Head";
 import LazyLoad from "../../../../dist/LazyLoad";
 
 
-export default function App() {
+export default () => {
     const Markdown = LazyLoad(() => import("../../components/Markdown/Markdown.jsx"), () => require.resolveWeak("../../components/Markdown/Markdown.jsx"))
 
     return (

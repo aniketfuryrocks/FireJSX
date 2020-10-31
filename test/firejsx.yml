@@ -1,7 +1,8 @@
 plugins:
   - ./plugin/hello.js
+  - ./plugin/multi_page.js
 custom:
   name: "aniket"
 paths:
-  pages: src/_pages
+  pages: src/pages
   app: App.jsx

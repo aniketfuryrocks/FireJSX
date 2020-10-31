@@ -1,10 +1,9 @@
-import "../style/main.css"
 import "../style/hash.css"
 import Link from "../../../dist/Link";
 
 const colors = ["red", "yellow", "blue", "green"]
 
-export default function App() {
+export default () => {
     return (
         <div>
             {
