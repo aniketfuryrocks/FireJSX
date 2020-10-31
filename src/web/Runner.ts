@@ -1,5 +1,7 @@
-FireJSX.run = function (path) {
-    const {app, content} = FireJSX.cache[path];
+import {FunctionComponent} from "react";
+
+FireJSX.run = function (app: FunctionComponent) {
+    const {content} = FireJSX.pathsCache[location.pathname]
     FireJSX.linkApi.lock = false;
     //update page if already rendered
     if (FireJSX.setApp)

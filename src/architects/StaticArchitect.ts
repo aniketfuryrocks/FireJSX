@@ -50,12 +50,13 @@ export default class {
         if (this.config.ssr) {
             if (!FireJSX.app)
                 throw new Error("FireJSX.app not defined. Did you run requireAppPage() on StaticArchitect ?")
-            mapCache = FireJSX.cache[path];
+            //TODO:Fix here
+            /*mapCache = FireJSX.cache[path];
             if (!mapCache)
                 mapCache = (FireJSX.cache[path] = {})
             mapCache.content = content;
             mapCache.chunks = page.chunks;
-            //if ssr then require async chunks
+            //if ssr then require async chunks*/
             page.chunks.async.forEach(c => this.requireJs(c));
         }
 
@@ -108,7 +109,7 @@ export default class {
             "<meta charset=\"UTF-8\">" +
             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
             `<meta name="generator" content="FireJSX v${FireJSX.version}"/>` +
-            `<script>window.FireJSX={cache:{},` +
+            `<script>window.FireJSX={pathsCache:{},pagesCache:{},` +
             `isHydrated: ${this.config.ssr},` +
             `lib: "${this.config.lib}",` +
             `prefix: "${this.config.prefix}",` +

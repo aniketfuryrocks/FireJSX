@@ -1,5 +1,9 @@
-export default function (app, hot) {
-    let path = decodeURI(location.pathname);
+export default function (page, app, hot) {
+    app = FireJSX.pagesCache[page].app = hot ? hot(app) : app;
+    if (!FireJSX.isSSR)
+        FireJSX.run(app);
+}
+/*let path = decodeURI(location.pathname);
     if (!FireJSX.isSSR) {
         const li = path.lastIndexOf("/index")
         if (path.endsWith("/index"))
@@ -8,7 +12,4 @@ export default function (app, hot) {
         if (!FireJSX.cache[path])
             path = "/404";
     }
-    FireJSX.cache[path].app = hot ? hot(app) : app;
-    if (!FireJSX.isSSR)
-        FireJSX.run(path);
-}
+    FireJSX.cache[path].app =*/

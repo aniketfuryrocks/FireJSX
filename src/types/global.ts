@@ -26,7 +26,7 @@ declare global {
             content: any
         }>
         let setApp: (App: FunctionComponent, Content: any) => void
-        let run: (path: string) => void
+        let run: (app: FunctionComponent) => void
         let version: string
         let lib: string
         let prefix: string

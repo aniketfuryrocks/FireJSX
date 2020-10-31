@@ -4,7 +4,13 @@ export default function ({types: t}) {
     const WrapJsPath = join(__dirname, "../web/Wrap")
     return {
         visitor: {
-            "ExportDefaultDeclaration"(path, {filename, opts: {pagesPath, proOrSSR}}) {
+            "ExportDefaultDeclaration"(path, {filename, opts: {pagesPath, proOrSSR}}: {
+                filename: string,
+                opts: {
+                    pagesPath: string,
+                    proOrSSR: boolean
+                }
+            }) {
                 if (filename.startsWith(pagesPath))
                     path.replaceWith(t.callExpression(
                         t.memberExpression(
@@ -17,6 +23,7 @@ export default function ({types: t}) {
                             t.identifier("default")
                         ),
                         [
+                            t.stringLiteral(filename.replace(pagesPath + "/", "")),
                             t.toExpression(path.node.declaration),
                             ...(proOrSSR ? [] :
                                     [

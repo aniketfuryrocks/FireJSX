@@ -15,18 +15,18 @@ FireJSX.linkApi = {
     lock: false,
     chunksStatusMap: (() => {
         const chunksStatusMap = {};
-        let possibleCacheMap = FireJSX.cache[location.pathname]
-        if (!possibleCacheMap)//if current location is not cached then page must be 404
-            possibleCacheMap = FireJSX.cache["/404"];
-        if (possibleCacheMap)// 404 page may not exist
-            possibleCacheMap.chunks.initial.forEach(c => chunksStatusMap[c] = true)
+        let possiblePathsCache = FireJSX.pathsCache[location.pathname];
+        //if path exists then use it's respective page, else use 404
+        const pageCache = possiblePathsCache ? FireJSX.pagesCache[possiblePathsCache.page] : FireJSX.pagesCache["404.jsx"];
+        //mark the chunks as loaded
+        pageCache.chunks.initial.forEach(c => chunksStatusMap[c] = true);
         return chunksStatusMap;
     })(),
     loadMap(url) {
         return new Promise((resolve, reject) => {
             const chunk_path = `map${url === "/" ? "/index" : url}.map.js`;
             const ele = this.loadChunk(chunk_path);
-            ele.onload = () => resolve(FireJSX.cache[url]);
+            /*ele.onload = () => resolve(FireJSX.cache[url]);
             ele.onerror = () => {
                 if (url === "/404")
                     throw new Error("Error loading 404 map. Make sure 404 page exists.");
@@ -40,12 +40,12 @@ FireJSX.linkApi = {
                         resolve(FireJSX.cache[url] = FireJSX.cache["/404"])
                     })
                     .catch(reject);
-            };
+            };*/
         })
     },
     async preloadPage(url) {
         url = getPathFromUrl(url);
-        if (FireJSX.cache[url])
+        if (FireJSX.pathsCache[url])
             return;
         const {chunks} = await this.loadMap(url);
         chunks.initial.forEach(c => this.preloadChunk(c, "prefetch"));
@@ -58,13 +58,14 @@ FireJSX.linkApi = {
             window.history.pushState(undefined, undefined, FireJSX.prefix + url);
         url = getPathFromUrl(url);//url
         //map
-        let cacheMap = FireJSX.cache[url];
-        if (!cacheMap)
-            cacheMap = await this.loadMap(url);
-        if (!cacheMap.app)
-            cacheMap.chunks.initial.forEach((c) => this.loadChunk(c));
+        let pathsCacheElement = FireJSX.pathsCache[url];
+        if (!pathsCacheElement)
+            pathsCacheElement = await this.loadMap(url);
+        const pageCacheElement = FireJSX.pagesCache[pathsCacheElement.page]
+        if (!pageCacheElement.app)
+            pageCacheElement.chunks.initial.forEach((c) => this.loadChunk(c));
         else
-            FireJSX.run(url)
+            FireJSX.run(pageCacheElement.app)
     },
     preloadChunk(chunk, rel) {
         //false when preloaded, undefined if neither loaded nor preloaded
