@@ -1,2 +1,2 @@
 Changes :
-1. cache firejsx.map.json using require
+1. Template based routing fixed
