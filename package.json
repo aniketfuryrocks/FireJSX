@@ -1,6 +1,6 @@
 {
   "name": "firejsx",
-  "version": "0.10.0-dev.10",
+  "version": "0.10.0-rc.3",
   "license": "GPL-3.0-or-later",
   "description": "The React Framework for SSB, SSR and Serverless technologies",
   "bin": {
@@ -88,7 +88,8 @@
     "sync": "sh scripts/sync.sh",
     "dev": "yarn sync",
     "autopublish": "sh scripts/autopublish.sh",
-    "publishNitely": "yarn autopublish nitely",
-    "publishDev": "yarn autopublish dev"
+    "publishCanary": "yarn autopublish canary",
+    "publishDev": "yarn autopublish dev",
+    "publishNext": "yarn autopublish dev"
   }
 }
