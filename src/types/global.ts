@@ -31,8 +31,25 @@ declare global {
         let lib: string
         let prefix: string
         let staticPrefix: string
-        let cache: {
-            [key: string]: FireJSX_CacheMap
+        /**
+         * Chunks required to load app, and its entry point
+         */
+        let pagesCache: {
+            [key: string]: {
+                chunks: {
+                    initial: string[]
+                },
+                app: any
+            }
+        }
+        /**
+         * Content of every page and the original file it belongs to
+         */
+        let pathsCache: {
+            [key: string]: {
+                content: any,
+                page: any
+            }
         }
         let isSSR: boolean
         let isHydrated: boolean

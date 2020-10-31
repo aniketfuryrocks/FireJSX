@@ -244,15 +244,12 @@ export default class {
 }
 
 export function generateMapJS(path: string, content: any, page: Page): string {
-    return `FireJSX.cache["${pathToUrlPath(path)}"]=${JSON.stringify({
-        content,
-        chunks: {
-            initial: page.chunks.initial
-        }
-    })}`
+    return `!function(){const e="${page.toString()}";FireJSX.pathsCache["${path}"]={page:e,content:${JSON.stringify(content)}},(FireJSX.pagesCache[e]=FireJSX.pagesCache[e]||{}).chunks=${JSON.stringify({
+        initial: page.chunks.initial
+    })}}();`;
 }
 
-export function pathToUrlPath(path): string {
+export function pathToUrlPath(path: string): string {
     if (path === "/index")
         return "/"
     const li = path.lastIndexOf("/index");
