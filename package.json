@@ -90,6 +90,6 @@
     "autopublish": "sh scripts/autopublish.sh",
     "publishCanary": "yarn autopublish canary",
     "publishDev": "yarn autopublish dev",
-    "publishNext": "yarn autopublish dev"
+    "publishNext": "yarn autopublish next"
   }
 }
