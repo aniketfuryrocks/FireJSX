@@ -46,17 +46,17 @@ export default class {
     render(page: Page, path: string, content: any): string {
         //globals
         location.assign("https://firejsx.com" + path);
-        let mapCache;
+        //reference to cache
+        let pagesCacheElement;
         if (this.config.ssr) {
             if (!FireJSX.app)
-                throw new Error("FireJSX.app not defined. Did you run requireAppPage() on StaticArchitect ?")
-            //TODO:Fix here
-            /*mapCache = FireJSX.cache[path];
-            if (!mapCache)
-                mapCache = (FireJSX.cache[path] = {})
-            mapCache.content = content;
-            mapCache.chunks = page.chunks;
-            //if ssr then require async chunks*/
+                throw new Error("FireJSX.app not defined. Did you run requireAppPage() on StaticArchitect ?");
+            //set reference on create one
+            pagesCacheElement = FireJSX.pagesCache[page.toString()];
+            if (!pagesCacheElement)
+                //don't set the chunks and content because they are not required by anyone
+                pagesCacheElement = (FireJSX.pagesCache[page.toString()] = {});
+            //require async chunks
             page.chunks.async.forEach(c => this.requireJs(c));
         }
 
@@ -95,7 +95,7 @@ export default class {
         }
         //render
         const rootDiv = this.config.ssr ? global.ReactDOMServer.renderToString(
-            global.React.createElement(FireJSX.app, {app: mapCache.app, content})
+            global.React.createElement(FireJSX.app, {app: pagesCacheElement.app, content})
         ) : ""
         //helmet
         if (this.config.ssr) {

@@ -41,10 +41,10 @@ declare global {
          */
         let pagesCache: {
             [key: string]: {
-                chunks: {
+                chunks?: {
                     initial: string[]
                 },
-                app: any
+                app?: any
             }
         }
         /**

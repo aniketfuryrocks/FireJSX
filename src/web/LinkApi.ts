@@ -10,6 +10,8 @@ if (!FireJSX.isSSR)
 FireJSX.linkApi = {
     lock: false,
     chunksStatusMap: (() => {
+        if (FireJSX.isSSR)
+            return;
         const chunksStatusMap = {};
         let possiblePathsCache = FireJSX.pathsCache[convertPathToUrl(decodeURI(location.pathname))];
         //if path exists then use it's respective page, else use 404

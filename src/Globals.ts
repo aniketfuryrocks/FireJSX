@@ -14,7 +14,8 @@ export function initGlobals() {
 
     global.FireJSX = {
         version: FireJSX_Version,
-        cache: {},
+        pagesCache: {},
+        pathsCache: {}
     }
     // @ts-ignore
     global.self = global;
