@@ -1,6 +1,6 @@
 import {window as ssr_window} from "ssr-window";
 
-export const FireJSX_Version = "0.10.0-rc.5";
+export const FireJSX_Version = "0.10.0-rc.6";
 
 export function initGlobals() {
 
