@@ -1,2 +1,2 @@
 Changes :
-1. Fixed Components and Hooks
+1. dontPrevent hook dep 
