@@ -9,5 +9,5 @@ export default function (msg: string = "You might have some unsaved work. Do you
             return window.onbeforeunload = undefined;
         window.onbeforeunload = () => confirm(msg)
         return () => window.onbeforeunload = void 0;
-    }, [msg])
+    }, [msg, dontPrevent])
 }
