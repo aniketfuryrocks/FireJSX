@@ -23,6 +23,7 @@ declare global {
     interface Window extends FireJSX_GLOBAL {
         buildPageResolver: () => void | undefined
         FireJSX
+        onbeforeunload: (Event) => boolean
     }
 
     namespace FireJSX {

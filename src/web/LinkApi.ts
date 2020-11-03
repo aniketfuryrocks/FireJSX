@@ -49,9 +49,17 @@ FireJSX.linkApi = {
     async loadPage(url, pushState = true) {
         if (this.lock)
             return;
-        this.lock = true;
+        //check if user wants to pause navigation
+        if (window.onbeforeunload)
+            if (!window.onbeforeunload(new Event('beforeunload')))
+                return;
         if (pushState)
             window.history.pushState(undefined, undefined, FireJSX.prefix + url);
+        //show loader
+        if (FireJSX.showLoader)
+            FireJSX.showLoader();
+        //set lock
+        this.lock = true;
         url = convertPathToUrl(url);//url
         //map
         let pathsCacheElement = FireJSX.pathsCache[url];
