@@ -18,8 +18,6 @@ export default ({href, children, onClick, onMouseEnter, ...rest}: {
         e.preventDefault();
         if (onClick)
             onClick(e)
-        if (FireJSX.showLoader)
-            FireJSX.showLoader();
         FireJSX.linkApi.loadPage(href);
     }
 
