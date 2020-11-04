@@ -105,7 +105,7 @@ FireJSX.linkApi = {
         }
         ele.crossOrigin = "anonymous";
         document.body.appendChild(ele);
-        this.chunksStatusMap[chunk] = true;
+        this.chunksStatusMap[chunk] = ele;
         return ele;
     }
 }
