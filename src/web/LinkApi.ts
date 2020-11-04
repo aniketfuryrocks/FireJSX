@@ -88,8 +88,11 @@ FireJSX.linkApi = {
     },
     loadChunk(chunk) {
         //if true, then already loaded
-        if (this.chunksStatusMap[chunk])
-            return;
+        {
+            const stausMap = this.chunksStatusMap[chunk];
+            if (stausMap)
+                return stausMap;
+        }
         let ele;
         if (chunk.endsWith(".js")) {
             ele = document.createElement("script");

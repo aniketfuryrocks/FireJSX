@@ -59,10 +59,10 @@ declare global {
         let linkApi: {
             lock: boolean,
             /**
-             * true if loaded, if false means preloaded but no loaded
+             * Element if loaded, if false means preloaded but no loaded
              */
             chunksStatusMap: {
-                [key: string]: boolean
+                [key: string]: boolean | Element
             }
             loadMap: (url: string) => Promise<pathsCacheElement>
             preloadPage: (url: string) => Promise<void>
