@@ -3,7 +3,7 @@ import {convertPathToUrl} from "../utils/LinkTools";
 
 if (!FireJSX.isSSR)
     window.onpopstate = function () {
-        const path = location.pathname.replace(FireJSX.prefix, "");//remove prefix
+        const path = decodeURI(location.pathname.replace(FireJSX.prefix, ""));//remove prefix
         FireJSX.linkApi.loadPage(path, false)
     }
 
