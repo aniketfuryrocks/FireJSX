@@ -117,7 +117,7 @@ export default class {
     buildPages() {
         if (global.buildPageResolver)
             throw new Error("A build is already in progress, await it or run in a different global environment/node process.")
-        return new Promise<any>((resolve, reject) => {
+        return new Promise<void>((resolve, reject) => {
             this.$.pageArchitect.buildPages(global.buildPageResolver = () => {
                 this.$.cli.ok("Pages Built");
                 //require app when ssr
@@ -220,7 +220,7 @@ export default class {
 
                 const writeFlyMap = () => {
                     this.$.outputFileSystem.writeFile(join(this.$.outDir, "firejsx.map.json"), JSON.stringify(map), err => {
-                        err ? reject(err) : resolve()
+                        err ? reject(err) : resolve(void 0)
                     })
                 }
 

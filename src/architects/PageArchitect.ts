@@ -31,13 +31,13 @@ export default class {
                 new Promise((resolve, reject) => {
                     this.build(this.webpackArchitect.forSemiExternal(), stat => {
                         externals.semi = stat.compilation.chunks[0].files[0];
-                        resolve()
+                        resolve(void 0)
                     }, reject)
                 }),
                 ...(this.$.ssr ? [new Promise((resolve, reject) => {
                     this.build(this.webpackArchitect.forFullExternal(), stat => {
                         externals.full = stat.compilation.chunks[0].files[0];
-                        resolve()
+                        resolve(void 0)
                     }, reject)
                 })] : [])
             ]).then(() => resolve(externals)).catch(reject)

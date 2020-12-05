@@ -9,7 +9,7 @@ export function writeFileRecursively(path: string, data: string | Buffer, output
                     if (err)
                         reject(err);
                     else
-                        resolve();
+                        resolve(void 0);
                 })
         })
     })
