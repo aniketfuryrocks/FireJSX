@@ -9,8 +9,10 @@ Please note we have a [Code of conduct](CODE_OF_CONDUCT.md), please follow it in
 
 Make sure you have typescript compiler installed and available as tsc.
 
-1. run `yarn install` to install all dependencies.
-2. run `yarn dev` if u are in a unix like env. Windows users should run typescript compiler manually. Make sure a typescript outputs to a dist folder.
+1. run `yarn install`.
+2. run `yarn dev` if u are in a unix like env. Windows users should run typescript compiler manually. Make sure a
+   typescript outputs to a dist folder.
+4. run `yarn install` inside the test dir.
 3. run `yarn test` inside the test dir and follow along.
 
 `yarn dev` does not run tsc with watch flag. U can run it manually.
