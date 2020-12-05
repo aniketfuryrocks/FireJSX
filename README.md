@@ -16,31 +16,31 @@ Visit the [quick start](https://github.com/eAdded/FireJSX/wiki/Quick-Start) guid
 
 + Server Side Render with maximum of 3 lines of code. No need to fake an express server.
 
-+ `Lightning fast` rendering with latency as low as `3ms`.
++ Lightning fast rendering with latency as low as 3ms.
 
-+ `Portable code`. Export for fly builds once. Run it any-where. No need to carry node_modules
-  around. `Reduced cold start` time.
++ Portable code. Export for fly builds once. Run it any-where. No need to carry node_modules around. Reduced cold start
+  time.
 
-+ `0 overhead`, means smaller bundle sizes and faster apps. Bundle sizes smaller by at least 100kb when compared to
-  other frameworks.
++ 0 overhead, means smaller bundle sizes and faster apps. Bundle sizes smaller by at least 100kb when compared to other
+  frameworks.
 
-+ `Dev Friendly`. `Low build time` through build time caching.
++ Dev Friendly. Low build time through build time caching.
 
-+ `Advance caching` mechanism ensures lightning fast routing.
++ Advance caching mechanism ensures lightning fast routing.
 
 + Made with the thought of Long term caching for fast cdn delivery
 
-+ Easily `pull in data` from any data source and pass it to your page with no confusing and buggy `getInitialProps`
-  or `getServerSideProps`. Moreover, you don't need to learn any extra technology such as `GraphQL` or worry about
++ Easily pull in data from any data source and pass it to your page with no confusing and buggy `getInitialProps`
+  or getServerSideProps. Moreover, you don't need to learn any extra technology such as `GraphQL` or worry about
   efficiency and code spitting.
 
-+ `Customizable`. Customize the framework to your liking.
++ Customizable. Customize the framework to your liking.
 
-+ `Scalable`. Grow feature set using easy to write plugins.
++ Scalable. Grow feature set using easy to write plugins.
 
-+ `Easy to use` node interface. You are not limited to the cli interface anymore.
++ Easy to use node interface. You are not limited to the cli interface anymore.
 
-+ `Modern`. Made with `serverless` technological services in mind.
++ Modern. Made with serverless technological services in mind.
 
 Read more [here](https://webbuddy360.com/AniketFuryRocks/The%202021%20web%20development%20stack)
 
