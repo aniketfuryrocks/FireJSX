@@ -85,8 +85,7 @@
     "react-dom": "^16.14.0"
   },
   "scripts": {
-    "sync": "sh scripts/sync.sh",
-    "dev": "yarn sync",
+    "dev": "sh scripts/sync.sh",
     "autopublish": "sh scripts/autopublish.sh",
     "publishCanary": "yarn autopublish canary",
     "publishDev": "yarn autopublish dev",
