@@ -7,9 +7,9 @@
     "firejsx": "bin/index.js"
   },
   "bugs": {
-    "url": "https://github.com/eAdded/firejsx/issues"
+    "url": "https://github.com/aniketfuryrocks/firejsx/issues"
   },
-  "homepage": "https://github.com/eAdded/firejsx#readme",
+  "homepage": "https://github.com/aniketfuryrocks/firejsx#readme",
   "keywords": [
     "react",
     "react-static",
@@ -34,7 +34,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eAdded/firejsx.git"
+    "url": "git+https://github.com/aniketfuryrocks/firejsx.git"
   },
   "author": "Aniket Prajapati <prajapati.ani306@gmail.com>",
   "private": false,
