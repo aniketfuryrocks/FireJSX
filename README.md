@@ -14,21 +14,33 @@ Visit the [quick start](https://github.com/eAdded/FireJSX/wiki/Quick-Start) guid
 
 ## How is it different ? 👽
 
-**FireJSX = [Gatsby](https://www.gatsbyjs.org/) + [Next.JS](https://nextjs.org/) - Problems + Awesomeness**
++ Server Side Render with maximum of 3 lines of code. No need to fake an express server.
 
-+ Long term caching for fast cdn delivery
++ `Lightning fast` rendering with latency as low as `3ms`.
 
-+ Easily render pages on the fly with very-very low latency.
++ `Portable code`. Export for fly builds once. Run it any-where. No need to carry node_modules
+  around. `Reduced cold start` time.
 
-+ Pure react apps for fast web-pages and practically no overhead added by FireJSX.
++ `0 overhead`, means smaller bundle sizes and faster apps. Bundle sizes smaller by at least 100kb when compared to
+  other frameworks.
 
-+ Easily pull in data from any data source and pass it to your page with no confusing and buggy `getInitialProps` or `getServerSideProps`. Moreover, you don't need to learn any extra technology such as `GraphQL` or worry about efficiency and code spitting.
++ `Dev Friendly`. `Low build time` through build time caching.
 
-+ **Export Fly** mechanism exports your build to a single package allowing devs to SSR their site from any remote location, like a serverless lambda function or deep down from the ocean.
++ `Advance caching` mechanism ensures lightning fast routing.
 
-+ Extensible and easy to build plugins, similar to react-hooks.
++ Made with the thought of Long term caching for fast cdn delivery
 
-+ You are not bound by the CLI interface. FireJSX provides an easy to use node interface, allowing you to make extend your creativity and shape FireJSX according to your use-case.
++ Easily `pull in data` from any data source and pass it to your page with no confusing and buggy `getInitialProps`
+  or `getServerSideProps`. Moreover, you don't need to learn any extra technology such as `GraphQL` or worry about
+  efficiency and code spitting.
+
++ `Customizable`. Customize the framework to your liking.
+
++ `Scalable`. Grow feature set using easy to write plugins.
+
++ `Easy to use` node interface. You are not limited to the cli interface anymore.
+
++ `Modern`. Made with `serverless` technological services in mind.
 
 Read more [here](https://webbuddy360.com/AniketFuryRocks/The%202021%20web%20development%20stack)
 
@@ -60,6 +72,14 @@ Code of conduct can be found at **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)**
 
 Make sure to read **[Contribution Guidelines](CONTRIBUTING.md)** before contributing.
 
+Need help with :
+
+1. Documentation
+2. React Error Overlay design
+3. Webpack 5 and React Fast Refresh Integration
+
+Free feel to help, contact maintainer if necessary.
+
 ## License & Copyright
 
 Copyright (C) 2020 Aniket Prajapati
@@ -67,4 +87,6 @@ Copyright (C) 2020 Aniket Prajapati
 Licensed under the **[GNU GENERAL PUBLIC LICENSE](LICENSE)**
 
 ## Contributors
- + [Aniket Prajapati](https://github.com/aniketfuryrocks) @[prajapati.ani306@gmail.com](mailto:prajapati.ani306@gmail.com) , [eAdded](http://www.eadded.com)
+
++ [Aniket Prajapati](https://github.com/aniketfuryrocks)
+  @[prajapati.ani306@gmail.com](mailto:prajapati.ani306@gmail.com) , [eAdded](http://www.eadded.com) (MAINTAINER)
