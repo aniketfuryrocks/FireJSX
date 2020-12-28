@@ -51,8 +51,6 @@ Read more [here](https://webbuddy360.com/AniketFuryRocks/The%202021%20web%20deve
 
 ## Documentation 📚
 
-> The Documentation is currently outdated and requires revisions. Windows is currently unsupported.
-
 Documentation is available at the official [FireJSX Github Wiki](https://github.com/eAdded/FireJSX/wiki)
 
 ## Special Thanks 🙏

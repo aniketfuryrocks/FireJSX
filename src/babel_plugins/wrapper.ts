@@ -1,4 +1,4 @@
-import {join} from "path"
+import {join, sep as pathSeparator} from "path"
 
 export default function ({types: t}) {
     const WrapJsPath = join(__dirname, "../web/Wrap")
@@ -23,7 +23,7 @@ export default function ({types: t}) {
                             t.identifier("default")
                         ),
                         [
-                            t.stringLiteral(filename.replace(pagesPath + "/", "")),
+                            t.stringLiteral(filename.replace(pagesPath + pathSeparator, "")),
                             t.toExpression(path.node.declaration),
                             ...(proOrSSR ? [] :
                                     [
