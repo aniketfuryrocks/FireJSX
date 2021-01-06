@@ -7,7 +7,7 @@
     "test": "node --trace-warnings ../dist/bin/index.js"
   },
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "cookie": "^0.4.1",
     "js-cookie": "^2.2.1",
     "markdown-to-jsx": "^7.0.1",
