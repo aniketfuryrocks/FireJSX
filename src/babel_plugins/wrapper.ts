@@ -1,4 +1,4 @@
-import {join, sep as pathSeparator} from "path"
+import {join} from "path"
 
 export default function ({types: t}) {
     const WrapJsPath = join(__dirname, "../web/Wrap")
@@ -11,7 +11,9 @@ export default function ({types: t}) {
                     proOrSSR: boolean
                 }
             }) {
-                if (filename.startsWith(pagesPath))
+                const filenames = filename.split(pagesPath);
+                //if filename starts with pagesPath then split returns empty string at index 0
+                if (!filenames[0]) {
                     path.replaceWith(t.callExpression(
                         t.memberExpression(
                             t.callExpression(
@@ -23,7 +25,7 @@ export default function ({types: t}) {
                             t.identifier("default")
                         ),
                         [
-                            t.stringLiteral(filename.replace(pagesPath + pathSeparator, "")),
+                            t.stringLiteral(filenames[1].replace(/\\/g, "/").substring(1)),
                             t.toExpression(path.node.declaration),
                             ...(proOrSSR ? [] :
                                     [
@@ -40,6 +42,7 @@ export default function ({types: t}) {
                             )
                         ])
                     )
+                }
             }
         }
     }
