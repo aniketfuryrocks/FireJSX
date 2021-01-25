@@ -66,7 +66,7 @@ export default class {
         // @ts-ignore
         const pathname = join(this.$.outDir, decodeURI(req._parsedUrl.pathname).replace(this.$.prefix, ""))
 
-        res.contentType(mime.getType(pathname.substr(pathname.lastIndexOf("."))))
+        res.contentType(mime.lookup(pathname.substr(pathname.lastIndexOf("."))))
         //cache them
         if (this.$.outputFileSystem.existsSync(pathname))
             res.write(this.$.outputFileSystem.readFileSync(pathname));
