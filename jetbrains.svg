@@ -1,18 +1,22 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="263" height="147" viewBox="0 0 263 147">
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="263" height="147" viewBox="0 0 263 147">
   <defs>
-    <linearGradient id="linear-gradient" x1="54.4568" y1="122.5936" x2="251.779" y2="10.2057" gradientUnits="userSpaceOnUse">
+    <linearGradient id="linear-gradient" x1="54.4568" y1="122.5936" x2="251.779" y2="10.2057"
+                    gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#00adee"/>
       <stop offset="1" stop-color="#9f76a6"/>
     </linearGradient>
-    <linearGradient id="linear-gradient-2" x1="80.247" y1="38.7607" x2="241.2622" y2="10.9511" gradientUnits="userSpaceOnUse">
+    <linearGradient id="linear-gradient-2" x1="80.247" y1="38.7607" x2="241.2622" y2="10.9511"
+                    gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#ec037c"/>
       <stop offset="1" stop-color="#9f76a6"/>
     </linearGradient>
-    <linearGradient id="linear-gradient-3" x1="75.7205" y1="33.5582" x2="127.8253" y2="123.9392" gradientUnits="userSpaceOnUse">
+    <linearGradient id="linear-gradient-3" x1="75.7205" y1="33.5582" x2="127.8253" y2="123.9392"
+                    gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#ec037c"/>
       <stop offset="1" stop-color="#5c2d90"/>
     </linearGradient>
-    <linearGradient id="linear-gradient-4" x1="7.4647" y1="44.578" x2="129.4543" y2="125.0813" gradientUnits="userSpaceOnUse">
+    <linearGradient id="linear-gradient-4" x1="7.4647" y1="44.578" x2="129.4543" y2="125.0813"
+                    gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#44c7f4"/>
       <stop offset="1" stop-color="#5c2d90"/>
     </linearGradient>

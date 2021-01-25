@@ -1,6 +1,6 @@
 {
   "name": "firejsx",
-  "version": "0.10.1",
+  "version": "0.10.2-canary.1",
   "license": "GPL-3.0-or-later",
   "description": "The React Framework for SSB, SSR and Serverless technologies",
   "bin": {
@@ -47,6 +47,7 @@
     "@babel/preset-react": "^7.12.10",
     "@babel/runtime": "^7.12.1",
     "@hot-loader/react-dom": "^16.14.0",
+    "@types/mime": "^2.0.3",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "compression": "^1.7.4",
