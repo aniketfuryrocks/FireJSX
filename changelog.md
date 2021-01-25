@@ -1,2 +1,2 @@
 Changes :
-+ Fixed bug with file separator in babel plugin on windows. 
+1. Fixed pageCache file path separator bug
