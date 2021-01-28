@@ -11,7 +11,6 @@ export default () => {
         <div>
             <Head>
                 <title>About</title>
-                <meta name={"asd"}/>
             </Head>
             <Markdown>
                 By the way, I am a lazy loaded component 😺

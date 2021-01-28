@@ -1,7 +1,12 @@
+import Head from "firejsx/Head";
+
 export default ({content: {index}}) => {
     return (
         <div>
-            <h1>Template page {index}</h1>
+            <Head>
+                <title>Template {index}</title>
+            </Head>
+            <h1>Template {index}</h1>
         </div>
     )
 }

@@ -13,7 +13,7 @@ export default ({content: {emoji}}) => {
     return (
         <div>
             <Head>
-                <title>Index</title>
+                <title title={"index-counter"}>Index</title>
             </Head>
             <h1>Welcome to FireJSX <img height={30} width={30} src={`${FireJSX.staticPrefix}/fire.svg`}/></h1>
             <br/>

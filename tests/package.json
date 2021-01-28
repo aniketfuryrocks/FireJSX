@@ -23,6 +23,9 @@
     "simple-cookie": "^1.0.13"
   },
   "devDependencies": {
-    "firejsx": "../dist"
+    "@types/jest-environment-puppeteer": "^4.4.1",
+    "firejsx": "../dist",
+    "jest-puppeteer": "^4.4.0",
+    "puppeteer": "^5.5.0"
   }
 }

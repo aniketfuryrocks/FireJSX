@@ -1,11 +1,15 @@
 import "../style/hash.css"
 import Link from "firejsx/Link";
+import Head from "firejsx/Head";
 
 const colors = ["red", "yellow", "blue", "green"]
 
 export default () => {
     return (
         <div>
+            <Head>
+                <title>Hash</title>
+            </Head>
             {
                 (() => {
                     const links = []
