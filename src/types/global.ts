@@ -81,9 +81,6 @@ declare global {
 
 export interface FireJSX_GLOBAL {
     FireJSX_jsonp: any[]
-
-    __webpack_require__(resolveID1: any)
-
     React?: any,
     ReactDOM?: any,
     ReactDOMServer?: any,
@@ -95,6 +92,8 @@ export interface FireJSX_GLOBAL {
         },
         canUseDOM: boolean
     }
+
+    __webpack_require__(resolveID1: any)
 }
 
 export interface appPageChunks extends PageChunks {

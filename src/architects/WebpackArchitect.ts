@@ -5,8 +5,8 @@ import * as webpack from "webpack";
 import {CleanWebpackPlugin} from "clean-webpack-plugin";
 
 export default class {
-    private readonly $: $;
     public readonly proOrSSR: boolean
+    private readonly $: $;
 
     constructor($: $) {
         this.$ = $;

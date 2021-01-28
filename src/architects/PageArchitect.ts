@@ -7,11 +7,11 @@ import {writeFileSync} from "fs";
 import {Externals} from "./StaticArchitect";
 
 export default class {
-    private readonly $: $;
     public readonly webpackArchitect: WebpackArchitect
     public isOutputCustom: boolean
     public isInputCustom: boolean
     public compiler: Compiler
+    private readonly $: $;
 
     constructor(globalData: $, webpackArchitect, isOutputCustom: boolean, isInputCustom: boolean) {
         this.$ = globalData;

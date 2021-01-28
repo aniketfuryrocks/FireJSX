@@ -3,8 +3,8 @@ import {PageChunks} from "../types/global";
 
 export default class {
     public hooks: PageHooks;
-    private readonly name: string;
     public chunks: PageChunks;
+    private readonly name: string;
 
     constructor(page: string) {
         this.name = page;
