@@ -1,4 +1,4 @@
-//run yarn test with -Esp before running this
+//run yarn manual_test with -Esp before running this
 import {writeFileSync} from "fs";
 import SSR from "../dist/SSR.js";
 

@@ -1,10 +1,10 @@
 /node_modules/
-/test/node_modules/
-/test/out/
+/manual_test/node_modules/
+/manual_test/out/
 /.idea/
 /dist/
-/test/components/
-/test/de_pages/
-/test/scripts/
+/manual_test/components/
+/manual_test/de_pages/
+/manual_test/scripts/
 yarn.lock
 yarn-error.log
