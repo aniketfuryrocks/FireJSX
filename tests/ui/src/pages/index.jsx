@@ -1,5 +1,5 @@
-import Link from "../../../dist/Link";
-import Head from "../../../dist/Head";
+import Head from "firejsx/Head";
+import Link from "firejsx/Link";
 
 export default ({content: {emoji}}) => {
     const [s, setS] = React.useState(0)

@@ -1,17 +1,13 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
     "target": "ES2017",
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "declaration": true,
+    "declaration": false,
     "lib": [
       "ES2017",
       "DOM"
     ],
     "jsx": "react"
-  },
-  "include": [
-    "src"
-  ]
+  }
 }

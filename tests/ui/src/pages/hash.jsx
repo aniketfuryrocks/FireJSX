@@ -1,5 +1,5 @@
 import "../style/hash.css"
-import Link from "../../../dist/Link";
+import Link from "firejsx/Link";
 
 const colors = ["red", "yellow", "blue", "green"]
 
@@ -13,7 +13,6 @@ export default () => {
                     colors.forEach((color, i) => {
                         links.push(<Link href={"/hash#" + i} key={i}><p>{i}</p></Link>)
                         items.push(<div
-                            id={i}
                             style={{
                                 height: "100vh",
                                 width: "100vw",

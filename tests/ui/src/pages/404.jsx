@@ -1,6 +1,6 @@
-import Link from "../../../dist/Link";
-import Head from "../../../dist/Head";
-import LazyLoad from "../../../dist/LazyLoad";
+import Link from "firejsx/Link";
+import Head from "firejsx/Head";
+import LazyLoad from "firejsx/LazyLoad";
 
 export default () => {
     const Markdown = LazyLoad(() => import("../components/Markdown/Markdown.jsx"))

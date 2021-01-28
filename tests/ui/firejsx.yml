@@ -1,6 +1,7 @@
 plugins:
-  - ./plugin/hello.js
-  - ./plugin/multi_page.js
+  - ./plugins/alias
+  - ./plugins/multi_page
+  - ./plugins/index
 custom:
   name: "aniket"
 paths:

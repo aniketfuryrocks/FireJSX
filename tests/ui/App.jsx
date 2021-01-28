@@ -1,7 +1,7 @@
 import "./src/style/main.css"
-import Page from "../dist/Page";
+import Page from "firejsx/Page";
 import LoadingBar from "./src/components/LoadingBar/LoadingBar";
-import Loader from "../dist/Loader";
+import Loader from "firejsx/Loader";
 
 FireJSX.app = props => {
     return <>

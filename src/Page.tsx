@@ -3,7 +3,6 @@ import {FunctionComponent} from "react";
 export default function ({app, content, ...extra}: {
     app: FunctionComponent,
     content: any,
-    [key: string]: any
 }) {
     const [App, setApp] = React.useState(React.createElement<any>(app, {content, ...extra}));
     React.useEffect(() => {

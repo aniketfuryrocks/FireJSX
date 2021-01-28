@@ -2,7 +2,7 @@ import * as React from "react";
 
 export default ({href, children, onClick, onMouseEnter, ...rest}: {
     href: string
-    children: JSX.Element
+    children: any | [any]
     onClick?: (Event) => void
     onMouseEnter?: (Event) => void
 }) => {
