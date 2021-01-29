@@ -13,7 +13,6 @@ describe('UI', () => {
         })
     });
 
-
     it('should be titled "Index"', async () => {
         await expect(page.title()).resolves.toMatch('Index');
     });
@@ -22,8 +21,15 @@ describe('UI', () => {
         it('should have valid globals', async () => {
             const FireJSX = await page.evaluate(() => window.FireJSX);
             expect(FireJSX.lib).toEqual("lib");
-            await expect(page.evaluate(() => typeof window.FireJSX.app)).resolves
+            FireJSX.isHydrated = 2;
+            //check if app is present
+            await expect(page.evaluate(() => typeof window.FireJSX.app))
+                .resolves
                 .toEqual('function');
+            //check if FireJSX_jsonp is created
+            await expect(page.evaluate(() => typeof window.FireJSX_jsonp))
+                .resolves
+                .toEqual('object')
         });
 
         it('should have valid pathsCache', async () => {
